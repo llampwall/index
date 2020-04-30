@@ -18,10 +18,7 @@ const Route = use('Route')
 
 // Route.on('/').render('pages/home')
 
-Route.get('/', 'PageController.welcome')
-
-Route.get('/home', 'PageController.home').middleware('auth')
-
+Route.get('/', 'PageController.home')
 
 // auth
 Route.get('/register', 'AuthController.register')

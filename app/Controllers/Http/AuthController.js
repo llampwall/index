@@ -63,7 +63,7 @@ class AuthController {
         }
 
         session.flash({notification: 'registered'})
-        return response.redirect('/home')
+        return response.redirect('/')
     }
 
     async login ({response, request, view}) {
@@ -80,7 +80,7 @@ class AuthController {
             if (passwordVerified) {
                 await auth.login(user)
                 session.flash({notification: 'logged in'})
-                return response.redirect('/home')
+                return response.redirect('/')
             } else {
                 session
                 .withErrors([

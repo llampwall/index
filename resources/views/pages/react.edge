@@ -1,0 +1,34 @@
+@layout('layouts/app-react')
+
+
+{{--  this class is for the external elements like the title
+  and pop up notifications. it also is where the 'app' element 
+  is inserted into the dom  --}}
+
+  
+@section('title')
+  iNDEx
+@endsection
+
+{{--  injecting the classname of this page into the appcontainer classname  --}}
+@section('current-class')
+home-page
+@endsection
+
+@section('content-area')
+
+    <div class="notify success
+    @if(flashMessage('notification'))
+      active
+    @endif
+    ">
+      {{ flashMessage('notification') }}
+    </div>
+
+    <div class="title">
+      <h1>iNDEx</h1>
+    </div>
+
+    <div id="app"></div>
+
+@endsection

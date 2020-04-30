@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>
+    @!section('title')
+  </title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div className="title">
+      <h1>iNDEx</h1>
+    </div>
+    <div className="app-container
+      @!section('current-class')
+    ">
+      <section id="left-menu">
+        <div className="account-dropdown">
+          <div className="logo">
+            <i className="fa fa-archive" />
+          </div>
+          <div className="username">
+            [Jordan_Hewitt]
+          </div>
+          <div className="icon-down">
+            <i className="fa fa-sort-down" />
+          </div>
+        </div>
+        <div className="groups">
+          <div className="title">{_usr}</div>
+          <ul>
+            <li>bio</li>
+            <li>work</li>
+            <li>media</li>
+          </ul>
+        </div>
+        <div className="groups">
+          <div className="title">{_groups}</div>
+          <ul>
+            <li>software</li>
+            <li>photography</li>
+            <li>design</li>
+          </ul>
+        </div>
+        <div className="logout">
+          <a href="/logout">[logout <i className="fa fa-trash" />]</a>
+        </div>
+      </section>
+      <section id="content-container">
+        <div className="header">
+          <div className="nothing" />
+          <div className="search">
+            <input type="text" name="search" placeholder="search..." />
+          </div>
+          <div className="icons">
+            <i className="fa fa-bell" />
+            <i className="fa fa-comment" />
+            <i className="fa fa-user" />
+          </div>
+        </div>
+        <div className="content-area">
+          <div className="notify success
+            @if(flashMessage('notification'))
+              active
+            @endif
+            ">
+              {/* {{ flashMessage('notification') }} */}
+          </div>
+          <section id="compose">
+            <textarea name="post" cols={30} rows={10} placeholder="share something..." defaultValue={""} />
+            <div className="user-img" style={{background: 'url("/img/welcome.jpg")', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}} />
+            <div className="photo-btn">
+              <i className="fa fa-camera" />
+            </div>
+            <div className="video-btn">
+              <i className="fa fa-youtube" />
+            </div>
+            <div className="send-btn">
+              <i className="fa fa-arrow-right" />
+            </div>
+          </section>
+          <section id="all-posts">
+            <div className="post-container">
+              <div className="post">
+                <div className="post-header">
+                  <div className="author">
+                    <div className="user-img" style={{background: 'url("{{ auth.user.profile_img }}")', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}} />
+                    <a href="#" className="username">[Jordan Hewitt]</a>
+                    <span className="text">shared an article</span>
+                  </div>
+                  <div className="time">43 min</div>
+                </div>
+                <div className="post-media">
+                  <img src="img/webdesign.jpg" />
+                </div>
+                <div className="post-info">
+                  <h3 className="title">How to Become a Web Developer in 2020</h3>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit accusantium vero impedit, dolor earum error doloribus delectus deleniti rerum quis, voluptas debitis nesciunt perspiciatis voluptatibus ipsum sapiente necessitatibus laboriosam amet.</p>
+                </div>
+                <div className="post-stats">
+                  <div className="icons">
+                    <i className="fa fa-grin-alt" />
+                    <i className="fa fa-thumbs-up" />
+                  </div>
+                  <span className="text">Sarah Jane and 23 others liked this post.</span>
+                  <div className="comment-count">4 comments</div>
+                </div>
+                <textarea name="comment" cols={30} rows={2} placeholder="write a comment..." defaultValue={""} />
+                <div className="buttons">
+                  <div className="send-btn">
+                    <i className="fa fa-arrow-right" />
+                  </div>
+                  <div className="share-btn">
+                    <i className="fa fa-share" />
+                  </div>
+                  <div className="like-btn">
+                    <i className="fa fa-thumbs-up" />
+                  </div>
+                </div>
+              </div>
+              <div className="post">
+                <div className="post-header">
+                  <div className="author">
+                    <div className="user-img" />
+                    <a href="#" className="username">[Shawn Ramsey]</a>
+                    <span className="text">shared an article</span>
+                  </div>
+                  <div className="time">2 hr</div>
+                </div>
+                <div className="post-media">
+                  <img src="img/typography.jpg" />
+                </div>
+                <div className="post-info">
+                  <h3 className="title">UX Design Trends</h3>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit accusantium vero impedit, dolor earum error doloribus delectus deleniti rerum quis, voluptas debitis nesciunt perspiciatis voluptatibus ipsum sapiente necessitatibus laboriosam amet.</p>
+                </div>
+                <div className="post-stats">
+                  <div className="icons">
+                    <i className="fa fa-grin-alt" />
+                    <i className="fa fa-thumbs-up" />
+                  </div>
+                  <span className="text">Marshall Woods and 11 others liked this post.</span>
+                  <div className="comment-count">1 comment</div>
+                </div>
+                <textarea name="comment" cols={30} rows={2} placeholder="write a comment..." defaultValue={""} />
+                <div className="buttons">
+                  <div className="send-btn">
+                    <i className="fa fa-arrow-right" />
+                  </div>
+                  <div className="share-btn">
+                    <i className="fa fa-share" />
+                  </div>
+                  <div className="like-btn">
+                    <i className="fa fa-thumbs-up" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </section>
+      <section id="messenger">
+        <div className="messenger-header">
+          <div className="messenger-icon">
+            <i className="fa fa-paper-plane" />
+          </div>
+          <div className="title">
+            \\connect
+          </div>
+          <div className="options-icon">
+            <i className="fa fa-ellipsis-v" />
+          </div>
+        </div>
+        <div className="users">
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Eric Schmidt
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Louis Verdes
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Caroline Logan
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Shawn Ramsey
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Eric Schmidt
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Louis Verdes
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Caroline Logan
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Shawn Ramsey
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Eric Schmidt
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Louis Verdes
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Caroline Logan
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+          <div className="user">
+            <div className="user-img" />
+            <div className="username">
+              Shawn Ramsey
+            </div>
+            <div className="message-icon">
+              <i className="fa fa-comment" />
+            </div>
+          </div>
+        </div>
+        <div className="search">
+          <i className="fa fa-search" />
+          <input type="text" name="friendSearch" placeholder="search..." />
+        </div>
+      </section>
+    </div>
+  {{--  react stuff  --}}
+  <script src="/js/components/vendor.js"></script>
+  <script src="/js/components/firstComp.js"></script>
+</body>
+</html>

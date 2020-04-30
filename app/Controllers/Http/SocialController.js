@@ -44,7 +44,7 @@ class SocialController {
         }
     
         session.flash({notification: 'logged in via Facebook'})
-        return response.redirect('/home')
+        return response.redirect('/')
     }
 
     async callbackg ({ ally, auth }) {
@@ -67,7 +67,7 @@ class SocialController {
           await auth.login(user)
           
           session.flash({notification: 'logged in via Google'})
-          return response.redirect('/home')
+          return response.redirect('/')
         } catch (error) {
           return 'Unable to authenticate. Try again later'
         }
