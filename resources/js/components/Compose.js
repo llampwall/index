@@ -12,7 +12,7 @@ export default class Compose extends Component {
     return (
       <section id="compose">
         <textarea name="post" cols={30} rows={10} placeholder="share something..." defaultValue={""} />
-        <div className="user-img" style={{background: 'url("/img/welcome.jpg")', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}} />
+        <div className="user-img" style={{background: `url("${this.props.user.profile_img}")`, backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}} />
         <div className="photo-btn">
           <i className="fa fa-camera" />
         </div>

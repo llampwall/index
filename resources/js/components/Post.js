@@ -12,8 +12,8 @@ export default class Post extends Component {
         <div className="post">
             <div className="post-header">
                 <div className="author">
-                    <div className="user-img" style={{background: 'url("/img/welcome.jpg")', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}} />
-                    <a href="#" className="username">Jordan Hewitt</a>
+                    <div className="user-img" style={{background: `url("${this.props.user.profile_img}")`, backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}} />
+                    <a href="#" className="username">{this.props.user.fname} {this.props.user.lname}</a>
                     <span className="text">shared an article</span>
                 </div>
                 <div className="time">43 min</div>

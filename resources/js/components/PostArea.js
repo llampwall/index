@@ -12,8 +12,8 @@ export default class PostArea extends Component {
     return (
         <section id="all-posts">
             <div className="post-container">
-                <Post />
-                <Post />
+                <Post user={this.props.user}/>
+                <Post user={this.props.user}/>
             </div>
         </section>
     )

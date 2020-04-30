@@ -22,7 +22,7 @@ export default class LeftMenu extends Component {
             <i className="fa fa-archive" />
           </div>
           <div className="username">
-            Jordan_Hewitt
+            {`${this.props.user.fname}_${this.props.user.lname}`}
           </div>
           <div className="icon-down">
             <i className="fa fa-sort-down" />
@@ -53,9 +53,9 @@ export default class LeftMenu extends Component {
             <li>design</li>
           </ul>
         </div>
-        <div className="logout">
-          <a href="/logout">logout <i className="fa fa-trash" /></a>
-        </div>
+        <a href="/logout" className="logout">
+          logout <i className="fa fa-trash" />
+        </a>
       </section>
     )
   }

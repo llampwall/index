@@ -6,6 +6,10 @@
   ],
   "plugins": [
     "transform-react-pug",
-    "transform-react-jsx"
+    "transform-react-jsx",
+    ["transform-runtime", {
+      "polyfill": false,
+      "regenerator": true
+    }]
   ]
 }

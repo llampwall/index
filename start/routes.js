@@ -35,4 +35,5 @@ Route.get('facebook/authenticated', 'SocialController.callbackf')
 Route.get('login/google', 'SocialController.redirectg')
 Route.get('google/authenticated', 'SocialController.callbackg')
 
-
+// api
+Route.get('/api/intialize', 'ApiController.initialize')
