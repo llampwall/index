@@ -1,0 +1,137 @@
+$offwhite: #f8f8f8;
+$france: #bcbbbd;
+$apricot: #ed8e74;
+$energy: #f9cf5d;
+$sandy: #f4ae60;
+$thunder: #432943;
+
+//hixle.co/gradients/fire
+@mixin main-gradient {
+  background: rgba(255,95,108,1);
+  background: -moz-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(255,95,108,1)), color-stop(100%, rgba(255,195,113,1)));
+  background: -webkit-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+  background: -o-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+  background: -ms-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+  background: linear-gradient(135deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+}
+
+@mixin lighter-gradient {
+  background: rgb(251,227,138);
+  background: linear-gradient(315deg, rgba(251,227,138,1) 0%, rgba(205,155,177,1) 100%);
+}
+
+@mixin fb-gradient {
+  background: rgb(30,87,153);
+  background: -moz-linear-gradient(-45deg, rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%);
+  background: -webkit-linear-gradient(-45deg, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%);
+  background: linear-gradient(135deg, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%);
+}
+
+@mixin google-gradient {
+  background: rgb(248,80,50);
+  background: -moz-linear-gradient(-45deg, rgba(248,80,50,1) 0%, rgba(241,111,92,1) 50%, rgba(246,41,12,1) 51%, rgba(240,47,23,1) 71%, rgba(231,56,39,1) 100%);
+  background: -webkit-linear-gradient(-45deg, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(246,41,12,1) 51%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%);
+  background: linear-gradient(135deg, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(246,41,12,1) 51%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%);
+}
+
+@mixin email-gradient {
+  background: rgb(210,223,237);
+  background: -moz-linear-gradient(-45deg, rgba(210,223,237,1) 0%, rgba(200,215,235,1) 26%, rgba(190,208,234,1) 51%, rgba(166,192,227,1) 51%, rgba(175,199,232,1) 62%, rgba(186,208,239,1) 75%, rgba(153,181,219,1) 88%, rgba(121,155,200,1) 100%);
+  background: -webkit-linear-gradient(-45deg, rgba(210,223,237,1) 0%,rgba(200,215,235,1) 26%,rgba(190,208,234,1) 51%,rgba(166,192,227,1) 51%,rgba(175,199,232,1) 62%,rgba(186,208,239,1) 75%,rgba(153,181,219,1) 88%,rgba(121,155,200,1) 100%);
+  background: linear-gradient(135deg, rgba(210,223,237,1) 0%,rgba(200,215,235,1) 26%,rgba(190,208,234,1) 51%,rgba(166,192,227,1) 51%,rgba(175,199,232,1) 62%,rgba(186,208,239,1) 75%,rgba(153,181,219,1) 88%,rgba(121,155,200,1) 100%);
+}
+
+@mixin hard-shadow {
+  -webkit-box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75);
+  box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75);
+}
+
+@mixin hard-shadow-white {
+  -webkit-box-shadow: 5px 5px 0px 0px rgba(255,255,255,.9);
+  -moz-box-shadow: 5px 5px 0px 0px rgba(255,255,255,.9);
+  box-shadow: 5px 5px 0px 0px rgba(255,255,255,.9);
+}
+
+@mixin button-animation {
+  span {
+    position: absolute;
+    display: block;
+  }
+  
+  span:nth-child(1) {
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, $apricot);
+      animation: btn-anim1 1s linear infinite;
+  }
+    
+  @keyframes btn-anim1 {
+      0% {
+        left: -100%;
+      }
+      50%,100% {
+        left: 100%;
+      }
+  }
+    
+  span:nth-child(2) {
+      top: -100%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, $apricot);
+      animation: btn-anim2 1s linear infinite;
+      animation-delay: .25s
+  }
+    
+  @keyframes btn-anim2 {
+      0% {
+        top: -100%;
+      }
+      50%,100% {
+        top: 100%;
+      }
+  }
+    
+  span:nth-child(3) {
+      bottom: 0;
+      right: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(270deg, transparent, $apricot);
+      animation: btn-anim3 1s linear infinite;
+      animation-delay: .5s
+  }
+    
+  @keyframes btn-anim3 {
+      0% {
+        right: -100%;
+      }
+      50%,100% {
+        right: 100%;
+      }
+  }
+    
+  span:nth-child(4) {
+      bottom: -100%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(360deg, transparent, $apricot);
+      animation: btn-anim4 1s linear infinite;
+      animation-delay: .75s
+  }
+    
+  @keyframes btn-anim4 {
+      0% {
+        bottom: -100%;
+      }
+      50%,100% {
+        bottom: 100%;
+      }
+  }
+}

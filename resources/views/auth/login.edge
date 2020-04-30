@@ -1,0 +1,63 @@
+@layout('layouts/empty')
+
+@section('title')
+    iNDEX - [login]
+@endsection
+
+
+@section('current-class')
+  auth-page
+@endsection
+
+@section('current-inline-style')
+@endsection 
+
+@section('content')
+  <div class="default-form">
+    <form action="/login" class="lform" method="POST">
+        {{csrfField()}}
+        <div class="error-box
+        @if(hasErrorFor('email') || hasErrorFor('password'))
+            active
+        @endif
+        ">
+            @if(hasErrorFor('email'))
+                {{ getErrorFor('email') }}
+            @endif
+            @if(hasErrorFor('password'))
+                {{ getErrorFor('password') }}
+            @endif
+        </div>
+        <div class="form-group">
+            <label for="email">email</label>
+            <input type="email" name="email" value="{{ old('email', '') }}" class="email
+            @if(hasErrorFor('email'))
+              error
+            @endif
+            ">
+        </div>
+        <div class="form-group">
+            <label for="password">password</label>
+            <input type="password" name="password" class="password
+            @if(hasErrorFor('password'))
+              error
+            @endif
+            ">
+        </div>
+        <div class="form-group">
+            <button type='submit'>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              [enter]
+            </button>
+        </div>
+        <hr>
+          <a href="/forgot">~ forgot your password?</a>
+          <br>
+          <br>
+          <a href="/register">~ don't have an account?</a>
+    </form>
+  </div>
+@endsection

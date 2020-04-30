@@ -1,0 +1,595 @@
+.home-page {
+  display: grid;
+  grid-template-columns: minmax(200px, 15%) 65% minmax(200px, 20%);
+
+  #left-menu {
+    border-right: 1px solid $apricot;
+    color: $apricot;
+    position: relative;
+    
+    
+    .account-dropdown {
+      display: grid;
+      grid-template-columns: 1fr 4fr 1fr;
+      padding: .77rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid $apricot;
+      background-color: $apricot;
+      color: white;
+      height: 58px;
+      min-width: 200px;
+      .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        .fa {
+          font-size: 1.3rem;
+        }
+      }
+      .username {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: lowercase;
+        font-size: .8rem;
+        font-weight: 700;
+        color: white;
+        cursor: pointer;
+      }
+      .icon-down {
+        display: flex;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        .fa {
+          font-size: 1rem;
+          position: absolute;
+          top: 6px;
+          padding-left: 8px;
+        }
+      }
+    }
+
+    .groups {
+      padding: .7rem;
+      .title {
+        font-size: 1.2rem;
+        text-transform: lowercase;
+        font-weight: bold;
+        padding: .7rem 0;
+        color: $sandy;
+      }
+
+      ul {
+        padding-left: 1rem;
+        li {
+          font-size: .9rem;
+          padding: .7rem 0;
+          font-weight: 700;
+          transition: all .3 ease;
+          cursor: pointer;
+
+          &::before{
+            content: ":/~";
+          }
+          &:hover {
+            background: $apricot;
+            color: white;
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+
+    .logout {
+      width: 100%;
+      padding: .5rem;
+      height: 50px;
+      border-top: 1px solid $apricot;
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s ease-in-out;
+      a {
+        color: $apricot;
+        transition: all .2s ease-in-out;
+      }
+
+      &:hover {
+        background: $apricot;
+        a {
+          color: white;
+        }
+      }
+    }
+  }
+
+  #content-container {
+    border-right: 1px solid $apricot;
+    color: $apricot;
+    background: white;
+    max-height: 85vh;
+    overflow: hidden;
+
+    .header {
+      display: flex;
+      padding: .7rem;
+      border-bottom: 1px solid $apricot;
+      background-color: $offwhite;
+      .nothing {
+        width: 116px;
+      }
+      .search {
+        margin: 0 auto;
+        width: 80%;
+        max-width: 600px;
+        input[type="text"] {
+          font-size: 1.3rem;
+          padding: 3px 8px;
+          width: 100%;
+          background: white;
+          border: 1px solid $apricot;
+          // border: none;
+          outline: none;
+          color: $apricot;
+          &::placeholder {
+            color: $apricot;
+            opacity: .5;
+          }
+          &:focus::placeholder {
+            color: transparent;
+          }
+        }
+      }
+
+      .icons {
+        display: grid;
+        grid-template-columns: repeat(3, 2rem);
+        // border: 1px solid $apricot;
+        grid-gap: 5px;
+        padding: 0 5px;
+        cursor: pointer;
+
+        .fa {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.1rem;
+          color: $apricot;
+        }
+      }
+    }
+
+    .content-area {
+      padding: 1rem 1rem 0 1rem;
+      box-sizing: content-box;
+      width: 100%;
+      height: calc(85vh - 57px);
+      overflow: auto;
+
+      #compose {
+        margin: 0 auto;
+        width: 90%;
+        max-width: 700px;
+        padding: .7rem 0;
+        position: relative;
+        margin-bottom: 3rem;;
+        
+        textarea {
+          width: 100%;
+          height: 70px;
+
+          border: 1px solid $apricot;
+          resize: none;
+          background: $offwhite;
+          padding: .5rem 2rem;
+          font-size: 1.2rem;
+          outline: none;
+          color: $apricot;
+          overflow: visible;
+          transition: all .3s ease;
+          &:focus {
+            height: 80px;
+          }
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          &::placeholder {
+            color: $apricot;
+          }
+          &:focus::placeholder{
+            color: transparent;
+          }
+          @include hard-shadow;
+        }
+
+        .user-img {
+          height: 40px;
+          width: 40px;
+          // background: url('https://pbs.twimg.com/profile_images/1005670478231547909/wPhZMQM6.jpg');
+          // background-position: center center;
+          // background-repeat: no-repeat;
+          // background-size: cover;
+          position: absolute;
+          top: 0;
+          left: -1rem;
+          border: 1px solid $apricot;
+        }
+
+        .photo-btn, .video-btn, .send-btn {
+          height: 20px;
+          width: 20px;
+          // border-radius: 10%;
+          background: white;
+          padding: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          border: 1px solid $apricot;
+          @include hard-shadow;
+          cursor: pointer;
+          .fa {
+            font-size: 1.1rem;
+          }
+
+          &:hover {
+            background: $apricot;
+            color: white;
+          }
+        }
+
+        .photo-btn {
+          top: -3px;
+          right: -10px;
+        }
+        .video-btn {
+          bottom: 30px;
+          right: -10px;
+        }
+        .send-btn {
+          bottom: -10px;
+          right: -10px;
+        }
+      }
+
+      #all-posts {
+        .post-container {
+          margin: 0 auto;
+          width: 90%;
+          max-width: 700px;
+          background: white;
+          .post {
+            position: relative;
+            width: 100%;
+            // border: 1px solid $apricot;
+            margin-bottom: 3rem;
+
+            .post-header {
+              border: 1px solid $apricot;
+              border-bottom: none;
+              background: $offwhite;
+              width: 95%;
+              margin: 0 auto;
+              display: flex;
+              align-items: center;
+              @include hard-shadow;
+              .author {
+                display: flex;
+                align-items: center;
+                .user-img {
+                  height: 40px;
+                  width: 40px;
+                  // background: url('https://pbs.twimg.com/profile_images/1005670478231547909/wPhZMQM6.jpg');
+                  // background-position: center center;
+                  // background-repeat: no-repeat;
+                  // background-size: cover;
+                  border-right: 1px solid $apricot;
+                }
+                .username {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  text-transform: lowercase;
+                  font-size: .9rem;
+                  font-weight: 700;
+                  color: $sandy;
+                  cursor: pointer;
+                  padding: 0 1rem;
+                }
+              }
+              .text {
+                font-size: .9rem;
+              }
+              .time {
+                margin-left: auto;
+                padding: 0 1rem;
+                font-size: .9rem;
+                opacity: .7;
+              }
+            }
+
+            .post-media {
+              // width: 95%;
+              border: 1px solid $apricot;
+              margin: 0 auto;
+              transition: all .3s ease;
+              &:hover {
+                width: 100%;
+              }
+              img {
+                width: 100%;
+                @include hard-shadow;
+              }
+            }
+
+            .post-info {
+              border-left: 1px solid $apricot;
+              border-right: 1px solid $apricot;
+              background: $offwhite;
+              width: 95%;
+              margin: 0 auto;
+              @include hard-shadow;
+
+              .title {
+                text-align: center;
+                font-size: 1.3rem;
+                font-weight: 700;
+                padding: .3rem;
+
+                &::before {
+                  content: "~{"
+                }
+                &::after {
+                  content: "}~"
+                }
+              }
+
+              p {
+                font-size: .9rem;
+                padding: .5rem 1rem;
+              }
+            }
+
+            .post-stats {
+              background: $offwhite;
+              width: 95%;
+              margin: 0 auto;
+              display: flex;
+              align-items: center;
+              padding: .3rem;
+              border-left: 1px solid $apricot;
+              border-right: 1px solid $apricot;
+              @include hard-shadow;
+              .icons {
+                .fa {
+                  font-size: 1.2rem;
+                }
+              }
+
+              .text {
+                font-size: .9rem;
+                margin-left: .5rem;
+              }
+
+              .comment-count {
+                font-size: .9rem;
+                margin-left: auto;
+              }
+            }
+
+            textarea {
+              width: 100%;
+              height: 40px;
+              resize: none;
+              border: 1px solid $apricot;
+              @include hard-shadow;
+              padding: .5rem 2.5rem .5rem 1rem;
+              color: $apricot;
+              transition: all .3s ease;
+              font-size: 14px;
+              overflow-y: auto;
+              outline: none;
+              &::-webkit-scrollbar {
+                display: none;
+              }
+              &:focus {
+                width: 100%;
+                height: 50px;
+              }
+              &::placeholder {
+                color: $apricot;
+              }
+              &:focus::placeholder{
+                color: transparent;
+              }
+            }
+            .buttons {
+              width: 95%;
+              margin: 0 auto;
+              display: flex;
+              justify-content: flex-end;
+              padding: .5rem 0;
+              background: $offwhite;
+              @include hard-shadow;
+              position: relative;
+              border: 1px solid $apricot;
+              border-top: none;
+
+              .send-btn {
+                height: 20px;
+                width: 20px;
+                background: white;
+                padding: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid $apricot;
+                margin-right: .7rem;
+                cursor: pointer;
+                
+                &:hover {
+                  background: $apricot;
+                  color: white;
+                }
+              }
+
+              .share-btn, .like-btn, .send-btn {
+                height: 20px;
+                width: 20px;
+                background: white;
+                padding: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid $apricot;
+                margin-right: .7rem;
+                cursor: pointer;
+                
+                &:hover {
+                  background: $apricot;
+                  color: white;
+                }
+              }
+
+              .send-btn {
+                position: absolute;
+                top: -37px;
+                right: -25px;
+              }
+              .fa {
+                font-size: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+    
+  }
+
+  #messenger {
+    color: $apricot;
+    min-width: 200px;
+    max-height: 85vh;
+    position: relative;
+
+    .messenger-header {
+      background-color: $apricot;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr 4fr 1fr;
+      height: 58px;
+      border-bottom: 1px solid $apricot;
+      min-width: 101%;
+
+      .messenger-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 1.5rem;
+        cursor: pointer;
+      }
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .options-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-right: 1.5rem;
+        cursor: pointer;
+      }
+    }
+
+    .users {
+      padding-top: .7rem;
+      display: block;
+      box-sizing: content-box;
+      width: 110%;
+      height: calc(85vh - 120px);
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .user {
+        display: flex;
+        align-items: center;
+        padding: .7rem;
+        cursor: pointer;
+        transition: all .3s ease;
+        &:hover {
+          background: $apricot;
+          color: white;
+          transform: scale(1.05);
+        }
+
+        .user-img {
+          height: 35px;
+          width: 35px;
+          background: url('https://pbs.twimg.com/profile_images/1005670478231547909/wPhZMQM6.jpg');
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          border: 1px solid $apricot;
+          margin-right: .6rem;
+        }
+        
+        .username {
+          font-size: 1rem;
+        }
+
+        .message-icon {
+          margin-left: auto;
+          margin-right: 1.8rem;
+          
+          .fa {
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+
+    .search {
+      width: 100%;
+      padding: .5rem;
+      height: 50px;
+      border-top: 1px solid $apricot;
+      position: absolute;
+      bottom: 0;
+      // left: -8px;
+
+
+      .fa {
+        margin-left: .8rem;
+      }
+
+      input[type='text'] {
+        border: none;
+        background: transparent;
+        outline: none;
+        padding: .5rem;
+        border-radius: 30%;
+        width: 70%;
+        color: $apricot;
+        font-size: 1rem;
+        &::placeholder {
+          color: $apricot;
+        }
+        &:focus::placeholder{
+          color: transparent;
+        }
+      }
+    }
+  }
+
+}
+

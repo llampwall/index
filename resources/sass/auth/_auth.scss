@@ -1,0 +1,99 @@
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .default-form {
+        width: 500px;
+
+        .error-box {
+            display: none;
+            background: red;
+            color: white;
+            padding: 15px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 700;
+            &.active {
+                display: block;
+            }
+        }
+      
+        .form-group {
+
+            &.names {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            & > .error {
+                border: 3px solid red;
+            }
+
+            label {
+                font-size: 20px;
+                color: $apricot;
+                font-weight: 500;
+            }
+            margin-bottom: 1rem;
+      
+            input {
+                margin-top: .5rem;
+                @include hard-shadow;
+            }
+
+            .fname, .lname {
+                width: 48%;
+                display: block;
+            }
+      
+            button {
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+                margin-top: 1rem;
+                background: white;
+                color: $apricot;
+                font-weight: 700;
+                font-size: 16px;
+                padding: .5rem 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid $sandy;
+                @include hard-shadow;
+                transition: all .2s ease;
+                cursor: pointer;
+                .fa {
+                  font-size: 1.1rem;
+                }
+      
+                &:hover {
+                  background: $apricot;
+                  color: white;
+                  -webkit-box-shadow: 0px 0px 0px 0px rgba(255,255,255,.9);
+                    -moz-box-shadow: 0px 0px 0px 0px rgba(255,255,255,.9);
+                    box-shadow: 0px 0px 0px 0px rgba(255,255,255,.9);
+                    transform: translate(5px, 5px);
+                }
+
+                @include button-animation;
+                  
+            }
+        }
+    }
+
+    hr {
+        height: 1px;
+        width: 100%;
+        margin: 1.3rem 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: $sandy;
+        font-size: 1rem;
+    }
+}

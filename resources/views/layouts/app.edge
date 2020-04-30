@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>
+    @!section('title')
+  </title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+  <div id="app"></div>
+  
+  {{--  <h1>i\\N\\D\\E\\x</h1>  --}}
+  <div class="title">
+    <h1>iNDEx</h1>
+  </div>
+
+  
+  <div class="app-container
+    @!section('current-class')
+  ">
+    
+    <section id="left-menu">
+      <div class="account-dropdown">
+        <div class="logo">
+          <i class="fa fa-archive"></i>
+        </div>
+        <div class="username">
+          [{{ auth.user.fname }}_{{ auth.user.lname }}]
+        </div>
+        <div class="icon-down">
+          <i class="fa fa-sort-down"></i>
+        </div>
+      </div>
+      <div class="groups">
+        <div class="title">{_usr}</div>
+        <ul>
+          <li>bio</li>
+          <li>work</li>
+          <li>media</li>
+        </ul>
+      </div>
+      <div class="groups">
+        <div class="title">{_groups}</div>
+        <ul>
+          <li>software</li>
+          <li>photography</li>
+          <li>design</li>
+        </ul>
+      </div>
+
+      <div class="logout">
+        <a href='/logout'>[logout <i class='fa fa-trash'></i>]</a>
+      </div>
+    </section>
+    
+    <section id="content-container">
+
+      <div class="header">
+        <div class="nothing"></div>
+        <div class="search">
+          <input type="text" name="search" placeholder="search...">
+        </div>
+        <div class="icons">
+          <i class="fa fa-bell"></i>
+          <i class="fa fa-comment"></i>
+          <i class="fa fa-user"></i>
+        </div>
+      </div>
+
+      <div class="content-area">
+        @!section('content-area')
+      </div>
+
+    </section>
+    
+    <section id="messenger">
+      <div class="messenger-header">
+        <div class="messenger-icon">
+          <i class='fa fa-paper-plane'></i>
+        </div>
+        <div class="title">
+          \\connect
+        </div>
+        <div class="options-icon">
+          <i class="fa fa-ellipsis-v"></i>
+        </div>
+      </div>
+
+      <div class="users">
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Eric Schmidt
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Louis Verdes
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Caroline Logan
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Shawn Ramsey
+          </div>
+
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Eric Schmidt
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Louis Verdes
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Caroline Logan
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Shawn Ramsey
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Eric Schmidt
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Louis Verdes
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Caroline Logan
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+        <div class="user">
+          <div class="user-img"></div>
+          <div class="username">
+            Shawn Ramsey
+          </div>
+          <div class="message-icon">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="search">
+        <i class='fa fa-search'></i>
+        <input type="text" name="friendSearch" placeholder="search...">
+      </div>
+
+    </section>
+  </div>
+
+  {{--  react stuff  --}}
+  <script src="/js/components/vendor.js"></script>
+  <script src="/js/components/firstComp.js"></script>
+</body>
+</html>

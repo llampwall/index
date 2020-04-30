@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>
+      @!section('title')
+  </title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  {{--  <h1>i\\N\\D\\E\\x</h1>  --}}
+  <div class="title">
+    <h1>iNDEx</h1>
+  </div>
+  
+  <div class="app-container
+    @!section('current-class')
+  " style="
+    @!section('current-inline-style')
+  ">
+
+    @!section('content')
+
+  </div>
+
+  {{--  react stuff  --}}
+  <script src="/js/components/vendor.js"></script>
+  <script src="/js/components/firstComp.js"></script>
+</body>
+</html>

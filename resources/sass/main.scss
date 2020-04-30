@@ -1,0 +1,112 @@
+@import url( 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+@import url('https://fonts.googleapis.com/css2?family=Cantarell&family=Josefin+Slab:wght@600;700&family=Source+Code+Pro:ital@0;1&family=Stardos+Stencil&display=swap');
+@import "reset";
+@import "variables";
+@import "pages/welcome";
+@import "pages/home";
+@import "auth/auth";
+
+* {
+  box-sizing: border-box;
+  font-family: 'Source Code Pro', monospace;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+
+  @include main-gradient;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Source Code Pro', monospace;
+  // font-family: 'Cantarell', sans-serif;
+
+  .title {
+    h1 {
+      font-size: 70px;
+      font-weight: 700;
+      color: $offwhite;
+      letter-spacing: 20px;
+      white-space: nowrap;
+      width: 4.2em;
+      overflow: hidden;
+      animation: type 4s steps(15, end); 
+      pointer-events: none;
+      &::selection {
+        text-shadow: 5px 5px black;
+      }
+    }
+  
+    h1:nth-child(2) {
+      animation: type2 8s steps(15, end);
+    }
+  
+    @keyframes type { 
+      from { width: 0; } 
+    } 
+    
+    @keyframes type2 {
+      0%{width: 0;}
+      50%{width: 0;}
+      100%{ width: 100; } 
+    } 
+  }
+  
+  
+
+  .app-container {
+    width: 90%;
+    max-width: 1400px;
+    background: $offwhite;
+    margin: 0 auto;
+    min-height: 85vh;
+    height: 85vh;
+    overflow: hidden;
+  }
+
+    
+}
+
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"] {
+  font-size: 1.3rem;
+  padding: 3px 8px;
+  width: 100%;
+  background: white;
+  border: 1px solid $apricot;
+  outline: none;
+  color: $apricot;
+  &::placeholder {
+    color: $apricot;
+    opacity: .5;
+  }
+  &:focus::placeholder {
+     color: transparent;
+  }
+}
+
+.notify {
+  
+  display: none;
+  &.active {
+    display: block;
+  }
+
+  &.success {
+    background: lightgreen;
+    color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: .6rem 2rem;
+  }
+
+}
