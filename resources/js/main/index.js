@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import {
+  BrowserRouter as Router,
+  Route, 
+  NavLink
+} from 'react-router-dom'
 import axios from 'axios'
+import Home from '../components/Home'
+import Profile from '../components/Profile'
 import LeftMenu from '../components/LeftMenu'
 import Messenger from '../components/Messenger'
 import SearchHeader from '../components/SearchHeader'
-import PostArea from '../components/PostArea'
-import Compose from '../components/Compose'
 import Loading from '../components/Loading'
 
 
@@ -14,13 +19,8 @@ class Layout extends Component {
   constructor () {
     super()
     this.state = {
-      initialData: {},
-      refresh: false
+      initialData: {}
     }
-  }
-
-  update() {
-
   }
 
   componentWillMount() {
@@ -30,7 +30,7 @@ class Layout extends Component {
       try {
         const data = await axios.get('/api/intialize')
         const allData = data.data
-        console.log(allData)
+        // console.log(allData)
 
         self.setState({
           initialData: allData
@@ -38,7 +38,7 @@ class Layout extends Component {
           console.log(self.state.initialData)
         })
       } catch (error) {
-        console.log("This it? " + error)
+        console.log("Initialization error: " + error)
       }
     }
 
@@ -47,6 +47,7 @@ class Layout extends Component {
 
   render () {
     return (
+      <Router>
         <div className="app-container home-page">
 
           <Loading active={(this.state.initialData != undefined) ? "" : 'active'}/>
@@ -54,15 +55,16 @@ class Layout extends Component {
           <LeftMenu initialData={this.state.initialData}/>
 
           <section id="content-container">
+
             <SearchHeader />
-            <div className="content-area">
-              <Compose initialData={this.state.initialData}/>
-              <PostArea initialData={this.state.initialData}/>
-            </div>
+            <Route exact path="/" component={ (props) => <Home routeProps={props} initialData={this.state.initialData}/> }/>
+            <Route exact path="/profile/:id" component={ (props) => <Profile routeProps={props} initialData={this.state.initialData}/> }/>
+          
           </section>
 
           <Messenger initialData={this.state.initialData}/>
         </div>
+      </Router>
     )
   }
 }

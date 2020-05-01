@@ -29,7 +29,7 @@ export default class PostArea extends Component {
   // }
 
   showMyPosts = () => {
-    console.log(this.props.initialData.postData)
+    // console.log(this.props.initialData.postData)
     return (
       this.props.initialData.postData.map((item) => {
         let post = item.posts

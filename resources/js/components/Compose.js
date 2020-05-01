@@ -16,7 +16,9 @@ export default class Compose extends Component {
         image_url: 'img/webdesign.jpg',
         type: 'image'
       })
-      document.getElementById('content').value = ""
+      this.setState({
+        postContent: ""
+      })
       return 'item saved'
     } catch (error) {
       console.log("axios didnt work: " + error)

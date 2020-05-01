@@ -37,10 +37,18 @@ Route.get('google/authenticated', 'SocialController.callbackg')
 
 // api
 Route.get('/api/intialize', 'ApiController.initialize')
+Route.get('/api/user/:id', 'UserController.profile')
 
 // posts
 // Route.resource('/posts', 'PostController').except(['delete'])
 Route.get('/posts', 'PostController.index')
 Route.post('/posts', 'PostController.store')
-// Route.post('/posts/', 'PostController.store')
-// Route.get('/posts/:id/delete', 'PostController.destroy')
+Route.get('/posts/:id/delete', 'PostController.destroy')
+
+
+// ------- react router ----------
+// anything that doesnt clear the above routes will
+// use the main react page, where react-router 
+// will display the {Home} component as it says in the 
+// route exact path
+Route.any('*', ({ view }) => view.render('pages/react'))

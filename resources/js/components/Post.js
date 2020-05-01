@@ -35,7 +35,7 @@ export default class Post extends Component {
             <div>Loading...</div>
         )
     } else {
-        console.log(this.props.post)
+        // console.log(this.props.post)
         return (
             <div className="post">
                 <div className="post-header">

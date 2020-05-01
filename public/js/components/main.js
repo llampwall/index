@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 297:
+/***/ 203:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10,39 +10,39 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(330);
+var _defineProperty2 = __webpack_require__(339);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _regenerator = __webpack_require__(191);
+var _regenerator = __webpack_require__(196);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(190);
+var _asyncToGenerator2 = __webpack_require__(195);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _classCallCheck2 = __webpack_require__(48);
+var _classCallCheck2 = __webpack_require__(37);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(49);
+var _createClass2 = __webpack_require__(38);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(51);
+var _possibleConstructorReturn2 = __webpack_require__(40);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(50);
+var _inherits2 = __webpack_require__(39);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(36);
+var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(126);
+var _axios = __webpack_require__(85);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -73,7 +73,9 @@ var Compose = function (_Component) {
               });
 
             case 3:
-              document.getElementById('content').value = "";
+              _this.setState({
+                postContent: ""
+              });
               return _context.abrupt('return', 'item saved');
 
             case 7:
@@ -148,7 +150,7 @@ exports.default = Compose;
 
 /***/ }),
 
-/***/ 298:
+/***/ 304:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -158,23 +160,127 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(48);
+var _classCallCheck2 = __webpack_require__(37);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(49);
+var _createClass2 = __webpack_require__(38);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(51);
+var _possibleConstructorReturn2 = __webpack_require__(40);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(50);
+var _inherits2 = __webpack_require__(39);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(36);
+var _react = __webpack_require__(17);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(103);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = __webpack_require__(133);
+
+var _axios = __webpack_require__(85);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _PostArea = __webpack_require__(331);
+
+var _PostArea2 = _interopRequireDefault(_PostArea);
+
+var _Compose = __webpack_require__(203);
+
+var _Compose2 = _interopRequireDefault(_Compose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Handles updating the postarea when its sibling compose adds a post to the database
+
+
+var Home = function (_Component) {
+  (0, _inherits3.default)(Home, _Component);
+
+  function Home() {
+    (0, _classCallCheck3.default)(this, Home);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
+
+    _this.state = {
+      initialData: {}
+    };
+    return _this;
+  }
+
+  (0, _createClass3.default)(Home, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      this.setState({
+        initialData: this.props.initialData
+      }, function () {
+        console.log(_this2.state);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (this.props.initialData == undefined) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'posts loading...'
+        );
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'content-area' },
+          _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData }),
+          _react2.default.createElement(_PostArea2.default, { initialData: this.state.initialData })
+        );
+      }
+    }
+  }]);
+  return Home;
+}(_react.Component);
+
+exports.default = Home;
+
+/***/ }),
+
+/***/ 305:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _classCallCheck2 = __webpack_require__(37);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(38);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(40);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(39);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -333,7 +439,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 299:
+/***/ 306:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -343,23 +449,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(48);
+var _classCallCheck2 = __webpack_require__(37);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(49);
+var _createClass2 = __webpack_require__(38);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(51);
+var _possibleConstructorReturn2 = __webpack_require__(40);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(50);
+var _inherits2 = __webpack_require__(39);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(36);
+var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -402,7 +508,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 300:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -412,23 +518,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(48);
+var _classCallCheck2 = __webpack_require__(37);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(49);
+var _createClass2 = __webpack_require__(38);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(51);
+var _possibleConstructorReturn2 = __webpack_require__(40);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(50);
+var _inherits2 = __webpack_require__(39);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(36);
+var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -671,7 +777,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 301:
+/***/ 308:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -681,104 +787,120 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(48);
+var _classCallCheck2 = __webpack_require__(37);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(49);
+var _createClass2 = __webpack_require__(38);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(51);
+var _possibleConstructorReturn2 = __webpack_require__(40);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(50);
+var _inherits2 = __webpack_require__(39);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(36);
+var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(323);
+var _reactRouterDom = __webpack_require__(133);
 
-var _Post2 = _interopRequireDefault(_Post);
+var _axios = __webpack_require__(85);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _Compose = __webpack_require__(203);
+
+var _Compose2 = _interopRequireDefault(_Compose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PostArea = function (_Component) {
-  (0, _inherits3.default)(PostArea, _Component);
+// Handles updating the postarea when its sibling compose adds a post to the database
 
-  function PostArea() {
-    (0, _classCallCheck3.default)(this, PostArea);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (PostArea.__proto__ || Object.getPrototypeOf(PostArea)).call(this));
+var Profile = function (_Component) {
+  (0, _inherits3.default)(Profile, _Component);
 
-    _this.showMyPosts = function () {
-      console.log(_this.props.initialData.postData);
-      return _this.props.initialData.postData.map(function (item) {
-        var post = item.posts;
-        var user = item.users;
-        return _react2.default.createElement(_Post2.default, { post: post, user: user, key: post.id });
-      });
-    };
+  function Profile() {
+    (0, _classCallCheck3.default)(this, Profile);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this));
 
     _this.state = {
-      posts: []
+      initialData: {}
     };
     return _this;
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     posts: this.props.posts
-  //   })
-  // }
+  (0, _createClass3.default)(Profile, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.setState({
+        initialData: this.props.initialData
+      }, function () {
+        // console.log(this.state)
+      });
+    }
 
-  // must be async so it must be moved to componentwillmount or useeffect
-  // also must be modified so it shows the posts of you and all of your friends
-  // showLatestPostFeed() {
-  //   const latestPosts = await Database
-  //     .from('posts').where('user_id', auth.user.id).forPage(1,10)
+    // const getUser = async function() {
+    //   const 
+    // }
 
-  //   return (
-  //     latestPosts.map((post, i) => {
-  //       return <Post post={post} /> 
-  //     })
-  //   )
-  // }
-
-  (0, _createClass3.default)(PostArea, [{
+  }, {
     key: 'render',
     value: function render() {
       if (this.props.initialData.userData == undefined) {
         return _react2.default.createElement(
           'div',
           null,
-          'Loading...'
+          'profile loading...'
         );
       } else {
+        // console.log(this.props.initialData.userData)
         return _react2.default.createElement(
-          'section',
-          { id: 'all-posts' },
+          'div',
+          { className: 'content-area profile-page' },
           _react2.default.createElement(
             'div',
-            { className: 'post-container' },
-            this.showMyPosts()
+            { className: 'user-img' },
+            _react2.default.createElement('img', { src: this.props.initialData.userData.profile_img }),
+            _react2.default.createElement(
+              'h1',
+              null,
+              this.props.initialData.userData.fname,
+              ' ',
+              this.props.initialData.userData.lname
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'user-info' },
+            _react2.default.createElement(
+              'div',
+              { className: 'follow-btn' },
+              _react2.default.createElement('span', null),
+              _react2.default.createElement('span', null),
+              _react2.default.createElement('span', null),
+              _react2.default.createElement('span', null),
+              'follow'
+            )
           )
         );
       }
     }
   }]);
-  return PostArea;
+  return Profile;
 }(_react.Component);
 
-exports.default = PostArea;
+exports.default = Profile;
 
 /***/ }),
 
-/***/ 302:
+/***/ 309:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -788,23 +910,23 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _classCallCheck2 = __webpack_require__(48);
+var _classCallCheck2 = __webpack_require__(37);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(49);
+var _createClass2 = __webpack_require__(38);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(51);
+var _possibleConstructorReturn2 = __webpack_require__(40);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(50);
+var _inherits2 = __webpack_require__(39);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(36);
+var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -851,7 +973,7 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 323:
+/***/ 330:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -861,27 +983,27 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _classCallCheck2 = __webpack_require__(48);
+var _classCallCheck2 = __webpack_require__(37);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(49);
+var _createClass2 = __webpack_require__(38);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(51);
+var _possibleConstructorReturn2 = __webpack_require__(40);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(50);
+var _inherits2 = __webpack_require__(39);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(36);
+var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(126);
+var _axios = __webpack_require__(85);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -931,7 +1053,7 @@ var Post = function (_Component) {
                     'Loading...'
                 );
             } else {
-                console.log(this.props.post);
+                // console.log(this.props.post)
                 return _react2.default.createElement(
                     'div',
                     { className: 'post' },
@@ -1036,69 +1158,178 @@ exports.default = Post;
 
 /***/ }),
 
-/***/ 324:
+/***/ 331:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _regenerator = __webpack_require__(191);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var _regenerator2 = _interopRequireDefault(_regenerator);
-
-var _asyncToGenerator2 = __webpack_require__(190);
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
-var _classCallCheck2 = __webpack_require__(48);
+var _classCallCheck2 = __webpack_require__(37);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(49);
+var _createClass2 = __webpack_require__(38);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(51);
+var _possibleConstructorReturn2 = __webpack_require__(40);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(50);
+var _inherits2 = __webpack_require__(39);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(36);
+var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(127);
+var _Post = __webpack_require__(330);
+
+var _Post2 = _interopRequireDefault(_Post);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var PostArea = function (_Component) {
+  (0, _inherits3.default)(PostArea, _Component);
+
+  function PostArea() {
+    (0, _classCallCheck3.default)(this, PostArea);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (PostArea.__proto__ || Object.getPrototypeOf(PostArea)).call(this));
+
+    _this.showMyPosts = function () {
+      // console.log(this.props.initialData.postData)
+      return _this.props.initialData.postData.map(function (item) {
+        var post = item.posts;
+        var user = item.users;
+        return _react2.default.createElement(_Post2.default, { post: post, user: user, key: post.id });
+      });
+    };
+
+    _this.state = {
+      posts: []
+    };
+    return _this;
+  }
+
+  // componentDidMount() {
+  //   this.setState({
+  //     posts: this.props.posts
+  //   })
+  // }
+
+  // must be async so it must be moved to componentwillmount or useeffect
+  // also must be modified so it shows the posts of you and all of your friends
+  // showLatestPostFeed() {
+  //   const latestPosts = await Database
+  //     .from('posts').where('user_id', auth.user.id).forPage(1,10)
+
+  //   return (
+  //     latestPosts.map((post, i) => {
+  //       return <Post post={post} /> 
+  //     })
+  //   )
+  // }
+
+  (0, _createClass3.default)(PostArea, [{
+    key: 'render',
+    value: function render() {
+      if (this.props.initialData.userData == undefined) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Loading...'
+        );
+      } else {
+        return _react2.default.createElement(
+          'section',
+          { id: 'all-posts' },
+          _react2.default.createElement(
+            'div',
+            { className: 'post-container' },
+            this.showMyPosts()
+          )
+        );
+      }
+    }
+  }]);
+  return PostArea;
+}(_react.Component);
+
+exports.default = PostArea;
+
+/***/ }),
+
+/***/ 332:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _regenerator = __webpack_require__(196);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__(195);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _classCallCheck2 = __webpack_require__(37);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(38);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(40);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(39);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(17);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(103);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _axios = __webpack_require__(126);
+var _reactRouterDom = __webpack_require__(133);
+
+var _axios = __webpack_require__(85);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _LeftMenu = __webpack_require__(298);
+var _Home = __webpack_require__(304);
+
+var _Home2 = _interopRequireDefault(_Home);
+
+var _Profile = __webpack_require__(308);
+
+var _Profile2 = _interopRequireDefault(_Profile);
+
+var _LeftMenu = __webpack_require__(305);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(300);
+var _Messenger = __webpack_require__(307);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(302);
+var _SearchHeader = __webpack_require__(309);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _PostArea = __webpack_require__(301);
-
-var _PostArea2 = _interopRequireDefault(_PostArea);
-
-var _Compose = __webpack_require__(297);
-
-var _Compose2 = _interopRequireDefault(_Compose);
-
-var _Loading = __webpack_require__(299);
+var _Loading = __webpack_require__(306);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
@@ -1113,16 +1344,12 @@ var Layout = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this));
 
     _this.state = {
-      initialData: {},
-      refresh: false
+      initialData: {}
     };
     return _this;
   }
 
   (0, _createClass3.default)(Layout, [{
-    key: 'update',
-    value: function update() {}
-  }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
 
@@ -1141,29 +1368,28 @@ var Layout = function (_Component) {
                 case 3:
                   data = _context.sent;
                   allData = data.data;
-
-                  console.log(allData);
+                  // console.log(allData)
 
                   self.setState({
                     initialData: allData
                   }, function () {
                     console.log(self.state.initialData);
                   });
-                  _context.next = 12;
+                  _context.next = 11;
                   break;
 
-                case 9:
-                  _context.prev = 9;
+                case 8:
+                  _context.prev = 8;
                   _context.t0 = _context['catch'](0);
 
-                  console.log("This it? " + _context.t0);
+                  console.log("Initialization error: " + _context.t0);
 
-                case 12:
+                case 11:
                 case 'end':
                   return _context.stop();
               }
             }
-          }, _callee, this, [[0, 9]]);
+          }, _callee, this, [[0, 8]]);
         }));
 
         return function getUser() {
@@ -1176,23 +1402,29 @@ var Layout = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
-        'div',
-        { className: 'app-container home-page' },
-        _react2.default.createElement(_Loading2.default, { active: this.state.initialData != undefined ? "" : 'active' }),
-        _react2.default.createElement(_LeftMenu2.default, { initialData: this.state.initialData }),
+        _reactRouterDom.BrowserRouter,
+        null,
         _react2.default.createElement(
-          'section',
-          { id: 'content-container' },
-          _react2.default.createElement(_SearchHeader2.default, null),
+          'div',
+          { className: 'app-container home-page' },
+          _react2.default.createElement(_Loading2.default, { active: this.state.initialData != undefined ? "" : 'active' }),
+          _react2.default.createElement(_LeftMenu2.default, { initialData: this.state.initialData }),
           _react2.default.createElement(
-            'div',
-            { className: 'content-area' },
-            _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData }),
-            _react2.default.createElement(_PostArea2.default, { initialData: this.state.initialData })
-          )
-        ),
-        _react2.default.createElement(_Messenger2.default, { initialData: this.state.initialData })
+            'section',
+            { id: 'content-container' },
+            _react2.default.createElement(_SearchHeader2.default, null),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: function component(props) {
+                return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData });
+              } }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/:id', component: function component(props) {
+                return _react2.default.createElement(_Profile2.default, { routeProps: props, initialData: _this2.state.initialData });
+              } })
+          ),
+          _react2.default.createElement(_Messenger2.default, { initialData: this.state.initialData })
+        )
       );
     }
   }]);
@@ -1205,4 +1437,4 @@ _reactDom2.default.render(_react2.default.createElement(Layout, null), app);
 
 /***/ })
 
-},[324]);
+},[332]);
