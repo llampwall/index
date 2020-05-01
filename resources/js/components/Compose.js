@@ -19,6 +19,7 @@ export default class Compose extends Component {
       this.setState({
         postContent: ""
       })
+      this.props.update()
       return 'item saved'
     } catch (error) {
       console.log("axios didnt work: " + error)

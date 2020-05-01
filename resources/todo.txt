@@ -1,3 +1,9 @@
+CURRENTLY at 18:30 in "getting data for profile components" video. it's a recap that shows how easy it is.
+use componentwillmount (profile.js to do get request (look at 11:06 or 19:51), which hits the controller 
+(see 19:40 but it doesnt have to be usercontroller), which returns sets the state variable userprofile to 
+set the state in profile.js and populate the page
+
+
 - subscribe the postArea to database changes
     -probably involves passing a function down from index to Compose that can 
     change a value in the state of postArea so that it renders
@@ -13,6 +19,8 @@ UPDATE - router will help it. new parent component 'Home' can handle that.
 - link post functionality
     -pull image and text preview
     -"user shared an article"
+
+- dates on posts
 
 - comments/likes
 
@@ -48,5 +56,3 @@ UPDATE - router will help it. new parent component 'Home' can handle that.
 
 - maybe turn it into a little private server for small friend groups
     like a chat room on steroids
-
-- ads

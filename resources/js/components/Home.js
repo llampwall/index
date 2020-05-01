@@ -28,6 +28,23 @@ export default class Home extends Component {
     })
   }
 
+  //pass down function to pass down to compose change state and update the whole area
+  update = async () => {
+    try {
+      const data = await axios.get('/api/intialize')
+      const allData = data.data
+      // console.log(allData)
+
+      this.setState({
+        initialData: allData
+      }, () => {
+        console.log(this.state.initialData)
+      })
+    } catch (error) {
+      console.log("Initialization error: " + error)
+    }
+  }
+
   render () {
     if (this.props.initialData == undefined) {
       return (
@@ -36,7 +53,7 @@ export default class Home extends Component {
     } else {
       return (
         <div className="content-area">
-          <Compose initialData={this.state.initialData}/>
+          <Compose initialData={this.state.initialData} update={this.update}/>
           <PostArea initialData={this.state.initialData}/>
         </div>
       )

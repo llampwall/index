@@ -14,11 +14,11 @@ var _defineProperty2 = __webpack_require__(339);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _regenerator = __webpack_require__(196);
+var _regenerator = __webpack_require__(134);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(195);
+var _asyncToGenerator2 = __webpack_require__(133);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -76,20 +76,21 @@ var Compose = function (_Component) {
               _this.setState({
                 postContent: ""
               });
+              _this.props.update();
               return _context.abrupt('return', 'item saved');
 
-            case 7:
-              _context.prev = 7;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context['catch'](0);
 
               console.log("axios didnt work: " + _context.t0);
 
-            case 10:
+            case 11:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, _this2, [[0, 7]]);
+      }, _callee, _this2, [[0, 8]]);
     }));
 
     _this.handleChange = function (event) {
@@ -160,6 +161,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _regenerator = __webpack_require__(134);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__(133);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
 var _classCallCheck2 = __webpack_require__(37);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -184,7 +193,7 @@ var _reactDom = __webpack_require__(103);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(133);
+var _reactRouterDom = __webpack_require__(135);
 
 var _axios = __webpack_require__(85);
 
@@ -207,9 +216,48 @@ var Home = function (_Component) {
   (0, _inherits3.default)(Home, _Component);
 
   function Home() {
+    var _this2 = this;
+
     (0, _classCallCheck3.default)(this, Home);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
+
+    _this.update = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var data, allData;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return _axios2.default.get('/api/intialize');
+
+            case 3:
+              data = _context.sent;
+              allData = data.data;
+              // console.log(allData)
+
+              _this.setState({
+                initialData: allData
+              }, function () {
+                console.log(_this.state.initialData);
+              });
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context['catch'](0);
+
+              console.log("Initialization error: " + _context.t0);
+
+            case 11:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this2, [[0, 8]]);
+    }));
 
     _this.state = {
       initialData: {}
@@ -220,14 +268,17 @@ var Home = function (_Component) {
   (0, _createClass3.default)(Home, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.setState({
         initialData: this.props.initialData
       }, function () {
-        console.log(_this2.state);
+        console.log(_this3.state);
       });
     }
+
+    //pass down function to pass down to compose change state and update the whole area
+
   }, {
     key: 'render',
     value: function render() {
@@ -241,7 +292,7 @@ var Home = function (_Component) {
         return _react2.default.createElement(
           'div',
           { className: 'content-area' },
-          _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData }),
+          _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData, update: this.update }),
           _react2.default.createElement(_PostArea2.default, { initialData: this.state.initialData })
         );
       }
@@ -807,7 +858,7 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(133);
+var _reactRouterDom = __webpack_require__(135);
 
 var _axios = __webpack_require__(85);
 
@@ -1271,11 +1322,11 @@ exports.default = PostArea;
 "use strict";
 
 
-var _regenerator = __webpack_require__(196);
+var _regenerator = __webpack_require__(134);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(195);
+var _asyncToGenerator2 = __webpack_require__(133);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1303,7 +1354,7 @@ var _reactDom = __webpack_require__(103);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(133);
+var _reactRouterDom = __webpack_require__(135);
 
 var _axios = __webpack_require__(85);
 
@@ -1334,6 +1385,9 @@ var _Loading = __webpack_require__(306);
 var _Loading2 = _interopRequireDefault(_Loading);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import ImagePicker from '../components/ImagePicker'
+
 
 var Layout = function (_Component) {
   (0, _inherits3.default)(Layout, _Component);

@@ -12,7 +12,7 @@ import LeftMenu from '../components/LeftMenu'
 import Messenger from '../components/Messenger'
 import SearchHeader from '../components/SearchHeader'
 import Loading from '../components/Loading'
-
+// import ImagePicker from '../components/ImagePicker'
 
 
 class Layout extends Component {
@@ -59,6 +59,7 @@ class Layout extends Component {
             <SearchHeader />
             <Route exact path="/" component={ (props) => <Home routeProps={props} initialData={this.state.initialData}/> }/>
             <Route exact path="/profile/:id" component={ (props) => <Profile routeProps={props} initialData={this.state.initialData}/> }/>
+            {/* <Route exact path="/image" component={ (props) => <ImagePicker routeProps={props} initialData={this.state.initialData}/> }/> */}
           
           </section>
 
