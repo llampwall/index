@@ -29,6 +29,16 @@ export default class Post extends Component {
 //     }
 //   }
 
+  displayMedia = () => {
+    if (this.props.post.type == 'image') {
+        return (
+            <div className="post-media">
+                <img src={this.props.post.image_url} />
+            </div>
+        )
+    }
+  }
+
   render () {
     if (this.props.post == undefined) {
         return (
@@ -45,17 +55,16 @@ export default class Post extends Component {
                         backgroundPosition: 'center center', 
                         backgroundRepeat: 'no-repeat', 
                         backgroundSize: 'cover'}} />
-                        <a href="#" className="username">{this.props.user.fname} {this.props.user.lname}</a>
+                        <a href={`/profile/${this.props.user.id}`} className="username">{this.props.user.fname} {this.props.user.lname}</a>
                         <span className="text">shared {(this.props.post.type == 'image') ? 'an image' : 'something'}</span>
                     </div>
-                    <div className="time">43 min</div>
+                    <div className="time">{this.props.post.created_at}</div>
                 </div>
-                <div className="post-media">
-                    <img src={this.props.post.image_url} />
-                </div>
+
+                {this.displayMedia()}
                 <div className="post-info">
-                    <h3 className="title">How to Become a Web Developer in 2020</h3>
-                        <p>{this.props.post.content}</p>
+                    {/* <h3 className="title">How to Become a Web Developer in 2020</h3> */}
+                    <p>{this.props.post.content}</p>
                 </div>
                 <div className="post-stats">
                     <div className="icons">
@@ -67,12 +76,18 @@ export default class Post extends Component {
                 </div>
                 <textarea name="comment" cols={30} rows={2} placeholder="write a comment..." defaultValue={""} />
                 <div className="buttons">
+                    <div className="comments"> 
+                        <p>Jordan Hewitt: yeah you would know loser</p>
+                        <p>Jordan Hewitt: yeah you would know loser</p>
+                        <p>Jordan Hewitt: yeah you would know loser</p>
+                        <p>Jordan Hewitt: yeah you would know loser</p>
+                    </div>
                     <div className="send-btn">
                         <i className="fa fa-arrow-right" />
                     </div>
-                    <div className="share-btn">
+                    {/* <div className="share-btn">
                         <i className="fa fa-share" />
-                    </div>
+                    </div> */}
                     <div className="like-btn">
                         <i className="fa fa-thumbs-up" />
                     </div>

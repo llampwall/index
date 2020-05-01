@@ -14,7 +14,7 @@ export default class Compose extends Component {
         user_id: this.props.initialData.userData.id,
         content: this.state.postContent,
         image_url: 'img/webdesign.jpg',
-        type: 'image'
+        type: 'text'
       })
       this.setState({
         postContent: ""
@@ -54,9 +54,9 @@ export default class Compose extends Component {
           <div className="photo-btn">
             <i className="fa fa-camera" />
           </div>
-          <div className="video-btn">
+          {/* <div className="video-btn">
             <i className="fa fa-youtube" />
-          </div>
+          </div> */}
           <div className="send-btn" onClick={this.submitPost}>
             <i className="fa fa-arrow-right" />
           </div>

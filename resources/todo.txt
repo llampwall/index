@@ -11,19 +11,34 @@ set the state in profile.js and populate the page
 
 UPDATE - router will help it. new parent component 'Home' can handle that.
 
+*** DONE MOTHAFUCKA ***
+
 - images
-    -react-filepond on the main page and the user registration / user profile pages
+    -react-filepond on the user registration
         **** added regular image_url field in registration page ***
+    - add to compose section for new image posts
+        - i need to figure out how to store uploads on the server or implement URLs again here
     -allow for captions (the 'title' from the current setup)
-    -microsoft vision captioning???
+        *** kinda just made the content text act as that ***
+
+- posts
+    make different styles for image vs text 
+        *** DONE - not perfect ***
+    fix like button positioning, make it more sleek. remove share button.
 
 - link post functionality
     -pull image and text preview
     -"user shared an article"
 
 - dates on posts
+    *** sorta done, just needs formatting ***
+
+- youtube button
+    - delete for now
+        *** DONE ***
 
 - comments/likes
+    setup buttons to submit to database tables
 
 - profile
     - about
@@ -54,6 +69,8 @@ UPDATE - router will help it. new parent component 'Home' can handle that.
 - PWA stuff
 
 - more subtle animations
+
+-microsoft vision captioning???
 
 - maybe turn it into a little private server for small friend groups
     like a chat room on steroids

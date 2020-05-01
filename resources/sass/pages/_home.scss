@@ -273,7 +273,7 @@
         }
 
         .photo-btn {
-          top: -3px;
+          top: 0px;
           right: -10px;
         }
         .video-btn {
@@ -281,7 +281,7 @@
           right: -10px;
         }
         .send-btn {
-          bottom: -10px;
+          bottom: 3px;
           right: -10px;
         }
       }
@@ -352,7 +352,7 @@
               }
               img {
                 width: 100%;
-                @include hard-shadow;
+                // @include hard-shadow;
               }
             }
 
@@ -360,7 +360,7 @@
               border-left: 1px solid $apricot;
               border-right: 1px solid $apricot;
               background: $offwhite;
-              width: 95%;
+              width: 100%;
               margin: 0 auto;
               @include hard-shadow;
 
@@ -379,8 +379,23 @@
               }
 
               p {
-                font-size: .9rem;
-                padding: .5rem 1rem;
+                // width: 105%;
+                // position: relative;
+                // left: -2.5%;
+                border: 1px solid $apricot;
+                text-align: center;
+                font-size: 1.3rem;
+                word-wrap: break-word;
+                font-weight: 700;
+                padding: 1rem 1rem;
+                background: $geraldine;
+                color: white;
+                @include hard-shadow;
+                transition: all .3s ease-in-out;
+                cursor: pointer;
+                &:hover {
+                  transform: scale(1.05);
+                }
               }
             }
 
@@ -441,8 +456,8 @@
               width: 95%;
               margin: 0 auto;
               display: flex;
-              justify-content: flex-end;
-              padding: .5rem 0;
+              justify-content: space-between;
+              padding: .5rem;
               background: $offwhite;
               @include hard-shadow;
               position: relative;
@@ -483,6 +498,12 @@
                   background: $apricot;
                   color: white;
                 }
+              }
+
+              .like-btn {
+                position: absolute;
+                top: -115px;
+                right: -25px;
               }
 
               .send-btn {

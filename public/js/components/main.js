@@ -69,7 +69,7 @@ var Compose = function (_Component) {
                 user_id: _this.props.initialData.userData.id,
                 content: _this.state.postContent,
                 image_url: 'img/webdesign.jpg',
-                type: 'image'
+                type: 'text'
               });
 
             case 3:
@@ -129,11 +129,6 @@ var Compose = function (_Component) {
             'div',
             { className: 'photo-btn' },
             _react2.default.createElement('i', { className: 'fa fa-camera' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'video-btn' },
-            _react2.default.createElement('i', { className: 'fa fa-youtube' })
           ),
           _react2.default.createElement(
             'div',
@@ -402,12 +397,12 @@ var LeftMenu = function (_Component) {
               null,
               _react2.default.createElement(
                 "a",
-                { href: "/profile" },
+                { href: "/profile/" + this.props.initialData.userData.id },
                 "+ profile +"
               ),
               _react2.default.createElement(
                 "a",
-                { href: "/account" },
+                { href: "/account/" + this.props.initialData.userData.id },
                 "* account *"
               ),
               _react2.default.createElement(
@@ -1068,6 +1063,16 @@ var Post = function (_Component) {
 
         var _this = (0, _possibleConstructorReturn3.default)(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this));
 
+        _this.displayMedia = function () {
+            if (_this.props.post.type == 'image') {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'post-media' },
+                    _react2.default.createElement('img', { src: _this.props.post.image_url })
+                );
+            }
+        };
+
         _this.state = {
             post: {},
             poster: {}
@@ -1121,7 +1126,7 @@ var Post = function (_Component) {
                                     backgroundSize: 'cover' } }),
                             _react2.default.createElement(
                                 'a',
-                                { href: '#', className: 'username' },
+                                { href: '/profile/' + this.props.user.id, className: 'username' },
                                 this.props.user.fname,
                                 ' ',
                                 this.props.user.lname
@@ -1136,22 +1141,13 @@ var Post = function (_Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'time' },
-                            '43 min'
+                            this.props.post.created_at
                         )
                     ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'post-media' },
-                        _react2.default.createElement('img', { src: this.props.post.image_url })
-                    ),
+                    this.displayMedia(),
                     _react2.default.createElement(
                         'div',
                         { className: 'post-info' },
-                        _react2.default.createElement(
-                            'h3',
-                            { className: 'title' },
-                            'How to Become a Web Developer in 2020'
-                        ),
                         _react2.default.createElement(
                             'p',
                             null,
@@ -1184,13 +1180,32 @@ var Post = function (_Component) {
                         { className: 'buttons' },
                         _react2.default.createElement(
                             'div',
-                            { className: 'send-btn' },
-                            _react2.default.createElement('i', { className: 'fa fa-arrow-right' })
+                            { className: 'comments' },
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                'Jordan Hewitt: yeah you would know loser'
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                'Jordan Hewitt: yeah you would know loser'
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                'Jordan Hewitt: yeah you would know loser'
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                'Jordan Hewitt: yeah you would know loser'
+                            )
                         ),
                         _react2.default.createElement(
                             'div',
-                            { className: 'share-btn' },
-                            _react2.default.createElement('i', { className: 'fa fa-share' })
+                            { className: 'send-btn' },
+                            _react2.default.createElement('i', { className: 'fa fa-arrow-right' })
                         ),
                         _react2.default.createElement(
                             'div',
