@@ -717,8 +717,10 @@ var PostArea = function (_Component) {
 
     _this.showMyPosts = function () {
       console.log(_this.props.initialData.postData);
-      return _this.props.initialData.postData.map(function (post, i) {
-        return _react2.default.createElement(_Post2.default, { post: post });
+      return _this.props.initialData.postData.map(function (item) {
+        var post = item.posts;
+        var user = item.users;
+        return _react2.default.createElement(_Post2.default, { post: post, user: user, key: post.id });
       });
     };
 
@@ -940,16 +942,16 @@ var Post = function (_Component) {
                             'div',
                             { className: 'author' },
                             _react2.default.createElement('div', { className: 'user-img', style: {
-                                    backgroundImage: 'url("' + this.props.post.profile_img + '")',
+                                    backgroundImage: 'url("' + this.props.user.profile_img + '")',
                                     backgroundPosition: 'center center',
                                     backgroundRepeat: 'no-repeat',
                                     backgroundSize: 'cover' } }),
                             _react2.default.createElement(
                                 'a',
                                 { href: '#', className: 'username' },
-                                this.props.post.fname,
+                                this.props.user.fname,
                                 ' ',
-                                this.props.post.lname
+                                this.props.user.lname
                             ),
                             _react2.default.createElement(
                                 'span',
@@ -1111,12 +1113,16 @@ var Layout = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this));
 
     _this.state = {
-      initialData: {}
+      initialData: {},
+      refresh: false
     };
     return _this;
   }
 
   (0, _createClass3.default)(Layout, [{
+    key: 'update',
+    value: function update() {}
+  }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
 

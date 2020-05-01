@@ -14,11 +14,14 @@ class Layout extends Component {
   constructor () {
     super()
     this.state = {
-      initialData: {}
+      initialData: {},
+      refresh: false
     }
   }
 
-  
+  update() {
+
+  }
 
   componentWillMount() {
 

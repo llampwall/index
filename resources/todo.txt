@@ -1,0 +1,50 @@
+- subscribe the postArea to database changes
+    -probably involves passing a function down from index to Compose that can 
+    change a value in the state of postArea so that it renders
+    -router might fix this
+
+- images
+    -react-filepond on the main page and the user registration / user profile pages
+    -allow for captions (the 'title' from the current setup)
+    -microsoft vision captioning???
+
+- link post functionality
+    -pull image and text preview
+    -"user shared an article"
+
+- comments/likes
+
+- profile
+    - about
+    - photos
+    - groups
+
+- adding friends
+    -only showing posts from you and your friends
+    -only allowed to view full profiles of friends
+
+- delete posts / comments / likes / friends
+
+- messenger
+
+- search functionality everywhere
+
+- settings / themeing
+
+- password reset / forgot
+
+- google/microsoft logins
+
+
+<LATER>
+
+- mobile
+
+- PWA stuff
+
+- more subtle animations
+
+- maybe turn it into a little private server for small friend groups
+    like a chat room on steroids
+
+- ads

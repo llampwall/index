@@ -126,6 +126,10 @@
       color: $apricot;
       transition: all .2s ease-in-out;
 
+      .fa {
+        margin-left: .3rem;
+      }
+
       &:hover {
         background: $apricot;
         color: white;

@@ -41,11 +41,11 @@ export default class Post extends Component {
                 <div className="post-header">
                     <div className="author">
                         <div className="user-img" style={{
-                        backgroundImage: `url("${this.props.post.profile_img}")`, 
+                        backgroundImage: `url("${this.props.user.profile_img}")`, 
                         backgroundPosition: 'center center', 
                         backgroundRepeat: 'no-repeat', 
                         backgroundSize: 'cover'}} />
-                        <a href="#" className="username">{this.props.post.fname} {this.props.post.lname}</a>
+                        <a href="#" className="username">{this.props.user.fname} {this.props.user.lname}</a>
                         <span className="text">shared {(this.props.post.type == 'image') ? 'an image' : 'something'}</span>
                     </div>
                     <div className="time">43 min</div>
