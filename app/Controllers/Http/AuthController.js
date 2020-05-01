@@ -3,6 +3,7 @@
 const { validate, sanitize } = use('Validator')
 const Hash = use('Hash')
 const User = use('App/Models/User')
+const Helpers = use('Helpers')
 
 class AuthController {
 
@@ -45,11 +46,19 @@ class AuthController {
         }
 
         try {
+
+            // console.log(request.input('profile_pic'))
+            let uImg = '/img/user.jpg'
+            if (request.input('profile_pic') != undefined) {
+                uImg = request.input('profile_pic')
+            }
+
+
             let newUser = await User.create({
                 fname: request.input('fname'),
                 lname: request.input('lname'),
                 email: request.input('email'),
-                profile_img: '/img/user.jpg',
+                profile_img: uImg,
                 login_source: 'email',
                 password: request.input('password')
             })

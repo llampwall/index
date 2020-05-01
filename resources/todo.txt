@@ -13,6 +13,7 @@ UPDATE - router will help it. new parent component 'Home' can handle that.
 
 - images
     -react-filepond on the main page and the user registration / user profile pages
+        **** added regular image_url field in registration page ***
     -allow for captions (the 'title' from the current setup)
     -microsoft vision captioning???
 
