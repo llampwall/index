@@ -17,6 +17,7 @@ class SocialController {
         
         const fUser = await ally.driver('facebook').getUser()
 
+        console.log(fUser)
         // user details to be saved
         const userDetails = {
           fname: fUser.getName().split(' ').shift(),
@@ -35,7 +36,7 @@ class SocialController {
 
         const user = await User.findOrCreate(whereClause, userDetails)
 
-        console.log(user)
+        // console.log(user)
 
         try {
           await auth.login(user)

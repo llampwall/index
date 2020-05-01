@@ -14,7 +14,7 @@ class Layout extends Component {
   constructor () {
     super()
     this.state = {
-      userData: {}
+      initialData: {}
     }
   }
 
@@ -25,15 +25,17 @@ class Layout extends Component {
     const self = this;
     const getUser = async function() {
       try {
-        const userData = await axios.get('/api/intialize')
+        const data = await axios.get('/api/intialize')
+        const allData = data.data
+        console.log(allData)
 
         self.setState({
-          userData: userData.data
+          initialData: allData
         }, () => {
-          console.log(self.state.userData)
+          console.log(self.state.initialData)
         })
       } catch (error) {
-        console.log(error)
+        console.log("This it? " + error)
       }
     }
 
@@ -44,19 +46,19 @@ class Layout extends Component {
     return (
         <div className="app-container home-page">
 
-          <Loading data={(this.state.userData) ? this.state.userData : 'loading'}/>
+          <Loading active={(this.state.initialData != undefined) ? "" : 'active'}/>
 
-          <LeftMenu user={this.state.userData}/>
+          <LeftMenu initialData={this.state.initialData}/>
 
           <section id="content-container">
             <SearchHeader />
             <div className="content-area">
-              <Compose user={this.state.userData}/>
-              <PostArea user={this.state.userData}/>
+              <Compose initialData={this.state.initialData}/>
+              <PostArea initialData={this.state.initialData}/>
             </div>
           </section>
 
-          <Messenger user={this.state.userData}/>
+          <Messenger initialData={this.state.initialData}/>
         </div>
     )
   }

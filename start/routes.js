@@ -37,3 +37,10 @@ Route.get('google/authenticated', 'SocialController.callbackg')
 
 // api
 Route.get('/api/intialize', 'ApiController.initialize')
+
+// posts
+// Route.resource('/posts', 'PostController').except(['delete'])
+Route.get('/posts', 'PostController.index')
+Route.post('/posts', 'PostController.store')
+// Route.post('/posts/', 'PostController.store')
+// Route.get('/posts/:id/delete', 'PostController.destroy')
