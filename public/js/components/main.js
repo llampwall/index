@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 203:
+/***/ 205:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10,15 +10,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(339);
+var _extends2 = __webpack_require__(342);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _defineProperty2 = __webpack_require__(341);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _regenerator = __webpack_require__(134);
+var _regenerator = __webpack_require__(136);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(133);
+var _asyncToGenerator2 = __webpack_require__(135);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -59,38 +63,53 @@ var Compose = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
 
     _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var fData, self, response;
       return _regenerator2.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return _axios2.default.post('/posts', {
-                user_id: _this.props.initialData.userData.id,
-                content: _this.state.postContent,
-                image_url: 'img/webdesign.jpg',
-                type: 'text'
+              fData = new FormData();
+
+              fData.append('user_id', _this.props.initialData.userData.id);
+              fData.append('content', _this.state.postContent);
+              fData.append('image', _this.state.image);
+              self = _this;
+
+
+              console.log(fData);
+              _context.prev = 6;
+              _context.next = 9;
+              return (0, _axios2.default)({
+                method: 'post',
+                url: '/posts',
+                data: fData,
+                headers: { 'Content-Type': 'multipart/form-data boundary=' + fData._boundary }
+              }).then(function (response) {
+                self.setState({
+                  postContent: "",
+                  image: ""
+                });
+                self.props.update();
+                return 'item saved';
               });
 
-            case 3:
-              _this.setState({
-                postContent: ""
-              });
-              _this.props.update();
-              return _context.abrupt('return', 'item saved');
+            case 9:
+              response = _context.sent;
+              _context.next = 15;
+              break;
 
-            case 8:
-              _context.prev = 8;
-              _context.t0 = _context['catch'](0);
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context['catch'](6);
 
               console.log("axios didnt work: " + _context.t0);
 
-            case 11:
+            case 15:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, _this2, [[0, 8]]);
+      }, _callee, _this2, [[6, 12]]);
     }));
 
     _this.handleChange = function (event) {
@@ -102,7 +121,23 @@ var Compose = function (_Component) {
       });
     };
 
-    _this.state = {};
+    _this.imageSelect = function (event) {
+      var fileElem = document.getElementById("hidden-input");
+      fileElem.click();
+    };
+
+    _this.getImage = function (event) {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        image: event.target.files[0]
+      }), function () {
+        console.log(_this.state);
+      });
+    };
+
+    _this.state = {
+      postContent: "",
+      image: ""
+    };
     return _this;
   }
 
@@ -119,7 +154,7 @@ var Compose = function (_Component) {
         return _react2.default.createElement(
           'section',
           { id: 'compose' },
-          _react2.default.createElement('textarea', { name: 'postContent', id: 'content', cols: 30, rows: 10, placeholder: 'share something...', defaultValue: "", onChange: this.handleChange, value: this.state.postContent }),
+          _react2.default.createElement('textarea', { name: 'postContent', id: 'content', cols: 30, rows: 10, placeholder: 'share something...', onChange: this.handleChange, value: this.state.postContent }),
           _react2.default.createElement('div', { className: 'user-img', style: {
               backgroundImage: 'url("' + this.props.initialData.userData.profile_img + '")',
               backgroundPosition: 'center center',
@@ -127,8 +162,9 @@ var Compose = function (_Component) {
               backgroundSize: 'cover' } }),
           _react2.default.createElement(
             'div',
-            { className: 'photo-btn' },
-            _react2.default.createElement('i', { className: 'fa fa-camera' })
+            { className: 'photo-btn', onClick: this.imageSelect },
+            _react2.default.createElement('i', { className: 'fa fa-camera' }),
+            _react2.default.createElement('input', { type: 'file', id: 'hidden-input', name: 'post_img', onChange: this.getImage })
           ),
           _react2.default.createElement(
             'div',
@@ -146,7 +182,7 @@ exports.default = Compose;
 
 /***/ }),
 
-/***/ 304:
+/***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -156,11 +192,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(134);
+var _regenerator = __webpack_require__(136);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(133);
+var _asyncToGenerator2 = __webpack_require__(135);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -184,21 +220,21 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(103);
+var _reactDom = __webpack_require__(104);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(135);
+var _reactRouterDom = __webpack_require__(137);
 
 var _axios = __webpack_require__(85);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _PostArea = __webpack_require__(331);
+var _PostArea = __webpack_require__(332);
 
 var _PostArea2 = _interopRequireDefault(_PostArea);
 
-var _Compose = __webpack_require__(203);
+var _Compose = __webpack_require__(205);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
@@ -300,7 +336,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 305:
+/***/ 306:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -485,7 +521,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 306:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -554,7 +590,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 307:
+/***/ 308:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -823,7 +859,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 308:
+/***/ 309:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -853,13 +889,13 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(135);
+var _reactRouterDom = __webpack_require__(137);
 
 var _axios = __webpack_require__(85);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Compose = __webpack_require__(203);
+var _Compose = __webpack_require__(205);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
@@ -946,7 +982,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 309:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1019,7 +1055,7 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 330:
+/***/ 331:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1224,7 +1260,7 @@ exports.default = Post;
 
 /***/ }),
 
-/***/ 331:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1254,7 +1290,7 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(330);
+var _Post = __webpack_require__(331);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -1331,17 +1367,17 @@ exports.default = PostArea;
 
 /***/ }),
 
-/***/ 332:
+/***/ 333:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _regenerator = __webpack_require__(134);
+var _regenerator = __webpack_require__(136);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(133);
+var _asyncToGenerator2 = __webpack_require__(135);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1365,37 +1401,37 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(103);
+var _reactDom = __webpack_require__(104);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(135);
+var _reactRouterDom = __webpack_require__(137);
 
 var _axios = __webpack_require__(85);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(304);
+var _Home = __webpack_require__(305);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(308);
+var _Profile = __webpack_require__(309);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(305);
+var _LeftMenu = __webpack_require__(306);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(307);
+var _Messenger = __webpack_require__(308);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(309);
+var _SearchHeader = __webpack_require__(310);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(306);
+var _Loading = __webpack_require__(307);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
@@ -1506,4 +1542,4 @@ _reactDom2.default.render(_react2.default.createElement(Layout, null), app);
 
 /***/ })
 
-},[332]);
+},[333]);

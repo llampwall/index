@@ -53,6 +53,23 @@ class AuthController {
                 uImg = request.input('profile_pic')
             }
 
+            const imgFile = request.file('profile_pic_upload', {
+                types: ['image'],
+                size: '5mb'
+            })
+            const imgName = request.input('fname') + request.input('lname') + '_profile.jpg'
+            await imgFile.move(Helpers.publicPath('img/users'), {
+                name: imgName,
+                overwrite: true
+            })
+
+            if (!imgFile.moved()) {
+                console.log(imgFile.error())
+            } else {
+                uImg = 'http://localhost:3000/public/img/users/' + imgName
+                console.log(imgName)
+            }
+
 
             let newUser = await User.create({
                 fname: request.input('fname'),

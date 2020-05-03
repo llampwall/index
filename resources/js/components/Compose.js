@@ -5,22 +5,33 @@ export default class Compose extends Component {
   constructor () {
     super()
     this.state = { 
+      postContent : "", 
+      image: ""
     }
   }
 
   submitPost = async () => {
+    const fData = new FormData()
+    fData.append('user_id', this.props.initialData.userData.id)
+    fData.append('content', this.state.postContent)
+    fData.append('image', this.state.image)
+    const self = this;
+
+    console.log(fData)
     try {
-      await axios.post('/posts', {
-        user_id: this.props.initialData.userData.id,
-        content: this.state.postContent,
-        image_url: 'img/webdesign.jpg',
-        type: 'text'
+      const response = await axios({
+        method: 'post',
+        url: '/posts',
+        data: fData, 
+        headers: {'Content-Type': `multipart/form-data boundary=${fData._boundary}` }
+      }).then (function(response) {
+        self.setState({
+          postContent: "",
+          image: ""
+        })
+        self.props.update()
+        return 'item saved'
       })
-      this.setState({
-        postContent: ""
-      })
-      this.props.update()
-      return 'item saved'
     } catch (error) {
       console.log("axios didnt work: " + error)
     }
@@ -37,6 +48,20 @@ export default class Compose extends Component {
     })
   }
 
+  imageSelect = (event) => {
+    const fileElem = document.getElementById("hidden-input")
+    fileElem.click()
+  }
+
+  getImage = (event) => {
+    this.setState({
+      ...this.state,
+      image: event.target.files[0]
+    }, () => {
+      console.log(this.state)
+    })
+  }
+
   render () {
     if (this.props.initialData.userData == undefined) {
       return (
@@ -45,14 +70,15 @@ export default class Compose extends Component {
     } else {
       return (
         <section id="compose">
-          <textarea name="postContent" id="content" cols={30} rows={10} placeholder="share something..." defaultValue={""} onChange={this.handleChange} value={this.state.postContent}/>
+          <textarea name="postContent" id="content" cols={30} rows={10} placeholder="share something..." onChange={this.handleChange} value={this.state.postContent}/>
           <div className="user-img" style={{
             backgroundImage: `url("${this.props.initialData.userData.profile_img}")`, 
             backgroundPosition: 'center center', 
             backgroundRepeat: 'no-repeat', 
             backgroundSize: 'cover'}} />
-          <div className="photo-btn">
+          <div className="photo-btn" onClick={this.imageSelect}>
             <i className="fa fa-camera" />
+            <input type='file' id='hidden-input' name='post_img' onChange={this.getImage}/>
           </div>
           {/* <div className="video-btn">
             <i className="fa fa-youtube" />

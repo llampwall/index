@@ -275,6 +275,13 @@
         .photo-btn {
           top: 0px;
           right: -10px;
+
+          #hidden-input {
+            display: block;
+            visibility: hidden;
+            width: 0;
+            height: 0;
+          }
         }
         .video-btn {
           bottom: 30px;
@@ -475,7 +482,7 @@
                 border: 1px solid $apricot;
                 margin-right: .7rem;
                 cursor: pointer;
-                
+
                 &:hover {
                   background: $apricot;
                   color: white;

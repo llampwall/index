@@ -14,7 +14,7 @@
 
 @section('content')
     <div class="default-form">
-        <form action="/register" class="rform" method="POST">
+        <form action="/register" class="rform" method="POST" enctype="multipart/form-data">
             {{csrfField()}}
             <div class="error-box
             @if(hasErrorFor('email') || hasErrorFor('password'))
@@ -52,6 +52,10 @@
             <div class="form-group">
                 <label for="profile_pic">image URL</label>
                 <input type="text" name="profile_pic" />
+            </div>
+            <div class="form-group">
+                <label for="profile_pic_upload">image file</label>
+                <input type="file" name="profile_pic_upload" />
             </div>
             <div class="form-group">
                 <label for="password">password</label>
