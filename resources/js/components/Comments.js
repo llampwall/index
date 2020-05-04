@@ -35,6 +35,8 @@ export default class Comments extends Component {
     } catch (error) {
       console.log("Initialization error: " + error)
     }
+    
+    this.props.sendUp(this.state.comments.length)
   }
 
   componentDidMount() {

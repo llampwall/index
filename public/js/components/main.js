@@ -258,8 +258,8 @@ var LeftMenu = function (_Component) {
               ),
               _react2.default.createElement(
                 "a",
-                { href: "/account/" + this.props.initialData.userData.id },
-                "* account *"
+                { href: "/settings/" + this.props.initialData.userData.id },
+                "* settings *"
               ),
               _react2.default.createElement(
                 "a",
@@ -1054,6 +1054,10 @@ var Comments = function (_Component) {
               console.log("Initialization error: " + _context.t0);
 
             case 11:
+
+              this.props.sendUp(this.state.comments.length);
+
+            case 12:
             case 'end':
               return _context.stop();
           }
@@ -1464,7 +1468,7 @@ var Post = function (_Component) {
               _context.next = 5;
               return _axios2.default.post('/comments', {
                 post_id: self.props.post.id,
-                user_id: self.props.curuser,
+                user_id: self.props.curuser.id,
                 content: self.state.comment
               }).then(function (response) {
                 self.setState((0, _extends3.default)({}, self.state, {
@@ -1497,6 +1501,12 @@ var Post = function (_Component) {
         }
       }, _callee, _this2, [[2, 8]]);
     }));
+
+    _this.sendUp = function (num) {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        numComments: num
+      }));
+    };
 
     _this.checkSubmit = function (event) {
 
@@ -1539,16 +1549,46 @@ var Post = function (_Component) {
       }, _callee2, _this2, [[1, 7]]);
     }));
 
+    _this.getCommentCount = function () {
+      if (_this.state.numComments == 0) {
+        return _react2.default.createElement('div', { className: 'comment-count' });
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'comment-count' },
+          _this.state.numComments,
+          ' comments'
+        );
+      }
+    };
+
+    _this.like = function () {
+      console.log('liked');
+    };
+
     _this.state = {
       post: {},
       poster: {},
       comment: "",
+      numComments: 0,
       update: false
       // this.commentArea = React.createRef()
     };return _this;
   }
 
+  // triggers child to refresh
+
+
+  // this lets us get the comments from the child
+
+
   // allows comments to be submitted with the enter key
+
+
+  // delete the post only if you posted it
+
+
+  // displays the current post comments
 
 
   (0, _createClass3.default)(Post, [{
@@ -1599,7 +1639,7 @@ var Post = function (_Component) {
             ),
             _react2.default.createElement(
               'div',
-              { className: 'del-btn ' + (this.props.user.id == this.props.curuser ? 'active' : ''), onClick: this.deletePost },
+              { className: 'del-btn ' + (this.props.user.id == this.props.curuser.id ? 'active' : ''), onClick: this.deletePost },
               _react2.default.createElement('i', { className: 'fa fa-trash' })
             )
           ),
@@ -1621,7 +1661,7 @@ var Post = function (_Component) {
               { className: 'icons' },
               _react2.default.createElement(
                 'div',
-                { className: 'like-btn' },
+                { className: 'like-btn', onClick: this.like },
                 _react2.default.createElement('i', { className: 'fa fa-thumbs-up' })
               )
             ),
@@ -1630,11 +1670,7 @@ var Post = function (_Component) {
               { className: 'text' },
               'Sarah Jane and 23 others liked this post.'
             ),
-            _react2.default.createElement(
-              'div',
-              { className: 'comment-count' },
-              '4 comments'
-            )
+            this.getCommentCount()
           ),
           _react2.default.createElement(
             'div',
@@ -1644,7 +1680,7 @@ var Post = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'buttons' },
-            _react2.default.createElement(_Comments2.default, { post: this.props.post, update: this.state.update }),
+            _react2.default.createElement(_Comments2.default, { post: this.props.post, update: this.state.update, sendUp: this.sendUp }),
             _react2.default.createElement(
               'div',
               { className: 'send-btn', onClick: this.submitComment },
@@ -1711,7 +1747,7 @@ var PostArea = function (_Component) {
       return _this.props.initialData.postData.map(function (item) {
         var post = item.posts;
         var user = item.users;
-        return _react2.default.createElement(_Post2.default, { post: post, user: user, curuser: _this.props.initialData.userData.id, update: _this.props.update, key: post.id });
+        return _react2.default.createElement(_Post2.default, { post: post, user: user, curuser: _this.props.initialData.userData, update: _this.props.update, key: post.id });
       });
     };
 

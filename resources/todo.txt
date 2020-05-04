@@ -8,10 +8,11 @@ set the state in profile.js and populate the page
 
 
 usernames in posts/comments should link to that user's profile
+    ***DONE ***
 
 finish bio in profile area
 
-delete posts
+delete posts/comments
     *** deleting posts is done ***
 
 
@@ -29,7 +30,7 @@ UPDATE - router will help it. new parent component 'Home' can handle that.
     -react-filepond on the user registration
         **** added regular image_url field in registration page ***
     - add to compose section for new image posts
-        - i need to figure out how to store uploads on the server or implement URLs again here
+        *** DONE ***
     -allow for captions (the 'title' from the current setup)
         *** kinda just made the content text act as that ***
 
@@ -44,7 +45,7 @@ UPDATE - router will help it. new parent component 'Home' can handle that.
     -"user shared an article"
 
 - dates on posts
-    *** sorta done, just needs formatting ***
+    *** DONE ***
 
 - youtube button
     - delete for now

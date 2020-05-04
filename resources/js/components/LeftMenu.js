@@ -39,7 +39,7 @@ export default class LeftMenu extends Component {
           <div className={`dropdown ${this.state.dropdown ? 'active' : ''}`}>
             <nav>
               <a href={`/profile/${this.props.initialData.userData.id}`}>+ profile +</a>
-              <a href={`/account/${this.props.initialData.userData.id}`}>* account *</a>
+              <a href={`/settings/${this.props.initialData.userData.id}`}>* settings *</a>
               <a href="/logout">- logout -</a>
             </nav>
           </div>

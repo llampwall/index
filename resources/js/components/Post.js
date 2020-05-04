@@ -9,6 +9,7 @@ export default class Post extends Component {
         post: {},
         poster: {}, 
         comment: "",
+        numComments: 0,
         update: false
     }
     // this.commentArea = React.createRef()
@@ -38,6 +39,7 @@ export default class Post extends Component {
     })
   }
 
+  // triggers child to refresh
   refreshComments = () => {
     this.setState({
         ...this.state, 
@@ -51,7 +53,7 @@ export default class Post extends Component {
           try {
             const response = await axios.post('/comments', {
               post_id: self.props.post.id,
-              user_id: self.props.curuser,
+              user_id: self.props.curuser.id,
               content: self.state.comment
             }).then (function(response) {
               self.setState({
@@ -72,6 +74,14 @@ export default class Post extends Component {
       }
   }
 
+  // this lets us get the comments from the child
+  sendUp = (num) => {
+    this.setState({
+      ...this.state,
+      numComments: num
+    })
+  }
+
   // allows comments to be submitted with the enter key
   checkSubmit = (event) => {
 
@@ -81,6 +91,7 @@ export default class Post extends Component {
     }
   }
 
+  // delete the post only if you posted it
   deletePost = async () => {
     const self = this
     try {
@@ -92,6 +103,24 @@ export default class Post extends Component {
     } catch (error) {
       console.log('error deleting post: ' + error)
     }
+  }
+
+
+  // displays the current post comments
+  getCommentCount = () => {
+    if (this.state.numComments == 0) {
+      return (
+        <div className="comment-count"></div>
+      )
+    } else {
+      return (
+        <div className="comment-count">{this.state.numComments} comments</div>
+      )
+    }
+  }
+ 
+  like = () => {
+    console.log('liked')
   }
 
   render () {
@@ -116,7 +145,7 @@ export default class Post extends Component {
                         <span className="text">shared {(this.props.post.type == 'image') ? 'an image' : 'something'}</span>
                     </a>
                     <div className="time">{new Date(this.props.post.created_at).toLocaleString()}</div>
-                    <div className={`del-btn ${this.props.user.id == this.props.curuser ? 'active' : ''}`} onClick={this.deletePost}><i className="fa fa-trash"></i></div>
+                    <div className={`del-btn ${this.props.user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deletePost}><i className="fa fa-trash"></i></div>
                 </div>
 
                 {this.displayMedia()}
@@ -126,7 +155,7 @@ export default class Post extends Component {
                 </div>
                 <div className="post-stats">
                     <div className="icons">
-                        <div className="like-btn">
+                        <div className="like-btn" onClick={this.like}>
                           <i className="fa fa-thumbs-up" />
                         </div>
                         {/* <div className="share-btn">
@@ -134,7 +163,8 @@ export default class Post extends Component {
                         </div> */}
                     </div>
                     <span className="text">Sarah Jane and 23 others liked this post.</span>
-                    <div className="comment-count">4 comments</div>
+                    {this.getCommentCount()}
+                    {/* <div className="comment-count">4 comments</div> */}
                 </div>
                 <div className="c-section">
                   <textarea name="comment" cols={30} rows={2} placeholder="write a comment..." value={this.state.comment} onChange={this.handleChange} onKeyUp={this.checkSubmit}/>
@@ -142,7 +172,7 @@ export default class Post extends Component {
                 <div className="buttons">
 
                     {/* <Comments ref={this.commentArea} post={this.props.post} /> */}
-                    <Comments post={this.props.post} update={this.state.update}/>
+                    <Comments post={this.props.post} update={this.state.update} sendUp={this.sendUp}/>
 
                     <div className="send-btn" onClick={this.submitComment}>
                         <i className="fa fa-arrow-right" />
