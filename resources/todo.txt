@@ -4,6 +4,12 @@ use componentwillmount (profile.js to do get request (look at 11:06 or 19:51), w
 set the state in profile.js and populate the page
 
 
+pagination / lazy loading
+
+likes
+
+deleting comments
+
 
 
 
