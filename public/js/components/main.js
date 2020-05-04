@@ -1150,11 +1150,13 @@ var Comments = function (_Component) {
     }));
 
     _this.showComments = function () {
-      return _this.state.comments.map(function (comment) {
+      return _this.state.comments.map(function (item) {
+        var comment = item.comments;
+        var user = item.users;
         return _react2.default.createElement(
           'h1',
-          { key: comment.created_at },
-          comment.user_id + ': ' + comment.content
+          { key: comment.id },
+          user.fname + ' ' + user.lname + ': ' + comment.content
         );
       });
     };
@@ -1321,7 +1323,7 @@ var Post = function (_Component) {
                             _context.next = 5;
                             return _axios2.default.post('/comments', {
                                 post_id: self.props.post.id,
-                                user_id: self.props.user.id,
+                                user_id: self.props.curuser,
                                 content: self.state.comment
                             }).then(function (response) {
                                 self.setState((0, _extends3.default)({}, self.state, {
@@ -1514,7 +1516,7 @@ var PostArea = function (_Component) {
       return _this.props.initialData.postData.map(function (item) {
         var post = item.posts;
         var user = item.users;
-        return _react2.default.createElement(_Post2.default, { post: post, user: user, key: post.id });
+        return _react2.default.createElement(_Post2.default, { post: post, user: user, curuser: _this.props.initialData.userData.id, key: post.id });
       });
     };
 

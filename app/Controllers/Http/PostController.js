@@ -64,7 +64,8 @@ class PostController {
         // console.log(p_id)
         try {
             const commentData = await Comment.query()
-                // .innerJoin('users', 'users.id', 'comments.user_id')
+                .innerJoin('users', 'users.id', 'comments.user_id')
+                .options({nestTables:true})
                 .where('post_id', p_id).orderBy('comments.created_at', 'desc').fetch()
             console.log(commentData)
             return {

@@ -44,9 +44,11 @@ export default class Comments extends Component {
 
   showComments = () => {
     return (
-        this.state.comments.map((comment) => {
+        this.state.comments.map((item) => {
+            let comment = item.comments
+            let user = item.users
             return (
-                <h1 key={comment.created_at}>{`${comment.user_id}: ${comment.content}`}</h1>
+                <h1 key={comment.id}>{`${user.fname} ${user.lname}: ${comment.content}`}</h1>
             )}
         )
     )

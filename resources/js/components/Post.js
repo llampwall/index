@@ -51,7 +51,7 @@ export default class Post extends Component {
           try {
             const response = await axios.post('/comments', {
               post_id: self.props.post.id,
-              user_id: self.props.user.id,
+              user_id: self.props.curuser,
               content: self.state.comment
             }).then (function(response) {
               self.setState({

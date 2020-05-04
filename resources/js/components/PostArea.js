@@ -15,7 +15,7 @@ export default class PostArea extends Component {
       this.props.initialData.postData.map((item) => {
         let post = item.posts
         let user = item.users
-        return <Post post={post} user={user} key={post.id}/>
+        return <Post post={post} user={user} curuser={this.props.initialData.userData.id} key={post.id}/>
       })
     )
   }
