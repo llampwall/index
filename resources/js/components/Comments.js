@@ -9,6 +9,14 @@ export default class Comments extends Component {
     }
   }
 
+  // this wont work in react 16, but i didn't feel like upgrading
+  componentWillReceiveProps(props) {
+    const {post, update} = this.props
+    if (props.update !== update) {
+      this.getComments()
+    }
+  }
+
   getComments = async function() {
     const self = this;
     // console.log(this.props)
@@ -17,7 +25,7 @@ export default class Comments extends Component {
       // console.log(self.props.post.id)
       // const comments = await axios.get(`/posts/${self.props.post.id}/commments`)
       const comments = await axios.get(`/posts/${self.props.post.id}/comments`)
-      console.log(comments.data.commentData)
+    //   console.log(comments.data.commentData)
 
       self.setState({
         comments: comments.data.commentData
@@ -38,7 +46,7 @@ export default class Comments extends Component {
     return (
         this.state.comments.map((comment) => {
             return (
-                <h1 key={comment.id}>{`${comment.user_id}: ${comment.content}`}</h1>
+                <h1 key={comment.created_at}>{`${comment.user_id}: ${comment.content}`}</h1>
             )}
         )
     )

@@ -61,10 +61,12 @@ class PostController {
     async comments({ request, response }) {
         // console.log(request.params)
         const p_id = request.params.id
-        console.log(p_id)
+        // console.log(p_id)
         try {
-            const commentData = await Comment.query().where('post_id', p_id).orderBy('created_at', 'desc').fetch()
-            // console.log(commentData)
+            const commentData = await Comment.query()
+                // .innerJoin('users', 'users.id', 'comments.user_id')
+                .where('post_id', p_id).orderBy('comments.created_at', 'desc').fetch()
+            console.log(commentData)
             return {
                 commentData
             }

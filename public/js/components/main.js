@@ -1125,35 +1125,35 @@ var Comments = function (_Component) {
             case 4:
               comments = _context.sent;
 
-              console.log(comments.data.commentData);
+              //   console.log(comments.data.commentData)
 
               self.setState({
                 comments: comments.data.commentData
               }, function () {
                 //   console.log(self.state)
               });
-              _context.next = 12;
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context['catch'](1);
 
               console.log("Initialization error: " + _context.t0);
 
-            case 12:
+            case 11:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, this, [[1, 9]]);
+      }, _callee, this, [[1, 8]]);
     }));
 
     _this.showComments = function () {
       return _this.state.comments.map(function (comment) {
         return _react2.default.createElement(
           'h1',
-          { key: comment.id },
+          { key: comment.created_at },
           comment.user_id + ': ' + comment.content
         );
       });
@@ -1165,7 +1165,21 @@ var Comments = function (_Component) {
     return _this;
   }
 
+  // this wont work in react 16, but i didn't feel like upgrading
+
+
   (0, _createClass3.default)(Comments, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(props) {
+      var _props = this.props,
+          post = _props.post,
+          update = _props.update;
+
+      if (props.update !== update) {
+        this.getComments();
+      }
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.getComments();
@@ -1213,13 +1227,13 @@ var _regenerator = __webpack_require__(87);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(208);
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _asyncToGenerator2 = __webpack_require__(86);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _extends2 = __webpack_require__(208);
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _defineProperty2 = __webpack_require__(207);
 
@@ -1284,6 +1298,12 @@ var Post = function (_Component) {
             });
         };
 
+        _this.refreshComments = function () {
+            _this.setState((0, _extends3.default)({}, _this.state, {
+                update: !_this.state.update
+            }));
+        };
+
         _this.submitComment = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
             var self, response;
             return _regenerator2.default.wrap(function _callee$(_context) {
@@ -1307,8 +1327,12 @@ var Post = function (_Component) {
                                 self.setState((0, _extends3.default)({}, self.state, {
                                     comment: ""
                                 }));
-                                //   self.props.update()
+
+                                // should use the ref commented out in the constructor
+                                // to update the comment area, but in react 15 this 
+                                // way makes more sense
                                 //   this.commentArea.current.getComments()
+                                self.refreshComments();
                                 return 'comment saved';
                             });
 
@@ -1334,7 +1358,8 @@ var Post = function (_Component) {
         _this.state = {
             post: {},
             poster: {},
-            comment: ""
+            comment: "",
+            update: false
             // this.commentArea = React.createRef()
         };return _this;
     }
@@ -1417,7 +1442,7 @@ var Post = function (_Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'buttons' },
-                        _react2.default.createElement(_Comments2.default, { post: this.props.post }),
+                        _react2.default.createElement(_Comments2.default, { post: this.props.post, update: this.state.update }),
                         _react2.default.createElement(
                             'div',
                             { className: 'send-btn', onClick: this.submitComment },

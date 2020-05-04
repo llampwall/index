@@ -8,7 +8,8 @@ export default class Post extends Component {
     this.state = { 
         post: {},
         poster: {}, 
-        comment: ""
+        comment: "",
+        update: false
     }
     // this.commentArea = React.createRef()
   }
@@ -37,6 +38,13 @@ export default class Post extends Component {
     })
   }
 
+  refreshComments = () => {
+    this.setState({
+        ...this.state, 
+        update: !this.state.update
+    })
+  }
+
   submitComment = async () => {
       const self = this
       if (this.state.comment.length > 0) {
@@ -50,8 +58,12 @@ export default class Post extends Component {
                 ...self.state,
                 comment: ""
               })
-            //   self.props.update()
-            //   this.commentArea.current.getComments()
+            
+              // should use the ref commented out in the constructor
+              // to update the comment area, but in react 15 this 
+              // way makes more sense
+              //   this.commentArea.current.getComments()
+              self.refreshComments()
               return 'comment saved'
             })
           } catch (error) {
@@ -99,7 +111,7 @@ export default class Post extends Component {
                 <div className="buttons">
 
                     {/* <Comments ref={this.commentArea} post={this.props.post} /> */}
-                    <Comments post={this.props.post} />
+                    <Comments post={this.props.post} update={this.state.update}/>
 
                     <div className="send-btn" onClick={this.submitComment}>
                         <i className="fa fa-arrow-right" />
