@@ -14,7 +14,9 @@ class AuthController {
     async storeUser ({ request, session, response, auth }) {
 
         const rules = {
+            fname: 'required', // THIS BREAKS IT FOR SOME REASON
             email: 'required|email|unique:users,email',
+            profile_pic_upload: 'file|file_size:5mb|file_types:image',
             password: 'required|min:8|max:32',
             confirm: 'required'
         }
@@ -46,49 +48,42 @@ class AuthController {
         }
 
         try {
-
-            // console.log(request.input('profile_pic'))
             let uImg = '/img/user.jpg'
-            if (request.input('profile_pic') != undefined) {
-                uImg = request.input('profile_pic')
-            }
 
-            const imgFile = request.file('profile_pic_upload', {
-                types: ['image'],
-                size: '5mb'
-            })
-            const imgName = request.input('fname') + request.input('lname') + '_profile.jpg'
-            await imgFile.move(Helpers.publicPath('img/users'), {
-                name: imgName,
-                overwrite: true
-            })
-
-            if (!imgFile.moved()) {
-                console.log(imgFile.error())
+            if (request.input('profile_pic_upload') != null) {
+                console.log('image exists')
+                const imgFile = request.file('profile_pic_upload', {
+                    types: ['image'],
+                    size: '5mb'
+                })
+                console.log('passed first reqs')
+                const imgName = request.input('fname') + request.input('lname') + '_profile.jpg'
+                await imgFile.move(Helpers.publicPath('img/users'), {
+                    name: imgName,
+                    overwrite: true
+                })
+                if (!imgFile.moved()) {
+                    console.log(imgFile.error())
+                } else {
+                    uImg = 'http://localhost:3000/public/img/users/' + imgName
+                    console.log(imgName)
+                }
             } else {
-                uImg = 'http://localhost:3000/public/img/users/' + imgName
-                console.log(imgName)
-            }
-
-            let first = 'somebody'
-            if (request.input('fname') != null) {
-                first = request.input('fname')
-            }
-
-            let last = ""
-            if (request.input('lname') != null) {
-                first = request.input('lname')
+                console.log('no image')
+                console.log(uImg)
             }
 
             let newUser = await User.create({
-                fname: first,
-                lname: last,
+                fname: request.input('fname'),
+                lname: request.input('lname'),
                 email: request.input('email'),
                 profile_img: uImg,
                 login_source: 'email',
                 password: request.input('password')
             })
             await auth.login(newUser)
+            console.log('logged in')
+
         } catch(error) {
             session
             .withErrors([

@@ -1,5 +1,6 @@
 @import url( 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
 @import url('https://fonts.googleapis.com/css2?family=Cantarell&family=Josefin+Slab:wght@600;700&family=Source+Code+Pro:ital@0;1&family=Stardos+Stencil&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 @import "reset";
 @import "variables";
 @import "pages/welcome";
@@ -10,7 +11,8 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Source Code Pro', monospace;
+  // font-family: 'Source Code Pro', monospace;
+  font-family: 'Montserrat', sans-serif;
 }
 
 a {
@@ -26,8 +28,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Source Code Pro', monospace;
-  // font-family: 'Cantarell', sans-serif;
+  // font-family: 'Source Code Pro', monospace;
+  font-family: 'Montserrat', sans-serif;
 
   .title {
     h1 {

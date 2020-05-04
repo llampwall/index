@@ -48,7 +48,18 @@ export default class Comments extends Component {
             let comment = item.comments
             let user = item.users
             return (
-                <h1 key={comment.id}>{`${user.fname} ${user.lname}: ${comment.content}`}</h1>
+                <div className='single-comment' key={comment.id}>
+                  <div className='user'>
+                    <div className='comment-pic' style={{
+                          backgroundImage: `url("${user.profile_img}")`, 
+                          backgroundPosition: 'center center', 
+                          backgroundRepeat: 'no-repeat', 
+                          backgroundSize: 'cover'}}>
+                    </div>
+                    <h2>{`${user.fname} ${(user.lname == null) ? "" : user.lname}:`}</h2>
+                  </div>
+                  <p>{comment.content}</p>
+                </div>
             )}
         )
     )

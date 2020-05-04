@@ -52,6 +52,10 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// should really generalize and save this component as an axios image uploader
+// even has a preview window for the selected image file
+
+
 var Compose = function (_Component) {
   (0, _inherits3.default)(Compose, _Component);
 
@@ -71,7 +75,11 @@ var Compose = function (_Component) {
               fData = new FormData();
 
               fData.append('user_id', _this.props.initialData.userData.id);
-              fData.append('content', _this.state.postContent);
+              if (_this.state.postContent == "" && _this.state.image != "") {
+                fData.append('content', " ");
+              } else {
+                fData.append('content', _this.state.postContent);
+              }
               fData.append('image', _this.state.image);
               self = _this;
 
@@ -121,6 +129,13 @@ var Compose = function (_Component) {
       });
     };
 
+    _this.checkSubmit = function (event) {
+      if (event.keyCode == 13) {
+        event.preventDefault();
+        _this.submitPost();
+      }
+    };
+
     _this.imageSelect = function (event) {
       var fileElem = document.getElementById("hidden-input");
       fileElem.click();
@@ -134,12 +149,21 @@ var Compose = function (_Component) {
       });
     };
 
+    _this.removeImage = function () {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        image: ""
+      }));
+    };
+
     _this.state = {
       postContent: "",
       image: ""
     };
     return _this;
   }
+
+  // allows posts to be submit with the enter key
+
 
   (0, _createClass3.default)(Compose, [{
     key: 'render',
@@ -154,7 +178,7 @@ var Compose = function (_Component) {
         return _react2.default.createElement(
           'section',
           { id: 'compose' },
-          _react2.default.createElement('textarea', { name: 'postContent', id: 'content', cols: 30, rows: 10, placeholder: 'share something...', onChange: this.handleChange, value: this.state.postContent }),
+          _react2.default.createElement('textarea', { name: 'postContent', id: 'content', cols: 30, rows: 10, placeholder: 'share something...', onChange: this.handleChange, onKeyUp: this.checkSubmit, value: this.state.postContent }),
           _react2.default.createElement('div', { className: 'user-img', style: {
               backgroundImage: 'url("' + this.props.initialData.userData.profile_img + '")',
               backgroundPosition: 'center center',
@@ -166,6 +190,11 @@ var Compose = function (_Component) {
             _react2.default.createElement('i', { className: 'fa fa-camera' }),
             _react2.default.createElement('input', { type: 'file', id: 'hidden-input', name: 'post_img', onChange: this.getImage })
           ),
+          _react2.default.createElement('div', { className: 'preview ' + (this.state.image == "" ? "" : "active"), onClick: this.removeImage, style: {
+              backgroundImage: 'url("' + (this.state.image == "" ? "" : URL.createObjectURL(this.state.image)) + '")',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover' } }),
           _react2.default.createElement(
             'div',
             { className: 'send-btn', onClick: this.submitPost },
@@ -1154,9 +1183,27 @@ var Comments = function (_Component) {
         var comment = item.comments;
         var user = item.users;
         return _react2.default.createElement(
-          'h1',
-          { key: comment.id },
-          user.fname + ' ' + user.lname + ': ' + comment.content
+          'div',
+          { className: 'single-comment', key: comment.id },
+          _react2.default.createElement(
+            'div',
+            { className: 'user' },
+            _react2.default.createElement('div', { className: 'comment-pic', style: {
+                backgroundImage: 'url("' + user.profile_img + '")',
+                backgroundPosition: 'center center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover' } }),
+            _react2.default.createElement(
+              'h2',
+              null,
+              user.fname + ' ' + (user.lname == null ? "" : user.lname) + ':'
+            )
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            comment.content
+          )
         );
       });
     };
@@ -1222,7 +1269,7 @@ exports.default = Comments;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _regenerator = __webpack_require__(87);
@@ -1272,195 +1319,207 @@ var _axios2 = _interopRequireDefault(_axios);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Post = function (_Component) {
-    (0, _inherits3.default)(Post, _Component);
+  (0, _inherits3.default)(Post, _Component);
 
-    function Post() {
-        var _this2 = this;
+  function Post() {
+    var _this2 = this;
 
-        (0, _classCallCheck3.default)(this, Post);
+    (0, _classCallCheck3.default)(this, Post);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this));
 
-        _this.displayMedia = function () {
-            if (_this.props.post.type == 'image') {
-                return _react2.default.createElement('div', { className: 'post-media', style: {
-                        backgroundImage: 'url("' + _this.props.post.image_url + '")',
-                        backgroundPosition: 'center center',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'cover' } });
-            }
-        };
+    _this.displayMedia = function () {
+      if (_this.props.post.type == 'image') {
+        return _react2.default.createElement('div', { className: 'post-media', style: {
+            backgroundImage: 'url("' + _this.props.post.image_url + '")',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover' } });
+      }
+    };
 
-        _this.handleChange = function (event) {
-            var name = event.target.name;
-            var value = event.target.type == 'checkbox' ? event.target.checked : event.target.value;
+    _this.handleChange = function (event) {
+      var name = event.target.name;
+      var value = event.target.type == 'checkbox' ? event.target.checked : event.target.value;
 
-            _this.setState((0, _defineProperty3.default)({}, name, value), function () {
-                console.log(_this.state);
-            });
-        };
+      _this.setState((0, _defineProperty3.default)({}, name, value), function () {
+        console.log(_this.state);
+      });
+    };
 
-        _this.refreshComments = function () {
-            _this.setState((0, _extends3.default)({}, _this.state, {
-                update: !_this.state.update
-            }));
-        };
+    _this.refreshComments = function () {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        update: !_this.state.update
+      }));
+    };
 
-        _this.submitComment = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-            var self, response;
-            return _regenerator2.default.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            self = _this;
+    _this.submitComment = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var self, response;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              self = _this;
 
-                            if (!(_this.state.comment.length > 0)) {
-                                _context.next = 11;
-                                break;
-                            }
+              if (!(_this.state.comment.length > 0)) {
+                _context.next = 11;
+                break;
+              }
 
-                            _context.prev = 2;
-                            _context.next = 5;
-                            return _axios2.default.post('/comments', {
-                                post_id: self.props.post.id,
-                                user_id: self.props.curuser,
-                                content: self.state.comment
-                            }).then(function (response) {
-                                self.setState((0, _extends3.default)({}, self.state, {
-                                    comment: ""
-                                }));
+              _context.prev = 2;
+              _context.next = 5;
+              return _axios2.default.post('/comments', {
+                post_id: self.props.post.id,
+                user_id: self.props.curuser,
+                content: self.state.comment
+              }).then(function (response) {
+                self.setState((0, _extends3.default)({}, self.state, {
+                  comment: ""
+                }));
 
-                                // should use the ref commented out in the constructor
-                                // to update the comment area, but in react 15 this 
-                                // way makes more sense
-                                //   this.commentArea.current.getComments()
-                                self.refreshComments();
-                                return 'comment saved';
-                            });
+                // should use the ref commented out in the constructor
+                // to update the comment area, but in react 15 this 
+                // way makes more sense
+                //   this.commentArea.current.getComments()
+                self.refreshComments();
+                return 'comment saved';
+              });
 
-                        case 5:
-                            response = _context.sent;
-                            _context.next = 11;
-                            break;
+            case 5:
+              response = _context.sent;
+              _context.next = 11;
+              break;
 
-                        case 8:
-                            _context.prev = 8;
-                            _context.t0 = _context['catch'](2);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context['catch'](2);
 
-                            console.log("axios didnt work: " + _context.t0);
+              console.log("axios didnt work: " + _context.t0);
 
-                        case 11:
-                        case 'end':
-                            return _context.stop();
-                    }
-                }
-            }, _callee, _this2, [[2, 8]]);
-        }));
-
-        _this.state = {
-            post: {},
-            poster: {},
-            comment: "",
-            update: false
-            // this.commentArea = React.createRef()
-        };return _this;
-    }
-
-    (0, _createClass3.default)(Post, [{
-        key: 'render',
-        value: function render() {
-            if (this.props.post == undefined) {
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    'Loading...'
-                );
-            } else {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'post' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'post-header' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'author' },
-                            _react2.default.createElement('div', { className: 'user-img', style: {
-                                    backgroundImage: 'url("' + this.props.user.profile_img + '")',
-                                    backgroundPosition: 'center center',
-                                    backgroundRepeat: 'no-repeat',
-                                    backgroundSize: 'cover' } }),
-                            _react2.default.createElement(
-                                'a',
-                                { href: '/profile/' + this.props.user.id, className: 'username' },
-                                this.props.user.fname,
-                                ' ',
-                                this.props.user.lname
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'text' },
-                                'shared ',
-                                this.props.post.type == 'image' ? 'an image' : 'something'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'time' },
-                            new Date(this.props.post.created_at).toLocaleString()
-                        )
-                    ),
-                    this.displayMedia(),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'post-info' },
-                        _react2.default.createElement(
-                            'p',
-                            null,
-                            this.props.post.content
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'post-stats' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'icons' },
-                            _react2.default.createElement('i', { className: 'fa fa-grin-alt' }),
-                            _react2.default.createElement('i', { className: 'fa fa-thumbs-up' })
-                        ),
-                        _react2.default.createElement(
-                            'span',
-                            { className: 'text' },
-                            'Sarah Jane and 23 others liked this post.'
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'comment-count' },
-                            '4 comments'
-                        )
-                    ),
-                    _react2.default.createElement('textarea', { name: 'comment', cols: 30, rows: 2, placeholder: 'write a comment...', value: this.state.comment, onChange: this.handleChange }),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'buttons' },
-                        _react2.default.createElement(_Comments2.default, { post: this.props.post, update: this.state.update }),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'send-btn', onClick: this.submitComment },
-                            _react2.default.createElement('i', { className: 'fa fa-arrow-right' })
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'like-btn' },
-                            _react2.default.createElement('i', { className: 'fa fa-thumbs-up' })
-                        )
-                    )
-                );
-            }
+            case 11:
+            case 'end':
+              return _context.stop();
+          }
         }
-    }]);
-    return Post;
+      }, _callee, _this2, [[2, 8]]);
+    }));
+
+    _this.checkSubmit = function (event) {
+      if (event.keyCode == 13) {
+        event.preventDefault();
+        _this.submitComment();
+      }
+    };
+
+    _this.state = {
+      post: {},
+      poster: {},
+      comment: "",
+      update: false
+      // this.commentArea = React.createRef()
+    };return _this;
+  }
+
+  // allows comments to be submitted with the enter key
+
+
+  (0, _createClass3.default)(Post, [{
+    key: 'render',
+    value: function render() {
+      if (this.props.post == undefined) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Loading...'
+        );
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'post' },
+          _react2.default.createElement(
+            'div',
+            { className: 'post-header' },
+            _react2.default.createElement(
+              'div',
+              { className: 'author' },
+              _react2.default.createElement('div', { className: 'user-img', style: {
+                  backgroundImage: 'url("' + this.props.user.profile_img + '")',
+                  backgroundPosition: 'center center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover' } }),
+              _react2.default.createElement(
+                'a',
+                { href: '/profile/' + this.props.user.id, className: 'username' },
+                this.props.user.fname,
+                ' ',
+                this.props.user.lname
+              ),
+              _react2.default.createElement(
+                'span',
+                { className: 'text' },
+                'shared ',
+                this.props.post.type == 'image' ? 'an image' : 'something'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'time' },
+              new Date(this.props.post.created_at).toLocaleString()
+            )
+          ),
+          this.displayMedia(),
+          _react2.default.createElement(
+            'div',
+            { className: 'post-info' },
+            _react2.default.createElement(
+              'p',
+              null,
+              this.props.post.content
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'post-stats' },
+            _react2.default.createElement(
+              'div',
+              { className: 'icons' },
+              _react2.default.createElement(
+                'div',
+                { className: 'like-btn' },
+                _react2.default.createElement('i', { className: 'fa fa-thumbs-up' })
+              )
+            ),
+            _react2.default.createElement(
+              'span',
+              { className: 'text' },
+              'Sarah Jane and 23 others liked this post.'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'comment-count' },
+              '4 comments'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'c-section' },
+            _react2.default.createElement('textarea', { name: 'comment', cols: 30, rows: 2, placeholder: 'write a comment...', value: this.state.comment, onChange: this.handleChange, onKeyUp: this.checkSubmit })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'buttons' },
+            _react2.default.createElement(_Comments2.default, { post: this.props.post, update: this.state.update }),
+            _react2.default.createElement(
+              'div',
+              { className: 'send-btn', onClick: this.submitComment },
+              _react2.default.createElement('i', { className: 'fa fa-arrow-right' })
+            )
+          )
+        );
+      }
+    }
+  }]);
+  return Post;
 }(_react.Component);
 
 exports.default = Post;

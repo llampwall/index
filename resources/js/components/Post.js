@@ -72,6 +72,14 @@ export default class Post extends Component {
       }
   }
 
+  // allows comments to be submitted with the enter key
+  checkSubmit = (event) => {
+    if (event.keyCode == 13) {
+      event.preventDefault()
+      this.submitComment()
+    }
+  }
+
 
   render () {
     if (this.props.post == undefined) {
@@ -101,13 +109,19 @@ export default class Post extends Component {
                 </div>
                 <div className="post-stats">
                     <div className="icons">
-                        <i className="fa fa-grin-alt" />
-                        <i className="fa fa-thumbs-up" />
+                        <div className="like-btn">
+                          <i className="fa fa-thumbs-up" />
+                        </div>
+                        {/* <div className="share-btn">
+                          <i className="fa fa-share" />
+                        </div> */}
                     </div>
                     <span className="text">Sarah Jane and 23 others liked this post.</span>
                     <div className="comment-count">4 comments</div>
                 </div>
-                <textarea name="comment" cols={30} rows={2} placeholder="write a comment..." value={this.state.comment} onChange={this.handleChange} />
+                <div className="c-section">
+                  <textarea name="comment" cols={30} rows={2} placeholder="write a comment..." value={this.state.comment} onChange={this.handleChange} onKeyUp={this.checkSubmit}/>
+                </div>
                 <div className="buttons">
 
                     {/* <Comments ref={this.commentArea} post={this.props.post} /> */}
@@ -116,12 +130,7 @@ export default class Post extends Component {
                     <div className="send-btn" onClick={this.submitComment}>
                         <i className="fa fa-arrow-right" />
                     </div>
-                    {/* <div className="share-btn">
-                        <i className="fa fa-share" />
-                    </div> */}
-                    <div className="like-btn">
-                        <i className="fa fa-thumbs-up" />
-                    </div>
+                    
                 </div>
             </div>
         )

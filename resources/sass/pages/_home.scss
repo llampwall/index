@@ -291,29 +291,44 @@
           bottom: 3px;
           right: -10px;
         }
+
+        .preview {
+          position: absolute;
+          top: 0px;
+          right: 25px;
+          width: 32px;
+          height: 32px;
+          z-index: 5;
+
+          &.active {
+            border: 1px solid $apricot;
+            cursor: not-allowed;
+          }
+        }
       }
 
       #all-posts {
         .post-container {
           margin: 0 auto;
-          width: 90%;
+          width: 85%;
           max-width: 700px;
           background: white;
+
           .post {
             position: relative;
             width: 100%;
-            // border: 1px solid $apricot;
+            @include hard-shadow;
             margin-bottom: 3rem;
+            border: 1px solid $apricot;
+            font-family: 'Montserrat', sans-serif;
 
             .post-header {
-              border: 1px solid $apricot;
-              border-bottom: none;
               background: $offwhite;
-              width: 95%;
+              width: 100%;
               margin: 0 auto;
               display: flex;
               align-items: center;
-              @include hard-shadow;
+              
               .author {
                 display: flex;
                 align-items: center;
@@ -350,31 +365,24 @@
             }
 
             .post-media {
-              // width: 95%;
               width: 100%;
-              border: 1px solid $apricot;
+              border-top: 1px solid $apricot;
+              border-bottom: 1px solid $apricot;
               margin: 0 auto;
               transition: all .3s ease;
               height: 400px;
               z-index: 2;
-              @include hard-shadow;
               &:hover {
                 width: 100%;
               }
-              // img {
-              //   width: 100%;
-              //   max-height: 400px;
-              //   // @include hard-shadow;
-              // }
             }
 
             .post-info {
-              border: 1px solid $apricot;
+              border-bottom: none;
               background: $offwhite;
               width: 100%;
               margin: 0 auto 0;
               z-index: -10;
-              @include hard-shadow;
 
               .title {
                 text-align: center;
@@ -391,19 +399,15 @@
               }
 
               p {
-                // width: 105%;
-                // position: relative;
-                // left: -2.5%;
-                // border-left: 1px solid $apricot;
-                // border-right: 1px solid $apricot;
-                text-align: center;
+                width: 100%;
+                text-align: left;
                 font-size: 1.3rem;
                 word-wrap: break-word;
                 // font-weight: 700;
                 padding: 1rem 1rem;
                 background: $offwhite;
                 color: $geraldine;
-                @include hard-shadow;
+                // @include hard-shadow;
                 transition: all .3s ease-in-out;
                 cursor: pointer;
                 // &:hover {
@@ -414,17 +418,33 @@
 
             .post-stats {
               background: $offwhite;
-              width: 95%;
+              width: 100%;
               margin: 0 auto;
               display: flex;
               align-items: center;
               padding: .3rem;
-              border-left: 1px solid $apricot;
-              border-right: 1px solid $apricot;
-              @include hard-shadow;
+              // @include hard-shadow;
               .icons {
-                .fa {
-                  font-size: 1.2rem;
+                // .fa {
+                //   font-size: 1.2rem;
+                // }
+
+                .like-btn {
+                  height: 20px;
+                  width: 20px;
+                  background: white;
+                  padding: 15px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border: 1px solid $apricot;
+                  margin-right: .7rem;
+                  cursor: pointer;
+                  
+                  &:hover {
+                    background: $apricot;
+                    color: white;
+                  }
                 }
               }
 
@@ -439,101 +459,124 @@
               }
             }
 
-            textarea {
+            .c-section {
               width: 100%;
-              height: 40px;
-              resize: none;
-              border: 1px solid $apricot;
-              @include hard-shadow;
-              padding: .5rem 2.5rem .5rem 1rem;
-              color: $apricot;
-              transition: all .3s ease;
-              font-size: 14px;
-              overflow-y: auto;
-              outline: none;
-              &::-webkit-scrollbar {
-                display: none;
-              }
-              &:focus {
+              background: $offwhite;
+              border-top: 1px solid $apricot;
+              border-bottom: 1px solid $apricot;
+              padding: 0;
+
+              textarea {
                 width: 100%;
-                height: 50px;
-              }
-              &::placeholder {
+                height: 45px;
+                resize: none;
+                border: none;
+                padding: .5rem 2.5rem .5rem 1rem;
                 color: $apricot;
-              }
-              &:focus::placeholder{
-                color: transparent;
+                transition: all .3s ease;
+                font-size: 14px;
+                overflow-y: auto;
+                outline: none;
+                &::-webkit-scrollbar {
+                  display: none;
+                }
+                &:focus {
+                  height: 50px;
+                }
+                &::placeholder {
+                  color: $apricot;
+                }
+                &:focus::placeholder{
+                  color: transparent;
+                }
               }
             }
             .buttons {
-              width: 95%;
+              width: 100%;
               margin: 0 auto;
               display: flex;
               justify-content: space-between;
               padding: .5rem;
               background: $offwhite;
-              @include hard-shadow;
+              // @include hard-shadow;
               position: relative;
-              border: 1px solid $apricot;
               border-top: none;
 
               .comments {
-                h1 {
-                  padding: .2rem;
-                  border-bottom: 1px solid $apricot;
-                }
-              }
-
-              .send-btn {
-                height: 20px;
-                width: 20px;
-                background: white;
-                padding: 15px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                width: 100%;
                 border: 1px solid $apricot;
-                margin-right: .7rem;
-                cursor: pointer;
-
-                &:hover {
-                  background: $apricot;
-                  color: white;
-                }
-              }
-
-              .share-btn, .like-btn, .send-btn {
-                height: 20px;
-                width: 20px;
-                background: white;
-                padding: 15px;
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                border: 1px solid $apricot;
-                margin-right: .7rem;
-                cursor: pointer;
+                flex-direction: column;
                 
+                .single-comment {
+                  background: white;
+                  display: grid;
+                  grid-template-columns: 3fr 10fr;
+                  width: 100%;
+                  min-height: 25px;
+                  padding: .5rem .2rem;
+
+                  &:nth-of-type(2n){
+                    background: $offwhite;
+                  }
+
+                  &:not(:last-of-type) {
+                    border-bottom: 1px solid $apricot;
+                  }
+                  
+
+                  .user {
+                    display: flex;
+                    align-items: flex-start;
+                  }
+                  .comment-pic {
+                    height: 25px;
+                    width: 25px;
+                    margin-right: .5rem;
+                  }
+                  
+                  h2 {
+                    font-size: .9rem;
+                    font-weight: 500;
+                    color: $apricot;
+                    padding-top: .3rem;
+                    display: flex;
+                  }
+
+                  p {
+                    padding: 0 .3rem;
+                    display: flex;
+                    font-size: .8rem;
+                    word-break: break-all;
+                    align-items: center;
+                  }
+                }
+              }
+
+              .send-btn {
+                height: 20px;
+                width: 20px;
+                background: white;
+                padding: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid $apricot;
+                margin-right: .7rem;
+                cursor: pointer;
+                position: absolute;
+                top: -42px;
+                right: 0px;
+
                 &:hover {
                   background: $apricot;
                   color: white;
                 }
+                .fa {
+                  font-size: 1.2rem;
+                }
               }
-
-              .like-btn {
-                position: absolute;
-                top: -115px;
-                right: -25px;
-              }
-
-              .send-btn {
-                position: absolute;
-                top: -37px;
-                right: -25px;
-              }
-              .fa {
-                font-size: 1.2rem;
-              }
+              
             }
           }
         }
@@ -603,6 +646,15 @@
           transform: scale(1.05);
         }
 
+        &:nth-of-type(2n){
+          background: white;
+          &:hover {
+            background: $apricot;
+          }
+        }
+
+        border-bottom: 1px solid $apricot;
+
         .user-img {
           height: 35px;
           width: 35px;
@@ -615,7 +667,7 @@
         }
         
         .username {
-          font-size: 1rem;
+          font-size: .9rem;
         }
 
         .message-icon {

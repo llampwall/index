@@ -25,6 +25,7 @@ UPDATE - router will help it. new parent component 'Home' can handle that.
     make different styles for image vs text 
         *** DONE - not perfect ***
     fix like button positioning, make it more sleek. remove share button.
+        *** SORTA DONE ***
 
 - link post functionality
     -pull image and text preview
@@ -39,6 +40,7 @@ UPDATE - router will help it. new parent component 'Home' can handle that.
 
 - comments/likes
     setup buttons to submit to database tables
+        *** COMMENTS DONE ***
 
 - profile
     - about
