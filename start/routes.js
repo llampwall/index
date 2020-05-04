@@ -44,7 +44,8 @@ Route.get('/api/user/:id', 'UserController.profile')
 Route.get('/posts', 'PostController.index')
 Route.post('/posts', 'PostController.store')
 Route.get('/posts/:id/delete', 'PostController.destroy')
-
+Route.get('/posts/:id/comments', 'PostController.comments')
+Route.post('/comments', 'PostController.makeComment')
 
 // ------- react router ----------
 // anything that doesnt clear the above routes will

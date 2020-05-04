@@ -10,35 +10,35 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(342);
+var _extends2 = __webpack_require__(208);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _defineProperty2 = __webpack_require__(341);
+var _defineProperty2 = __webpack_require__(207);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _regenerator = __webpack_require__(136);
+var _regenerator = __webpack_require__(87);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(135);
+var _asyncToGenerator2 = __webpack_require__(86);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _classCallCheck2 = __webpack_require__(37);
+var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(38);
+var _createClass2 = __webpack_require__(33);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(40);
+var _possibleConstructorReturn2 = __webpack_require__(35);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(39);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -46,7 +46,7 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(85);
+var _axios = __webpack_require__(75);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -182,7 +182,7 @@ exports.default = Compose;
 
 /***/ }),
 
-/***/ 305:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -192,27 +192,27 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(136);
+var _regenerator = __webpack_require__(87);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(135);
+var _asyncToGenerator2 = __webpack_require__(86);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _classCallCheck2 = __webpack_require__(37);
+var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(38);
+var _createClass2 = __webpack_require__(33);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(40);
+var _possibleConstructorReturn2 = __webpack_require__(35);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(39);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -220,17 +220,17 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(104);
+var _reactDom = __webpack_require__(106);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(137);
 
-var _axios = __webpack_require__(85);
+var _axios = __webpack_require__(75);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _PostArea = __webpack_require__(332);
+var _PostArea = __webpack_require__(335);
 
 var _PostArea2 = _interopRequireDefault(_PostArea);
 
@@ -301,6 +301,7 @@ var Home = function (_Component) {
     value: function componentWillMount() {
       var _this3 = this;
 
+      console.log(this.props);
       this.setState({
         initialData: this.props.initialData
       }, function () {
@@ -320,11 +321,12 @@ var Home = function (_Component) {
           'posts loading...'
         );
       } else {
+        // console.log(this.props)
         return _react2.default.createElement(
           'div',
           { className: 'content-area' },
           _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData, update: this.update }),
-          _react2.default.createElement(_PostArea2.default, { initialData: this.state.initialData })
+          _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, initialData: this.state.initialData })
         );
       }
     }
@@ -336,7 +338,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 306:
+/***/ 308:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -346,19 +348,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(37);
+var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(38);
+var _createClass2 = __webpack_require__(33);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(40);
+var _possibleConstructorReturn2 = __webpack_require__(35);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(39);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -521,7 +523,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 307:
+/***/ 309:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -531,19 +533,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(37);
+var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(38);
+var _createClass2 = __webpack_require__(33);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(40);
+var _possibleConstructorReturn2 = __webpack_require__(35);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(39);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -590,7 +592,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 308:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -600,19 +602,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(37);
+var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(38);
+var _createClass2 = __webpack_require__(33);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(40);
+var _possibleConstructorReturn2 = __webpack_require__(35);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(39);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -859,7 +861,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 309:
+/***/ 311:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -869,19 +871,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(37);
+var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(38);
+var _createClass2 = __webpack_require__(33);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(40);
+var _possibleConstructorReturn2 = __webpack_require__(35);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(39);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -891,7 +893,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(137);
 
-var _axios = __webpack_require__(85);
+var _axios = __webpack_require__(75);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -982,7 +984,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 310:
+/***/ 312:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -992,19 +994,19 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _classCallCheck2 = __webpack_require__(37);
+var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(38);
+var _createClass2 = __webpack_require__(33);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(40);
+var _possibleConstructorReturn2 = __webpack_require__(35);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(39);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -1055,7 +1057,149 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 331:
+/***/ 333:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _regenerator = __webpack_require__(87);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__(86);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _classCallCheck2 = __webpack_require__(32);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(33);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(35);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(34);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(17);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(75);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Comments = function (_Component) {
+  (0, _inherits3.default)(Comments, _Component);
+
+  function Comments() {
+    (0, _classCallCheck3.default)(this, Comments);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).call(this));
+
+    _this.getComments = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var self, comments;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              self = this;
+              // console.log(this.props)
+
+              _context.prev = 1;
+              _context.next = 4;
+              return _axios2.default.get('/posts/' + self.props.post.id + '/comments');
+
+            case 4:
+              comments = _context.sent;
+
+              console.log(comments.data.commentData);
+
+              self.setState({
+                comments: comments.data.commentData
+              }, function () {
+                //   console.log(self.state)
+              });
+              _context.next = 12;
+              break;
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context['catch'](1);
+
+              console.log("Initialization error: " + _context.t0);
+
+            case 12:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, this, [[1, 9]]);
+    }));
+
+    _this.showComments = function () {
+      return _this.state.comments.map(function (comment) {
+        return _react2.default.createElement(
+          'h1',
+          { key: comment.id },
+          comment.user_id + ': ' + comment.content
+        );
+      });
+    };
+
+    _this.state = {
+      comments: []
+    };
+    return _this;
+  }
+
+  (0, _createClass3.default)(Comments, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.getComments();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (this.props.post == undefined) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Loading...'
+        );
+      } else {
+        if (this.state.comments.length > 0) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'comments' },
+            this.showComments()
+          );
+        } else {
+          return null;
+        }
+      }
+    }
+  }]);
+  return Comments;
+}(_react.Component);
+
+exports.default = Comments;
+
+/***/ }),
+
+/***/ 334:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1065,19 +1209,35 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _classCallCheck2 = __webpack_require__(37);
+var _regenerator = __webpack_require__(87);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _extends2 = __webpack_require__(208);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _asyncToGenerator2 = __webpack_require__(86);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _defineProperty2 = __webpack_require__(207);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(38);
+var _createClass2 = __webpack_require__(33);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(40);
+var _possibleConstructorReturn2 = __webpack_require__(35);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(39);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -1085,7 +1245,11 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(85);
+var _Comments = __webpack_require__(333);
+
+var _Comments2 = _interopRequireDefault(_Comments);
+
+var _axios = __webpack_require__(75);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1095,45 +1259,85 @@ var Post = function (_Component) {
     (0, _inherits3.default)(Post, _Component);
 
     function Post() {
+        var _this2 = this;
+
         (0, _classCallCheck3.default)(this, Post);
 
         var _this = (0, _possibleConstructorReturn3.default)(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this));
 
         _this.displayMedia = function () {
             if (_this.props.post.type == 'image') {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'post-media' },
-                    _react2.default.createElement('img', { src: _this.props.post.image_url })
-                );
+                return _react2.default.createElement('div', { className: 'post-media', style: {
+                        backgroundImage: 'url("' + _this.props.post.image_url + '")',
+                        backgroundPosition: 'center center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover' } });
             }
         };
 
+        _this.handleChange = function (event) {
+            var name = event.target.name;
+            var value = event.target.type == 'checkbox' ? event.target.checked : event.target.value;
+
+            _this.setState((0, _defineProperty3.default)({}, name, value), function () {
+                console.log(_this.state);
+            });
+        };
+
+        _this.submitComment = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+            var self, response;
+            return _regenerator2.default.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            self = _this;
+
+                            if (!(_this.state.comment.length > 0)) {
+                                _context.next = 11;
+                                break;
+                            }
+
+                            _context.prev = 2;
+                            _context.next = 5;
+                            return _axios2.default.post('/comments', {
+                                post_id: self.props.post.id,
+                                user_id: self.props.user.id,
+                                content: self.state.comment
+                            }).then(function (response) {
+                                self.setState((0, _extends3.default)({}, self.state, {
+                                    comment: ""
+                                }));
+                                //   self.props.update()
+                                //   this.commentArea.current.getComments()
+                                return 'comment saved';
+                            });
+
+                        case 5:
+                            response = _context.sent;
+                            _context.next = 11;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context['catch'](2);
+
+                            console.log("axios didnt work: " + _context.t0);
+
+                        case 11:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, _callee, _this2, [[2, 8]]);
+        }));
+
         _this.state = {
             post: {},
-            poster: {}
-        };
-        return _this;
+            poster: {},
+            comment: ""
+            // this.commentArea = React.createRef()
+        };return _this;
     }
-
-    //   componentDidMount() {
-    //     const self = this;
-    //     const getPoster = async function() {
-    //         try {
-    //             const data = await axios.get('/api/intialize')
-    //             const allData = data.data
-    //             // console.log(allData)
-
-    //             self.setState({
-    //                 initialData: allData
-    //             }, () => {
-    //                 console.log(self.state.initialData)
-    //             })
-    //             } catch (error) {
-    //                 console.log("This it? " + error)
-    //             }
-    //     }
-    //   }
 
     (0, _createClass3.default)(Post, [{
         key: 'render',
@@ -1145,7 +1349,6 @@ var Post = function (_Component) {
                     'Loading...'
                 );
             } else {
-                // console.log(this.props.post)
                 return _react2.default.createElement(
                     'div',
                     { className: 'post' },
@@ -1177,7 +1380,7 @@ var Post = function (_Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'time' },
-                            this.props.post.created_at
+                            new Date(this.props.post.created_at).toLocaleString()
                         )
                     ),
                     this.displayMedia(),
@@ -1210,37 +1413,14 @@ var Post = function (_Component) {
                             '4 comments'
                         )
                     ),
-                    _react2.default.createElement('textarea', { name: 'comment', cols: 30, rows: 2, placeholder: 'write a comment...', defaultValue: "" }),
+                    _react2.default.createElement('textarea', { name: 'comment', cols: 30, rows: 2, placeholder: 'write a comment...', value: this.state.comment, onChange: this.handleChange }),
                     _react2.default.createElement(
                         'div',
                         { className: 'buttons' },
+                        _react2.default.createElement(_Comments2.default, { post: this.props.post }),
                         _react2.default.createElement(
                             'div',
-                            { className: 'comments' },
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'Jordan Hewitt: yeah you would know loser'
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'Jordan Hewitt: yeah you would know loser'
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'Jordan Hewitt: yeah you would know loser'
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                'Jordan Hewitt: yeah you would know loser'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'send-btn' },
+                            { className: 'send-btn', onClick: this.submitComment },
                             _react2.default.createElement('i', { className: 'fa fa-arrow-right' })
                         ),
                         _react2.default.createElement(
@@ -1260,7 +1440,7 @@ exports.default = Post;
 
 /***/ }),
 
-/***/ 332:
+/***/ 335:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1270,19 +1450,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(37);
+var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(38);
+var _createClass2 = __webpack_require__(33);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(40);
+var _possibleConstructorReturn2 = __webpack_require__(35);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(39);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -1290,7 +1470,7 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(331);
+var _Post = __webpack_require__(334);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -1318,25 +1498,6 @@ var PostArea = function (_Component) {
     };
     return _this;
   }
-
-  // componentDidMount() {
-  //   this.setState({
-  //     posts: this.props.posts
-  //   })
-  // }
-
-  // must be async so it must be moved to componentwillmount or useeffect
-  // also must be modified so it shows the posts of you and all of your friends
-  // showLatestPostFeed() {
-  //   const latestPosts = await Database
-  //     .from('posts').where('user_id', auth.user.id).forPage(1,10)
-
-  //   return (
-  //     latestPosts.map((post, i) => {
-  //       return <Post post={post} /> 
-  //     })
-  //   )
-  // }
 
   (0, _createClass3.default)(PostArea, [{
     key: 'render',
@@ -1367,33 +1528,33 @@ exports.default = PostArea;
 
 /***/ }),
 
-/***/ 333:
+/***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _regenerator = __webpack_require__(136);
+var _regenerator = __webpack_require__(87);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(135);
+var _asyncToGenerator2 = __webpack_require__(86);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _classCallCheck2 = __webpack_require__(37);
+var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(38);
+var _createClass2 = __webpack_require__(33);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(40);
+var _possibleConstructorReturn2 = __webpack_require__(35);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(39);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -1401,37 +1562,37 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(104);
+var _reactDom = __webpack_require__(106);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(137);
 
-var _axios = __webpack_require__(85);
+var _axios = __webpack_require__(75);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(305);
+var _Home = __webpack_require__(307);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(309);
+var _Profile = __webpack_require__(311);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(306);
+var _LeftMenu = __webpack_require__(308);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(308);
+var _Messenger = __webpack_require__(310);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(310);
+var _SearchHeader = __webpack_require__(312);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(307);
+var _Loading = __webpack_require__(309);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
@@ -1542,4 +1703,4 @@ _reactDom2.default.render(_react2.default.createElement(Layout, null), app);
 
 /***/ })
 
-},[333]);
+},[336]);

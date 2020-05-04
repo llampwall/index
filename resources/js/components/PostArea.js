@@ -9,25 +9,6 @@ export default class PostArea extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     posts: this.props.posts
-  //   })
-  // }
-
-  // must be async so it must be moved to componentwillmount or useeffect
-  // also must be modified so it shows the posts of you and all of your friends
-  // showLatestPostFeed() {
-  //   const latestPosts = await Database
-  //     .from('posts').where('user_id', auth.user.id).forPage(1,10)
-
-  //   return (
-  //     latestPosts.map((post, i) => {
-  //       return <Post post={post} /> 
-  //     })
-  //   )
-  // }
-
   showMyPosts = () => {
     // console.log(this.props.initialData.postData)
     return (

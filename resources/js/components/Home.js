@@ -21,6 +21,7 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
+    console.log(this.props)
     this.setState({
       initialData: this.props.initialData
     }, () => {
@@ -51,10 +52,11 @@ export default class Home extends Component {
         <div>posts loading...</div>
       )
     } else {
+      // console.log(this.props)
       return (
         <div className="content-area">
           <Compose initialData={this.state.initialData} update={this.update}/>
-          <PostArea initialData={this.state.initialData}/>
+          <PostArea routeProps={this.props.routeProps} initialData={this.state.initialData}/>
         </div>
       )
     }

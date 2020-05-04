@@ -1,4 +1,5 @@
 import React, { Component} from 'react'
+import Comments from "./Comments"
 import axios from 'axios'
 
 export default class Post extends Component {
@@ -6,38 +7,59 @@ export default class Post extends Component {
     super()
     this.state = { 
         post: {},
-        poster: {}
+        poster: {}, 
+        comment: ""
     }
+    // this.commentArea = React.createRef()
   }
-
-//   componentDidMount() {
-//     const self = this;
-//     const getPoster = async function() {
-//         try {
-//             const data = await axios.get('/api/intialize')
-//             const allData = data.data
-//             // console.log(allData)
-
-//             self.setState({
-//                 initialData: allData
-//             }, () => {
-//                 console.log(self.state.initialData)
-//             })
-//             } catch (error) {
-//                 console.log("This it? " + error)
-//             }
-//     }
-//   }
 
   displayMedia = () => {
     if (this.props.post.type == 'image') {
         return (
-            <div className="post-media">
-                <img src={this.props.post.image_url} />
+            <div className="post-media" style={{
+                backgroundImage: `url("${this.props.post.image_url}")`, 
+                backgroundPosition: 'center center', 
+                backgroundRepeat: 'no-repeat', 
+                backgroundSize: 'cover'}}>
             </div>
         )
     }
   }
+
+  handleChange = (event) => {
+    const name = event.target.name
+    const value = (event.target.type == 'checkbox') ? event.target.checked : event.target.value
+
+    this.setState({
+      [name]: value
+    }, () => {
+      console.log(this.state)
+    })
+  }
+
+  submitComment = async () => {
+      const self = this
+      if (this.state.comment.length > 0) {
+          try {
+            const response = await axios.post('/comments', {
+              post_id: self.props.post.id,
+              user_id: self.props.user.id,
+              content: self.state.comment
+            }).then (function(response) {
+              self.setState({
+                ...self.state,
+                comment: ""
+              })
+            //   self.props.update()
+            //   this.commentArea.current.getComments()
+              return 'comment saved'
+            })
+          } catch (error) {
+            console.log("axios didnt work: " + error)
+          }
+      }
+  }
+
 
   render () {
     if (this.props.post == undefined) {
@@ -45,7 +67,6 @@ export default class Post extends Component {
             <div>Loading...</div>
         )
     } else {
-        // console.log(this.props.post)
         return (
             <div className="post">
                 <div className="post-header">
@@ -58,7 +79,7 @@ export default class Post extends Component {
                         <a href={`/profile/${this.props.user.id}`} className="username">{this.props.user.fname} {this.props.user.lname}</a>
                         <span className="text">shared {(this.props.post.type == 'image') ? 'an image' : 'something'}</span>
                     </div>
-                    <div className="time">{this.props.post.created_at}</div>
+                    <div className="time">{new Date(this.props.post.created_at).toLocaleString()}</div>
                 </div>
 
                 {this.displayMedia()}
@@ -74,15 +95,13 @@ export default class Post extends Component {
                     <span className="text">Sarah Jane and 23 others liked this post.</span>
                     <div className="comment-count">4 comments</div>
                 </div>
-                <textarea name="comment" cols={30} rows={2} placeholder="write a comment..." defaultValue={""} />
+                <textarea name="comment" cols={30} rows={2} placeholder="write a comment..." value={this.state.comment} onChange={this.handleChange} />
                 <div className="buttons">
-                    <div className="comments"> 
-                        <p>Jordan Hewitt: yeah you would know loser</p>
-                        <p>Jordan Hewitt: yeah you would know loser</p>
-                        <p>Jordan Hewitt: yeah you would know loser</p>
-                        <p>Jordan Hewitt: yeah you would know loser</p>
-                    </div>
-                    <div className="send-btn">
+
+                    {/* <Comments ref={this.commentArea} post={this.props.post} /> */}
+                    <Comments post={this.props.post} />
+
+                    <div className="send-btn" onClick={this.submitComment}>
                         <i className="fa fa-arrow-right" />
                     </div>
                     {/* <div className="share-btn">

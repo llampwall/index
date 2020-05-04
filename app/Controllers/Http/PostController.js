@@ -1,5 +1,6 @@
 'use strict'
 const Post = use('App/Models/Post')
+const Comment = use('App/Models/Comment')
 const Helpers = use('Helpers')
 
 class PostController {
@@ -8,6 +9,7 @@ class PostController {
 
     }
 
+    // new post
     async store({request, response}) {
         let imgFile = {}
         let pImg = ''
@@ -32,7 +34,7 @@ class PostController {
                 if (!imgFile.moved()) {
                     console.log(imgFile.error())
                 } else {
-                    pImg = '/public/img/posts/' + imgName
+                    pImg = 'http://localhost:3000/public/img/posts/' + imgName
                     console.log(imgName)
                 }
             } catch (error) {
@@ -55,6 +57,39 @@ class PostController {
         }
     }
 
+    // get all comments for a specific post
+    async comments({ request, response }) {
+        // console.log(request.params)
+        const p_id = request.params.id
+        console.log(p_id)
+        try {
+            const commentData = await Comment.query().where('post_id', p_id).orderBy('created_at', 'desc').fetch()
+            // console.log(commentData)
+            return {
+                commentData
+            }
+
+        } catch (error) {
+            console.log('api call failed')
+            console.log(error)
+        }
+    }
+
+    // submit a comment to a post
+    async makeComment({request, response}) {
+        try {
+            const newComment = await Comment.create({
+                content: request.input('content'),
+                post_id: request.input('post_id'),
+                user_id: request.input('user_id')
+            })
+            console.log('saved comment');
+            return response.redirect('/')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     async update() {
         return request.post()
     }
@@ -62,6 +97,7 @@ class PostController {
     async destroy() {
         return 'detroyed'
     }
+
 }
 
 module.exports = PostController
