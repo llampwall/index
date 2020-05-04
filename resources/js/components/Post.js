@@ -74,32 +74,49 @@ export default class Post extends Component {
 
   // allows comments to be submitted with the enter key
   checkSubmit = (event) => {
+
     if (event.keyCode == 13) {
       event.preventDefault()
       this.submitComment()
     }
   }
 
+  deletePost = async () => {
+    const self = this
+    try {
+      const response = await axios.get(`/posts/${self.props.post.id}/delete`)
+        .then(function(response) {
+          console.log('post deleted: ' + response)
+          self.props.update()
+        })
+    } catch (error) {
+      console.log('error deleting post: ' + error)
+    }
+  }
 
   render () {
-    if (this.props.post == undefined) {
+
+    if (this.props.post == undefined || this.props.curuser == undefined) {
         return (
             <div>Loading...</div>
         )
     } else {
+      // console.log("current user: " + this.props.curuser)
+      // console.log("posted by " + this.props.user.id)
         return (
             <div className="post">
                 <div className="post-header">
-                    <div className="author">
+                    <a href={`/profile/${this.props.user.id}`} className="author">
                         <div className="user-img" style={{
                         backgroundImage: `url("${this.props.user.profile_img}")`, 
                         backgroundPosition: 'center center', 
                         backgroundRepeat: 'no-repeat', 
                         backgroundSize: 'cover'}} />
-                        <a href={`/profile/${this.props.user.id}`} className="username">{this.props.user.fname} {this.props.user.lname}</a>
+                        <div className="username">{this.props.user.fname} {this.props.user.lname}</div>
                         <span className="text">shared {(this.props.post.type == 'image') ? 'an image' : 'something'}</span>
-                    </div>
+                    </a>
                     <div className="time">{new Date(this.props.post.created_at).toLocaleString()}</div>
+                    <div className={`del-btn ${this.props.user.id == this.props.curuser ? 'active' : ''}`} onClick={this.deletePost}><i className="fa fa-trash"></i></div>
                 </div>
 
                 {this.displayMedia()}

@@ -33,13 +33,49 @@
     align-items: center;
     // justify-content: center;
 
-    
+    .bio {
+      width: 60%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+
+      .bio-text {
+        width: 100%;
+        height: 0px;
+        opacity: 0;
+        transition: all .5s ease-in-out;
+        resize: none;
+        border: 1px solid $apricot;
+        padding: .5rem;
+        color: $apricot;
+        font-size: 14px;
+        overflow-y: auto;
+        outline: none;
+
+        &.active {
+          height: 100px;
+          opacity: 1;
+        }
+      }
+
+      .bio-btn {
+        padding: .3rem .7rem;
+        border: 1px solid $apricot;
+        margin: 0 auto;
+        cursor: pointer;
+        &:hover {
+          background-color: $apricot;
+          color: white;
+          font-weight: 500;
+        }
+      }
+    }
 
     .follow-btn {
       overflow: hidden;
       border: 1px solid $apricot;
       padding: 1rem 2rem;
-      margin: 0 auto;
+      margin: 2rem auto;
       font-size: 2rem;
       text-align: center;
       cursor: pointer;

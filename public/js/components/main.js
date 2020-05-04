@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 205:
+/***/ 306:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10,222 +10,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(208);
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _defineProperty2 = __webpack_require__(207);
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-var _regenerator = __webpack_require__(87);
+var _regenerator = __webpack_require__(77);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(86);
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
-var _classCallCheck2 = __webpack_require__(32);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(33);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = __webpack_require__(35);
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = __webpack_require__(34);
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = __webpack_require__(17);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _axios = __webpack_require__(75);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// should really generalize and save this component as an axios image uploader
-// even has a preview window for the selected image file
-
-
-var Compose = function (_Component) {
-  (0, _inherits3.default)(Compose, _Component);
-
-  function Compose() {
-    var _this2 = this;
-
-    (0, _classCallCheck3.default)(this, Compose);
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
-
-    _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-      var fData, self, response;
-      return _regenerator2.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              fData = new FormData();
-
-              fData.append('user_id', _this.props.initialData.userData.id);
-              if (_this.state.postContent == "" && _this.state.image != "") {
-                fData.append('content', " ");
-              } else {
-                fData.append('content', _this.state.postContent);
-              }
-              fData.append('image', _this.state.image);
-              self = _this;
-
-
-              console.log(fData);
-              _context.prev = 6;
-              _context.next = 9;
-              return (0, _axios2.default)({
-                method: 'post',
-                url: '/posts',
-                data: fData,
-                headers: { 'Content-Type': 'multipart/form-data boundary=' + fData._boundary }
-              }).then(function (response) {
-                self.setState({
-                  postContent: "",
-                  image: ""
-                });
-                self.props.update();
-                return 'item saved';
-              });
-
-            case 9:
-              response = _context.sent;
-              _context.next = 15;
-              break;
-
-            case 12:
-              _context.prev = 12;
-              _context.t0 = _context['catch'](6);
-
-              console.log("axios didnt work: " + _context.t0);
-
-            case 15:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, _this2, [[6, 12]]);
-    }));
-
-    _this.handleChange = function (event) {
-      var name = event.target.name;
-      var value = event.target.type == 'checkbox' ? event.target.checked : event.target.value;
-
-      _this.setState((0, _defineProperty3.default)({}, name, value), function () {
-        console.log(_this.state);
-      });
-    };
-
-    _this.checkSubmit = function (event) {
-      if (event.keyCode == 13) {
-        event.preventDefault();
-        _this.submitPost();
-      }
-    };
-
-    _this.imageSelect = function (event) {
-      var fileElem = document.getElementById("hidden-input");
-      fileElem.click();
-    };
-
-    _this.getImage = function (event) {
-      _this.setState((0, _extends3.default)({}, _this.state, {
-        image: event.target.files[0]
-      }), function () {
-        console.log(_this.state);
-      });
-    };
-
-    _this.removeImage = function () {
-      _this.setState((0, _extends3.default)({}, _this.state, {
-        image: ""
-      }));
-    };
-
-    _this.state = {
-      postContent: "",
-      image: ""
-    };
-    return _this;
-  }
-
-  // allows posts to be submit with the enter key
-
-
-  (0, _createClass3.default)(Compose, [{
-    key: 'render',
-    value: function render() {
-      if (this.props.initialData.userData == undefined) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          'Loading...'
-        );
-      } else {
-        return _react2.default.createElement(
-          'section',
-          { id: 'compose' },
-          _react2.default.createElement('textarea', { name: 'postContent', id: 'content', cols: 30, rows: 10, placeholder: 'share something...', onChange: this.handleChange, onKeyUp: this.checkSubmit, value: this.state.postContent }),
-          _react2.default.createElement('div', { className: 'user-img', style: {
-              backgroundImage: 'url("' + this.props.initialData.userData.profile_img + '")',
-              backgroundPosition: 'center center',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover' } }),
-          _react2.default.createElement(
-            'div',
-            { className: 'photo-btn', onClick: this.imageSelect },
-            _react2.default.createElement('i', { className: 'fa fa-camera' }),
-            _react2.default.createElement('input', { type: 'file', id: 'hidden-input', name: 'post_img', onChange: this.getImage })
-          ),
-          _react2.default.createElement('div', { className: 'preview ' + (this.state.image == "" ? "" : "active"), onClick: this.removeImage, style: {
-              backgroundImage: 'url("' + (this.state.image == "" ? "" : URL.createObjectURL(this.state.image)) + '")',
-              backgroundPosition: 'center center',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover' } }),
-          _react2.default.createElement(
-            'div',
-            { className: 'send-btn', onClick: this.submitPost },
-            _react2.default.createElement('i', { className: 'fa fa-arrow-right' })
-          )
-        );
-      }
-    }
-  }]);
-  return Compose;
-}(_react.Component);
-
-exports.default = Compose;
-
-/***/ }),
-
-/***/ 307:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _regenerator = __webpack_require__(87);
-
-var _regenerator2 = _interopRequireDefault(_regenerator);
-
-var _asyncToGenerator2 = __webpack_require__(86);
+var _asyncToGenerator2 = __webpack_require__(76);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -263,7 +52,7 @@ var _PostArea = __webpack_require__(335);
 
 var _PostArea2 = _interopRequireDefault(_PostArea);
 
-var _Compose = __webpack_require__(205);
+var _Compose = __webpack_require__(333);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
@@ -355,7 +144,7 @@ var Home = function (_Component) {
           'div',
           { className: 'content-area' },
           _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData, update: this.update }),
-          _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, initialData: this.state.initialData })
+          _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, initialData: this.state.initialData, update: this.update })
         );
       }
     }
@@ -367,7 +156,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 308:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -552,7 +341,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 309:
+/***/ 308:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -621,7 +410,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 310:
+/***/ 309:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -890,7 +679,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 311:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -899,6 +688,18 @@ exports.default = Messenger;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _regenerator = __webpack_require__(77);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _extends2 = __webpack_require__(139);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _asyncToGenerator2 = __webpack_require__(76);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var _classCallCheck2 = __webpack_require__(32);
 
@@ -926,10 +727,6 @@ var _axios = __webpack_require__(75);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Compose = __webpack_require__(205);
-
-var _Compose2 = _interopRequireDefault(_Compose);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Handles updating the postarea when its sibling compose adds a post to the database
@@ -943,8 +740,94 @@ var Profile = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this));
 
+    _this.getUser = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var _this2 = this;
+
+      var _props$routeProps, match, history, location, self, user;
+
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _props$routeProps = this.props.routeProps, match = _props$routeProps.match, history = _props$routeProps.history, location = _props$routeProps.location;
+              self = this;
+              user = '';
+              _context.prev = 3;
+              _context.next = 6;
+              return _axios2.default.get('/api/user/' + match.params.id);
+
+            case 6:
+              user = _context.sent;
+
+              console.log(user);
+              _context.next = 13;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context['catch'](3);
+
+              console.log(_context.t0);
+
+            case 13:
+
+              this.setState((0, _extends3.default)({}, this.state, {
+                user: user.data[0]
+              }), function () {
+                console.log(_this2.state);
+              });
+
+            case 14:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, this, [[3, 10]]);
+    }));
+
+    _this.editBio = function () {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        edit: true
+      }), function () {
+        console.log(_this.state);
+      });
+    };
+
+    _this.displayBio = function () {
+      if (_this.state.user == undefined) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'bio loading...'
+        );
+      } else {
+
+        console.log(_this.state.user);
+        if (_this.state.user.info == "") {
+          return _react2.default.createElement(
+            'div',
+            { className: 'bio' },
+            _react2.default.createElement('textarea', { className: 'bio-text ' + (_this.state.edit ? 'active' : '') + ' ' }),
+            _react2.default.createElement(
+              'div',
+              { className: 'bio-btn', onClick: _this.editBio },
+              ' Add a bio '
+            )
+          );
+        } else {
+          return _react2.default.createElement(
+            'p',
+            null,
+            _this.state.user.info
+          );
+        }
+      }
+    };
+
     _this.state = {
-      initialData: {}
+      initialData: {},
+      user: "",
+      edit: false
     };
     return _this;
   }
@@ -957,41 +840,41 @@ var Profile = function (_Component) {
       }, function () {
         // console.log(this.state)
       });
+
+      this.getUser();
     }
 
-    // const getUser = async function() {
-    //   const 
-    // }
+    // value={this.state.comment} onChange={this.handleChange} onKeyUp={this.checkSubmit}
 
   }, {
     key: 'render',
     value: function render() {
-      if (this.props.initialData.userData == undefined) {
+      if (this.state.user == undefined) {
         return _react2.default.createElement(
           'div',
           null,
           'profile loading...'
         );
       } else {
-        // console.log(this.props.initialData.userData)
         return _react2.default.createElement(
           'div',
           { className: 'content-area profile-page' },
           _react2.default.createElement(
             'div',
             { className: 'user-img' },
-            _react2.default.createElement('img', { src: this.props.initialData.userData.profile_img }),
+            _react2.default.createElement('img', { src: this.state.user.profile_img }),
             _react2.default.createElement(
               'h1',
               null,
-              this.props.initialData.userData.fname,
+              this.state.user.fname,
               ' ',
-              this.props.initialData.userData.lname
+              this.state.user.lname
             )
           ),
           _react2.default.createElement(
             'div',
             { className: 'user-info' },
+            this.displayBio(),
             _react2.default.createElement(
               'div',
               { className: 'follow-btn' },
@@ -1013,7 +896,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 312:
+/***/ 311:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1086,7 +969,7 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 333:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1096,11 +979,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(87);
+var _regenerator = __webpack_require__(77);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(86);
+var _asyncToGenerator2 = __webpack_require__(76);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1186,8 +1069,8 @@ var Comments = function (_Component) {
           'div',
           { className: 'single-comment', key: comment.id },
           _react2.default.createElement(
-            'div',
-            { className: 'user' },
+            'a',
+            { href: '/profile/' + user.id, className: 'user' },
             _react2.default.createElement('div', { className: 'comment-pic', style: {
                 backgroundImage: 'url("' + user.profile_img + '")',
                 backgroundPosition: 'center center',
@@ -1262,6 +1145,217 @@ exports.default = Comments;
 
 /***/ }),
 
+/***/ 333:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends2 = __webpack_require__(139);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _defineProperty2 = __webpack_require__(207);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _regenerator = __webpack_require__(77);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__(76);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _classCallCheck2 = __webpack_require__(32);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(33);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(35);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(34);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(17);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(75);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// should really generalize and save this component as an axios image uploader
+// even has a preview window for the selected image file
+
+
+var Compose = function (_Component) {
+  (0, _inherits3.default)(Compose, _Component);
+
+  function Compose() {
+    var _this2 = this;
+
+    (0, _classCallCheck3.default)(this, Compose);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
+
+    _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var fData, self, response;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              fData = new FormData();
+
+              fData.append('user_id', _this.props.initialData.userData.id);
+              if (_this.state.postContent == "" && _this.state.image != "") {
+                fData.append('content', " ");
+              } else {
+                fData.append('content', _this.state.postContent);
+              }
+              fData.append('image', _this.state.image);
+              self = _this;
+
+
+              console.log(fData);
+              _context.prev = 6;
+              _context.next = 9;
+              return (0, _axios2.default)({
+                method: 'post',
+                url: '/posts',
+                data: fData,
+                headers: { 'Content-Type': 'multipart/form-data boundary=' + fData._boundary }
+              }).then(function (response) {
+                self.setState({
+                  postContent: "",
+                  image: ""
+                });
+                self.props.update();
+                return 'item saved';
+              });
+
+            case 9:
+              response = _context.sent;
+              _context.next = 15;
+              break;
+
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context['catch'](6);
+
+              console.log("axios didnt work: " + _context.t0);
+
+            case 15:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this2, [[6, 12]]);
+    }));
+
+    _this.handleChange = function (event) {
+      var name = event.target.name;
+      var value = event.target.type == 'checkbox' ? event.target.checked : event.target.value;
+
+      _this.setState((0, _defineProperty3.default)({}, name, value), function () {
+        console.log(_this.state);
+      });
+    };
+
+    _this.checkSubmit = function (event) {
+      if (event.keyCode == 13) {
+        event.preventDefault();
+        _this.submitPost();
+      }
+    };
+
+    _this.imageSelect = function (event) {
+      var fileElem = document.getElementById("hidden-input");
+      fileElem.click();
+    };
+
+    _this.getImage = function (event) {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        image: event.target.files[0]
+      }), function () {
+        console.log(_this.state);
+      });
+    };
+
+    _this.removeImage = function () {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        image: ""
+      }));
+    };
+
+    _this.state = {
+      postContent: "",
+      image: ""
+    };
+    return _this;
+  }
+
+  // allows posts to be submit with the enter key
+
+
+  (0, _createClass3.default)(Compose, [{
+    key: 'render',
+    value: function render() {
+      if (this.props.initialData.userData == undefined) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Loading...'
+        );
+      } else {
+        return _react2.default.createElement(
+          'section',
+          { id: 'compose' },
+          _react2.default.createElement('textarea', { name: 'postContent', id: 'content', cols: 30, rows: 10, placeholder: 'share something...', onChange: this.handleChange, onKeyUp: this.checkSubmit, value: this.state.postContent }),
+          _react2.default.createElement('div', { className: 'user-img', style: {
+              backgroundImage: 'url("' + this.props.initialData.userData.profile_img + '")',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover' } }),
+          _react2.default.createElement(
+            'div',
+            { className: 'photo-btn', onClick: this.imageSelect },
+            _react2.default.createElement('i', { className: 'fa fa-camera' }),
+            _react2.default.createElement('input', { type: 'file', id: 'hidden-input', name: 'post_img', onChange: this.getImage })
+          ),
+          _react2.default.createElement('div', { className: 'preview ' + (this.state.image == "" ? "" : "active"), onClick: this.removeImage, style: {
+              backgroundImage: 'url("' + (this.state.image == "" ? "" : URL.createObjectURL(this.state.image)) + '")',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover' } }),
+          _react2.default.createElement(
+            'div',
+            { className: 'send-btn', onClick: this.submitPost },
+            _react2.default.createElement('i', { className: 'fa fa-arrow-right' })
+          )
+        );
+      }
+    }
+  }]);
+  return Compose;
+}(_react.Component);
+
+exports.default = Compose;
+
+/***/ }),
+
 /***/ 334:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1272,15 +1366,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(87);
+var _regenerator = __webpack_require__(77);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(86);
+var _asyncToGenerator2 = __webpack_require__(76);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _extends2 = __webpack_require__(208);
+var _extends2 = __webpack_require__(139);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1308,7 +1402,7 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Comments = __webpack_require__(333);
+var _Comments = __webpack_require__(332);
 
 var _Comments2 = _interopRequireDefault(_Comments);
 
@@ -1405,11 +1499,45 @@ var Post = function (_Component) {
     }));
 
     _this.checkSubmit = function (event) {
+
       if (event.keyCode == 13) {
         event.preventDefault();
         _this.submitComment();
       }
     };
+
+    _this.deletePost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+      var self, response;
+      return _regenerator2.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              self = _this;
+              _context2.prev = 1;
+              _context2.next = 4;
+              return _axios2.default.get('/posts/' + self.props.post.id + '/delete').then(function (response) {
+                console.log('post deleted: ' + response);
+                self.props.update();
+              });
+
+            case 4:
+              response = _context2.sent;
+              _context2.next = 10;
+              break;
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2['catch'](1);
+
+              console.log('error deleting post: ' + _context2.t0);
+
+            case 10:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2, [[1, 7]]);
+    }));
 
     _this.state = {
       post: {},
@@ -1426,13 +1554,16 @@ var Post = function (_Component) {
   (0, _createClass3.default)(Post, [{
     key: 'render',
     value: function render() {
-      if (this.props.post == undefined) {
+
+      if (this.props.post == undefined || this.props.curuser == undefined) {
         return _react2.default.createElement(
           'div',
           null,
           'Loading...'
         );
       } else {
+        // console.log("current user: " + this.props.curuser)
+        // console.log("posted by " + this.props.user.id)
         return _react2.default.createElement(
           'div',
           { className: 'post' },
@@ -1440,16 +1571,16 @@ var Post = function (_Component) {
             'div',
             { className: 'post-header' },
             _react2.default.createElement(
-              'div',
-              { className: 'author' },
+              'a',
+              { href: '/profile/' + this.props.user.id, className: 'author' },
               _react2.default.createElement('div', { className: 'user-img', style: {
                   backgroundImage: 'url("' + this.props.user.profile_img + '")',
                   backgroundPosition: 'center center',
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: 'cover' } }),
               _react2.default.createElement(
-                'a',
-                { href: '/profile/' + this.props.user.id, className: 'username' },
+                'div',
+                { className: 'username' },
                 this.props.user.fname,
                 ' ',
                 this.props.user.lname
@@ -1465,6 +1596,11 @@ var Post = function (_Component) {
               'div',
               { className: 'time' },
               new Date(this.props.post.created_at).toLocaleString()
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'del-btn ' + (this.props.user.id == this.props.curuser ? 'active' : ''), onClick: this.deletePost },
+              _react2.default.createElement('i', { className: 'fa fa-trash' })
             )
           ),
           this.displayMedia(),
@@ -1575,7 +1711,7 @@ var PostArea = function (_Component) {
       return _this.props.initialData.postData.map(function (item) {
         var post = item.posts;
         var user = item.users;
-        return _react2.default.createElement(_Post2.default, { post: post, user: user, curuser: _this.props.initialData.userData.id, key: post.id });
+        return _react2.default.createElement(_Post2.default, { post: post, user: user, curuser: _this.props.initialData.userData.id, update: _this.props.update, key: post.id });
       });
     };
 
@@ -1620,11 +1756,11 @@ exports.default = PostArea;
 "use strict";
 
 
-var _regenerator = __webpack_require__(87);
+var _regenerator = __webpack_require__(77);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(86);
+var _asyncToGenerator2 = __webpack_require__(76);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1658,27 +1794,27 @@ var _axios = __webpack_require__(75);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(307);
+var _Home = __webpack_require__(306);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(311);
+var _Profile = __webpack_require__(310);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(308);
+var _LeftMenu = __webpack_require__(307);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(310);
+var _Messenger = __webpack_require__(309);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(312);
+var _SearchHeader = __webpack_require__(311);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(309);
+var _Loading = __webpack_require__(308);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 

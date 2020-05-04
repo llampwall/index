@@ -49,7 +49,7 @@ export default class Comments extends Component {
             let user = item.users
             return (
                 <div className='single-comment' key={comment.id}>
-                  <div className='user'>
+                  <a href={`/profile/${user.id}`} className='user'>
                     <div className='comment-pic' style={{
                           backgroundImage: `url("${user.profile_img}")`, 
                           backgroundPosition: 'center center', 
@@ -57,7 +57,7 @@ export default class Comments extends Component {
                           backgroundSize: 'cover'}}>
                     </div>
                     <h2>{`${user.fname} ${(user.lname == null) ? "" : user.lname}:`}</h2>
-                  </div>
+                  </a>
                   <p>{comment.content}</p>
                 </div>
             )}

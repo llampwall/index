@@ -56,7 +56,7 @@ export default class Home extends Component {
       return (
         <div className="content-area">
           <Compose initialData={this.state.initialData} update={this.update}/>
-          <PostArea routeProps={this.props.routeProps} initialData={this.state.initialData}/>
+          <PostArea routeProps={this.props.routeProps} initialData={this.state.initialData} update={this.update}/>
         </div>
       )
     }

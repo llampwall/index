@@ -4,6 +4,18 @@ use componentwillmount (profile.js to do get request (look at 11:06 or 19:51), w
 set the state in profile.js and populate the page
 
 
+
+
+
+usernames in posts/comments should link to that user's profile
+
+finish bio in profile area
+
+delete posts
+    *** deleting posts is done ***
+
+
+
 - subscribe the postArea to database changes
     -probably involves passing a function down from index to Compose that can 
     change a value in the state of postArea so that it renders

@@ -342,6 +342,7 @@
                   border-right: 1px solid $apricot;
                 }
                 .username {
+                  color: $apricot;
                   display: flex;
                   align-items: center;
                   justify-content: center;
@@ -352,15 +353,45 @@
                   cursor: pointer;
                   padding: 0 1rem;
                 }
+
+                .text {
+                  color: $apricot;
+                  font-size: .9rem;
+                }
               }
-              .text {
-                font-size: .9rem;
-              }
+              
               .time {
                 margin-left: auto;
                 padding: 0 1rem;
                 font-size: .9rem;
                 opacity: .7;
+              }
+
+              .del-btn {
+                display: none;
+                height: 20px;
+                width: 20px;
+                background: white;
+                color: $apricot;
+                padding: 15px;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid $apricot;
+                margin-right: .7rem;
+                cursor: pointer;
+
+                &.active {
+                  display: flex;
+                }
+
+                .fa {
+                  font-size: 1.2rem;
+                }
+                
+                &:hover {
+                  background: $apricot;
+                  color: white;
+                }
               }
             }
 
@@ -511,7 +542,7 @@
                 .single-comment {
                   background: white;
                   display: grid;
-                  grid-template-columns: 3fr 10fr;
+                  grid-template-columns: 4fr 9fr;
                   width: 100%;
                   min-height: 25px;
                   padding: .5rem .2rem;
@@ -525,9 +556,10 @@
                   }
                   
 
-                  .user {
+                  a.user {
                     display: flex;
                     align-items: flex-start;
+
                   }
                   .comment-pic {
                     height: 25px;

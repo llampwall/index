@@ -86,6 +86,7 @@ class AuthController {
                 email: request.input('email'),
                 profile_img: uImg,
                 login_source: 'email',
+                info: '',
                 password: request.input('password')
             })
             await auth.login(newUser)

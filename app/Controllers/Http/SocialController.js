@@ -26,7 +26,8 @@ class SocialController {
           profile_img: fUser.getAvatar(),
           password: '12345678',
           token: fUser.getAccessToken(),
-          login_source: 'facebook'
+          login_source: 'facebook',
+          info: ''
         }
 
         // search for existing user

@@ -2,6 +2,7 @@
 const Post = use('App/Models/Post')
 const Comment = use('App/Models/Comment')
 const Helpers = use('Helpers')
+const Database = use('Database')
 
 class PostController {
 
@@ -97,8 +98,16 @@ class PostController {
         return request.post()
     }
 
-    async destroy() {
-        return 'detroyed'
+    async destroy({request, response}) {
+        console.log(request)
+        const p_id = request.params.id
+        try {
+            await Database.table('posts')
+            .where('id', p_id).delete()
+        } catch {
+            console.log("error destroying post: " + error)
+        }
+        return "destroyed"
     }
 
 }
