@@ -1017,6 +1017,8 @@ var Comments = function (_Component) {
   (0, _inherits3.default)(Comments, _Component);
 
   function Comments() {
+    var _this2 = this;
+
     (0, _classCallCheck3.default)(this, Comments);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).call(this));
@@ -1065,13 +1067,54 @@ var Comments = function (_Component) {
       }, _callee, this, [[1, 8]]);
     }));
 
+    _this.deleteComment = function () {
+      var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(id) {
+        var self;
+        return _regenerator2.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                self = _this;
+
+                console.log("comment id: " + id);
+                _context2.prev = 2;
+                _context2.next = 5;
+                return _axios2.default.get('/comments/' + id + '/delete').then(function (response) {
+                  console.log('comment deleted: ' + response);
+                  self.getComments();
+                });
+
+              case 5:
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2['catch'](2);
+
+                console.log('error deleting comment: ' + _context2.t0);
+
+              case 10:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, _this2, [[2, 7]]);
+      }));
+
+      return function (_x) {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+
     _this.showComments = function () {
       return _this.state.comments.map(function (item) {
         var comment = item.comments;
         var user = item.users;
+        var id = comment.id;
         return _react2.default.createElement(
           'div',
-          { className: 'single-comment', key: comment.id },
+          { className: 'single-comment', key: id },
           _react2.default.createElement(
             'a',
             { href: '/profile/' + user.id, className: 'user' },
@@ -1090,6 +1133,11 @@ var Comments = function (_Component) {
             'p',
             null,
             comment.content
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'del-btn ' + (user.id == _this.props.curuser.id ? 'active' : ''), onClick: _this.deleteComment.bind(null, id) },
+            _react2.default.createElement('i', { className: 'fa fa-trash' })
           )
         );
       });
@@ -1120,6 +1168,9 @@ var Comments = function (_Component) {
     value: function componentDidMount() {
       this.getComments();
     }
+
+    // delete the comment only if you posted it
+
   }, {
     key: 'render',
     value: function render() {
@@ -1568,7 +1619,147 @@ var Post = function (_Component) {
     };
 
     _this.like = function () {
-      console.log('liked');
+      var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(u_id, p_id) {
+        var self;
+        return _regenerator2.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                self = _this;
+
+                if (_this.state.liked) {
+                  _context3.next = 12;
+                  break;
+                }
+
+                _context3.prev = 2;
+                _context3.next = 5;
+                return _axios2.default.post('/likes', {
+                  user_id: u_id,
+                  post_id: p_id
+                }).then(function () {
+                  console.log('post liked');
+                });
+
+              case 5:
+                _context3.next = 10;
+                break;
+
+              case 7:
+                _context3.prev = 7;
+                _context3.t0 = _context3['catch'](2);
+
+                console.log("error liking post: " + _context3.t0);
+
+              case 10:
+                _context3.next = 20;
+                break;
+
+              case 12:
+                _context3.prev = 12;
+                _context3.next = 15;
+                return _axios2.default.post('/likes/delete', {
+                  user_id: u_id,
+                  post_id: p_id
+                });
+
+              case 15:
+                _context3.next = 20;
+                break;
+
+              case 17:
+                _context3.prev = 17;
+                _context3.t1 = _context3['catch'](12);
+
+                console.log("error liking post: " + _context3.t1);
+
+              case 20:
+                _this.setState((0, _extends3.default)({}, _this.state, {
+                  liked: !_this.state.liked
+                }));
+                _this.getLikes();
+
+              case 22:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, _this2, [[2, 7], [12, 17]]);
+      }));
+
+      return function (_x, _x2) {
+        return _ref3.apply(this, arguments);
+      };
+    }();
+
+    _this.getLikes = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
+      var self, likes;
+      return _regenerator2.default.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              self = _this;
+              _context4.prev = 1;
+              _context4.next = 4;
+              return _axios2.default.get('/posts/' + self.props.post.id + '/likes').then(function (response) {
+                console.log(response.data.likeData);
+                var like_d = response.data.likeData;
+                if (like_d.length > 0) {
+                  self.setState((0, _extends3.default)({}, self.state, {
+                    likes: like_d.length,
+                    lastLike: like_d[0].users.fname + ' ' + like_d[0].users.lname
+                  }), function () {
+                    console.log(self.state);
+                  });
+                } else {
+                  self.setState((0, _extends3.default)({}, self.state, {
+                    likes: 0,
+                    lastLike: ""
+                  }), function () {
+                    console.log(self.state);
+                  });
+                }
+              });
+
+            case 4:
+              likes = _context4.sent;
+              _context4.next = 10;
+              break;
+
+            case 7:
+              _context4.prev = 7;
+              _context4.t0 = _context4['catch'](1);
+
+              console.log("error getting likes: " + _context4.t0);
+
+            case 10:
+            case 'end':
+              return _context4.stop();
+          }
+        }
+      }, _callee4, _this2, [[1, 7]]);
+    }));
+
+    _this.displayStats = function () {
+      if (_this.state.liked) {
+        if (_this.state.likes > 1) {
+          return 'You and ' + (_this.state.likes - 1) + ' other people like this.';
+        } else if (_this.state.likes == 1) {
+          return 'You and 1 other person like this.';
+        } else {
+          return "You like this.";
+        }
+      } else {
+        if (_this.state.likes > 2) {
+          return _this.state.lastLike + ' and ' + (_this.state.likes - 1) + ' other people like this.';
+        } else if (_this.state.likes == 2) {
+          return _this.state.lastLike + ' and 1 other person like this.';
+        } else if (_this.state.likes == 1) {
+          return _this.state.lastLike + ' likes this.';
+        } else {
+          return 'Be the first to like this.';
+        }
+      }
     };
 
     _this.state = {
@@ -1576,27 +1767,44 @@ var Post = function (_Component) {
       poster: {},
       comment: "",
       numComments: 0,
-      update: false
+      update: false,
+      liked: false,
+      likes: 0,
+      lastLike: ""
       // this.commentArea = React.createRef()
     };return _this;
   }
 
-  // triggers child to refresh
-
-
-  // this lets us get the comments from the child
-
-
-  // allows comments to be submitted with the enter key
-
-
-  // delete the post only if you posted it
-
-
-  // displays the current post comments
-
-
   (0, _createClass3.default)(Post, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.getLikes();
+    }
+
+    // triggers child to refresh
+
+
+    // this lets us get the comments from the child
+
+
+    // allows comments to be submitted with the enter key
+
+
+    // delete the post only if you posted it
+
+
+    // displays the current post comments
+
+
+    // like or unlike a post
+
+
+    // get the like stats
+
+
+    // display the post stats
+
+  }, {
     key: 'render',
     value: function render() {
 
@@ -1666,14 +1874,14 @@ var Post = function (_Component) {
               { className: 'icons' },
               _react2.default.createElement(
                 'div',
-                { className: 'like-btn', onClick: this.like },
+                { className: 'like-btn ' + (this.state.liked ? 'active' : ''), onClick: this.like.bind(null, this.props.curuser.id, this.props.post.id) },
                 _react2.default.createElement('i', { className: 'fa fa-thumbs-up' })
               )
             ),
             _react2.default.createElement(
               'span',
               { className: 'text' },
-              'Sarah Jane and 23 others liked this post.'
+              this.displayStats()
             ),
             this.getCommentCount()
           ),
@@ -1685,7 +1893,7 @@ var Post = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'buttons' },
-            _react2.default.createElement(_Comments2.default, { post: this.props.post, update: this.state.update, sendUp: this.sendUp }),
+            _react2.default.createElement(_Comments2.default, { post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
             _react2.default.createElement(
               'div',
               { className: 'send-btn', onClick: this.submitComment },

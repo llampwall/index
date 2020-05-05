@@ -4,24 +4,23 @@ use componentwillmount (profile.js to do get request (look at 11:06 or 19:51), w
 set the state in profile.js and populate the page
 
 
+
+registration not working without picture?
+
 pagination / lazy loading
 
 likes
 
-deleting comments
+finish bio in profile area
 
 posts aren't deleting if they are from a previous session
-
-
-
+    ? this may not be an issue now
 
 usernames in posts/comments should link to that user's profile
     ***DONE ***
 
-finish bio in profile area
-
 delete posts/comments
-    *** deleting posts is done ***
+    *** DONE ***
 
 
 
@@ -29,10 +28,8 @@ delete posts/comments
     -probably involves passing a function down from index to Compose that can 
     change a value in the state of postArea so that it renders
     -router might fix this
-
-UPDATE - router will help it. new parent component 'Home' can handle that.
-
-*** DONE MOTHAFUCKA ***
+    UPDATE - router will help it. new parent component 'Home' can handle that.
+    *** DONE MOTHAFUCKA ***
 
 - images
     -react-filepond on the user registration

@@ -10,9 +10,17 @@ export default class Post extends Component {
         poster: {}, 
         comment: "",
         numComments: 0,
-        update: false
+        update: false,
+        liked: false, 
+        likes: 0,
+        lastLike: ""
     }
     // this.commentArea = React.createRef()
+  }
+
+
+  componentDidMount() {
+    this.getLikes()
   }
 
   displayMedia = () => {
@@ -122,9 +130,96 @@ export default class Post extends Component {
     }
   }
  
-  like = () => {
-    console.log('liked')
+  // like or unlike a post
+  like = async (u_id, p_id) => {
+    const self = this
+    if (!this.state.liked) {
+      try {
+        await axios.post('/likes', {
+          user_id: u_id,
+          post_id: p_id
+        }).then(function() {
+          console.log('post liked')
+        })
+      } catch (error) {
+        console.log("error liking post: " + error)
+      }
+    } else {
+      try {
+        await axios.post('/likes/delete', {
+          user_id: u_id,
+          post_id: p_id
+        })
+      } catch (error) {
+        console.log("error liking post: " + error)
+      }
+    }
+    this.setState({
+      ...this.state,
+      liked: !this.state.liked
+    })
+    this.getLikes()
   }
+
+
+  // get the like stats
+  getLikes = async () => {
+    const self = this;
+    try {
+      const likes = await axios.get(`/posts/${self.props.post.id}/likes`)
+      .then(function(response) {
+        console.log(response.data.likeData)
+        const like_d = response.data.likeData
+        if (like_d.length > 0) {
+          self.setState({
+            ...self.state,
+            likes: like_d.length,
+            lastLike: `${like_d[0].users.fname} ${like_d[0].users.lname}`
+          }, () => {
+            console.log(self.state)
+          })
+        } else {
+          self.setState({
+            ...self.state,
+            likes: 0,
+            lastLike: ""
+          }, () => {
+            console.log(self.state)
+          })
+        }
+      })
+      
+    } catch (error) {
+      console.log("error getting likes: " + error)
+    }
+  }
+
+
+  // display the post stats
+  displayStats = () => {
+    if (this.state.liked) {
+      if (this.state.likes > 1) {
+        return `You and ${this.state.likes - 1} other people like this.`
+      } else if (this.state.likes == 1) {
+        return `You and 1 other person like this.`
+      } else {
+        return "You like this."
+      }
+
+    } else {
+      if (this.state.likes > 2) {
+        return `${this.state.lastLike} and ${this.state.likes - 1} other people like this.`
+      } else if (this.state.likes == 2) {
+        return `${this.state.lastLike} and 1 other person like this.`
+      } else if (this.state.likes == 1) {
+        return `${this.state.lastLike} likes this.`
+      } else {
+        return `Be the first to like this.`
+      }
+    }
+  }
+
+
 
   render () {
 
@@ -158,14 +253,14 @@ export default class Post extends Component {
                 </div>
                 <div className="post-stats">
                     <div className="icons">
-                        <div className="like-btn" onClick={this.like}>
+                        <div className={`like-btn ${this.state.liked ? 'active' : ''}`}  onClick={this.like.bind(null, this.props.curuser.id, this.props.post.id)}>
                           <i className="fa fa-thumbs-up" />
                         </div>
                         {/* <div className="share-btn">
                           <i className="fa fa-share" />
                         </div> */}
                     </div>
-                    <span className="text">Sarah Jane and 23 others liked this post.</span>
+                    <span className="text">{this.displayStats()}</span>
                     {this.getCommentCount()}
                     {/* <div className="comment-count">4 comments</div> */}
                 </div>
@@ -175,7 +270,7 @@ export default class Post extends Component {
                 <div className="buttons">
 
                     {/* <Comments ref={this.commentArea} post={this.props.post} /> */}
-                    <Comments post={this.props.post} update={this.state.update} sendUp={this.sendUp}/>
+                    <Comments post={this.props.post} update={this.state.update} sendUp={this.sendUp} curuser={this.props.curuser}/>
 
                     <div className="send-btn" onClick={this.submitComment}>
                         <i className="fa fa-arrow-right" />

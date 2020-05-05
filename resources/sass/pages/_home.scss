@@ -472,6 +472,11 @@
                   margin-right: .7rem;
                   cursor: pointer;
                   
+                  &.active {
+                    background: $apricot;
+                    color: white;
+                  }
+
                   &:hover {
                     background: $apricot;
                     color: white;
@@ -546,6 +551,7 @@
                   width: 100%;
                   min-height: 25px;
                   padding: .5rem .2rem;
+                  position: relative;
 
                   &:nth-of-type(2n){
                     background: $offwhite;
@@ -553,6 +559,12 @@
 
                   &:not(:last-of-type) {
                     border-bottom: 1px solid $apricot;
+                  }
+
+                  &:hover {
+                    & > .del-btn {
+                      opacity: 1;
+                    }
                   }
                   
 
@@ -581,6 +593,38 @@
                     font-size: .8rem;
                     word-break: break-all;
                     align-items: center;
+                  }
+
+                  .del-btn {
+                    display: none;
+                    opacity: 0;
+                    transition: all .3s ease-in-out;
+                    position: absolute;
+                    top: 5px;
+                    right: 0px;
+                    height: 20px;
+                    width: 20px;
+                    background: white;
+                    color: $apricot;
+                    padding: 15px;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid $apricot;
+                    margin-right: .7rem;
+                    cursor: pointer;
+    
+                    &.active {
+                      display: flex;
+                    }
+    
+                    .fa {
+                      font-size: 1.2rem;
+                    }
+                    
+                    &:hover {
+                      background: $apricot;
+                      color: white;
+                    }
                   }
                 }
               }
