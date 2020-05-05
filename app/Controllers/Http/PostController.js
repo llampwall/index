@@ -98,15 +98,16 @@ class PostController {
         return request.post()
     }
 
-    async destroy({request, response}) {
-        console.log(request)
-        const p_id = request.params.id
+    async destroy({request}) {
+        console.log(request.params)
+        const { id } = request.params
+        console.log("deleting: " + id)
         try {
-            await Database.table('posts')
-            .where('id', p_id).delete()
+            const target = await Post.query().where('id', id).delete()
         } catch {
             console.log("error destroying post: " + error)
         }
+        console.log("done")
         return "destroyed"
     }
 

@@ -1517,36 +1517,41 @@ var Post = function (_Component) {
     };
 
     _this.deletePost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      var self, response;
+      var self;
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               self = _this;
-              _context2.prev = 1;
-              _context2.next = 4;
+
+              console.log("post id: " + self.props.post.id);
+              _context2.prev = 2;
+              _context2.next = 5;
               return _axios2.default.get('/posts/' + self.props.post.id + '/delete').then(function (response) {
                 console.log('post deleted: ' + response);
                 self.props.update();
               });
 
-            case 4:
-              response = _context2.sent;
+            case 5:
               _context2.next = 10;
               break;
 
             case 7:
               _context2.prev = 7;
-              _context2.t0 = _context2['catch'](1);
+              _context2.t0 = _context2['catch'](2);
 
               console.log('error deleting post: ' + _context2.t0);
 
             case 10:
+              console.log('post deleted');
+              self.props.update();
+
+            case 12:
             case 'end':
               return _context2.stop();
           }
         }
-      }, _callee2, _this2, [[1, 7]]);
+      }, _callee2, _this2, [[2, 7]]);
     }));
 
     _this.getCommentCount = function () {

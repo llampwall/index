@@ -94,8 +94,9 @@ export default class Post extends Component {
   // delete the post only if you posted it
   deletePost = async () => {
     const self = this
+    console.log("post id: " + self.props.post.id)
     try {
-      const response = await axios.get(`/posts/${self.props.post.id}/delete`)
+      await axios.get(`/posts/${self.props.post.id}/delete`)
         .then(function(response) {
           console.log('post deleted: ' + response)
           self.props.update()
@@ -103,6 +104,8 @@ export default class Post extends Component {
     } catch (error) {
       console.log('error deleting post: ' + error)
     }
+    console.log('post deleted')
+    self.props.update()
   }
 
 

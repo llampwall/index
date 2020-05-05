@@ -10,6 +10,8 @@ likes
 
 deleting comments
 
+posts aren't deleting if they are from a previous session
+
 
 
 
