@@ -7,14 +7,31 @@ set the state in profile.js and populate the page
 
 registration not working without picture?
 
+
+stop referencing 'http://localhost:3000/public/img/users/' directly
+
+
 pagination / lazy loading
 
-likes
+
+- profile
+    - about
+    - photos
+    - groups
+
+- friends or followers
+    -only showing posts from you and your friends
+    -only allowed to view full profiles of friends
+
 
 finish bio in profile area
 
+
+
+
+
 posts aren't deleting if they are from a previous session
-    ? this may not be an issue now
+    *** this may not be an issue now
 
 usernames in posts/comments should link to that user's profile
     ***DONE ***
@@ -22,7 +39,8 @@ usernames in posts/comments should link to that user's profile
 delete posts/comments
     *** DONE ***
 
-
+likes
+    *** DONE ***
 
 - subscribe the postArea to database changes
     -probably involves passing a function down from index to Compose that can 
@@ -60,16 +78,10 @@ delete posts/comments
     setup buttons to submit to database tables
         *** COMMENTS DONE ***
 
-- profile
-    - about
-    - photos
-    - groups
 
-- adding friends
-    -only showing posts from you and your friends
-    -only allowed to view full profiles of friends
 
-- delete posts / comments / likes / friends
+- delete posts / comments / likes
+    *** DONE ***
 
 - messenger
 

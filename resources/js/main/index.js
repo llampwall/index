@@ -59,7 +59,6 @@ class Layout extends Component {
             <SearchHeader />
             <Route exact path="/" component={ (props) => <Home routeProps={props} initialData={this.state.initialData}/> }/>
             <Route exact path="/profile/:id" component={ (props) => <Profile routeProps={props} initialData={this.state.initialData}/> }/>
-            {/* <Route exact path="/image" component={ (props) => <ImagePicker routeProps={props} initialData={this.state.initialData}/> }/> */}
           
           </section>
 

@@ -1742,9 +1742,9 @@ var Post = function (_Component) {
 
     _this.displayStats = function () {
       if (_this.state.liked) {
-        if (_this.state.likes > 1) {
+        if (_this.state.likes > 2) {
           return 'You and ' + (_this.state.likes - 1) + ' other people like this.';
-        } else if (_this.state.likes == 1) {
+        } else if (_this.state.likes == 2) {
           return 'You and 1 other person like this.';
         } else {
           return "You like this.";
