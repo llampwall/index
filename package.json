@@ -4,6 +4,10 @@
   "adonis-version": "4.1.0",
   "description": "The social Index built with AdonisJS.",
   "main": "index.js",
+  "engines": {
+    "node": "10.18.1",
+    "yarn": "1.22.1"
+  },
   "scripts": {
     "start": "node server.js",
     "test": "node ace test",
