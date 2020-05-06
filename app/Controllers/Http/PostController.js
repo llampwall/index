@@ -127,14 +127,14 @@ class PostController {
     async likes({request, response}) {
         // console.log(request.params)
         const p_id = request.params.id
-        console.log(p_id)
+        // console.log(p_id)
         try {
             let likeData = await Like.query()
                 .innerJoin('users', 'users.id', 'likes.user_id')
                 .options({nestTables:true})
                 .where('post_id', p_id).orderBy('likes.created_at', 'desc').fetch()
             likeData = likeData.toJSON()
-            console.log(likeData)
+            // console.log(likeData)
             return {
                 likeData
             }

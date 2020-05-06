@@ -38,6 +38,7 @@ Route.get('google/authenticated', 'SocialController.callbackg')
 // api
 Route.get('/api/intialize', 'ApiController.initialize')
 Route.get('/api/user/:id', 'UserController.profile')
+Route.get('/api/users', 'UserController.getAll')
 
 // posts
 // Route.resource('/posts', 'PostController').except(['delete'])
@@ -58,4 +59,4 @@ Route.post('/likes/delete', 'PostController.unlikePost')
 // use the main react page, where react-router 
 // will display the {Home} component as it says in the 
 // route exact path
-Route.any('*', ({ view }) => view.render('pages/react'))
+Route.any('*', ({ view }) => view.render('pages/react')).middleware(['auth'])

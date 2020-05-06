@@ -10,11 +10,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(77);
+var _regenerator = __webpack_require__(62);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(76);
+var _asyncToGenerator2 = __webpack_require__(61);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -44,7 +44,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(137);
 
-var _axios = __webpack_require__(75);
+var _axios = __webpack_require__(60);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -420,6 +420,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _regenerator = __webpack_require__(62);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__(61);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
 var _classCallCheck2 = __webpack_require__(32);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -440,234 +448,129 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _axios = __webpack_require__(60);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Messenger = function (_Component) {
   (0, _inherits3.default)(Messenger, _Component);
 
   function Messenger() {
+    var _this2 = this;
+
     (0, _classCallCheck3.default)(this, Messenger);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Messenger.__proto__ || Object.getPrototypeOf(Messenger)).call(this));
 
-    _this.state = {};
+    _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var self, allUsers;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              self = _this;
+              _context.prev = 1;
+              _context.next = 4;
+              return _axios2.default.get('/api/users');
+
+            case 4:
+              allUsers = _context.sent;
+
+              console.log("users: ");
+              console.log(allUsers);
+              self.setState({
+                users: allUsers.data
+              });
+              _context.next = 13;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context['catch'](1);
+
+              console.log("error fetching users: " + _context.t0);
+
+            case 13:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this2, [[1, 10]]);
+    }));
+
+    _this.displayUsers = function () {
+      return _this.state.users.map(function (user) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'user', key: user.id },
+          _react2.default.createElement('div', { className: 'user-img' }),
+          _react2.default.createElement(
+            'div',
+            { className: 'username' },
+            user.fname,
+            ' ',
+            user.lname
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'message-icon' },
+            _react2.default.createElement('i', { className: 'fa fa-comment' })
+          )
+        );
+      });
+    };
+
+    _this.state = {
+      users: []
+    };
     return _this;
   }
 
   (0, _createClass3.default)(Messenger, [{
-    key: "render",
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.populate();
+    }
+  }, {
+    key: 'render',
     value: function render() {
+      if (this.state.users == undefined) {
+        this.populate();
+      }
       return _react2.default.createElement(
-        "section",
-        { id: "messenger" },
+        'section',
+        { id: 'messenger' },
         _react2.default.createElement(
-          "div",
-          { className: "messenger-header" },
+          'div',
+          { className: 'messenger-header' },
           _react2.default.createElement(
-            "div",
-            { className: "messenger-icon" },
-            _react2.default.createElement("i", { className: "fa fa-paper-plane" })
+            'div',
+            { className: 'messenger-icon' },
+            _react2.default.createElement('i', { className: 'fa fa-paper-plane' })
           ),
           _react2.default.createElement(
-            "div",
-            { className: "title" },
-            "\\connect"
+            'div',
+            { className: 'title' },
+            '\\connect'
           ),
           _react2.default.createElement(
-            "div",
-            { className: "options-icon" },
-            _react2.default.createElement("i", { className: "fa fa-ellipsis-v" })
+            'div',
+            { className: 'options-icon' },
+            _react2.default.createElement('i', { className: 'fa fa-ellipsis-v' })
           )
         ),
         _react2.default.createElement(
-          "div",
-          { className: "users" },
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Eric Schmidt"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Louis Verdes"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Caroline Logan"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Shawn Ramsey"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Eric Schmidt"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Louis Verdes"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Caroline Logan"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Shawn Ramsey"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Eric Schmidt"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Louis Verdes"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Caroline Logan"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "user" },
-            _react2.default.createElement("div", { className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "Shawn Ramsey"
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "message-icon" },
-              _react2.default.createElement("i", { className: "fa fa-comment" })
-            )
-          )
+          'div',
+          { className: 'users' },
+          this.displayUsers()
         ),
         _react2.default.createElement(
-          "div",
-          { className: "search" },
-          _react2.default.createElement("i", { className: "fa fa-search" }),
-          _react2.default.createElement("input", { type: "text", name: "friendSearch", placeholder: "search..." })
+          'div',
+          { className: 'search' },
+          _react2.default.createElement('i', { className: 'fa fa-search' }),
+          _react2.default.createElement('input', { type: 'text', name: 'friendSearch', placeholder: 'search...' })
         )
       );
     }
@@ -689,7 +592,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(77);
+var _regenerator = __webpack_require__(62);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
@@ -697,7 +600,7 @@ var _extends2 = __webpack_require__(139);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(76);
+var _asyncToGenerator2 = __webpack_require__(61);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -723,7 +626,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(137);
 
-var _axios = __webpack_require__(75);
+var _axios = __webpack_require__(60);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -770,6 +673,11 @@ var Profile = function (_Component) {
               console.log(_context.t0);
 
             case 13:
+
+              // not logged in
+              // if (user.data == "LOGIN") {
+              //   history.push('/')
+              // }
 
               this.setState((0, _extends3.default)({}, this.state, {
                 user: user.data[0]
@@ -833,8 +741,9 @@ var Profile = function (_Component) {
   }
 
   (0, _createClass3.default)(Profile, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+
       this.setState({
         initialData: this.props.initialData
       }, function () {
@@ -979,11 +888,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(77);
+var _regenerator = __webpack_require__(62);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(76);
+var _asyncToGenerator2 = __webpack_require__(61);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1007,7 +916,7 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(75);
+var _axios = __webpack_require__(60);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1218,11 +1127,11 @@ var _defineProperty2 = __webpack_require__(207);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _regenerator = __webpack_require__(77);
+var _regenerator = __webpack_require__(62);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(76);
+var _asyncToGenerator2 = __webpack_require__(61);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1246,7 +1155,7 @@ var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(75);
+var _axios = __webpack_require__(60);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1421,11 +1330,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(77);
+var _regenerator = __webpack_require__(62);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(76);
+var _asyncToGenerator2 = __webpack_require__(61);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1461,7 +1370,7 @@ var _Comments = __webpack_require__(332);
 
 var _Comments2 = _interopRequireDefault(_Comments);
 
-var _axios = __webpack_require__(75);
+var _axios = __webpack_require__(60);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1744,7 +1653,7 @@ var Post = function (_Component) {
       if (_this.state.liked) {
         if (_this.state.likes > 2) {
           return 'You and ' + (_this.state.likes - 1) + ' other people like this.';
-        } else if (_this.state.likes == 2) {
+        } else if (_this.state.likes == 1) {
           return 'You and 1 other person like this.';
         } else {
           return "You like this.";
@@ -2005,11 +1914,11 @@ exports.default = PostArea;
 "use strict";
 
 
-var _regenerator = __webpack_require__(77);
+var _regenerator = __webpack_require__(62);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(76);
+var _asyncToGenerator2 = __webpack_require__(61);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -2039,7 +1948,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(137);
 
-var _axios = __webpack_require__(75);
+var _axios = __webpack_require__(60);
 
 var _axios2 = _interopRequireDefault(_axios);
 

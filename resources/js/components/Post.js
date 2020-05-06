@@ -200,7 +200,7 @@ export default class Post extends Component {
     if (this.state.liked) {
       if (this.state.likes > 2) {
         return `You and ${this.state.likes - 1} other people like this.`
-      } else if (this.state.likes == 2) {
+      } else if (this.state.likes == 1) {
         return `You and 1 other person like this.`
       } else {
         return "You like this."

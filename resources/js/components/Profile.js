@@ -19,7 +19,8 @@ export default class Profile extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
+
     this.setState({
       initialData: this.props.initialData
     }, () => {
@@ -39,6 +40,11 @@ export default class Profile extends Component {
     } catch(error) {
       console.log(error)
     }
+
+    // not logged in
+    // if (user.data == "LOGIN") {
+    //   history.push('/')
+    // }
 
     this.setState({
       ...this.state,
