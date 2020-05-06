@@ -5,6 +5,7 @@ const Post = use('App/Models/Post')
 const Comment = use('App/Models/Comment')
 const Like = use('App/Models/Like')
 const Helpers = use('Helpers')
+const Env = use("Env")
 
 class PostController {
 
@@ -37,7 +38,7 @@ class PostController {
                 if (!imgFile.moved()) {
                     console.log(imgFile.error())
                 } else {
-                    pImg = 'http://localhost:3000/public/img/posts/' + imgName
+                    pImg = `${Env.get('APP_URL')}/public/img/posts/` + imgName
                     console.log(imgName)
                 }
             } catch (error) {

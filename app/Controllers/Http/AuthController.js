@@ -4,6 +4,7 @@ const { validate, sanitize } = use('Validator')
 const Hash = use('Hash')
 const User = use('App/Models/User')
 const Helpers = use('Helpers')
+const Env = use('Env')
 
 class AuthController {
 
@@ -66,7 +67,7 @@ class AuthController {
             if (!imgFile.moved()) {
                 console.log(imgFile.error())
             } else {
-                uImg = 'http://localhost:3000/public/img/users/' + imgName
+                uImg = `${Env.get('APP_URL')}/public/img/users/` + imgName
                 console.log(imgName)
             }
 
