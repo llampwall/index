@@ -12,7 +12,7 @@ import LeftMenu from '../components/LeftMenu'
 import Messenger from '../components/Messenger'
 import SearchHeader from '../components/SearchHeader'
 import Loading from '../components/Loading'
-// import ImagePicker from '../components/ImagePicker'
+
 
 
 class Layout extends Component {
@@ -23,7 +23,7 @@ class Layout extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
 
     const self = this;
     const getUser = async function() {

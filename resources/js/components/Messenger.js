@@ -9,7 +9,7 @@ export default class Messenger extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.populate()
   }
 

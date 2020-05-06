@@ -36,15 +36,10 @@ export default class Profile extends Component {
     let user = ''
     try {
       user = await axios.get(`/api/user/${match.params.id}`)
-      console.log(user)
+      // console.log(user)
     } catch(error) {
       console.log(error)
     }
-
-    // not logged in
-    // if (user.data == "LOGIN") {
-    //   history.push('/')
-    // }
 
     this.setState({
       ...this.state,

@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 229:
+/***/ 231:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34,11 +34,11 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(84);
+var _reactDom = __webpack_require__(70);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -48,11 +48,11 @@ var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _PostArea = __webpack_require__(258);
+var _PostArea = __webpack_require__(260);
 
 var _PostArea2 = _interopRequireDefault(_PostArea);
 
-var _Compose = __webpack_require__(256);
+var _Compose = __webpack_require__(258);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
@@ -156,7 +156,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 230:
+/***/ 232:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -182,7 +182,7 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -341,7 +341,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 231:
+/***/ 233:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -367,7 +367,7 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -410,7 +410,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 232:
+/***/ 234:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -444,7 +444,7 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -529,8 +529,8 @@ var Messenger = function (_Component) {
   }
 
   (0, _createClass3.default)(Messenger, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       this.populate();
     }
   }, {
@@ -582,7 +582,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 233:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -620,7 +620,7 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -629,6 +629,8 @@ var _reactRouterDom = __webpack_require__(107);
 var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
+
+var _colorpicker = __webpack_require__(529);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -661,23 +663,16 @@ var Profile = function (_Component) {
 
             case 6:
               user = _context.sent;
-
-              console.log(user);
-              _context.next = 13;
+              _context.next = 12;
               break;
 
-            case 10:
-              _context.prev = 10;
+            case 9:
+              _context.prev = 9;
               _context.t0 = _context['catch'](3);
 
               console.log(_context.t0);
 
-            case 13:
-
-              // not logged in
-              // if (user.data == "LOGIN") {
-              //   history.push('/')
-              // }
+            case 12:
 
               this.setState((0, _extends3.default)({}, this.state, {
                 user: user.data[0]
@@ -685,12 +680,12 @@ var Profile = function (_Component) {
                 console.log(_this2.state);
               });
 
-            case 14:
+            case 13:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, this, [[3, 10]]);
+      }, _callee, this, [[3, 9]]);
     }));
 
     _this.editBio = function () {
@@ -732,10 +727,19 @@ var Profile = function (_Component) {
       }
     };
 
+    _this.changeColor = function (e) {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        color: e.value
+      }), function () {
+        console.log(_this.state.color);
+      });
+    };
+
     _this.state = {
       initialData: {},
       user: "",
-      edit: false
+      edit: false,
+      color: null
     };
     return _this;
   }
@@ -782,6 +786,29 @@ var Profile = function (_Component) {
           ),
           _react2.default.createElement(
             'div',
+            { className: 'color-picker' },
+            _react2.default.createElement(_colorpicker.ColorPicker, { value: this.state.color, onChange: this.changeColor })
+          ),
+          _react2.default.createElement(
+            'p',
+            { style: { marginTop: '.5em' } },
+            'Selected Color:',
+            ' ',
+            _react2.default.createElement('span', {
+              style: {
+                display: 'inline-block',
+                width: '32px',
+                height: '32px',
+                verticalAlign: 'middle',
+                backgroundColor: '#' + this.state.color1
+              }
+            }),
+            ' ',
+            this.state.color1,
+            ' '
+          ),
+          _react2.default.createElement(
+            'div',
             { className: 'user-info' },
             this.displayBio(),
             _react2.default.createElement(
@@ -805,7 +832,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 234:
+/***/ 236:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -831,7 +858,7 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -878,7 +905,7 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 255:
+/***/ 257:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -912,7 +939,7 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -1109,7 +1136,7 @@ exports.default = Comments;
 
 /***/ }),
 
-/***/ 256:
+/***/ 258:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1151,7 +1178,7 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -1320,7 +1347,7 @@ exports.default = Compose;
 
 /***/ }),
 
-/***/ 257:
+/***/ 259:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1362,11 +1389,11 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Comments = __webpack_require__(255);
+var _Comments = __webpack_require__(257);
 
 var _Comments2 = _interopRequireDefault(_Comments);
 
@@ -1820,7 +1847,7 @@ exports.default = Post;
 
 /***/ }),
 
-/***/ 258:
+/***/ 260:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1846,11 +1873,11 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(257);
+var _Post = __webpack_require__(259);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -1908,7 +1935,7 @@ exports.default = PostArea;
 
 /***/ }),
 
-/***/ 259:
+/***/ 261:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1938,11 +1965,11 @@ var _inherits2 = __webpack_require__(26);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(11);
+var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(84);
+var _reactDom = __webpack_require__(70);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -1952,34 +1979,31 @@ var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(229);
+var _Home = __webpack_require__(231);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(233);
+var _Profile = __webpack_require__(235);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(230);
+var _LeftMenu = __webpack_require__(232);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(232);
+var _Messenger = __webpack_require__(234);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(234);
+var _SearchHeader = __webpack_require__(236);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(231);
+var _Loading = __webpack_require__(233);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import ImagePicker from '../components/ImagePicker'
-
 
 var Layout = function (_Component) {
   (0, _inherits3.default)(Layout, _Component);
@@ -1996,8 +2020,8 @@ var Layout = function (_Component) {
   }
 
   (0, _createClass3.default)(Layout, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
 
       var self = this;
       var getUser = function () {
@@ -2083,4 +2107,4 @@ _reactDom2.default.render(_react2.default.createElement(Layout, null), app);
 
 /***/ })
 
-},[259]);
+},[261]);

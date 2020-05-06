@@ -1,7 +1,10 @@
 .profile-page {
   // margin-right: 15px; <-fix this
-  display: grid;
-  grid-template-rows: 1fr 3fr;
+  // display: grid;
+  // grid-template-rows: 1fr 3fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .user-img {
     // background: $tundra;
