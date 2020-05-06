@@ -1035,7 +1035,7 @@ var Comments = function (_Component) {
             _react2.default.createElement(
               'h2',
               null,
-              user.fname + ' ' + (user.lname == null ? "" : user.lname) + ':'
+              '' + user.fname + (user.lname == null ? "" : " ") + (user.lname == null ? "" : user.lname) + ': '
             )
           ),
           _react2.default.createElement(
@@ -1653,10 +1653,10 @@ var Post = function (_Component) {
       if (_this.state.liked) {
         if (_this.state.likes > 2) {
           return 'You and ' + (_this.state.likes - 1) + ' other people like this.';
-        } else if (_this.state.likes == 1) {
+        } else if (_this.state.likes == 2) {
           return 'You and 1 other person like this.';
         } else {
-          return "You like this.";
+          return 'You like this.';
         }
       } else {
         if (_this.state.likes > 2) {
