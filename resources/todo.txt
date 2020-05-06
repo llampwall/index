@@ -13,6 +13,10 @@ stop referencing 'http://localhost:3000/public/img/users/' directly
 
 pagination / lazy loading
 
+colors
+
+easy scrolling
+
 
 - profile
     - about
@@ -40,6 +44,19 @@ delete posts/comments
     *** DONE ***
 
 likes
+    backend adonis
+        database setup
+        set route
+        controller getlikes
+        controller makelike
+        controller unlike
+    front end react
+        getlikes
+        like/unlike toggle
+        make button 
+            shows up differently when liked already
+        display stats
+            "you like this" and variations like facebook
     *** DONE ***
 
 - subscribe the postArea to database changes
