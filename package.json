@@ -1,6 +1,6 @@
 {
   "name": "Index",
-  "version": "1.0",
+  "version": "1.0.0",
   "adonis-version": "4.1.0",
   "description": "The social Index built with AdonisJS.",
   "main": "index.js",
