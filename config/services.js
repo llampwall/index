@@ -6,7 +6,7 @@ module.exports = {
       facebook: {
         clientId: Env.get('FB_CLIENT_ID'),
         clientSecret: Env.get('FB_CLIENT_SECRET'),
-        redirectUri: `http://localhost:3000/facebook/authenticated`
+        redirectUri: `${Env.get('APP_URL')}/facebook/authenticated`
       },
       google: {}
     }

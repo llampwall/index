@@ -23,7 +23,7 @@
     "adonisjs",
     "adonis-app"
   ],
-  "author": "",
+  "author": "Jordan Hewitt",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
