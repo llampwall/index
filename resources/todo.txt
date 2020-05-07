@@ -15,6 +15,10 @@ pagination / lazy loading
 
 colors
 
+reorganize scss
+    file splitting
+    variables
+
 easy scrolling
 
 

@@ -66,12 +66,14 @@ body {
   #app {
     // max-width: 1600px;
     // min-width: 1400px;
-    width: 1600px;
+    width: $app-width;
+    height: $app-height;
+    max-width: 1600px;
   }
 
   .app-container {
     width: 100%;
-    max-width: 1600px;
+    max-width: 1400px;
     background: $offwhite;
     margin: 0 auto;
     min-height: 85vh;
