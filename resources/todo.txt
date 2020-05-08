@@ -16,6 +16,8 @@ stop referencing 'http://localhost:3000/public/img/users/' directly
 
 switch to s3 hosting
     ** in progress **
+    images in posts works
+    working on register images
 
 
 pagination / lazy loading

@@ -12,6 +12,29 @@ class AuthController {
         return view.render('auth/register')
     }
 
+    // get and return a signed aws url for image uploading
+    async getUrl({request, response}) {
+
+        console.log(request.params)
+        // prepare aws
+        aws.config.region = 'us-west-1'
+        const S3_BUCKET = Env.get('S3_BUCKET')
+        const s3 = new aws.S3()
+        const fileName = request.params.filename
+        const fileType = decodeURIComponent(request.params.type)
+        console.log(fileName)
+        console.log(fileType)
+        const s3Params = {
+            Bucket: S3_BUCKET,
+            Key: fileName,
+            Expires: 60,
+            ContentType: fileType,
+            ACL: 'public-read'
+        }
+        console.log(fileType)
+        return await s3.getSignedUrlPromise('putObject', s3Params)
+    }
+
     async storeUser ({ request, session, response, auth }) {
 
         const rules = {
@@ -78,7 +101,7 @@ class AuthController {
 
             let last = ""
             if (request.input('lname') != null) {
-                first = request.input('lname')
+                last = request.input('lname')
             }
 
             let newUser = await User.create({

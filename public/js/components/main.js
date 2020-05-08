@@ -1112,10 +1112,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(109);
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _defineProperty2 = __webpack_require__(161);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
@@ -1123,6 +1119,10 @@ var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _extends2 = __webpack_require__(109);
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _asyncToGenerator2 = __webpack_require__(48);
 
@@ -1168,27 +1168,66 @@ var Compose = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
 
-    _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-      var fData, self, response;
-      return _regenerator2.default.wrap(function _callee$(_context) {
+    _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+      var self, fData, response, img_url, file, filename, type, _response;
+
+      return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
+              self = _this;
+              // deal with just newline case
+
+              if (!(_this.state.postContent == '\n')) {
+                _context3.next = 4;
+                break;
+              }
+
+              _this.setState((0, _extends3.default)({}, _this.state, {
+                postContent: ''
+              }));
+              return _context3.abrupt('return');
+
+            case 4:
+
+              // get post data
               fData = new FormData();
 
-              fData.append('user_id', _this.props.initialData.userData.id);
-              if (_this.state.postContent == "" && _this.state.image != "") {
-                fData.append('content', " ");
-              } else {
-                fData.append('content', _this.state.postContent);
+              if (!(_this.state.postContent == '')) {
+                _context3.next = 13;
+                break;
               }
-              fData.append('image', _this.state.image);
-              self = _this;
 
+              if (!(_this.state.image == '')) {
+                _context3.next = 10;
+                break;
+              }
 
-              console.log(fData);
-              _context.prev = 6;
-              _context.next = 9;
+              return _context3.abrupt('return');
+
+            case 10:
+              // if there is just an image append a space for the content
+              fData.append('content', ' ');
+
+            case 11:
+              _context3.next = 14;
+              break;
+
+            case 13:
+              fData.append('content', _this.state.postContent);
+
+            case 14:
+              fData.append('user_id', _this.props.initialData.userData.id);
+
+              if (!(_this.state.image == '')) {
+                _context3.next = 23;
+                break;
+              }
+
+              fData.append('img_name', '');
+
+              console.log('no image');
+              _context3.next = 20;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -1203,23 +1242,115 @@ var Compose = function (_Component) {
                 return 'item saved';
               });
 
-            case 9:
-              response = _context.sent;
-              _context.next = 15;
+            case 20:
+              response = _context3.sent;
+              _context3.next = 37;
               break;
 
-            case 12:
-              _context.prev = 12;
-              _context.t0 = _context['catch'](6);
+            case 23:
 
-              console.log("axios didnt work: " + _context.t0);
+              console.log('image');
+              // get signed url from the server
+              img_url = '';
+              _context3.prev = 25;
+              file = self.state.image;
+              filename = file.name;
+              type = encodeURIComponent(file.type);
+              // console.log(filename)
+              // console.log(type)
 
-            case 15:
+              _context3.next = 31;
+              return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
+                var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
+                  var options;
+                  return _regenerator2.default.wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          console.log('signed url: ' + response.data);
+
+                          // upload file to s3
+                          options = {
+                            headers: {
+                              'Content-Type': file.type
+                            }
+                          };
+
+                          _axios2.default.put(response.data, file, options).then(function () {
+                            var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(response) {
+                              var res;
+                              return _regenerator2.default.wrap(function _callee$(_context) {
+                                while (1) {
+                                  switch (_context.prev = _context.next) {
+                                    case 0:
+                                      console.log(response);
+
+                                      // store the url in database
+                                      fData.append('img_name', self.state.image.name);
+
+                                      _context.next = 4;
+                                      return (0, _axios2.default)({
+                                        method: 'post',
+                                        url: '/posts',
+                                        data: fData,
+                                        headers: { 'Content-Type': 'multipart/form-data boundary=' + fData._boundary }
+                                      }).then(function () {
+                                        self.setState({
+                                          postContent: "",
+                                          image: ""
+                                        });
+                                        self.props.update();
+                                        return 'item saved';
+                                      });
+
+                                    case 4:
+                                      res = _context.sent;
+
+                                    case 5:
+                                    case 'end':
+                                      return _context.stop();
+                                  }
+                                }
+                              }, _callee, this);
+                            }));
+
+                            return function (_x2) {
+                              return _ref3.apply(this, arguments);
+                            };
+                          }()).catch(function (err) {
+                            console.log('upload failed: ' + err);
+                          });
+
+                        case 3:
+                        case 'end':
+                          return _context2.stop();
+                      }
+                    }
+                  }, _callee2, this);
+                }));
+
+                return function (_x) {
+                  return _ref2.apply(this, arguments);
+                };
+              }());
+
+            case 31:
+              _response = _context3.sent;
+              _context3.next = 37;
+              break;
+
+            case 34:
+              _context3.prev = 34;
+              _context3.t0 = _context3['catch'](25);
+
+              console.log("axios didnt work: " + _context3.t0);
+
+            case 37:
             case 'end':
-              return _context.stop();
+              return _context3.stop();
           }
         }
-      }, _callee, _this2, [[6, 12]]);
+      }, _callee3, _this2, [[25, 34]]);
     }));
 
     _this.handleChange = function (event) {
@@ -1258,8 +1389,8 @@ var Compose = function (_Component) {
     };
 
     _this.state = {
-      postContent: "",
-      image: ""
+      postContent: '',
+      image: ''
     };
     return _this;
   }

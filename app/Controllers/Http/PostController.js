@@ -4,8 +4,9 @@ const Database = use('Database')
 const Post = use('App/Models/Post')
 const Comment = use('App/Models/Comment')
 const Like = use('App/Models/Like')
+const Env = use('Env')
+const aws = require('aws-sdk');
 const Helpers = use('Helpers')
-const Env = use("Env")
 
 class PostController {
 
@@ -13,45 +14,49 @@ class PostController {
 
     }
 
+    // get and return a signed aws url for image uploading
+    async getUrl({request, response}) {
+
+        console.log(request.params)
+        // prepare aws
+        aws.config.region = 'us-west-1'
+        const S3_BUCKET = Env.get('S3_BUCKET')
+        const s3 = new aws.S3()
+        const fileName = request.params.filename
+        const fileType = decodeURIComponent(request.params.type)
+        console.log(fileName)
+        console.log(fileType)
+        const s3Params = {
+            Bucket: S3_BUCKET,
+            Key: fileName,
+            Expires: 60,
+            ContentType: fileType,
+            ACL: 'public-read'
+        }
+        console.log(fileType)
+        return await s3.getSignedUrlPromise('putObject', s3Params)
+    }
+
     // new post
     async store({request, response}) {
-        let imgFile = {}
-        let pImg = ''
-        try {
-            imgFile = request.file('image', {
-                types: ['image'],
-                size: '5mb'
-            })
-        } catch(error) {
-            console.log(error)
+
+        let url = ''
+        if (request.input('img_name') != null) {
+            url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${request.input('img_name')}`
         }
 
-        if (imgFile != null) {
-            console.log(imgFile)
-            try {
-                const imgName = request.input('user_id') + `${Date.now()}.jpg`
-                await imgFile.move(Helpers.publicPath('img/posts'), {
-                    name: imgName,
-                    overwrite: true
-                })
+        console.log(request.input('content'))
+        console.log(request.input('user_id'))
+        console.log(url)
 
-                if (!imgFile.moved()) {
-                    console.log(imgFile.error())
-                } else {
-                    pImg = `${Env.get('APP_URL')}/public/img/posts/` + imgName
-                    console.log(imgName)
-                }
-            } catch (error) {
-                console.log('error uploading image')
-            }
-        }
-
-        const pType = (pImg.length > 0) ? 'image' : 'text' 
+        // save post to db
+        const pType = (url.length > 0) ? 'image' : 'text' 
+        console.log(pType)
         try {
             const newPost = await Post.create({
                 content: request.input('content'),
                 user_id: request.input('user_id'),
-                image_url: pImg,
+                image_url: url,
                 type: pType
             })
             console.log('saved post');

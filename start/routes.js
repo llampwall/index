@@ -43,6 +43,7 @@ Route.get('/api/users', 'UserController.getAll')
 // posts
 // Route.resource('/posts', 'PostController').except(['delete'])
 Route.get('/posts', 'PostController.index')
+Route.get('/posts/url/:filename/:type', 'PostController.getUrl')
 Route.post('/posts', 'PostController.store')
 Route.get('/posts/:id/delete', 'PostController.destroy')
 Route.get('/posts/:id/comments', 'PostController.comments')

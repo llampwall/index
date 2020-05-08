@@ -34,11 +34,11 @@
             <div class="form-group names">
                 <label for="fname" class='fname'>
                     first
-                    <input type="text" name="fname">
+                    <input type="text" name="fname" value="{{ old('fname', '') }}">
                 </label>
                 <label for="lname" class="lname">
                     last
-                    <input type="text" name="lname">
+                    <input type="text" name="lname" value="{{ old('lname', '') }}">
                 </label>
             </div>
             <div class="form-group">

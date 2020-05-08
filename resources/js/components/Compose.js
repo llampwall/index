@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-
 // should really generalize and save this component as an axios image uploader
 // even has a preview window for the selected image file
 
@@ -10,24 +9,41 @@ export default class Compose extends Component {
   constructor () {
     super()
     this.state = { 
-      postContent : "", 
-      image: ""
+      postContent : '', 
+      image: ''
     }
   }
 
+
   submitPost = async () => {
+    const self = this;
+    // deal with just newline case
+    if (this.state.postContent == '\n') {
+      this.setState({
+        ...this.state, 
+        postContent: ''
+      })
+      return
+    }
+
+    // get post data
     const fData = new FormData()
-    fData.append('user_id', this.props.initialData.userData.id)
-    if ((this.state.postContent == "") && (this.state.image != "")) {
-      fData.append('content', " ")
+    if (this.state.postContent == '') {
+      if (this.state.image == '') {
+        return
+      } else {
+        // if there is just an image append a space for the content
+        fData.append('content', ' ')
+      }
     } else {
       fData.append('content', this.state.postContent)
     }
-    fData.append('image', this.state.image)
-    const self = this;
+    fData.append('user_id', this.props.initialData.userData.id)
 
-    console.log(fData)
-    try {
+    if (this.state.image == '') {
+      fData.append('img_name', '')
+
+      console.log('no image')
       const response = await axios({
         method: 'post',
         url: '/posts',
@@ -41,9 +57,61 @@ export default class Compose extends Component {
         self.props.update()
         return 'item saved'
       })
-    } catch (error) {
-      console.log("axios didnt work: " + error)
+
+    } else {
+
+      console.log('image')
+      // get signed url from the server
+      let img_url = ''
+      try {
+          const file = self.state.image
+          const filename = file.name
+          const type = encodeURIComponent(file.type)
+          // console.log(filename)
+          // console.log(type)
+          const response = await axios.get(`/posts/url/${filename}/${type}`)
+          .then (async function(response) {   
+            console.log('signed url: ' + response.data)
+
+            // upload file to s3
+            var options = {
+              headers: {
+                'Content-Type': file.type
+              }
+            }
+            axios.put(response.data, file, options)
+            .then(async function(response) {
+                console.log(response)
+                
+                // store the url in database
+                fData.append('img_name', self.state.image.name)
+                
+                const res = await axios({
+                  method: 'post',
+                  url: '/posts',
+                  data: fData, 
+                  headers: {'Content-Type': `multipart/form-data boundary=${fData._boundary}` }
+                }).then (function() {
+                  self.setState({
+                    postContent: "",
+                    image: ""
+                  })
+                  self.props.update()
+                  return 'item saved'
+                })
+              }).catch(function(err) {
+                console.log('upload failed: ' + err)
+            })
+
+          
+        })
+      } catch (error) {
+        console.log("axios didnt work: " + error)
+      }
     }
+    
+
+    //
   }
 
   handleChange = (event) => {
