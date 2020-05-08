@@ -20,7 +20,7 @@ export default class Home extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     console.log(this.props)
     this.setState({
       initialData: this.props.initialData

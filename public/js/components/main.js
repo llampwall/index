@@ -115,8 +115,8 @@ var Home = function (_Component) {
   }
 
   (0, _createClass3.default)(Home, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       var _this3 = this;
 
       console.log(this.props);

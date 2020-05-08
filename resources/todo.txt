@@ -5,10 +5,17 @@ set the state in profile.js and populate the page
 
 
 
+hosting with heroku
+    up and running
+    database working
+
 registration not working without picture?
 
 
 stop referencing 'http://localhost:3000/public/img/users/' directly
+
+switch to s3 hosting
+    ** in progress **
 
 
 pagination / lazy loading

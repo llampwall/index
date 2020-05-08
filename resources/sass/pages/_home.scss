@@ -328,6 +328,7 @@
               margin: 0 auto;
               display: flex;
               align-items: center;
+              border-bottom: 1px solid $apricot;
               
               .author {
                 display: flex;
@@ -397,7 +398,6 @@
 
             .post-media {
               width: 100%;
-              border-top: 1px solid $apricot;
               border-bottom: 1px solid $apricot;
               margin: 0 auto;
               transition: all .3s ease;
