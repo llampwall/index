@@ -10,10 +10,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(86);
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -46,7 +42,7 @@ var _reactDom = __webpack_require__(84);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(108);
+var _reactRouterDom = __webpack_require__(107);
 
 var _axios = __webpack_require__(47);
 
@@ -113,9 +109,9 @@ var Home = function (_Component) {
     }));
 
     _this.state = {
-      initialData: {},
-      time: Date.now()
+      initialData: {}
     };
+    _this.interval = null;
     return _this;
   }
 
@@ -126,7 +122,7 @@ var Home = function (_Component) {
 
       // console.log(this.props)
       this.interval = setInterval(function () {
-        return _this3.setState((0, _extends3.default)({}, _this3.state, { time: Date.now() }));
+        return _this3.update();
       }, 3000);
       this.setState({
         initialData: this.props.initialData
@@ -140,7 +136,7 @@ var Home = function (_Component) {
       clearInterval(this.interval);
     }
 
-    //pass down function to pass down to compose change state and update the whole area
+    // pass down function to pass down to compose so it can update the whole area
 
   }, {
     key: 'render',
@@ -609,7 +605,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(86);
+var _extends2 = __webpack_require__(109);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -637,7 +633,7 @@ var _react = __webpack_require__(11);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(108);
+var _reactRouterDom = __webpack_require__(107);
 
 var _axios = __webpack_require__(47);
 
@@ -1117,7 +1113,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(86);
+var _extends2 = __webpack_require__(109);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1240,18 +1236,22 @@ var Compose = function (_Component) {
 
             case 19:
               response = _context3.sent;
-              _context3.next = 34;
+              _context3.next = 35;
               break;
 
             case 22:
-              _context3.prev = 22;
+              // disable input while image uploads - maybe add loading symbol
+              document.getElementById("content").disabled = true;
+
+              // get signed url from the server
+              _context3.prev = 23;
               file = self.state.image;
               filename = file.name;
               type = encodeURIComponent(file.type);
               // console.log(filename)
               // console.log(type)
 
-              _context3.next = 28;
+              _context3.next = 29;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
                 var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
                   var options;
@@ -1291,6 +1291,7 @@ var Compose = function (_Component) {
                                           postContent: "",
                                           image: ""
                                         });
+                                        document.getElementById("content").disabled = false; // enable input again
                                         self.props.update();
                                         return 'item saved';
                                       });
@@ -1326,23 +1327,23 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 28:
+            case 29:
               _response = _context3.sent;
-              _context3.next = 34;
+              _context3.next = 35;
               break;
 
-            case 31:
-              _context3.prev = 31;
-              _context3.t0 = _context3['catch'](22);
+            case 32:
+              _context3.prev = 32;
+              _context3.t0 = _context3['catch'](23);
 
               console.log("axios didnt work: " + _context3.t0);
 
-            case 34:
+            case 35:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[22, 31]]);
+      }, _callee3, _this2, [[23, 32]]);
     }));
 
     _this.handleChange = function (event) {
@@ -1450,7 +1451,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(86);
+var _extends2 = __webpack_require__(109);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -2050,7 +2051,7 @@ var _reactDom = __webpack_require__(84);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(108);
+var _reactRouterDom = __webpack_require__(107);
 
 var _axios = __webpack_require__(47);
 

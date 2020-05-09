@@ -29,8 +29,43 @@ class AuthController {
 
         console.log(request.body)
 
+        const rules = {
+            email: 'required|email|unique:users,email',
+            password: 'required|min:8|max:32',
+            confirm: 'required'
+        }
+
         let first, last, email, img, pw, url
+
+
+        // validate input
         try {
+            const validation = await validate(request.all(), rules)
+            if (request.input('password') != request.input('confirm')) {
+                session
+                .withErrors([
+                    {field: 'password', message: "passwords don't match"},
+                    {field: 'confirm', message: "passwords don't match"}
+                ])
+                .flashExcept(['password'])
+    
+                return response.redirect('back')
+            }
+            if (validation.fails()) {
+                session
+                .withErrors(validation.messages())
+                .flashExcept(['password'])
+    
+                return response.redirect('back')
+            }
+
+        } catch(error) {
+            return 'error validating user input'
+        }
+
+        // 
+        try {
+
             first = 'somebody'
             if (request.input('fname') != null) {
                 first = request.input('fname')
@@ -48,14 +83,14 @@ class AuthController {
         } catch(error) {
             session
             .withErrors([
-                {field: 'database', message: "error adding user to database"}
+                {field: 'database', message: "error getting input fields"}
             ])
             .flashExcept(['password'])
 
             return response.redirect('back')
         }
 
-        url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${img}` || '/img/user.jpg'
+        url = img ? `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${img}` : '/img/user.jpg'
 
         console.log(first)
         console.log(last)
@@ -65,17 +100,27 @@ class AuthController {
         console.log(url)
 
         // save new user
-        let newUser = await User.create({
-            fname: first,
-            lname: last,
-            email: email,
-            profile_img: url,
-            login_source: 'register',
-            info: '',
-            password: pw
-        })
+        try {
+            let newUser = await User.create({
+                fname: first,
+                lname: last,
+                email: email,
+                profile_img: url,
+                login_source: 'register',
+                info: '',
+                password: pw
+            })
+            await auth.login(newUser)
 
-        await auth.login(newUser)
+        } catch(error) {
+            session
+            .withErrors([
+                {field: 'database', message: "error adding user to database"}
+            ])
+            .flashExcept(['password'])
+
+            return response.redirect('back')
+        }
 
         session.flash({notification: 'registered'})
         return response.redirect('/')

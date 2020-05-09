@@ -58,6 +58,8 @@ export default class Compose extends Component {
       })
 
     } else {
+      // disable input while image uploads - maybe add loading symbol
+      document.getElementById("content").disabled = true
 
       // get signed url from the server
       try {
@@ -93,6 +95,7 @@ export default class Compose extends Component {
                     postContent: "",
                     image: ""
                   })
+                  document.getElementById("content").disabled = false   // enable input again
                   self.props.update()
                   return 'item saved'
                 })

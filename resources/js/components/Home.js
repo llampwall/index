@@ -16,14 +16,14 @@ export default class Home extends Component {
   constructor () {
     super()
     this.state = {
-      initialData: {},
-      time: Date.now()
+      initialData: {}
     }
+    this.interval = null
   }
 
   componentDidMount() {
     // console.log(this.props)
-    this.interval = setInterval(() => this.setState({ ...this.state, time: Date.now() }), 3000);
+    this.interval = setInterval(() => this.update(), 3000);
     this.setState({
       initialData: this.props.initialData
     }, () => {
@@ -35,7 +35,7 @@ export default class Home extends Component {
     clearInterval(this.interval);
   }
 
-  //pass down function to pass down to compose change state and update the whole area
+  // pass down function to pass down to compose so it can update the whole area
   update = async () => {
     try {
       const data = await axios.get('/api/intialize')
