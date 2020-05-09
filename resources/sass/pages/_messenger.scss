@@ -2,6 +2,7 @@
     min-width: 200px;
     max-height: 85vh;
     position: relative;
+    font-family: $main-font;
 
     .messenger-header {
       background-color: $messenger-header-bg;
@@ -122,6 +123,7 @@
         font-size: 1rem;
         &::placeholder {
           color: $placeholder-font-color;
+          font-weight: 700;
         }
         &:focus::placeholder {
           color: transparent;

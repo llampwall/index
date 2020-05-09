@@ -19,18 +19,90 @@ $burning: #D35701;
 $silouette: #5C0C01;
 $darkness: #2E0201;
 
+@import url('https://fonts.googleapis.com/css2?family=Geo&display=swap');
+// other vars
 
+$main-font: 'Electrolize', sans-serif;
+$small-font: $main-font;
+$title-font: Montserrat;
+$app-width: 80vw;
+$app-height: 85vh;
+$border-thickness: 1px;
+$shadow-light: rgba(255,255,255,.8);
+$shadow-color: rgba(0,0,0,0.75);
 // ========= THEME SECTION ========
-$primary: #7395AE;
-$secondary: #ADADAD;
-$third: #557A95;
-$fourth:#5D5C61;
-$title-font-color: $secondary;
-$primary-font-color: #4F1B1D;
-$secondary-font-color: $fourth;
-$placeholder-font-color: #ADADAD;
-$third-font-color: $primary;
 
+
+//dark mode
+// $primary: #2d2d2d;
+// $secondary: #474747;
+// $third: #adadad;
+// $fourth:#dbdbdb;
+// $accents: $third;
+// $title-font-color: $third;
+// $primary-font-color: $third;
+// $secondary-font-color: $third;
+// $third-font-color: $fourth;
+// $placeholder-font-color: $third;
+// $border-color: $accents;
+// $button-bg: $primary;
+// $button-color: $accents;
+// $shadow-light: rgba(0,0,0,0.75);
+// $shadow-color: rgba(255,255,255,.8);
+
+
+// off white
+$primary: white;
+$secondary: $offwhite;
+$third: $thunder;
+$fourth:#ECECEC;
+$accents: $tundra;
+$title-font-color: $third;
+$primary-font-color: $third;
+$secondary-font-color: $third;
+$third-font-color: $accents;
+$placeholder-font-color: $third;
+$border-color: $accents;
+$button-bg: $primary;
+$button-color: $accents;
+
+// nautilus
+// $primary: #5CA2D5;
+// $secondary: #91CCF4;
+// $third: #C3DBF5;
+// $fourth:#ECECEC;
+// $accents: #F3D24F;
+// $title-font-color: $secondary;
+// $primary-font-color: $fourth;
+// $secondary-font-color: $third;
+// $third-font-color: $accents;
+// $placeholder-font-color: $third-font-color;
+// $border-color: $accents;
+
+// desert storm
+// $primary: #EAE8DC;
+// $secondary: #D8C3A4;
+// $third: #8E8D89;
+// $fourth:#5D5C61;
+// $accents: #E85A50;
+// $title-font-color: $secondary;
+// $primary-font-color: $fourth;
+// $secondary-font-color: $third;
+// $third-font-color: $accents;
+// $placeholder-font-color: $third-font-color;
+// $border-color: $fourth;
+
+// deep purple
+// $primary: #7395AE;
+// $secondary: #83687B;
+// $third: #557A95;
+// $fourth:#5D5C61;
+// $title-font-color: $secondary;
+// $primary-font-color: #4F1B1D;
+// $secondary-font-color: $fourth;
+// $placeholder-font-color: #ADADAD;
+// $third-font-color: #ADADAD;
+// $border-color: $fourth;
 
 // seafoam
 // $primary: #CAFAFE;
@@ -42,18 +114,19 @@ $third-font-color: $primary;
 // $secondary-font-color: #05396B;
 // $placeholder-font-color: $primary;
 // $third-font-color: $primary;
-
+// $border-color: $fourth;
 
 // original (roughly)
 // $primary: $apricot;
 // $secondary: $offwhite;
 // $third: $sunlight;
+// $fourth:#5C0C01;
 // $title-font-color: $secondary;
 // $primary-font-color: $primary;
 // $secondary-font-color: $primary;
-// $placeholder-font-color: $primary;
+// $placeholder-font-color: $third;
 // $third-font-color: $third;
-
+// $border-color: $fourth;
 
 
 // area specific color vars
@@ -63,38 +136,24 @@ $welcome-color: white;
 $welcome-subtitle: black;
 $search-header-bg: $secondary;
 $left-menu-bg: $primary;
-$left-menu-header:#4F1B1D;
+$left-menu-header: $third-font-color;
 $left-menu-header-bg: $secondary;
-$left-menu-footer-bg: $third;
+$left-menu-footer-bg: $primary;
 $dropdown: $secondary;
 $messenger-bg: $secondary;
-$messenger-header: $primary-font-color;
+$messenger-header: $third-font-color;
 $messenger-header-bg: $secondary;
 $messenger-user-bg: transparent;
 $messenger-user-bg-alt: $messenger-user-bg;
-$messenger-footer-bg: $third;
+$messenger-footer-bg: $primary;
 $post-area-bg: white;
 $compose-bg: $secondary;
 $post-bg: $secondary;
 $post-header-bg: $secondary;
 $comment-bg: $primary;
 $comment-bg-alt: $primary;
-$write-comment-bg: $third;
+$write-comment-bg: $primary;
 
-$button-bg: $primary;
-$button-color: $third;
-$shadow-color: rgba(0,0,0,0.75);
-$shadow-light: rgba(255,255,255,.9);
-
-$border-color: $fourth;
-$border-thickness: 1px;
-
-// other vars
-$app-width: 80vw;
-$app-height: 85vh;
-$title-font: Montserrat;
-$main-font: 'Montserrat', sans-serif;
-$small-font: 'Montserrat', sans-serif;
 
 
 
