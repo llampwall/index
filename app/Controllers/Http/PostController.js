@@ -41,17 +41,24 @@ class PostController {
     async store({request, response}) {
 
         let url = ''
-        if (request.input('img_name') != null) {
+        let file = request.input('img_name')
+        if (file != null) {
             url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${request.input('img_name')}`
         }
 
-        console.log(request.input('content'))
-        console.log(request.input('user_id'))
-        console.log(url)
-
-        // save post to db
-        const pType = (url.length > 0) ? 'image' : 'text' 
+        // console.log(request.input('content'))
+        // console.log(request.input('user_id'))
+        // console.log(url)
+        let pType = null
+        if (file.includes('mp4')) {
+            pType = 'video'
+        } else if (file.includes('image')) {
+            pType = 'image'
+        } else {
+            pType = text
+        }
         console.log(pType)
+        // save post to db
         try {
             const newPost = await Post.create({
                 content: request.input('content'),

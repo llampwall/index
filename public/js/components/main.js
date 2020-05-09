@@ -111,29 +111,18 @@ var Home = function (_Component) {
     _this.state = {
       initialData: {}
     };
-    _this.interval = null;
     return _this;
   }
 
   (0, _createClass3.default)(Home, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this3 = this;
-
       // console.log(this.props)
-      this.interval = setInterval(function () {
-        return _this3.update();
-      }, 3000);
       this.setState({
         initialData: this.props.initialData
       }, function () {
         // console.log(this.state)
       });
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      clearInterval(this.interval);
     }
 
     // pass down function to pass down to compose so it can update the whole area
@@ -1240,7 +1229,7 @@ var Compose = function (_Component) {
 
             case 19:
               response = _context3.sent;
-              _context3.next = 35;
+              _context3.next = 36;
               break;
 
             case 22:
@@ -1253,9 +1242,9 @@ var Compose = function (_Component) {
               filename = file.name;
               type = encodeURIComponent(file.type);
               // console.log(filename)
-              // console.log(type)
 
-              _context3.next = 29;
+              console.log(type);
+              _context3.next = 30;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
                 var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
                   var options;
@@ -1331,23 +1320,23 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 29:
+            case 30:
               _response = _context3.sent;
-              _context3.next = 35;
+              _context3.next = 36;
               break;
 
-            case 32:
-              _context3.prev = 32;
+            case 33:
+              _context3.prev = 33;
               _context3.t0 = _context3['catch'](23);
 
               console.log("axios didnt work: " + _context3.t0);
 
-            case 35:
+            case 36:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[23, 32]]);
+      }, _callee3, _this2, [[23, 33]]);
     }));
 
     _this.handleChange = function (event) {
@@ -1514,6 +1503,12 @@ var Post = function (_Component) {
             backgroundPosition: 'center center',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover' } });
+      } else if (_this.props.post.type == 'video') {
+        return _react2.default.createElement(
+          'video',
+          { className: 'post-media', autoPlay: true, muted: true, loop: true },
+          _react2.default.createElement('source', { src: _this.props.post.image_url, type: 'video/mp4' })
+        );
       }
     };
 
@@ -1761,6 +1756,7 @@ var Post = function (_Component) {
     }));
 
     _this.displayStats = function () {
+
       if (_this.state.liked) {
         if (_this.state.likes > 2) {
           return 'You and ' + (_this.state.likes - 1) + ' other people like this.';
@@ -1779,6 +1775,16 @@ var Post = function (_Component) {
         } else {
           return 'Be the first to like this.';
         }
+      }
+    };
+
+    _this.getType = function () {
+      if (_this.props.post.type == 'image') {
+        return 'an image';
+      } else if (_this.props.post.type == 'video') {
+        return 'a video';
+      } else {
+        return 'something';
       }
     };
 
@@ -1860,7 +1866,7 @@ var Post = function (_Component) {
                 'span',
                 { className: 'text' },
                 'shared ',
-                this.props.post.type == 'image' ? 'an image' : 'something'
+                this.getType()
               )
             ),
             _react2.default.createElement(

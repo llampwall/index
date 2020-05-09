@@ -33,6 +33,12 @@ export default class Post extends Component {
                 backgroundSize: 'cover'}}>
             </div>
         )
+    } else if (this.props.post.type == 'video') {
+        return (
+            <video className="post-media" autoPlay muted loop>
+              <source src={this.props.post.image_url} type="video/mp4" />
+            </video>
+        )
     }
   }
 
@@ -185,6 +191,7 @@ export default class Post extends Component {
 
   // display the post stats
   displayStats = () => {
+    
     if (this.state.liked) {
       if (this.state.likes > 2) {
         return `You and ${this.state.likes - 1} other people like this.`
@@ -206,6 +213,16 @@ export default class Post extends Component {
     }
   }
 
+  getType = () => {
+    if (this.props.post.type == 'image') {
+      return 'an image'
+    } else if (this.props.post.type == 'video') {
+      return 'a video'
+    }
+    else {
+      return 'something'
+    }
+  }
 
 
   render () {
@@ -227,7 +244,7 @@ export default class Post extends Component {
                         backgroundRepeat: 'no-repeat', 
                         backgroundSize: 'cover'}} />
                         <div className="username">{this.props.user.fname} {this.props.user.lname}</div>
-                        <span className="text">shared {(this.props.post.type == 'image') ? 'an image' : 'something'}</span>
+                        <span className="text">shared {this.getType()}</span>
                     </a>
                     <div className="time">{new Date(this.props.post.created_at).toLocaleString()}</div>
                     <div className={`del-btn ${this.props.user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deletePost}><i className="fa fa-trash"></i></div>

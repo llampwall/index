@@ -28,9 +28,9 @@ export default class PostArea extends Component {
     } else {
       return (
           <section id="all-posts">
-              <div className="post-container">
-                  {this.showMyPosts()}
-              </div>
+                <div className="post-container">
+                    {this.showMyPosts()}
+                </div>
           </section>
       )
     }

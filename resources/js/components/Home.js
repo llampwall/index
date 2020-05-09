@@ -9,6 +9,7 @@ import axios from 'axios'
 import PostArea from './PostArea'
 import Compose from './Compose'
 
+
 // Handles updating the postarea when its sibling compose adds a post to the database
 
 
@@ -18,12 +19,10 @@ export default class Home extends Component {
     this.state = {
       initialData: {}
     }
-    this.interval = null
   }
 
   componentDidMount() {
     // console.log(this.props)
-    this.interval = setInterval(() => this.update(), 3000);
     this.setState({
       initialData: this.props.initialData
     }, () => {
@@ -31,9 +30,7 @@ export default class Home extends Component {
     })
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+
 
   // pass down function to pass down to compose so it can update the whole area
   update = async () => {
@@ -61,8 +58,10 @@ export default class Home extends Component {
       // console.log(this.props)
       return (
         <div className="content-area">
-          <Compose initialData={this.state.initialData} update={this.update}/>
-          <PostArea routeProps={this.props.routeProps} initialData={this.state.initialData} update={this.update}/>
+          
+            <Compose initialData={this.state.initialData} update={this.update}/>
+            <PostArea routeProps={this.props.routeProps} initialData={this.state.initialData} update={this.update}/>
+
         </div>
       )
     }

@@ -67,7 +67,7 @@ export default class Compose extends Component {
           const filename = file.name
           const type = encodeURIComponent(file.type)
           // console.log(filename)
-          // console.log(type)
+          console.log(type)
           const response = await axios.get(`/posts/url/${filename}/${type}`)
           .then (async function(response) {   
             console.log('signed url: ' + response.data)
