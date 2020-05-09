@@ -1062,21 +1062,7 @@ var Comments = function (_Component) {
     return _this;
   }
 
-  // this wont work in react 16, but i didn't feel like upgrading
-
-
   (0, _createClass3.default)(Comments, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(props) {
-      var _props = this.props,
-          post = _props.post,
-          update = _props.update;
-
-      if (props.update !== update) {
-        this.getComments();
-      }
-    }
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.getComments();
@@ -1464,13 +1450,13 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(48);
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
 var _extends2 = __webpack_require__(86);
 
 var _extends3 = _interopRequireDefault(_extends2);
+
+var _asyncToGenerator2 = __webpack_require__(48);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var _defineProperty2 = __webpack_require__(161);
 
@@ -1535,12 +1521,6 @@ var Post = function (_Component) {
       });
     };
 
-    _this.refreshComments = function () {
-      _this.setState((0, _extends3.default)({}, _this.state, {
-        update: !_this.state.update
-      }));
-    };
-
     _this.submitComment = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
       var self, response;
       return _regenerator2.default.wrap(function _callee$(_context) {
@@ -1565,11 +1545,7 @@ var Post = function (_Component) {
                   comment: ""
                 }));
 
-                // should use the ref commented out in the constructor
-                // to update the comment area, but in react 15 this 
-                // way makes more sense
-                //   this.commentArea.current.getComments()
-                self.refreshComments();
+                self.commentArea.current.getComments();
                 return 'comment saved';
               });
 
@@ -1810,8 +1786,9 @@ var Post = function (_Component) {
       liked: false,
       likes: 0,
       lastLike: ""
-      // this.commentArea = React.createRef()
-    };return _this;
+    };
+    _this.commentArea = _react2.default.createRef(); // ref for updating comments
+    return _this;
   }
 
   (0, _createClass3.default)(Post, [{
@@ -1819,9 +1796,6 @@ var Post = function (_Component) {
     value: function componentDidMount() {
       this.getLikes();
     }
-
-    // triggers child to refresh
-
 
     // this lets us get the comments from the child
 
@@ -1932,7 +1906,7 @@ var Post = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'buttons' },
-            _react2.default.createElement(_Comments2.default, { post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
+            _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
             _react2.default.createElement(
               'div',
               { className: 'send-btn', onClick: this.submitComment },

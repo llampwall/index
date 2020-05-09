@@ -9,14 +9,6 @@ export default class Comments extends Component {
     }
   }
 
-  // this wont work in react 16, but i didn't feel like upgrading
-  componentWillReceiveProps(props) {
-    const {post, update} = this.props
-    if (props.update !== update) {
-      this.getComments()
-    }
-  }
-
   componentDidMount() {
     this.getComments()
   }

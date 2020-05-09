@@ -15,7 +15,7 @@ export default class Post extends Component {
         likes: 0,
         lastLike: ""
     }
-    // this.commentArea = React.createRef()
+    this.commentArea = React.createRef()  // ref for updating comments
   }
 
 
@@ -47,14 +47,6 @@ export default class Post extends Component {
     })
   }
 
-  // triggers child to refresh
-  refreshComments = () => {
-    this.setState({
-        ...this.state, 
-        update: !this.state.update
-    })
-  }
-
   submitComment = async () => {
       const self = this
       if (this.state.comment.length > 0) {
@@ -69,11 +61,7 @@ export default class Post extends Component {
                 comment: ""
               })
             
-              // should use the ref commented out in the constructor
-              // to update the comment area, but in react 15 this 
-              // way makes more sense
-              //   this.commentArea.current.getComments()
-              self.refreshComments()
+              self.commentArea.current.getComments()
               return 'comment saved'
             })
           } catch (error) {
@@ -261,15 +249,13 @@ export default class Post extends Component {
                     </div>
                     <span className="text">{this.displayStats()}</span>
                     {this.getCommentCount()}
-                    {/* <div className="comment-count">4 comments</div> */}
                 </div>
                 <div className="c-section">
                   <textarea name="comment" cols={30} rows={2} placeholder="write a comment..." value={this.state.comment} onChange={this.handleChange} onKeyUp={this.checkSubmit}/>
                 </div>
                 <div className="buttons">
 
-                    {/* <Comments ref={this.commentArea} post={this.props.post} /> */}
-                    <Comments post={this.props.post} update={this.state.update} sendUp={this.sendUp} curuser={this.props.curuser}/>
+                    <Comments ref={this.commentArea} post={this.props.post} update={this.state.update} sendUp={this.sendUp} curuser={this.props.curuser}/>
 
                     <div className="send-btn" onClick={this.submitComment}>
                         <i className="fa fa-arrow-right" />
