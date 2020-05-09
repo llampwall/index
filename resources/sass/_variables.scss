@@ -19,15 +19,21 @@ $burning: #D35701;
 $silouette: #5C0C01;
 $darkness: #2E0201;
 
-@import url('https://fonts.googleapis.com/css2?family=Geo&display=swap');
-// other vars
-
-$main-font: 'Electrolize', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Electrolize&family=Enriqueta:wght@500;700&family=Russo+One&family=Sriracha&display=swap');// 'Russo One', sans-serif;
+// 'Electrolize', sans-serif;
+// 'Bangers', cursive;
+// 'Enriqueta', serif;
+$main-font: 'Sriracha', cursive;
+*{
+  letter-spacing: 2px; 
+}
 $small-font: $main-font;
-$title-font: Montserrat;
+$title-font: $main-font;
 $app-width: 80vw;
 $app-height: 85vh;
 $border-thickness: 1px;
+$welcome-color: $silouette;
+$welcome-subtitle: $darkness;
 $shadow-light: rgba(255,255,255,.8);
 $shadow-color: rgba(0,0,0,0.75);
 // ========= THEME SECTION ========
@@ -60,8 +66,8 @@ $accents: $tundra;
 $title-font-color: $third;
 $primary-font-color: $third;
 $secondary-font-color: $third;
-$third-font-color: $accents;
-$placeholder-font-color: $third;
+$third-font-color: $apricot;
+$placeholder-font-color: $apricot;
 $border-color: $accents;
 $button-bg: $primary;
 $button-color: $accents;
@@ -132,8 +138,6 @@ $button-color: $accents;
 // area specific color vars
 $outer-bg: $primary;
 $content-area-bg: $primary;
-$welcome-color: white;
-$welcome-subtitle: black;
 $search-header-bg: $secondary;
 $left-menu-bg: $primary;
 $left-menu-header: $third-font-color;

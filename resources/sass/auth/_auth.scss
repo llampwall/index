@@ -34,14 +34,16 @@
 
             label {
                 font-size: 20px;
-                color: $primary;
+                color: $thunder;
                 font-weight: 500;
                 // padding-right: 1.7rem;
             }
             margin-bottom: 1rem;
       
             input {
+                color: $apricot;
                 margin-top: .5rem;
+                border: 2px solid $silouette;
                 @include hard-shadow;
             }
 
@@ -49,13 +51,13 @@
                 margin-left: 1.7rem;
                 height: 2rem;
                 font-size: 1rem;
-                border: 1px solid $primary;
-                color: $primary;
+                border: 2px solid $accents;
+                color: $apricot;
                 background-color: white;
                 &::-webkit-file-upload-button {
                     border: none;
                     height: 2rem;
-                    background-color: $primary;
+                    background-color: $thunder;
                     color: white;
                     cursor: pointer;
                 }
@@ -71,15 +73,15 @@
                 position: relative;
                 overflow: hidden;
                 margin-top: 1rem;
-                background: white;
-                color: $primary;
+                background: $apricot;
+                color: $thunder;
                 font-weight: 700;
                 font-size: 16px;
                 padding: .5rem 1rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border: 1px solid $sandy;
+                border: 2px solid $accents;
                 @include hard-shadow;
                 transition: all .2s ease;
                 cursor: pointer;
@@ -88,7 +90,7 @@
                 }
       
                 &:hover {
-                  background: $primary;
+                  background: $apricot;
                   color: white;
                   -webkit-box-shadow: 0px 0px 0px 0px rgba(255,255,255,.9);
                     -moz-box-shadow: 0px 0px 0px 0px rgba(255,255,255,.9);
@@ -110,7 +112,7 @@
 
     a {
         text-decoration: none;
-        color: $sandy;
+        color: $silouette;
         font-size: 1rem;
     }
 }

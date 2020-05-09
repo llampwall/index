@@ -35,10 +35,11 @@ body {
   align-items: center;
   justify-content: center;
   // font-family: 'Source Code Pro', monospace;
-  font-family: 'Montserrat', sans-serif;
+  font-family: $main-font;
 
   .title {
     h1 {
+      font-family: $title-font;
       font-size: 70px;
       font-weight: 700;
       color: $title-font-color;
