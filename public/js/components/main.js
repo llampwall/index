@@ -514,7 +514,11 @@ var Messenger = function (_Component) {
         return _react2.default.createElement(
           'div',
           { className: 'user', key: user.id },
-          _react2.default.createElement('div', { className: 'user-img' }),
+          _react2.default.createElement('div', { className: 'user-img', style: {
+              backgroundImage: 'url("' + user.profile_img + '")',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover' } }),
           _react2.default.createElement(
             'div',
             { className: 'username' },

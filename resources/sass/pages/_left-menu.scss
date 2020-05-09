@@ -1,22 +1,22 @@
 #left-menu {
-    border-right: 1px solid $apricot;
-    color: $apricot;
+    border-right: $border-thickness solid $border-color;
     position: relative;
     
     .account-dropdown {
       display: grid;
       grid-template-columns: 1fr 4fr 1fr;
       padding: .77rem;
-      // margin-bottom: 2rem;
-      border-bottom: 1px solid $apricot;
-      background-color: $apricot;
-      color: white;
+      border-bottom: $border-thickness solid $border-color;
+      // border-right: $border-thickness solid $border-color;
+      background-color: $left-menu-header-bg;
+      color: $left-menu-header;
       height: 58px;
       min-width: 200px;
       .logo {
         display: flex;
         justify-content: center;
         align-items: center;
+        color: $primary-font-color;
         cursor: pointer;
         .fa {
           font-size: 1.3rem;
@@ -29,7 +29,7 @@
         text-transform: lowercase;
         font-size: .8rem;
         font-weight: 700;
-        color: white;
+        color:  $left-menu-header;
         cursor: pointer;
       }
       .icon-down {
@@ -38,6 +38,7 @@
         position: relative;
         cursor: pointer;
         .fa {
+          color: $primary-font-color;
           font-size: 1rem;
           position: absolute;
           top: 6px;
@@ -52,7 +53,7 @@
       right: 0;
       width: 100%;
       z-index: 10;
-      background: $tundra;
+      background: $dropdown;
       transition: all .3s ease-in-out;
       nav {
         width: 100%;
@@ -61,11 +62,11 @@
           text-align: center;
           display: block;
           padding: .4rem 1rem;
-          color: $goldenrod;
+          color: $third;
           font-weight: 500;
           &:hover {
-            background: $apricot;
-            color: white;
+            background: $primary;
+            color: $secondary;
           }
         }
       } 
@@ -83,7 +84,7 @@
         text-transform: lowercase;
         font-weight: bold;
         padding: .7rem 0;
-        color: $sandy;
+        color: $third;
       }
 
       ul {
@@ -93,14 +94,15 @@
           padding: .7rem 0;
           font-weight: 700;
           transition: all .3 ease;
+          color: $primary-font-color;
           cursor: pointer;
 
           &::before{
             content: ":/~";
           }
           &:hover {
-            background: $apricot;
-            color: white;
+            background: $primary-font-color;
+            color: $secondary-font-color;
             transform: scale(1.05);
           }
         }
@@ -111,14 +113,15 @@
       width: 100%;
       padding: .5rem;
       height: 50px;
-      border-top: 1px solid $apricot;
+      border-top: $border-thickness solid $border-color;
       position: absolute;
       bottom: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all .2s ease-in-out;
-      color: $apricot;
+      background: $left-menu-footer-bg;
+      color: $primary-font-color;
       transition: all .2s ease-in-out;
 
       .fa {
@@ -126,8 +129,8 @@
       }
 
       &:hover {
-        background: $apricot;
-        color: white;
+        background: $primary-font-color;
+        color: $secondary;
       }
     }
   }

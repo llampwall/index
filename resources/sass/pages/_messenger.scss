@@ -1,0 +1,131 @@
+#messenger {
+    min-width: 200px;
+    max-height: 85vh;
+    position: relative;
+
+    .messenger-header {
+      background-color: $messenger-header-bg;
+      color: $messenger-header;
+      display: grid;
+      grid-template-columns: 1fr 4fr 1fr;
+      height: 58px;
+      border-bottom: $border-thickness solid $border-color;
+      min-width: 101%;
+
+      .messenger-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 1.5rem;
+        cursor: pointer;
+      }
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .options-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-right: 1.5rem;
+        cursor: pointer;
+      }
+    }
+
+    .users {
+      padding-top: .7rem;
+      display: block;
+      box-sizing: content-box;
+      width: 110%;
+      height: calc(85vh - 120px);
+      overflow: auto;
+      background: $messenger-bg;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .user {
+        display: flex;
+        align-items: center;
+        padding: .7rem;
+        cursor: pointer;
+        transition: all .3s ease;
+        color: $secondary-font-color;
+        background: $messenger-user-bg;
+        &:hover {
+          background: $primary-font-color;
+          color: $messenger-user-bg;
+          transform: scale(1.05);
+        }
+
+        &:nth-of-type(2n){
+          background: $messenger-user-bg-alt;
+          color: $secondary-font-color;
+          &:hover {
+            background: $primary-font-color;
+            color: $messenger-user-bg-alt;
+          }
+        }
+
+        border-bottom: $border-thickness solid $border-color;
+
+        .user-img {
+          height: 35px;
+          width: 35px;
+
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          border: $border-thickness solid $border-color;
+          margin-right: .6rem;
+        }
+        
+        .username {
+          font-size: .9rem;
+        }
+
+        .message-icon {
+          margin-left: auto;
+          margin-right: 1.8rem;
+          
+          .fa {
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+
+    .search {
+      width: 100%;
+      padding: .5rem;
+      height: 50px;
+      background: $messenger-footer-bg;
+      border-top: $border-thickness solid $border-color;
+      position: absolute;
+      bottom: 0;
+
+      .fa {
+        margin-left: .8rem;
+      }
+
+      input[type='text'] {
+        border: none;
+        background: transparent;
+        outline: none;
+        padding: .5rem;
+        border-radius: 30%;
+        width: 70%;
+        color: $primary-font-color;
+        font-size: 1rem;
+        &::placeholder {
+          color: $placeholder-font-color;
+        }
+        &:focus::placeholder {
+          color: transparent;
+        }
+      }
+    }
+  }

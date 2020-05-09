@@ -20,16 +20,16 @@
         .welcome {
 
             h1 {
-                color: white;
+                color: $welcome-color;
                 text-align: center;
                 font-size: 43px;
                 margin-bottom: 2rem;
             }
     
             h3 {
-                color: $sandy;
+                color: $welcome-subtitle;
                 text-align: center;
-                font-size: 12px;
+                font-size: 13px;
             }
         }
 
@@ -79,13 +79,13 @@
                 margin: 2rem auto;
                 width: 50%;
                 height: 2px;
-                background-color: white;
+                background-color: $welcome-color;
             }
 
             .register {
-                color: white;
+                color: $welcome-color;
                 &:hover {
-                    color: $apricot;
+                    color: $primary-font-color;
                 }
             }
         }

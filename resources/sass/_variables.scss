@@ -19,41 +19,83 @@ $burning: #D35701;
 $silouette: #5C0C01;
 $darkness: #2E0201;
 
-// theme vars
-// $primary: null;
-// $secondary: null;
-// $dark: null;
-// text1: null;
-// text2: null;
+
+// ========= THEME SECTION ========
+$primary: #7395AE;
+$secondary: #ADADAD;
+$third: #557A95;
+$fourth:#5D5C61;
+$title-font-color: $secondary;
+$primary-font-color: #4F1B1D;
+$secondary-font-color: $fourth;
+$placeholder-font-color: #ADADAD;
+$third-font-color: $primary;
+
+
+// seafoam
+// $primary: #CAFAFE;
+// $secondary: #85CDCA;
+// $third: #55BDCA;
+// $fourth:#05396B;
+// $title-font-color: $secondary;
+// $primary-font-color: #05396B;
+// $secondary-font-color: #05396B;
+// $placeholder-font-color: $primary;
+// $third-font-color: $primary;
+
+
+// original (roughly)
+// $primary: $apricot;
+// $secondary: $offwhite;
+// $third: $sunlight;
+// $title-font-color: $secondary;
+// $primary-font-color: $primary;
+// $secondary-font-color: $primary;
+// $placeholder-font-color: $primary;
+// $third-font-color: $third;
+
+
 
 // area specific color vars
-$outer-bg: $apricot;
-$search-header-bg: $offwhite;
-$left-menu-bg: $offwhite;
-$left-menu-header-bg: $apricot;
-$messenger-bg: $offwhite;
-$messenger-header-bg: $apricot;
+$outer-bg: $primary;
+$content-area-bg: $primary;
+$welcome-color: white;
+$welcome-subtitle: black;
+$search-header-bg: $secondary;
+$left-menu-bg: $primary;
+$left-menu-header:#4F1B1D;
+$left-menu-header-bg: $secondary;
+$left-menu-footer-bg: $third;
+$dropdown: $secondary;
+$messenger-bg: $secondary;
+$messenger-header: $primary-font-color;
+$messenger-header-bg: $secondary;
+$messenger-user-bg: transparent;
+$messenger-user-bg-alt: $messenger-user-bg;
+$messenger-footer-bg: $third;
 $post-area-bg: white;
-$compose-bg: $offwhite;
-$post-bg: $offwhite;
-$post-header-bg: $offwhite;
+$compose-bg: $secondary;
+$post-bg: $secondary;
+$post-header-bg: $secondary;
+$comment-bg: $primary;
+$comment-bg-alt: $primary;
+$write-comment-bg: $third;
 
-$border-color: $apricot;
+$button-bg: $primary;
+$button-color: $third;
 $shadow-color: rgba(0,0,0,0.75);
 $shadow-light: rgba(255,255,255,.9);
 
-$title-font-color: $offwhite;
-$primary-font-color: $apricot;
-$secondary-font-color: $offwhite;
-
-
+$border-color: $fourth;
+$border-thickness: 1px;
 
 // other vars
 $app-width: 80vw;
 $app-height: 85vh;
 $title-font: Montserrat;
-$main-font: Montserrat;
-$small-font: Montserrat;
+$main-font: 'Montserrat', sans-serif;
+$small-font: 'Montserrat', sans-serif;
+
 
 
 //hixle.co/gradients/fire
@@ -116,7 +158,7 @@ $small-font: Montserrat;
       left: -100%;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, transparent, $apricot);
+      background: linear-gradient(90deg, transparent, $primary);
       animation: btn-anim1 1s linear infinite;
   }
     
@@ -134,7 +176,7 @@ $small-font: Montserrat;
       right: 0;
       width: 2px;
       height: 100%;
-      background: linear-gradient(180deg, transparent, $apricot);
+      background: linear-gradient(180deg, transparent, $primary);
       animation: btn-anim2 1s linear infinite;
       animation-delay: .25s
   }
@@ -153,7 +195,7 @@ $small-font: Montserrat;
       right: -100%;
       width: 100%;
       height: 2px;
-      background: linear-gradient(270deg, transparent, $apricot);
+      background: linear-gradient(270deg, transparent, $primary);
       animation: btn-anim3 1s linear infinite;
       animation-delay: .5s
   }
@@ -172,7 +214,7 @@ $small-font: Montserrat;
       left: 0;
       width: 2px;
       height: 100%;
-      background: linear-gradient(360deg, transparent, $apricot);
+      background: linear-gradient(360deg, transparent, $primary);
       animation: btn-anim4 1s linear infinite;
       animation-delay: .75s
   }

@@ -32,7 +32,11 @@ export default class Messenger extends Component {
       this.state.users.map((user) => {
         return (
           <div className="user" key={user.id}>
-            <div className="user-img" />
+            <div className="user-img" style={{
+              backgroundImage: `url("${user.profile_img}")`, 
+              backgroundPosition: 'center center', 
+              backgroundRepeat: 'no-repeat', 
+              backgroundSize: 'cover'}} />
             <div className="username">
               {user.fname} {user.lname}
             </div>

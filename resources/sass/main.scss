@@ -11,15 +11,13 @@
 @import "pages/left-menu";
 @import "pages/compose";
 @import "pages/all-posts";
-
-.fa-arrow-right:before {
-  content: "\f061"; }
+@import "pages/messenger";
 
 
 * {
   box-sizing: border-box;
   // font-family: 'Source Code Pro', monospace;
-  font-family: 'Montserrat', sans-serif;
+  font-family: $main-font;
 }
 
 a {
@@ -28,7 +26,8 @@ a {
 
 body {
 
-  @include main-gradient;
+  background: $outer-bg;
+  // @include main-gradient;
   min-height: 100vh;
   width: 100vw;
   display: flex;
@@ -42,7 +41,7 @@ body {
     h1 {
       font-size: 70px;
       font-weight: 700;
-      color: $offwhite;
+      color: $secondary;
       letter-spacing: 20px;
       white-space: nowrap;
       width: 4.5em;
@@ -81,11 +80,12 @@ body {
   .app-container {
     width: 100%;
     max-width: 1400px;
-    background: $offwhite;
+    background: $secondary;
     margin: 0 auto;
     min-height: 85vh;
     height: 85vh;
     overflow: hidden;
+    border: $border-thickness solid $border-color;
   }
     
 }
@@ -98,11 +98,11 @@ input[type="password"] {
   padding: 3px 8px;
   width: 100%;
   background: white;
-  border: 1px solid $apricot;
+  border: 1px solid $primary;
   outline: none;
-  color: $apricot;
+  color: $primary;
   &::placeholder {
-    color: $apricot;
+    color: $primary;
     opacity: .5;
   }
   &:focus::placeholder {

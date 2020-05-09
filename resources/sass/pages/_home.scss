@@ -4,17 +4,17 @@
   grid-template-columns: minmax(200px, 15%) 70% minmax(200px, 15%);
 
   #content-container {
-    border-right: 1px solid $apricot;
-    color: $apricot;
-    background: white;
+    border-right: $border-thickness solid $border-color;
+    color: $primary-font-color;
     max-height: 85vh;
     overflow: hidden;
+    background-color: $content-area-bg;
 
     .header {
       display: flex;
       padding: .7rem;
-      border-bottom: 1px solid $apricot;
-      background-color: $offwhite;
+      border-bottom: $border-thickness solid $border-color;
+      background-color: $post-header-bg;
       .nothing {
         width: 116px;
       }
@@ -26,13 +26,12 @@
           font-size: 1.3rem;
           padding: 3px 8px;
           width: 100%;
-          background: white;
-          border: 1px solid $apricot;
-          // border: none;
+          background: $write-comment-bg;
+          border: $border-thickness solid $border-color;
           outline: none;
-          color: $apricot;
+          color: $primary-font-color;
           &::placeholder {
-            color: $apricot;
+            color: $placeholder-font-color;
             opacity: .5;
           }
           &:focus::placeholder {
@@ -44,8 +43,7 @@
       .icons {
         display: grid;
         grid-template-columns: repeat(3, 2rem);
-        // border: 1px solid $apricot;
-        grid-gap: 5px;
+
         padding: 0 5px;
         cursor: pointer;
 
@@ -54,7 +52,7 @@
           align-items: center;
           justify-content: center;
           font-size: 1.1rem;
-          color: $apricot;
+          color: $button-color;
         }
       }
     }
@@ -67,135 +65,6 @@
       overflow: auto;
     }
     
-  }
-
-  #messenger {
-    color: $apricot;
-    min-width: 200px;
-    max-height: 85vh;
-    position: relative;
-
-    .messenger-header {
-      background-color: $apricot;
-      color: white;
-      display: grid;
-      grid-template-columns: 1fr 4fr 1fr;
-      height: 58px;
-      border-bottom: 1px solid $apricot;
-      min-width: 101%;
-
-      .messenger-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding-left: 1.5rem;
-        cursor: pointer;
-      }
-      .title {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        font-weight: 700;
-      }
-      .options-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding-right: 1.5rem;
-        cursor: pointer;
-      }
-    }
-
-    .users {
-      padding-top: .7rem;
-      display: block;
-      box-sizing: content-box;
-      width: 110%;
-      height: calc(85vh - 120px);
-      overflow: auto;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      .user {
-        display: flex;
-        align-items: center;
-        padding: .7rem;
-        cursor: pointer;
-        transition: all .3s ease;
-        &:hover {
-          background: $apricot;
-          color: white;
-          transform: scale(1.05);
-        }
-
-        &:nth-of-type(2n){
-          background: white;
-          &:hover {
-            background: $apricot;
-          }
-        }
-
-        border-bottom: 1px solid $apricot;
-
-        .user-img {
-          height: 35px;
-          width: 35px;
-          background: url('https://pbs.twimg.com/profile_images/1005670478231547909/wPhZMQM6.jpg');
-          background-position: center center;
-          background-repeat: no-repeat;
-          background-size: cover;
-          border: 1px solid $apricot;
-          margin-right: .6rem;
-        }
-        
-        .username {
-          font-size: .9rem;
-        }
-
-        .message-icon {
-          margin-left: auto;
-          margin-right: 1.8rem;
-          
-          .fa {
-            font-size: 1.1rem;
-          }
-        }
-      }
-    }
-
-    .search {
-      width: 100%;
-      padding: .5rem;
-      height: 50px;
-      border-top: 1px solid $apricot;
-      position: absolute;
-      bottom: 0;
-      // left: -8px;
-
-
-      .fa {
-        margin-left: .8rem;
-      }
-
-      input[type='text'] {
-        border: none;
-        background: transparent;
-        outline: none;
-        padding: .5rem;
-        border-radius: 30%;
-        width: 70%;
-        color: $apricot;
-        font-size: 1rem;
-        &::placeholder {
-          color: $apricot;
-        }
-        &:focus::placeholder{
-          color: transparent;
-        }
-      }
-    }
   }
 
 }

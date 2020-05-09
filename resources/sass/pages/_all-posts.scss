@@ -3,23 +3,22 @@
       margin: 0 auto;
       width: 85%;
       max-width: 700px;
-      background: white;
 
       .post {
         position: relative;
         width: 100%;
         @include hard-shadow;
         margin-bottom: 3rem;
-        border: 1px solid $apricot;
-        font-family: 'Montserrat', sans-serif;
+        border: $border-thickness solid $border-color;
+        font-family: $main-font;
 
         .post-header {
-          background: $offwhite;
+          background: $post-header-bg;
           width: 100%;
           margin: 0 auto;
           display: flex;
           align-items: center;
-          border-bottom: 1px solid $apricot;
+          border-bottom: $border-thickness solid $border-color;
           
           .author {
             display: flex;
@@ -27,28 +26,28 @@
             .user-img {
               height: 40px;
               width: 40px;
-              border-right: 1px solid $apricot;
+              border-right: $border-thickness solid $border-color
             }
             .username {
-              color: $apricot;
+              color: $third-font-color;
               display: flex;
               align-items: center;
               justify-content: center;
               text-transform: lowercase;
               font-size: .9rem;
               font-weight: 700;
-              color: $sandy;
               cursor: pointer;
               padding: 0 1rem;
             }
 
             .text {
-              color: $apricot;
+              color: $primary-font-color;
               font-size: .9rem;
             }
           }
           
           .time {
+            color: $primary-font-color;
             margin-left: auto;
             padding: 0 1rem;
             font-size: .9rem;
@@ -59,12 +58,12 @@
             display: none;
             height: 20px;
             width: 20px;
-            background: white;
-            color: $apricot;
+            background: $button-bg;
+            color: $button-color;
             padding: 15px;
             align-items: center;
             justify-content: center;
-            border: 1px solid $apricot;
+            border: $border-thickness solid $button-color;
             margin-right: .7rem;
             cursor: pointer;
 
@@ -77,15 +76,15 @@
             }
             
             &:hover {
-              background: $apricot;
-              color: white;
+              background: $button-color;
+              color: $button-bg;
             }
           }
         }
 
         .post-media {
           width: 100%;
-          border-bottom: 1px solid $apricot;
+          border-bottom: $border-thickness solid $border-color;
           margin: 0 auto;
           transition: all .3s ease;
           height: 400px;
@@ -97,7 +96,7 @@
 
         .post-info {
           border-bottom: none;
-          background: $offwhite;
+          background: $post-bg;
           width: 100%;
           margin: 0 auto 0;
           z-index: -10;
@@ -121,52 +120,44 @@
             text-align: left;
             font-size: 1.3rem;
             word-wrap: break-word;
-            // font-weight: 700;
             padding: 1rem 1rem;
-            background: $offwhite;
-            color: $geraldine;
-            // @include hard-shadow;
+            background: $post-bg;
+            color: $primary-font-color;
             transition: all .3s ease-in-out;
             cursor: pointer;
-            // &:hover {
-            //   transform: scale(1.05);
-            // }
           }
         }
 
         .post-stats {
-          background: $offwhite;
+          background: $post-bg;
           width: 100%;
           margin: 0 auto;
           display: flex;
           align-items: center;
           padding: .3rem;
-          // @include hard-shadow;
+
           .icons {
-            // .fa {
-            //   font-size: 1.2rem;
-            // }
 
             .like-btn {
               height: 20px;
               width: 20px;
-              background: white;
+              background: $button-bg;
               padding: 15px;
               display: flex;
               align-items: center;
               justify-content: center;
-              border: 1px solid $apricot;
+              border: $border-thickness solid $button-color;
               margin-right: .7rem;
               cursor: pointer;
               
               &.active {
-                background: $apricot;
-                color: white;
+                background: $button-color;
+                color: $button-bg
               }
 
               &:hover {
-                background: $apricot;
-                color: white;
+                background: $button-color;
+                color: $button-bg;
               }
             }
           }
@@ -184,9 +175,8 @@
 
         .c-section {
           width: 100%;
-          background: $offwhite;
-          border-top: 1px solid $apricot;
-          border-bottom: 1px solid $apricot;
+          background: $post-bg;
+          border-top: $border-thickness solid $border-color;
           padding: 0;
 
           textarea {
@@ -195,7 +185,9 @@
             resize: none;
             border: none;
             padding: .5rem 2.5rem .5rem 1rem;
-            color: $apricot;
+            border-bottom: $border-thickness solid $border-color;
+            background: $write-comment-bg;
+            color: $primary-font-color;
             transition: all .3s ease;
             font-size: 14px;
             overflow-y: auto;
@@ -207,7 +199,7 @@
               height: 50px;
             }
             &::placeholder {
-              color: $apricot;
+              color: $placeholder-font-color;
             }
             &:focus::placeholder{
               color: transparent;
@@ -220,32 +212,30 @@
           display: flex;
           justify-content: space-between;
           padding: .5rem;
-          background: $offwhite;
-          // @include hard-shadow;
+          background: $post-bg;
           position: relative;
           border-top: none;
 
           .comments {
             width: 100%;
-            border: 1px solid $apricot;
+            border: $border-thickness solid $border-color;
             display: flex;
             flex-direction: column;
             
             .single-comment {
-              background: white;
+              background: $comment-bg;
               display: flex;
-              // grid-template-columns: 1fr 3fr;
               width: 100%;
               min-height: 25px;
               padding: .5rem .2rem;
               position: relative;
 
               &:nth-of-type(2n){
-                background: $offwhite;
+                background: $comment-bg-alt;
               }
 
               &:not(:last-of-type) {
-                border-bottom: 1px solid $apricot;
+                border-bottom: $border-thickness solid $border-color;
               }
 
               &:hover {
@@ -269,7 +259,7 @@
               h2 {
                 font-size: .9rem;
                 font-weight: 500;
-                color: $apricot;
+                color: $primary-font-color;
                 padding-top: .3rem;
                 display: inline-block;
                 padding-right: .5rem;
@@ -292,12 +282,12 @@
                 right: 0px;
                 height: 20px;
                 width: 20px;
-                background: white;
-                color: $apricot;
+                background: $button-bg;
+                color: $button-color;
                 padding: 15px;
                 align-items: center;
                 justify-content: center;
-                border: 1px solid $apricot;
+                border: $border-thickness solid $button-color;
                 margin-right: .7rem;
                 cursor: pointer;
 
@@ -310,8 +300,8 @@
                 }
                 
                 &:hover {
-                  background: $apricot;
-                  color: white;
+                  background: $button-color;
+                  color: $button-bg;
                 }
               }
             }
@@ -320,12 +310,12 @@
           .send-btn {
             height: 20px;
             width: 20px;
-            background: white;
+            background: $button-bg;
             padding: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid $apricot;
+            border: $border-thickness solid $button-color;
             margin-right: .7rem;
             cursor: pointer;
             position: absolute;
@@ -333,8 +323,8 @@
             right: 0px;
 
             &:hover {
-              background: $apricot;
-              color: white;
+              background: $button-color;
+              color: $button-bg;
             }
             .fa {
               font-size: 1.2rem;

@@ -15,7 +15,7 @@
     position: relative;
     img {
       width: 30%;
-      // border: 2px solid $apricot;
+      // border: 2px solid $primary;
       @include hard-shadow;
     }
 
@@ -24,7 +24,7 @@
       bottom: 1rem;
       font-size: 2.5rem;
       font-weight: 700;
-      color: $apricot;
+      color: $primary-font-color;
     }
   }
 
@@ -48,9 +48,9 @@
         opacity: 0;
         transition: all .5s ease-in-out;
         resize: none;
-        border: 1px solid $apricot;
+        border: $border-thickness solid $border-color;
         padding: .5rem;
-        color: $apricot;
+        color: $primary-font-color;
         font-size: 14px;
         overflow-y: auto;
         outline: none;
@@ -63,12 +63,12 @@
 
       .bio-btn {
         padding: .3rem .7rem;
-        border: 1px solid $apricot;
+        border: $border-thickness solid $border-color;
         margin: 0 auto;
         cursor: pointer;
         &:hover {
-          background-color: $apricot;
-          color: white;
+          background-color: $primary-font-color;
+          color: $secondary;
           font-weight: 500;
         }
       }
@@ -76,14 +76,14 @@
 
     .follow-btn {
       overflow: hidden;
-      border: 1px solid $apricot;
+      border: $border-thickness solid $border-color;
       padding: 1rem 2rem;
       margin: 2rem auto;
       font-size: 2rem;
       text-align: center;
       cursor: pointer;
-      background: $apricot;
-      color: $offwhite;
+      background: $button-color;
+      color: $button-bg;
       @include main-gradient;
       @include hard-shadow;
       transition: all .2s ease;
@@ -93,8 +93,8 @@
           -moz-box-shadow: 0px 0px 0px 0px rgba(255,255,255,.9);
           box-shadow: 0px 0px 0px 0px rgba(255,255,255,.9);
           transform: translate(5px, 5px);
-          color: $apricot;
-          background: $offwhite;
+          color: $button-color;
+          background: $button-bg;
       }
     }
   }
