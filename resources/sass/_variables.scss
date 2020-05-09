@@ -26,10 +26,34 @@ $darkness: #2E0201;
 // text1: null;
 // text2: null;
 
+// area specific color vars
+$outer-bg: $apricot;
+$search-header-bg: $offwhite;
+$left-menu-bg: $offwhite;
+$left-menu-header-bg: $apricot;
+$messenger-bg: $offwhite;
+$messenger-header-bg: $apricot;
+$post-area-bg: white;
+$compose-bg: $offwhite;
+$post-bg: $offwhite;
+$post-header-bg: $offwhite;
+
+$border-color: $apricot;
+$shadow-color: rgba(0,0,0,0.75);
+$shadow-light: rgba(255,255,255,.9);
+
+$title-font-color: $offwhite;
+$primary-font-color: $apricot;
+$secondary-font-color: $offwhite;
+
+
+
 // other vars
 $app-width: 80vw;
 $app-height: 85vh;
-
+$title-font: Montserrat;
+$main-font: Montserrat;
+$small-font: Montserrat;
 
 
 //hixle.co/gradients/fire
@@ -70,15 +94,15 @@ $app-height: 85vh;
 }
 
 @mixin hard-shadow {
-  -webkit-box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75);
-  box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 5px 5px 0px 0px $shadow-color;
+  -moz-box-shadow: 5px 5px 0px 0px $shadow-color;
+  box-shadow: 5px 5px 0px 0px $shadow-color;
 }
 
 @mixin hard-shadow-white {
-  -webkit-box-shadow: 5px 5px 0px 0px rgba(255,255,255,.9);
-  -moz-box-shadow: 5px 5px 0px 0px rgba(255,255,255,.9);
-  box-shadow: 5px 5px 0px 0px rgba(255,255,255,.9);
+  -webkit-box-shadow: 5px 5px 0px 0px $shadow-light;
+  -moz-box-shadow: 5px 5px 0px 0px $shadow-light;
+  box-shadow: 5px 5px 0px 0px $shadow-light;
 }
 
 @mixin button-animation {

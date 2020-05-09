@@ -1,0 +1,347 @@
+#all-posts {
+    .post-container {
+      margin: 0 auto;
+      width: 85%;
+      max-width: 700px;
+      background: white;
+
+      .post {
+        position: relative;
+        width: 100%;
+        @include hard-shadow;
+        margin-bottom: 3rem;
+        border: 1px solid $apricot;
+        font-family: 'Montserrat', sans-serif;
+
+        .post-header {
+          background: $offwhite;
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          border-bottom: 1px solid $apricot;
+          
+          .author {
+            display: flex;
+            align-items: center;
+            .user-img {
+              height: 40px;
+              width: 40px;
+              border-right: 1px solid $apricot;
+            }
+            .username {
+              color: $apricot;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-transform: lowercase;
+              font-size: .9rem;
+              font-weight: 700;
+              color: $sandy;
+              cursor: pointer;
+              padding: 0 1rem;
+            }
+
+            .text {
+              color: $apricot;
+              font-size: .9rem;
+            }
+          }
+          
+          .time {
+            margin-left: auto;
+            padding: 0 1rem;
+            font-size: .9rem;
+            opacity: .7;
+          }
+
+          .del-btn {
+            display: none;
+            height: 20px;
+            width: 20px;
+            background: white;
+            color: $apricot;
+            padding: 15px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid $apricot;
+            margin-right: .7rem;
+            cursor: pointer;
+
+            &.active {
+              display: flex;
+            }
+
+            .fa {
+              font-size: 1.2rem;
+            }
+            
+            &:hover {
+              background: $apricot;
+              color: white;
+            }
+          }
+        }
+
+        .post-media {
+          width: 100%;
+          border-bottom: 1px solid $apricot;
+          margin: 0 auto;
+          transition: all .3s ease;
+          height: 400px;
+          z-index: 2;
+          &:hover {
+            width: 100%;
+          }
+        }
+
+        .post-info {
+          border-bottom: none;
+          background: $offwhite;
+          width: 100%;
+          margin: 0 auto 0;
+          z-index: -10;
+
+          .title {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: .3rem;
+
+            &::before {
+              content: "~{"
+            }
+            &::after {
+              content: "}~"
+            }
+          }
+
+          p {
+            width: 100%;
+            text-align: left;
+            font-size: 1.3rem;
+            word-wrap: break-word;
+            // font-weight: 700;
+            padding: 1rem 1rem;
+            background: $offwhite;
+            color: $geraldine;
+            // @include hard-shadow;
+            transition: all .3s ease-in-out;
+            cursor: pointer;
+            // &:hover {
+            //   transform: scale(1.05);
+            // }
+          }
+        }
+
+        .post-stats {
+          background: $offwhite;
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          padding: .3rem;
+          // @include hard-shadow;
+          .icons {
+            // .fa {
+            //   font-size: 1.2rem;
+            // }
+
+            .like-btn {
+              height: 20px;
+              width: 20px;
+              background: white;
+              padding: 15px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 1px solid $apricot;
+              margin-right: .7rem;
+              cursor: pointer;
+              
+              &.active {
+                background: $apricot;
+                color: white;
+              }
+
+              &:hover {
+                background: $apricot;
+                color: white;
+              }
+            }
+          }
+
+          .text {
+            font-size: .9rem;
+            margin-left: .5rem;
+          }
+
+          .comment-count {
+            font-size: .9rem;
+            margin-left: auto;
+          }
+        }
+
+        .c-section {
+          width: 100%;
+          background: $offwhite;
+          border-top: 1px solid $apricot;
+          border-bottom: 1px solid $apricot;
+          padding: 0;
+
+          textarea {
+            width: 100%;
+            height: 45px;
+            resize: none;
+            border: none;
+            padding: .5rem 2.5rem .5rem 1rem;
+            color: $apricot;
+            transition: all .3s ease;
+            font-size: 14px;
+            overflow-y: auto;
+            outline: none;
+            &::-webkit-scrollbar {
+              display: none;
+            }
+            &:focus {
+              height: 50px;
+            }
+            &::placeholder {
+              color: $apricot;
+            }
+            &:focus::placeholder{
+              color: transparent;
+            }
+          }
+        }
+        .buttons {
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          padding: .5rem;
+          background: $offwhite;
+          // @include hard-shadow;
+          position: relative;
+          border-top: none;
+
+          .comments {
+            width: 100%;
+            border: 1px solid $apricot;
+            display: flex;
+            flex-direction: column;
+            
+            .single-comment {
+              background: white;
+              display: flex;
+              // grid-template-columns: 1fr 3fr;
+              width: 100%;
+              min-height: 25px;
+              padding: .5rem .2rem;
+              position: relative;
+
+              &:nth-of-type(2n){
+                background: $offwhite;
+              }
+
+              &:not(:last-of-type) {
+                border-bottom: 1px solid $apricot;
+              }
+
+              &:hover {
+                & > .del-btn {
+                  opacity: 1;
+                }
+              }
+              
+
+              a.user {
+                display: flex;
+                align-items: flex-start;
+
+              }
+              .comment-pic {
+                height: 25px;
+                width: 25px;
+                margin-right: .5rem;
+              }
+              
+              h2 {
+                font-size: .9rem;
+                font-weight: 500;
+                color: $apricot;
+                padding-top: .3rem;
+                display: inline-block;
+                padding-right: .5rem;
+              }
+
+              p {
+                padding: .2rem .3rem;
+                display: flex;
+                font-size: .9rem;
+                align-items: center;
+                word-break: break-word;
+              }
+
+              .del-btn {
+                display: none;
+                opacity: 0;
+                transition: all .3s ease-in-out;
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                height: 20px;
+                width: 20px;
+                background: white;
+                color: $apricot;
+                padding: 15px;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid $apricot;
+                margin-right: .7rem;
+                cursor: pointer;
+
+                &.active {
+                  display: flex;
+                }
+
+                .fa {
+                  font-size: 1.2rem;
+                }
+                
+                &:hover {
+                  background: $apricot;
+                  color: white;
+                }
+              }
+            }
+          }
+
+          .send-btn {
+            height: 20px;
+            width: 20px;
+            background: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid $apricot;
+            margin-right: .7rem;
+            cursor: pointer;
+            position: absolute;
+            top: -42px;
+            right: 0px;
+
+            &:hover {
+              background: $apricot;
+              color: white;
+            }
+            .fa {
+              font-size: 1.2rem;
+            }
+          }
+          
+        }
+      }
+    }
+  }
