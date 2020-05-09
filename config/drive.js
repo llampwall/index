@@ -39,8 +39,8 @@ module.exports = {
     */
     s3: {
       driver: 's3',
-      key: Env.get('AWS_ACCESS_KEY_ID', 'AKIAJSB3B6HDLHQFPGEA'),
-      secret: Env.get('AWS_SECRET_ACCESS_KEY', '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'),
+      key: Env.get('AWS_ACCESS_KEY_ID'),
+      secret: Env.get('AWS_SECRET_ACCESS_KEY'),
       bucket: Env.get('S3_BUCKET', 'index-social'),
       region: Env.get('S3_REGION', 'us-west-1')
     }
