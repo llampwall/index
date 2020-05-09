@@ -1169,7 +1169,7 @@ var Compose = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
 
     _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-      var self, fData, response, img_url, file, filename, type, _response;
+      var self, fData, response, file, filename, type, _response;
 
       return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
@@ -1220,14 +1220,13 @@ var Compose = function (_Component) {
               fData.append('user_id', _this.props.initialData.userData.id);
 
               if (!(_this.state.image == '')) {
-                _context3.next = 23;
+                _context3.next = 22;
                 break;
               }
 
               fData.append('img_name', '');
 
-              console.log('no image');
-              _context3.next = 20;
+              _context3.next = 19;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -1242,24 +1241,20 @@ var Compose = function (_Component) {
                 return 'item saved';
               });
 
-            case 20:
+            case 19:
               response = _context3.sent;
-              _context3.next = 37;
+              _context3.next = 34;
               break;
 
-            case 23:
-
-              console.log('image');
-              // get signed url from the server
-              img_url = '';
-              _context3.prev = 25;
+            case 22:
+              _context3.prev = 22;
               file = self.state.image;
               filename = file.name;
               type = encodeURIComponent(file.type);
               // console.log(filename)
               // console.log(type)
 
-              _context3.next = 31;
+              _context3.next = 28;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
                 var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
                   var options;
@@ -1334,23 +1329,23 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 31:
+            case 28:
               _response = _context3.sent;
-              _context3.next = 37;
+              _context3.next = 34;
               break;
 
-            case 34:
-              _context3.prev = 34;
-              _context3.t0 = _context3['catch'](25);
+            case 31:
+              _context3.prev = 31;
+              _context3.t0 = _context3['catch'](22);
 
               console.log("axios didnt work: " + _context3.t0);
 
-            case 37:
+            case 34:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[25, 34]]);
+      }, _callee3, _this2, [[22, 31]]);
     }));
 
     _this.handleChange = function (event) {

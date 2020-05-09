@@ -1,10 +1,11 @@
 'use strict'
 
-const { validate, sanitize } = use('Validator')
+const { validate } = use('Validator')
 const Hash = use('Hash')
 const User = use('App/Models/User')
 const Helpers = use('Helpers')
 const Env = use('Env')
+const Drive = use('Drive')
 
 class AuthController {
 
@@ -13,107 +14,37 @@ class AuthController {
     }
 
     // get and return a signed aws url for image uploading
-    async getUrl({request, response}) {
-
-        console.log(request.params)
+    async getUrl(fileName, fileType) {
         // prepare aws
-        aws.config.region = 'us-west-1'
-        const S3_BUCKET = Env.get('S3_BUCKET')
-        const s3 = new aws.S3()
-        const fileName = request.params.filename
-        const fileType = decodeURIComponent(request.params.type)
-        console.log(fileName)
-        console.log(fileType)
         const s3Params = {
-            Bucket: S3_BUCKET,
             Key: fileName,
-            Expires: 60,
             ContentType: fileType,
             ACL: 'public-read'
         }
-        console.log(fileType)
-        return await s3.getSignedUrlPromise('putObject', s3Params)
+        // get url
+        return await Drive.disk('s3').getSignedUrl(filename, s3Params)
     }
 
     async storeUser ({ request, session, response, auth }) {
 
-        const rules = {
-            email: 'required|email|unique:users,email',
-            password: 'required|min:8|max:32',
-            confirm: 'required'
-        }
+        console.log(request.body)
 
+        let first, last, email, img, pw, url
         try {
-            const validation = await validate(request.all(), rules)
-
-            if (request.input('password') != request.input('confirm')) {
-                session
-                .withErrors([
-                    {field: 'password', message: "passwords don't match"},
-                    {field: 'confirm', message: "passwords don't match"}
-                ])
-                .flashExcept(['password'])
-    
-                return response.redirect('back')
-            }
-    
-            if (validation.fails()) {
-                session
-                .withErrors(validation.messages())
-                .flashExcept(['password'])
-    
-                return response.redirect('back')
-            }
-
-        } catch(error) {
-            return 'error validating user input'
-        }
-
-        try {
-
-            // console.log(request.input('profile_pic'))
-            let uImg = '/img/user.jpg'
-            if (request.input('profile_pic') != undefined) {
-                uImg = request.input('profile_pic')
-            }
-
-            const imgFile = request.file('profile_pic_upload', {
-                types: ['image'],
-                size: '5mb'
-            })
-            const imgName = request.input('fname') + request.input('lname') + '_profile.jpg'
-            await imgFile.move(Helpers.publicPath('img/users'), {
-                name: imgName,
-                overwrite: true
-            })
-
-            if (!imgFile.moved()) {
-                console.log(imgFile.error())
-            } else {
-                uImg = `${Env.get('APP_URL')}/public/img/users/` + imgName
-                console.log(imgName)
-            }
-
-            let first = 'somebody'
+            first = 'somebody'
             if (request.input('fname') != null) {
                 first = request.input('fname')
             }
 
-            let last = ""
+            last = ""
             if (request.input('lname') != null) {
                 last = request.input('lname')
             }
 
-            let newUser = await User.create({
-                fname: first,
-                lname: last,
-                email: request.input('email'),
-                profile_img: uImg,
-                login_source: 'email',
-                info: '',
-                password: request.input('password')
-            })
-            await auth.login(newUser)
+            email = request.input('email')
+            img = request.input('image_name')
+            pw = request.input('password')
+
         } catch(error) {
             session
             .withErrors([
@@ -124,9 +55,32 @@ class AuthController {
             return response.redirect('back')
         }
 
+        if (img != '') {
+            url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${img}`
+        }
+
+        console.log(first)
+        console.log(last)
+        console.log(email)
+        console.log(img)
+        console.log(pw)
+        console.log(url)
+        let newUser = await User.create({
+            fname: first,
+            lname: last,
+            email: email,
+            profile_img: url,
+            login_source: 'register',
+            info: '',
+            password: pw
+        })
+
+        await auth.login(newUser)
+
         session.flash({notification: 'registered'})
         return response.redirect('/')
     }
+
 
     async login ({response, request, view}) {
         return view.render('auth/login')

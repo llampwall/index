@@ -30,6 +30,7 @@ reorganize scss
 
 easy scrolling
 
+make custom file names for images being sent to amazon
 
 - profile
     - about

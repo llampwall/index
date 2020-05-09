@@ -43,7 +43,6 @@ export default class Compose extends Component {
     if (this.state.image == '') {
       fData.append('img_name', '')
 
-      console.log('no image')
       const response = await axios({
         method: 'post',
         url: '/posts',
@@ -60,9 +59,7 @@ export default class Compose extends Component {
 
     } else {
 
-      console.log('image')
       // get signed url from the server
-      let img_url = ''
       try {
           const file = self.state.image
           const filename = file.name
