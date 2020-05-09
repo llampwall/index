@@ -45,7 +45,7 @@ export default class Profile extends Component {
       ...this.state,
       user: user.data[0]
     }, () => {
-      console.log(this.state)
+      // console.log(this.state)
     })
   }
   
@@ -54,7 +54,7 @@ export default class Profile extends Component {
       ...this.state,
       edit: true
     }, () => {
-      console.log(this.state)
+      // console.log(this.state)
     })
   }
 
@@ -65,7 +65,7 @@ export default class Profile extends Component {
       return <div>bio loading...</div>
     } else {
 
-      console.log(this.state.user)
+      // console.log(this.state.user)
       if (this.state.user.info == "") {
         return (
           <div className="bio">

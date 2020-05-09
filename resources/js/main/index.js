@@ -35,7 +35,7 @@ class Layout extends Component {
         self.setState({
           initialData: allData
         }, () => {
-          console.log(self.state.initialData)
+          // console.log(self.state.initialData)
         })
       } catch (error) {
         console.log("Initialization error: " + error)

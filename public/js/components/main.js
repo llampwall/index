@@ -10,6 +10,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = __webpack_require__(86);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -42,7 +46,7 @@ var _reactDom = __webpack_require__(84);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(107);
+var _reactRouterDom = __webpack_require__(108);
 
 var _axios = __webpack_require__(47);
 
@@ -89,7 +93,7 @@ var Home = function (_Component) {
               _this.setState({
                 initialData: allData
               }, function () {
-                console.log(_this.state.initialData);
+                // console.log(this.state.initialData)
               });
               _context.next = 11;
               break;
@@ -109,7 +113,8 @@ var Home = function (_Component) {
     }));
 
     _this.state = {
-      initialData: {}
+      initialData: {},
+      time: Date.now()
     };
     return _this;
   }
@@ -121,12 +126,12 @@ var Home = function (_Component) {
 
       // console.log(this.props)
       this.interval = setInterval(function () {
-        return _this3.setState({ time: Date.now() });
+        return _this3.setState((0, _extends3.default)({}, _this3.state, { time: Date.now() }));
       }, 3000);
       this.setState({
         initialData: this.props.initialData
       }, function () {
-        console.log(_this3.state);
+        // console.log(this.state)
       });
     }
   }, {
@@ -486,26 +491,26 @@ var Messenger = function (_Component) {
             case 4:
               allUsers = _context.sent;
 
-              console.log("users: ");
-              console.log(allUsers);
+              // console.log("users: ")
+              // console.log(allUsers)
               self.setState({
                 users: allUsers.data
               });
-              _context.next = 13;
+              _context.next = 11;
               break;
 
-            case 10:
-              _context.prev = 10;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context['catch'](1);
 
               console.log("error fetching users: " + _context.t0);
 
-            case 13:
+            case 11:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, _this2, [[1, 10]]);
+      }, _callee, _this2, [[1, 8]]);
     }));
 
     _this.displayUsers = function () {
@@ -604,7 +609,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(109);
+var _extends2 = __webpack_require__(86);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -632,7 +637,7 @@ var _react = __webpack_require__(11);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(107);
+var _reactRouterDom = __webpack_require__(108);
 
 var _axios = __webpack_require__(47);
 
@@ -652,8 +657,6 @@ var Profile = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this));
 
     _this.getUser = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-      var _this2 = this;
-
       var _props$routeProps, match, history, location, self, user;
 
       return _regenerator2.default.wrap(function _callee$(_context) {
@@ -683,7 +686,7 @@ var Profile = function (_Component) {
               this.setState((0, _extends3.default)({}, this.state, {
                 user: user.data[0]
               }), function () {
-                console.log(_this2.state);
+                // console.log(this.state)
               });
 
             case 13:
@@ -698,7 +701,7 @@ var Profile = function (_Component) {
       _this.setState((0, _extends3.default)({}, _this.state, {
         edit: true
       }), function () {
-        console.log(_this.state);
+        // console.log(this.state)
       });
     };
 
@@ -711,7 +714,7 @@ var Profile = function (_Component) {
         );
       } else {
 
-        console.log(_this.state.user);
+        // console.log(this.state.user)
         if (_this.state.user.info == "") {
           return _react2.default.createElement(
             'div',
@@ -1128,7 +1131,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(109);
+var _extends2 = __webpack_require__(86);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1361,7 +1364,7 @@ var Compose = function (_Component) {
       var value = event.target.type == 'checkbox' ? event.target.checked : event.target.value;
 
       _this.setState((0, _defineProperty3.default)({}, name, value), function () {
-        console.log(_this.state);
+        // console.log(this.state)
       });
     };
 
@@ -1381,7 +1384,7 @@ var Compose = function (_Component) {
       _this.setState((0, _extends3.default)({}, _this.state, {
         image: event.target.files[0]
       }), function () {
-        console.log(_this.state);
+        // console.log(this.state)
       });
     };
 
@@ -1465,7 +1468,7 @@ var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _extends2 = __webpack_require__(109);
+var _extends2 = __webpack_require__(86);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1528,7 +1531,7 @@ var Post = function (_Component) {
       var value = event.target.type == 'checkbox' ? event.target.checked : event.target.value;
 
       _this.setState((0, _defineProperty3.default)({}, name, value), function () {
-        console.log(_this.state);
+        // console.log(this.state)
       });
     };
 
@@ -1610,35 +1613,35 @@ var Post = function (_Component) {
           switch (_context2.prev = _context2.next) {
             case 0:
               self = _this;
+              // console.log("post id: " + self.props.post.id)
 
-              console.log("post id: " + self.props.post.id);
-              _context2.prev = 2;
-              _context2.next = 5;
+              _context2.prev = 1;
+              _context2.next = 4;
               return _axios2.default.get('/posts/' + self.props.post.id + '/delete').then(function (response) {
                 console.log('post deleted: ' + response);
                 self.props.update();
               });
 
-            case 5:
-              _context2.next = 10;
+            case 4:
+              _context2.next = 9;
               break;
 
-            case 7:
-              _context2.prev = 7;
-              _context2.t0 = _context2['catch'](2);
+            case 6:
+              _context2.prev = 6;
+              _context2.t0 = _context2['catch'](1);
 
               console.log('error deleting post: ' + _context2.t0);
 
-            case 10:
+            case 9:
               console.log('post deleted');
               self.props.update();
 
-            case 12:
+            case 11:
             case 'end':
               return _context2.stop();
           }
         }
-      }, _callee2, _this2, [[2, 7]]);
+      }, _callee2, _this2, [[1, 6]]);
     }));
 
     _this.getCommentCount = function () {
@@ -1738,21 +1741,21 @@ var Post = function (_Component) {
               _context4.prev = 1;
               _context4.next = 4;
               return _axios2.default.get('/posts/' + self.props.post.id + '/likes').then(function (response) {
-                console.log(response.data.likeData);
+                // console.log(response.data.likeData)
                 var like_d = response.data.likeData;
                 if (like_d.length > 0) {
                   self.setState((0, _extends3.default)({}, self.state, {
                     likes: like_d.length,
                     lastLike: like_d[0].users.fname + ' ' + like_d[0].users.lname
                   }), function () {
-                    console.log(self.state);
+                    // console.log(self.state)
                   });
                 } else {
                   self.setState((0, _extends3.default)({}, self.state, {
                     likes: 0,
                     lastLike: ""
                   }), function () {
-                    console.log(self.state);
+                    // console.log(self.state)
                   });
                 }
               });
@@ -2073,7 +2076,7 @@ var _reactDom = __webpack_require__(84);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(107);
+var _reactRouterDom = __webpack_require__(108);
 
 var _axios = __webpack_require__(47);
 
@@ -2143,7 +2146,7 @@ var Layout = function (_Component) {
                   self.setState({
                     initialData: allData
                   }, function () {
-                    console.log(self.state.initialData);
+                    // console.log(self.state.initialData)
                   });
                   _context.next = 11;
                   break;

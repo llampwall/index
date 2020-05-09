@@ -16,17 +16,18 @@ export default class Home extends Component {
   constructor () {
     super()
     this.state = {
-      initialData: {}
+      initialData: {},
+      time: Date.now()
     }
   }
 
   componentDidMount() {
     // console.log(this.props)
-    this.interval = setInterval(() => this.setState({ time: Date.now() }), 3000);
+    this.interval = setInterval(() => this.setState({ ...this.state, time: Date.now() }), 3000);
     this.setState({
       initialData: this.props.initialData
     }, () => {
-      console.log(this.state)
+      // console.log(this.state)
     })
   }
 
@@ -44,7 +45,7 @@ export default class Home extends Component {
       this.setState({
         initialData: allData
       }, () => {
-        console.log(this.state.initialData)
+        // console.log(this.state.initialData)
       })
     } catch (error) {
       console.log("Initialization error: " + error)

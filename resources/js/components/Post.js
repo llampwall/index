@@ -43,7 +43,7 @@ export default class Post extends Component {
     this.setState({
       [name]: value
     }, () => {
-      console.log(this.state)
+      // console.log(this.state)
     })
   }
 
@@ -102,7 +102,7 @@ export default class Post extends Component {
   // delete the post only if you posted it
   deletePost = async () => {
     const self = this
-    console.log("post id: " + self.props.post.id)
+    // console.log("post id: " + self.props.post.id)
     try {
       await axios.get(`/posts/${self.props.post.id}/delete`)
         .then(function(response) {
@@ -168,7 +168,7 @@ export default class Post extends Component {
     try {
       const likes = await axios.get(`/posts/${self.props.post.id}/likes`)
       .then(function(response) {
-        console.log(response.data.likeData)
+        // console.log(response.data.likeData)
         const like_d = response.data.likeData
         if (like_d.length > 0) {
           self.setState({
@@ -176,7 +176,7 @@ export default class Post extends Component {
             likes: like_d.length,
             lastLike: `${like_d[0].users.fname} ${like_d[0].users.lname}`
           }, () => {
-            console.log(self.state)
+            // console.log(self.state)
           })
         } else {
           self.setState({
@@ -184,7 +184,7 @@ export default class Post extends Component {
             likes: 0,
             lastLike: ""
           }, () => {
-            console.log(self.state)
+            // console.log(self.state)
           })
         }
       })

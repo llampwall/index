@@ -118,7 +118,7 @@ export default class Compose extends Component {
     this.setState({
       [name]: value
     }, () => {
-      console.log(this.state)
+      // console.log(this.state)
     })
   }
 
@@ -140,7 +140,7 @@ export default class Compose extends Component {
       ...this.state,
       image: event.target.files[0]
     }, () => {
-      console.log(this.state)
+      // console.log(this.state)
     })
   }
 

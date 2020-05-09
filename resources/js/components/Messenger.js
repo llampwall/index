@@ -17,8 +17,8 @@ export default class Messenger extends Component {
     const self = this
     try {
       const allUsers = await axois.get('/api/users')
-      console.log("users: ")
-      console.log(allUsers)
+      // console.log("users: ")
+      // console.log(allUsers)
       self.setState({
         users: allUsers.data
       })
