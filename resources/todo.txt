@@ -3,34 +3,38 @@ use componentwillmount (profile.js to do get request (look at 11:06 or 19:51), w
 (see 19:40 but it doesnt have to be usercontroller), which returns sets the state variable userprofile to 
 set the state in profile.js and populate the page
 
+style stuff
+    reorganize scss
+        file splitting
+        variables
+    themeing
+    change welcome page
+    change title?
+    definitely change title styling
+    
 
 
-hosting with heroku
-    up and running
-    database working
 
 registration not working without picture?
 
 
-stop referencing 'http://localhost:3000/public/img/users/' directly
 
-switch to s3 hosting
-    ** in progress **
-    images in posts works
-    working on register images
 
+
+
+google login
 
 pagination / lazy loading
 
 colors
 
-reorganize scss
-    file splitting
-    variables
+
 
 easy scrolling
 
 make custom file names for images being sent to amazon
+
+"sent from my phone"
 
 - profile
     - about
@@ -44,8 +48,19 @@ make custom file names for images being sent to amazon
 
 finish bio in profile area
 
+switch to s3 hosting
+    ** in progress **
+    images in posts works
+    working on register images
+    ** DONE **
 
-
+hosting with heroku
+    up and running
+    database working
+    ** DONE **
+    
+stop referencing 'http://localhost:3000/public/img/users/' directly
+    ** DONE **
 
 
 posts aren't deleting if they are from a previous session

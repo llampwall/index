@@ -119,12 +119,20 @@ var Home = function (_Component) {
     value: function componentDidMount() {
       var _this3 = this;
 
-      console.log(this.props);
+      // console.log(this.props)
+      this.interval = setInterval(function () {
+        return _this3.setState({ time: Date.now() });
+      }, 3000);
       this.setState({
         initialData: this.props.initialData
       }, function () {
         console.log(_this3.state);
       });
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearInterval(this.interval);
     }
 
     //pass down function to pass down to compose change state and update the whole area

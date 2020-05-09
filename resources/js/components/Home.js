@@ -21,12 +21,17 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
+    // console.log(this.props)
+    this.interval = setInterval(() => this.setState({ time: Date.now() }), 3000);
     this.setState({
       initialData: this.props.initialData
     }, () => {
       console.log(this.state)
     })
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   //pass down function to pass down to compose change state and update the whole area

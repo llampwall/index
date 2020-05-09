@@ -55,9 +55,7 @@ class AuthController {
             return response.redirect('back')
         }
 
-        if (img != '') {
-            url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${img}`
-        }
+        url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${img}` || '/img/user.jpg'
 
         console.log(first)
         console.log(last)
@@ -65,6 +63,8 @@ class AuthController {
         console.log(img)
         console.log(pw)
         console.log(url)
+
+        // save new user
         let newUser = await User.create({
             fname: first,
             lname: last,
