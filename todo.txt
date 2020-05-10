@@ -15,7 +15,7 @@ style stuff
 
 
 
-registration not working without picture?
+
 
 
 
@@ -48,6 +48,11 @@ make custom file names for images being sent to amazon
 
 finish bio in profile area
 
+
+
+registration not working without picture?
+    ** fixed**
+    
 switch to s3 hosting
     ** in progress **
     images in posts works

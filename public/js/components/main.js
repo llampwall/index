@@ -229,18 +229,8 @@ var LeftMenu = function (_Component) {
             { className: "account-dropdown", onClick: this.clickedDropDown },
             _react2.default.createElement(
               "div",
-              { className: "logo" },
-              _react2.default.createElement("i", { className: "fa fa-archive" })
-            ),
-            _react2.default.createElement(
-              "div",
               { className: "username" },
-              fname + " " + lname
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "icon-down" },
-              _react2.default.createElement("i", { className: "fa fa-sort-down" })
+              "[[ " + fname + " " + lname + " ]]"
             )
           ),
           _react2.default.createElement(
@@ -550,17 +540,25 @@ var Messenger = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'messenger-icon' },
-            _react2.default.createElement('i', { className: 'fa fa-paper-plane' })
+            _react2.default.createElement(
+              'span',
+              null,
+              ' '
+            )
           ),
           _react2.default.createElement(
             'div',
             { className: 'title' },
-            '*:connect:*'
+            '* connect *'
           ),
           _react2.default.createElement(
             'div',
             { className: 'options-icon' },
-            _react2.default.createElement('i', { className: 'fa fa-ellipsis-v' })
+            _react2.default.createElement(
+              'span',
+              null,
+              ' '
+            )
           )
         ),
         _react2.default.createElement(

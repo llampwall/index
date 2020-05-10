@@ -57,13 +57,15 @@ export default class Messenger extends Component {
       <section id="messenger">
         <div className="messenger-header">
           <div className="messenger-icon">
-            <i className="fa fa-paper-plane" />
+            {/* <i className="fa fa-paper-plane" /> */}
+            <span> </span>
           </div>
           <div className="title">
-            *:connect:*
+            * connect *
           </div>
           <div className="options-icon">
-            <i className="fa fa-ellipsis-v" />
+            {/* <i className="fa fa-ellipsis-v" /> */}
+            <span> </span>
           </div>
         </div>
         <div className="users">

@@ -47,6 +47,7 @@ body {
       white-space: nowrap;
       width: 4.5em;
       overflow: hidden;
+      margin-bottom: 1rem;
       animation: type 4s steps(15, end); 
       pointer-events: none;
       &::selection {
@@ -75,13 +76,13 @@ body {
     // min-width: 1400px;
     width: $app-width;
     height: $app-height;
-    max-width: 1600px;
+    // max-width: 1600px;
   }
 
   .app-container {
     width: 100%;
-    max-width: 1400px;
-    background: $secondary;
+    // max-width: 1400px;
+    background: $secondary; 
     margin: 0 auto;
     min-height: 85vh;
     height: 85vh;

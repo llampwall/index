@@ -25,14 +25,8 @@ export default class LeftMenu extends Component {
       return (
         <section id="left-menu">
           <div className="account-dropdown" onClick={this.clickedDropDown}>
-            <div className="logo">
-              <i className="fa fa-archive" />
-            </div>
             <div className="username">
-              {`${fname} ${lname}`}
-            </div>
-            <div className="icon-down">
-              <i className="fa fa-sort-down" />
+              {`[[ ${fname} ${lname} ]]`}
             </div>
           </div>
   
