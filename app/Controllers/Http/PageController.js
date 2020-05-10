@@ -7,7 +7,9 @@ class PageController {
         if (auth.user) {
             return view.render('pages/react')
         } else {
-            return view.render('pages/welcome')
+            return view.render('pages/welcome', {
+                rand_int: Math.floor(Math.random()*10) + 1
+            })
         } 
 
     }

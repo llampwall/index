@@ -1,7 +1,7 @@
 @layout('layouts/empty')
 
 @section('title')
-  iNDEx - [welcome]
+  index - [welcome]
 @endsection
 
 @section('current-class')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('current-inline-style')
-  background: url('img/welcome10.jpg');
+  background: url('img/welcome{{ rand_int }}.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -19,7 +19,7 @@
   <div class="welcome-container">
 
     <div class="welcome">
-      <h1>welcome to iNDEx</h1>
+      <h1>welcome to [index]</h1>
       <h3>[your life on a screen]</h3>
     </div>
     

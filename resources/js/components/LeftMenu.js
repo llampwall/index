@@ -26,7 +26,7 @@ export default class LeftMenu extends Component {
         <section id="left-menu">
           <div className="account-dropdown" onClick={this.clickedDropDown}>
             <div className="username">
-              {`[[ ${fname} ${lname} ]]`}
+              {`[: ${fname} ${lname} :]`}
             </div>
           </div>
   

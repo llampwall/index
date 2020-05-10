@@ -47,11 +47,19 @@
                 @include hard-shadow;
             }
 
+            &.img {
+                margin: 3rem 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+
             input[type='file'] {
-                margin-left: 1.7rem;
-                height: 2rem;
+                width: 70%;
+                margin-left: auto;
+                margin-top: 0;
                 font-size: 1rem;
-                border: 2px solid $accents;
+                border: 2px solid $silouette;
                 color: $apricot;
                 background-color: white;
                 &::-webkit-file-upload-button {
@@ -60,6 +68,10 @@
                     background-color: $thunder;
                     color: white;
                     cursor: pointer;
+                    &:hover {
+                        background-color: $apricot;
+                        color: $silouette;
+                    }
                 }
             }
 
@@ -73,7 +85,7 @@
                 position: relative;
                 overflow: hidden;
                 margin-top: 1rem;
-                background: $apricot;
+                @include main-gradient;
                 color: $thunder;
                 font-weight: 700;
                 font-size: 16px;
@@ -81,7 +93,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border: 2px solid $accents;
+                border: 2px solid $thunder;
                 @include hard-shadow;
                 transition: all .2s ease;
                 cursor: pointer;

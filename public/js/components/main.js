@@ -230,7 +230,7 @@ var LeftMenu = function (_Component) {
             _react2.default.createElement(
               "div",
               { className: "username" },
-              "[[ " + fname + " " + lname + " ]]"
+              "[: " + fname + " " + lname + " :]"
             )
           ),
           _react2.default.createElement(
@@ -549,7 +549,7 @@ var Messenger = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'title' },
-            '* connect *'
+            '[:-- connect --:]'
           ),
           _react2.default.createElement(
             'div',
@@ -846,18 +846,10 @@ var SearchHeader = function (_Component) {
             return _react2.default.createElement(
                 "div",
                 { className: "header" },
-                _react2.default.createElement("div", { className: "nothing" }),
                 _react2.default.createElement(
                     "div",
                     { className: "search" },
                     _react2.default.createElement("input", { type: "text", name: "search", placeholder: "search..." })
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "icons" },
-                    _react2.default.createElement("i", { className: "fa fa-bell" }),
-                    _react2.default.createElement("i", { className: "fa fa-comment" }),
-                    _react2.default.createElement("i", { className: "fa fa-user" })
                 )
             );
         }

@@ -7,18 +7,12 @@ style stuff
     reorganize scss
         file splitting
         variables
+        ** DONE ISH **
     themeing
     change welcome page
+        ** DONE ISH **
     change title?
     definitely change title styling
-    
-
-
-
-
-
-
-
 
 
 
@@ -52,7 +46,7 @@ finish bio in profile area
 
 registration not working without picture?
     ** fixed**
-    
+
 switch to s3 hosting
     ** in progress **
     images in posts works
@@ -133,6 +127,12 @@ likes
 
 - delete posts / comments / likes
     *** DONE ***
+
+
+
+
+
+
 
 - messenger
 
