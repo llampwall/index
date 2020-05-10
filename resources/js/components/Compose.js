@@ -42,7 +42,7 @@ export default class Compose extends Component {
 
     if (this.state.image == '') {
       fData.append('img_name', '')
-
+      console.log('no image')
       const response = await axios({
         method: 'post',
         url: '/posts',

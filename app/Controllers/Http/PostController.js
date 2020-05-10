@@ -41,23 +41,25 @@ class PostController {
     async store({request, response}) {
 
         let url = ''
-        let file = request.input('img_name')
-        if (file != null) {
-            url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${request.input('img_name')}`
+        let file = ''
+        if (request.input('img_name') != null) {
+            file = request.input('img_name')
+            url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${file}`
         }
 
         // console.log(request.input('content'))
         // console.log(request.input('user_id'))
         // console.log(url)
-        let pType = null
+        let pType = 'text'
         if (file.includes('mp4')) {
             pType = 'video'
-        } else if (file.includes('image')) {
+        } else if (file.includes('jpg') || file.includes('png') || file.includes('png')) {
             pType = 'image'
-        } else {
-            pType = text
         }
+        
+        console.log(file)
         console.log(pType)
+        console.log(url)
         // save post to db
         try {
             const newPost = await Post.create({
@@ -66,11 +68,11 @@ class PostController {
                 image_url: url,
                 type: pType
             })
-            console.log('saved post');
-            return response.redirect('/')
         } catch (error) {
             console.log(error)
         }
+        console.log('saved post');
+        return response.redirect('/')
     }
 
     // delete post

@@ -29,7 +29,7 @@ export default class LeftMenu extends Component {
               <i className="fa fa-archive" />
             </div>
             <div className="username">
-              {`${fname}_${lname}`}
+              {`${fname} ${lname}`}
             </div>
             <div className="icon-down">
               <i className="fa fa-sort-down" />

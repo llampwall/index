@@ -235,7 +235,7 @@ var LeftMenu = function (_Component) {
             _react2.default.createElement(
               "div",
               { className: "username" },
-              fname + "_" + lname
+              fname + " " + lname
             ),
             _react2.default.createElement(
               "div",
@@ -555,7 +555,7 @@ var Messenger = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'title' },
-            '\\connect'
+            '*:connect:*'
           ),
           _react2.default.createElement(
             'div',
@@ -1206,13 +1206,13 @@ var Compose = function (_Component) {
               fData.append('user_id', _this.props.initialData.userData.id);
 
               if (!(_this.state.image == '')) {
-                _context3.next = 22;
+                _context3.next = 23;
                 break;
               }
 
               fData.append('img_name', '');
-
-              _context3.next = 19;
+              console.log('no image');
+              _context3.next = 20;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -1227,24 +1227,24 @@ var Compose = function (_Component) {
                 return 'item saved';
               });
 
-            case 19:
+            case 20:
               response = _context3.sent;
-              _context3.next = 36;
+              _context3.next = 37;
               break;
 
-            case 22:
+            case 23:
               // disable input while image uploads - maybe add loading symbol
               document.getElementById("content").disabled = true;
 
               // get signed url from the server
-              _context3.prev = 23;
+              _context3.prev = 24;
               file = self.state.image;
               filename = file.name;
               type = encodeURIComponent(file.type);
               // console.log(filename)
 
               console.log(type);
-              _context3.next = 30;
+              _context3.next = 31;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
                 var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
                   var options;
@@ -1320,23 +1320,23 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 30:
+            case 31:
               _response = _context3.sent;
-              _context3.next = 36;
+              _context3.next = 37;
               break;
 
-            case 33:
-              _context3.prev = 33;
-              _context3.t0 = _context3['catch'](23);
+            case 34:
+              _context3.prev = 34;
+              _context3.t0 = _context3['catch'](24);
 
               console.log("axios didnt work: " + _context3.t0);
 
-            case 36:
+            case 37:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[23, 33]]);
+      }, _callee3, _this2, [[24, 34]]);
     }));
 
     _this.handleChange = function (event) {

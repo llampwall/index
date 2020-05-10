@@ -60,7 +60,7 @@ export default class Messenger extends Component {
             <i className="fa fa-paper-plane" />
           </div>
           <div className="title">
-            \connect
+            *:connect:*
           </div>
           <div className="options-icon">
             <i className="fa fa-ellipsis-v" />

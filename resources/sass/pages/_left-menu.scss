@@ -6,12 +6,11 @@
     .account-dropdown {
       display: grid;
       grid-template-columns: 1fr 4fr 1fr;
-      padding: .77rem;
+      padding: .75rem .2rem;
+      height: 4.25rem;
       border-bottom: $border-thickness solid $border-color;
-      // border-right: $border-thickness solid $border-color;
       background-color: $left-menu-header-bg;
       color: $left-menu-header;
-      height: 58px;
       min-width: 200px;
       .logo {
         display: flex;
