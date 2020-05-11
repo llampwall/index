@@ -55,7 +55,7 @@ export default class LeftMenu extends Component {
             </ul>
           </div>
           <a href="/logout" className="logout">
-            logout <i className="fa fa-trash" />
+            logout <i className="ayn-trash" />
           </a>
         </section>
       )

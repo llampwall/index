@@ -87,6 +87,15 @@ export default class Profile extends Component {
         <div>profile loading...</div>
       )
     } else {
+      // home
+      // job
+      // education
+      // website
+      // email
+      // about
+      // phone?
+      // music
+      // resume?
       return (
         <div className="content-area profile-page">
           <div className="user-img">

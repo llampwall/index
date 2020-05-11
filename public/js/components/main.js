@@ -316,7 +316,7 @@ var LeftMenu = function (_Component) {
             "a",
             { href: "/logout", className: "logout" },
             "logout ",
-            _react2.default.createElement("i", { className: "fa fa-trash" })
+            _react2.default.createElement("i", { className: "ayn-trash" })
           )
         );
       }
@@ -508,7 +508,7 @@ var Messenger = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'message-icon' },
-            _react2.default.createElement('i', { className: 'fa fa-comment' })
+            _react2.default.createElement('i', { className: 'ayn-comment-1' })
           )
         );
       });
@@ -569,7 +569,7 @@ var Messenger = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'search' },
-          _react2.default.createElement('i', { className: 'fa fa-search' }),
+          _react2.default.createElement('i', { className: 'ayn-search' }),
           _react2.default.createElement('input', { type: 'text', name: 'friendSearch', placeholder: 'search...' })
         )
       );
@@ -756,6 +756,15 @@ var Profile = function (_Component) {
           'profile loading...'
         );
       } else {
+        // home
+        // job
+        // education
+        // website
+        // email
+        // about
+        // phone?
+        // music
+        // resume?
         return _react2.default.createElement(
           'div',
           { className: 'content-area profile-page' },
@@ -1029,7 +1038,7 @@ var Comments = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'del-btn ' + (user.id == _this.props.curuser.id ? 'active' : ''), onClick: _this.deleteComment.bind(null, id) },
-            _react2.default.createElement('i', { className: 'fa fa-trash' })
+            _react2.default.createElement('i', { className: 'ayn-trash' })
           )
         );
       });
@@ -1396,7 +1405,7 @@ var Compose = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'photo-btn', onClick: this.imageSelect },
-            _react2.default.createElement('i', { className: 'fa fa-camera' }),
+            _react2.default.createElement('i', { className: 'ayn-camera' }),
             _react2.default.createElement('input', { type: 'file', id: 'hidden-input', name: 'post_img', onChange: this.getImage })
           ),
           _react2.default.createElement('div', { className: 'preview ' + (this.state.image == "" ? "" : "active"), onClick: this.removeImage, style: {
@@ -1407,7 +1416,7 @@ var Compose = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'send-btn', onClick: this.submitPost },
-            _react2.default.createElement('i', { className: 'fa fa-arrow-right' })
+            _react2.default.createElement('i', { className: 'ayn-right' })
           )
         );
       }
@@ -1496,8 +1505,9 @@ var Post = function (_Component) {
       } else if (_this.props.post.type == 'video') {
         return _react2.default.createElement(
           'video',
-          { className: 'post-media', autoPlay: true, muted: true, loop: true },
-          _react2.default.createElement('source', { src: _this.props.post.image_url, type: 'video/mp4' })
+          { className: 'post-media', autoPlay: true, muted: true, controls: true, loop: true },
+          _react2.default.createElement('source', { src: _this.props.post.image_url, type: 'video/mp4' }),
+          'Your browser does not support html5 videos.'
         );
       }
     };
@@ -1867,7 +1877,7 @@ var Post = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'del-btn ' + (this.props.user.id == this.props.curuser.id ? 'active' : ''), onClick: this.deletePost },
-              _react2.default.createElement('i', { className: 'fa fa-trash' })
+              _react2.default.createElement('i', { className: 'ayn-trash' })
             )
           ),
           this.displayMedia(),
@@ -1889,7 +1899,7 @@ var Post = function (_Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'like-btn ' + (this.state.liked ? 'active' : ''), onClick: this.like.bind(null, this.props.curuser.id, this.props.post.id) },
-                _react2.default.createElement('i', { className: 'fa fa-thumbs-up' })
+                _react2.default.createElement('i', { className: 'ayn-thumbs-up-1' })
               )
             ),
             _react2.default.createElement(
@@ -1911,7 +1921,7 @@ var Post = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'send-btn', onClick: this.submitComment },
-              _react2.default.createElement('i', { className: 'fa fa-arrow-right' })
+              _react2.default.createElement('i', { className: 'ayn-right' })
             )
           )
         );

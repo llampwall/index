@@ -15,9 +15,9 @@ export default class SearchHeader extends Component {
                 <input type="text" name="search" placeholder="search..." />
             </div>
             {/* <div className="icons">
-                <i className="fa fa-bell" />
-                <i className="fa fa-comment" />
-                <i className="fa fa-user" />
+                <i className="ayn-bell-alt" />
+                <i className="ayn-comment-1" />
+                <i className="ayn-user-1" />
             </div> */}
         </div>
     )

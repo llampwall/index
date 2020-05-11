@@ -14,19 +14,21 @@ style stuff
     change title?
     definitely change title styling
 
-
+LOADING STUFF
 
 google login
 
-pagination / lazy loading
+pagination / infinite scrolling / lazy loading
+
+images
+    optimize? kraken.io / aws lambda
+    customize file names
+    make paths for different image files
+
 
 colors
 
 
-
-easy scrolling
-
-make custom file names for images being sent to amazon
 
 "sent from my phone"
 
@@ -106,7 +108,7 @@ likes
     make different styles for image vs text 
         *** DONE - not perfect ***
     fix like button positioning, make it more sleek. remove share button.
-        *** SORTA DONE ***
+        *** DONE ***
 
 - link post functionality
     -pull image and text preview

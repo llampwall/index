@@ -2,6 +2,7 @@
     border-right: $border-thickness solid $border-color;
     position: relative;
     font-family: $main-font;
+    background-color: $left-menu-bg;
     
     .account-dropdown {
       display: flex;
@@ -9,15 +10,15 @@
       align-items: center;
       height: 4.25rem;
       border-bottom: $border-thickness solid $border-color;
-      background-color: $left-menu-header-bg;
-      color: $left-menu-header;
+      background-color: $left-menu-bg;
+      color: $lr-menu-headers;
       min-width: 200px;
       cursor: pointer;
       .username {
         text-transform: lowercase;
-        font-size: 1rem;
+        font-size: 1.2rem;
         font-weight: 700;
-        color:  $left-menu-header;
+        color:  $lr-menu-headers;
       }
     }
 
@@ -27,7 +28,7 @@
       right: 0;
       width: 100%;
       z-index: 10;
-      background: $dropdown;
+      background: $secondary;
       transition: all .3s ease-in-out;
       nav {
         width: 100%;
@@ -58,7 +59,7 @@
         text-transform: lowercase;
         font-weight: bold;
         padding: .7rem 0;
-        color: $third-font-color;
+        color: $left-menu-primary;
       }
 
       ul {
@@ -68,7 +69,7 @@
           padding: .7rem 0;
           font-weight: 700;
           transition: all .3 ease;
-          color: $secondary-font-color;
+          color: $left-menu-secondary;
           cursor: pointer;
 
           &::before{
@@ -76,7 +77,7 @@
           }
           &:hover {
             // background: $primary-font-color;
-            color: $secondary-font-color;
+            color: $third-font-color;
             transform: scale(1.05);
           }
         }
@@ -94,11 +95,11 @@
       align-items: center;
       justify-content: center;
       transition: all .2s ease-in-out;
-      background: $left-menu-footer-bg;
+      background: $left-menu-bg;
       color: $third-font-color;
       transition: all .2s ease-in-out;
-
-      .fa {
+      font-weight: 700;
+      i {
         margin-left: .3rem;
       }
 

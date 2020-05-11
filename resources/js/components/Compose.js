@@ -169,7 +169,7 @@ export default class Compose extends Component {
             backgroundRepeat: 'no-repeat', 
             backgroundSize: 'cover'}} />
           <div className="photo-btn" onClick={this.imageSelect}>
-            <i className="fa fa-camera" />
+            <i className="ayn-camera" />
             <input type='file' id='hidden-input' name='post_img' onChange={this.getImage}/>
           </div>
           <div className={`preview ${(this.state.image == "") ? "" : "active"}`} onClick={this.removeImage} style= {{
@@ -178,7 +178,7 @@ export default class Compose extends Component {
               backgroundRepeat: 'no-repeat', 
               backgroundSize: 'cover'}} />
           <div className="send-btn" onClick={this.submitPost}>
-            <i className="fa fa-arrow-right" />
+            <i className="ayn-right" />
           </div>
         </section>
       )

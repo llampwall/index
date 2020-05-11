@@ -67,7 +67,7 @@ export default class Comments extends Component {
                     <h2>{`${user.fname}${(user.lname == null) ? "" : " "}${(user.lname == null) ? "" : user.lname}: `}</h2>
                   </a>
                   <p>{comment.content}</p>
-                  <div className={`del-btn ${user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deleteComment.bind(null, id)}><i className="fa fa-trash"></i></div>
+                  <div className={`del-btn ${user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deleteComment.bind(null, id)}><i className="ayn-trash"></i></div>
                 </div>
             )}
         )

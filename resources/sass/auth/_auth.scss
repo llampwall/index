@@ -34,17 +34,18 @@
 
             label {
                 font-size: 20px;
-                color: $thunder;
+                color: #CCD9E3;
                 font-weight: 500;
                 // padding-right: 1.7rem;
             }
             margin-bottom: 1rem;
       
             input {
-                color: $apricot;
+                color: #1D2025;
                 margin-top: .5rem;
-                border: 2px solid $silouette;
-                @include hard-shadow;
+                border: 2px solid #829AB1;
+                background: #CCD9E3;
+                @include hard-shadow-white;
             }
 
             &.img {
@@ -59,18 +60,18 @@
                 margin-left: auto;
                 margin-top: 0;
                 font-size: 1rem;
-                border: 2px solid $silouette;
-                color: $apricot;
-                background-color: white;
+                border: 2px solid #2E445B;
+                color: $accents;
+                background-color: #1F2933;
                 &::-webkit-file-upload-button {
                     border: none;
                     height: 2rem;
-                    background-color: $thunder;
+                    background-color: #2E445B;
                     color: white;
                     cursor: pointer;
                     &:hover {
-                        background-color: $apricot;
-                        color: $silouette;
+                        background-color: $accents;
+                        color: #2E445B;
                     }
                 }
             }
@@ -86,15 +87,15 @@
                 overflow: hidden;
                 margin-top: 1rem;
                 @include main-gradient;
-                color: $thunder;
+                color: $accents;
                 font-weight: 700;
                 font-size: 16px;
                 padding: .5rem 1rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border: 2px solid $thunder;
-                @include hard-shadow;
+                border: 2px solid #CCD9E3;
+                @include hard-shadow-white;
                 transition: all .2s ease;
                 cursor: pointer;
                 .fa {
@@ -102,7 +103,7 @@
                 }
       
                 &:hover {
-                  background: $apricot;
+                  background: #1F2933;
                   color: white;
                   -webkit-box-shadow: 0px 0px 0px 0px rgba(255,255,255,.9);
                     -moz-box-shadow: 0px 0px 0px 0px rgba(255,255,255,.9);
@@ -124,7 +125,7 @@
 
     a {
         text-decoration: none;
-        color: $silouette;
+        color: #CCD9E3;
         font-size: 1rem;
     }
 }

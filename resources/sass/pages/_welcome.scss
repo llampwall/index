@@ -83,8 +83,10 @@
 
             .register {
                 color: $welcome-color;
+                transition: all .2s ease;
                 &:hover {
                     color: $primary-font-color;
+                    transform: scale(1.2);
                 }
             }
         }

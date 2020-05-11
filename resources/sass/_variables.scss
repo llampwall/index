@@ -23,7 +23,7 @@ $darkness: #2E0201;
 // 'Electrolize', sans-serif;
 // 'Bangers', cursive;
 // 'Enriqueta', serif;
-$main-font: 'Sriracha', cursive;
+$main-font: 'Electrolize', sans-serif;
 *{
   letter-spacing: 2px; 
 }
@@ -40,37 +40,60 @@ $shadow-color: rgba(0,0,0,0.75);
 
 
 //dark mode
-// $primary: #2d2d2d;
-// $secondary: #474747;
-// $third: #adadad;
-// $fourth:#dbdbdb;
-// $accents: $geraldine;
-// $title-font-color: $goldenrod;
-// $primary-font-color: $geraldine;
-// $secondary-font-color: $goldenrod;
-// $third-font-color: $fourth;
-// $placeholder-font-color: $geraldine;
-// $border-color: $accents;
-// $button-bg: $primary;
-// $button-color: $accents;
-// $shadow-light: rgba(0,0,0,0.75);
-// $shadow-color: rgba(255,255,255,.8);
+$outer-bg: #1D2025;
+$primary: #2d2d2d;
+$secondary: #1D2025;
+$third: #1F2933;
+$fourth:#dbdbdb;
+$accents: #9CC1B5;
+$title-font-color: #829AB1;
+$primary-font-color: #829AB1;
+$secondary-font-color: #CCD9E3;
+$third-font-color: #CCD9E3;
+$placeholder-font-color: #829AB1;
+$border-color: #102A43;
+$button-bg: $primary;
+$button-color: #CCD9E3;
+$comment-bg: $secondary;
+$write-comment-bg: #1D2025;
+$shadow-light: #829AB1;
+$shadow-color: #1D2025;
+* {
+  border: none !important;
+
+  .app-container{
+    border-top: 1px solid #2E445B !important;
+    border-bottom: 1px solid #2E445B !important;
+  }  
+  .post,
+  .content-area {
+    border: 1px solid #1D2025 !important;
+  }
+
+  .users, 
+  #messenger>.search {
+    border-left: 1px solid #1D2025 !important;
+  }
+}
+
 
 
 // off white
-$primary: white;
-$secondary: $offwhite;
-$third: $thunder;
-$fourth:#ECECEC;
-$accents: $energy;
-$title-font-color: $third;
-$primary-font-color: $third;
-$secondary-font-color: $third;
-$third-font-color: $geraldine;
-$placeholder-font-color: $geraldine;
-$border-color: $tundra;
-$button-bg: $primary;
-$button-color: $tundra;
+// $outer-bg: $offwhite;
+// $primary: white;
+// $secondary: $offwhite;
+// $third: #ffddd6;
+// $accents: #f4ae60;
+// $title-font-color: $thunder;
+// $primary-font-color: $geraldine;
+// $secondary-font-color: $thunder;
+// $third-font-color: $geraldine;
+// $placeholder-font-color: $geraldine;
+// $border-color: $thunder;
+// $button-bg: $primary;
+// $button-color: $primary-font-color;
+// $comment-bg: $secondary;
+// $write-comment-bg: $primary;
 
 // nautilus
 // $primary: #5CA2D5;
@@ -147,40 +170,47 @@ $button-color: $tundra;
 
 
 // area specific color vars
-$outer-bg: $primary;
-$content-area-bg: $primary;
-$search-header-bg: $secondary;
-$left-menu-bg: $primary;
-$left-menu-header: $third-font-color;
-$left-menu-header-bg: $secondary;
-$left-menu-footer-bg: $primary;
-$dropdown: $secondary;
-$messenger-bg: $secondary;
-$messenger-header: $third-font-color;
-$messenger-header-bg: $secondary;
-$messenger-user-bg: transparent;
-$messenger-user-bg-alt: $messenger-user-bg;
-$messenger-footer-bg: $primary;
-$post-area-bg: white;
+$content-area-bg: $third;
+
+$menus: $secondary;
+$search-header-bg: $menus;
+
+$lr-menu-headers: $primary-font-color;
+
+$left-menu-bg: $menus;
+$left-menu-primary: $primary-font-color;
+$left-menu-secondary: $secondary-font-color;
+
+$right-menu-bg: $menus;
+$right-menu-names: $secondary-font-color;
+$right-menu-icons: $accents;
+
 $compose-bg: $secondary;
-$post-bg: $secondary;
+
 $post-header-bg: $secondary;
-$comment-bg: $primary;
-$comment-bg-alt: $primary;
-$write-comment-bg: $primary;
+$post-bg: $third;
+// $comment-bg: $secondary;
+// $write-comment-bg: white;
+
 
 
 
 
 //hixle.co/gradients/fire
+// @mixin main-gradient {
+//   background: rgba(255,95,108,1);
+//   background: -moz-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+//   background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(255,95,108,1)), color-stop(100%, rgba(255,195,113,1)));
+//   background: -webkit-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+//   background: -o-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+//   background: -ms-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+//   background: linear-gradient(135deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+// }
 @mixin main-gradient {
-  background: rgba(255,95,108,1);
-  background: -moz-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
-  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(255,95,108,1)), color-stop(100%, rgba(255,195,113,1)));
-  background: -webkit-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
-  background: -o-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
-  background: -ms-linear-gradient(-45deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
-  background: linear-gradient(135deg, rgba(255,95,108,1) 0%, rgba(255,195,113,1) 100%);
+  background: rgb(46,68,91); /* Old browsers */
+  background: -moz-linear-gradient(45deg, rgba(46,68,91,1) 0%, rgba(54,69,94,1) 43%, rgba(130,154,177,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, rgba(46,68,91,1) 0%,rgba(54,69,94,1) 43%,rgba(130,154,177,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, rgba(46,68,91,1) 0%,rgba(54,69,94,1) 43%,rgba(130,154,177,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 @mixin lighter-gradient {

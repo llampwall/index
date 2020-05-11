@@ -5,8 +5,8 @@
     font-family: $main-font;
 
     .messenger-header {
-      background-color: $messenger-header-bg;
-      color: $messenger-header;
+      background-color: $right-menu-bg;
+      color: $lr-menu-headers;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -25,7 +25,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1rem;
+        font-size: 1.2rem;
         font-weight: 700;
       }
       .options-icon {
@@ -44,7 +44,7 @@
       width: 110%;
       height: calc(85vh - 120px);
       overflow: auto;
-      background: $messenger-bg;
+      background: $right-menu-bg;
       &::-webkit-scrollbar {
         display: none;
       }
@@ -55,23 +55,22 @@
         padding: .7rem;
         cursor: pointer;
         transition: all .3s ease;
-        color: $secondary-font-color;
-        background: $messenger-user-bg;
+        color: $right-menu-names;
+        background: $right-menu-bg;
         &:hover {
-          // background: $primary-font-color;
-          color: $accents;
+          color: $primary-font-color;
           transform: scale(1.05);
         }
 
-        &:nth-of-type(2n){
-          background: $messenger-user-bg;
-          color: $secondary-font-color;
-          &:hover {
-            // background: $primary-font-color;
-            color: $accents;
-            transform: scale(1.05);
-          }
-        }
+        // &:nth-of-type(2n){
+        //   background: $right-menu-bg;
+        //   color: $right-menu-names;
+        //   &:hover {
+        //     // background: $primary-font-color;
+        //     color: $accents;
+        //     transform: scale(1.05);
+        //   }
+        // }
 
         border-bottom: $border-thickness solid $border-color;
 
@@ -94,7 +93,8 @@
           margin-left: auto;
           margin-right: 1.8rem;
           
-          .fa {
+          i {
+            color: $right-menu-icons;
             font-size: 1.1rem;
           }
         }
@@ -105,12 +105,15 @@
       width: 100%;
       padding: .5rem;
       height: 50px;
-      background: $messenger-footer-bg;
+      background: $right-menu-bg;
       border-top: $border-thickness solid $border-color;
       position: absolute;
       bottom: 0;
+      display: flex;
+      align-items: center;
+      color: $third-font-color;
 
-      .fa {
+      i {
         margin-left: .8rem;
       }
 
@@ -121,10 +124,11 @@
         padding: .5rem;
         border-radius: 30%;
         width: 70%;
-        color: $primary-font-color;
-        font-size: 1rem;
+        
+        font-size: 1.2rem;
         &::placeholder {
           color: $placeholder-font-color;
+          opacity: .8;
           font-weight: 700;
         }
         &:focus::placeholder {

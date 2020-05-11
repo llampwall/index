@@ -41,7 +41,7 @@ export default class Messenger extends Component {
               {user.fname} {user.lname}
             </div>
             <div className="message-icon">
-              <i className="fa fa-comment" />
+              <i className="ayn-comment-1" />
             </div>
           </div>
         )
@@ -57,14 +57,13 @@ export default class Messenger extends Component {
       <section id="messenger">
         <div className="messenger-header">
           <div className="messenger-icon">
-            {/* <i className="fa fa-paper-plane" /> */}
+            {/* <i className="ayn-paper-plane" /> */}
             <span> </span>
           </div>
           <div className="title">
             [:-- connect --:]
           </div>
           <div className="options-icon">
-            {/* <i className="fa fa-ellipsis-v" /> */}
             <span> </span>
           </div>
         </div>
@@ -73,7 +72,7 @@ export default class Messenger extends Component {
         </div>
 
         <div className="search">
-          <i className="fa fa-search" />
+          <i className="ayn-search" />
           <input type="text" name="friendSearch" placeholder="search..." />
         </div>
       </section>

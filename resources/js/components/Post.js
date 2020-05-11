@@ -35,8 +35,9 @@ export default class Post extends Component {
         )
     } else if (this.props.post.type == 'video') {
         return (
-            <video className="post-media" autoPlay muted loop>
+            <video className="post-media" autoPlay muted controls loop>
               <source src={this.props.post.image_url} type="video/mp4" />
+              Your browser does not support html5 videos.
             </video>
         )
     }
@@ -247,7 +248,7 @@ export default class Post extends Component {
                         <span className="text">shared {this.getType()}</span>
                     </a>
                     <div className="time">{new Date(this.props.post.created_at).toLocaleString()}</div>
-                    <div className={`del-btn ${this.props.user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deletePost}><i className="fa fa-trash"></i></div>
+                    <div className={`del-btn ${this.props.user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deletePost}><i className="ayn-trash"></i></div>
                 </div>
 
                 {this.displayMedia()}
@@ -258,10 +259,10 @@ export default class Post extends Component {
                 <div className="post-stats">
                     <div className="icons">
                         <div className={`like-btn ${this.state.liked ? 'active' : ''}`}  onClick={this.like.bind(null, this.props.curuser.id, this.props.post.id)}>
-                          <i className="fa fa-thumbs-up" />
+                          <i className="ayn-thumbs-up-1" />
                         </div>
                         {/* <div className="share-btn">
-                          <i className="fa fa-share" />
+                          <i className="ayn-share" />
                         </div> */}
                     </div>
                     <span className="text">{this.displayStats()}</span>
@@ -275,7 +276,7 @@ export default class Post extends Component {
                     <Comments ref={this.commentArea} post={this.props.post} update={this.state.update} sendUp={this.sendUp} curuser={this.props.curuser}/>
 
                     <div className="send-btn" onClick={this.submitComment}>
-                        <i className="fa fa-arrow-right" />
+                        <i className="ayn-right" />
                     </div>
                     
                 </div>
