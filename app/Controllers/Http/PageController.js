@@ -8,7 +8,7 @@ class PageController {
             return view.render('pages/react')
         } else {
             return view.render('pages/welcome', {
-                rand_int: Math.floor(Math.random()*10) + 1
+                rand_int: Math.floor(Math.random()*12) + 1
             })
         } 
 
