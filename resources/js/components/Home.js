@@ -52,7 +52,7 @@ export default class Home extends Component {
   render () {
     if (this.props.initialData == undefined) {
       return (
-        <div>posts loading...</div>
+        <i className="ayn-spin3" />
       )
     } else {
       // console.log(this.props)

@@ -10,9 +10,7 @@ export default class Loading extends Component {
   render () {
     return (
       <section id="loading" className={this.props.active}>
-            <div className="loadingio-spinner-ball-u501e4ya8ji"><div className="ldio-vn3lighz4w">
-<div></div>
-</div></div>
+           <i className="ayn-spin3" />
       </section>
     )
   }

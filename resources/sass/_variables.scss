@@ -30,7 +30,7 @@ $main-font: 'Electrolize', sans-serif;
 $small-font: $main-font;
 $title-font: $main-font;
 $app-width: 100vw;
-$app-height: 85vh;
+$app-height: 80vh;
 $border-thickness: 1px;
 $welcome-color: $silouette;
 $welcome-subtitle: $darkness;
@@ -46,33 +46,40 @@ $secondary: #1D2025;
 $third: #1F2933;
 $fourth:#dbdbdb;
 $accents: #9CC1B5;
-$title-font-color: #829AB1;
+$title-font-color: $shadow;
 $primary-font-color: #829AB1;
 $secondary-font-color: #CCD9E3;
 $third-font-color: #CCD9E3;
 $placeholder-font-color: #829AB1;
 $border-color: #102A43;
 $button-bg: $primary;
-$button-color: #CCD9E3;
+$button-color: $accents;
 $comment-bg: $secondary;
-$write-comment-bg: #1D2025;
+$write-comment-bg: #273D54;
 $shadow-light: #829AB1;
 $shadow-color: #1D2025;
+// $shadow-color: #273D54;
 * {
   border: none !important;
 
   .app-container{
-    border-top: 1px solid #2E445B !important;
-    border-bottom: 1px solid #2E445B !important;
+    border-top: 1px solid #2d2d2d !important;
+    border-bottom: 1px solid #2d2d2d !important;
   }  
-  .post,
-  .content-area {
-    border: 1px solid #1D2025 !important;
+  .post {
+    // border-left: 1px solid #1D2025 !important;
   }
 
   .users, 
   #messenger>.search {
     border-left: 1px solid #1D2025 !important;
+  }
+
+  .users>.user {
+    border-bottom: 1px solid #2D2D2D !important;
+    &:hover {
+      color: $accents !important;
+    }
   }
 }
 
@@ -81,8 +88,8 @@ $shadow-color: #1D2025;
 // off white
 // $outer-bg: $offwhite;
 // $primary: white;
-// $secondary: $offwhite;
-// $third: #ffddd6;
+// $secondary: #D2D7DE;
+// $third: #F0F4F8;
 // $accents: #f4ae60;
 // $title-font-color: $thunder;
 // $primary-font-color: $geraldine;
@@ -185,10 +192,10 @@ $right-menu-bg: $menus;
 $right-menu-names: $secondary-font-color;
 $right-menu-icons: $accents;
 
-$compose-bg: $secondary;
+$compose-bg: $third;
 
 $post-header-bg: $secondary;
-$post-bg: $third;
+$post-bg: $secondary;
 // $comment-bg: $secondary;
 // $write-comment-bg: white;
 
@@ -239,10 +246,17 @@ $post-bg: $third;
   background: linear-gradient(135deg, rgba(210,223,237,1) 0%,rgba(200,215,235,1) 26%,rgba(190,208,234,1) 51%,rgba(166,192,227,1) 51%,rgba(175,199,232,1) 62%,rgba(186,208,239,1) 75%,rgba(153,181,219,1) 88%,rgba(121,155,200,1) 100%);
 }
 
-@mixin hard-shadow {
+@mixin old-hard-shadow {
   -webkit-box-shadow: 5px 5px 0px 0px $shadow-color;
   -moz-box-shadow: 5px 5px 0px 0px $shadow-color;
   box-shadow: 5px 5px 0px 0px $shadow-color;
+  box-shadow: 5px 5px 0px 5px $shadow-color;
+}
+@mixin hard-shadow {
+  -webkit-box-shadow: 5px 5px 20px 0px $shadow-color;
+  -moz-box-shadow: 5px 5px 20px 0px $shadow-color;
+  box-shadow: 5px 5px 20px 0px $shadow-color;
+  box-shadow: 5px 5px 20px 5px $shadow-color;
 }
 
 @mixin hard-shadow-white {

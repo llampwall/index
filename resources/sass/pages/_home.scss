@@ -65,6 +65,8 @@
       width: 100%;
       height: calc(85vh - 57px);
       overflow: auto;
+      background: linear-gradient(-180deg, #1c252e, #212c37);
+      box-shadow: 5px 5px 5px 5px $shadow-color inset;
     }
     
   }

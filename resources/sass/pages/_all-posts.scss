@@ -50,7 +50,7 @@
             color: $accents;
             margin-left: auto;
             padding: 0 1rem;
-            font-size: .9rem;
+            font-size: .7rem;
             opacity: .7;
           }
 
@@ -58,24 +58,14 @@
             display: none;
             height: 20px;
             width: 20px;
-            background: $button-bg;
-            color: $button-color;
             padding: 15px;
             align-items: center;
             justify-content: center;
             border: $border-thickness solid $button-color;
             margin-right: .7rem;
             cursor: pointer;
-
             &.active {
               display: flex;
-            }
-
-            &:hover {
-              color: $button-bg;
-              i {
-                color: $button-bg;
-              }
             }
           }
         }
@@ -139,7 +129,6 @@
             .like-btn {
               height: 20px;
               width: 20px;
-              background: $button-bg;
               padding: 15px;
               display: flex;
               align-items: center;
@@ -283,8 +272,6 @@
                 right: 0px;
                 height: 20px;
                 width: 20px;
-                background: $button-bg;
-                color: $button-color;
                 padding: 15px;
                 align-items: center;
                 justify-content: center;
@@ -295,15 +282,7 @@
                 &.active {
                   display: flex;
                 }
-
-                .fa {
-                  font-size: 1.2rem;
-                }
                 
-                &:hover {
-                  background: $button-color;
-                  color: $button-bg;
-                }
               }
             }
           }
@@ -311,7 +290,6 @@
           .send-btn {
             height: 20px;
             width: 20px;
-            background: $button-bg;
             padding: 15px;
             display: flex;
             align-items: center;
@@ -323,11 +301,7 @@
             top: -42px;
             right: 0px;
 
-            &:hover {
-              background: $button-color;
-              color: $button-bg;
-            }
-            .fa {
+            i {
               font-size: 1.2rem;
             }
           }

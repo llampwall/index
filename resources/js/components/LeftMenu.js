@@ -17,7 +17,7 @@ export default class LeftMenu extends Component {
   render () {
     if (this.props.initialData.userData == undefined) {
       return (
-        <div>Loading...</div>
+        <i className="ayn-spin3" />
       )
     } else {
       // console.log(this.props.initialData.userData)

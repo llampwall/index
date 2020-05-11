@@ -1,9 +1,4 @@
 import React, { Component } from 'react'
-import {
-  BrowserRouter as Router,
-  Route, 
-  NavLink
-} from 'react-router-dom'
 import axios from 'axios'
 
 // Handles updating the postarea when its sibling compose adds a post to the database
@@ -84,7 +79,7 @@ export default class Profile extends Component {
   render () {
     if (this.state.user == undefined) {
       return (
-        <div>profile loading...</div>
+        <i className="ayn-spin3" />
       )
     } else {
       // home

@@ -77,7 +77,7 @@ export default class Comments extends Component {
   render() {
     if (this.props.post == undefined) {
         return (
-            <div>Loading...</div>
+          <i className="ayn-spin3" />
         )
     } else {
         if (this.state.comments.length > 0) {

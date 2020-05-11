@@ -42,7 +42,7 @@ var _reactDom = __webpack_require__(84);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(107);
+var _reactRouterDom = __webpack_require__(153);
 
 var _axios = __webpack_require__(47);
 
@@ -131,11 +131,7 @@ var Home = function (_Component) {
     key: 'render',
     value: function render() {
       if (this.props.initialData == undefined) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          'posts loading...'
-        );
+        return _react2.default.createElement('i', { className: 'ayn-spin3' });
       } else {
         // console.log(this.props)
         return _react2.default.createElement(
@@ -210,11 +206,7 @@ var LeftMenu = function (_Component) {
     key: "render",
     value: function render() {
       if (this.props.initialData.userData == undefined) {
-        return _react2.default.createElement(
-          "div",
-          null,
-          "Loading..."
-        );
+        return _react2.default.createElement("i", { className: "ayn-spin3" });
       } else {
         // console.log(this.props.initialData.userData)
         var _props$initialData$us = this.props.initialData.userData,
@@ -379,15 +371,7 @@ var Loading = function (_Component) {
       return _react2.default.createElement(
         "section",
         { id: "loading", className: this.props.active },
-        _react2.default.createElement(
-          "div",
-          { className: "loadingio-spinner-ball-u501e4ya8ji" },
-          _react2.default.createElement(
-            "div",
-            { className: "ldio-vn3lighz4w" },
-            _react2.default.createElement("div", null)
-          )
-        )
+        _react2.default.createElement("i", { className: "ayn-spin3" })
       );
     }
   }]);
@@ -489,29 +473,33 @@ var Messenger = function (_Component) {
     }));
 
     _this.displayUsers = function () {
-      return _this.state.users.map(function (user) {
-        return _react2.default.createElement(
-          'div',
-          { className: 'user', key: user.id },
-          _react2.default.createElement('div', { className: 'user-img', style: {
-              backgroundImage: 'url("' + user.profile_img + '")',
-              backgroundPosition: 'center center',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover' } }),
-          _react2.default.createElement(
+      if (_this.state.users == undefined) {
+        return _react2.default.createElement('i', { className: 'ayn-spin3' });
+      } else {
+        return _this.state.users.map(function (user) {
+          return _react2.default.createElement(
             'div',
-            { className: 'username' },
-            user.fname,
-            ' ',
-            user.lname
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'message-icon' },
-            _react2.default.createElement('i', { className: 'ayn-comment-1' })
-          )
-        );
-      });
+            { className: 'user', key: user.id },
+            _react2.default.createElement('div', { className: 'user-img', style: {
+                backgroundImage: 'url("' + user.profile_img + '")',
+                backgroundPosition: 'center center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover' } }),
+            _react2.default.createElement(
+              'div',
+              { className: 'username' },
+              user.fname,
+              ' ',
+              user.lname
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'message-icon' },
+              _react2.default.createElement('i', { className: 'ayn-comment-1' })
+            )
+          );
+        });
+      }
     };
 
     _this.state = {
@@ -549,7 +537,7 @@ var Messenger = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'title' },
-            '[:-- connect --:]'
+            '[:   connect   :]'
           ),
           _react2.default.createElement(
             'div',
@@ -596,7 +584,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(109);
+var _extends2 = __webpack_require__(108);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -623,8 +611,6 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 var _react = __webpack_require__(11);
 
 var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(107);
 
 var _axios = __webpack_require__(47);
 
@@ -750,11 +736,7 @@ var Profile = function (_Component) {
     key: 'render',
     value: function render() {
       if (this.state.user == undefined) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          'profile loading...'
-        );
+        return _react2.default.createElement('i', { className: 'ayn-spin3' });
       } else {
         // home
         // job
@@ -1062,11 +1044,7 @@ var Comments = function (_Component) {
     key: 'render',
     value: function render() {
       if (this.props.post == undefined) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          'Loading...'
-        );
+        return _react2.default.createElement('i', { className: 'ayn-spin3' });
       } else {
         if (this.state.comments.length > 0) {
           return _react2.default.createElement(
@@ -1105,7 +1083,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(109);
+var _extends2 = __webpack_require__(108);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1387,11 +1365,7 @@ var Compose = function (_Component) {
     key: 'render',
     value: function render() {
       if (this.props.initialData.userData == undefined) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          'Loading...'
-        );
+        return _react2.default.createElement('i', { className: 'ayn-spin3' });
       } else {
         return _react2.default.createElement(
           'section',
@@ -1443,7 +1417,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(109);
+var _extends2 = __webpack_require__(108);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1833,11 +1807,7 @@ var Post = function (_Component) {
     value: function render() {
 
       if (this.props.post == undefined || this.props.curuser == undefined) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          'Loading...'
-        );
+        return _react2.default.createElement('i', { className: 'ayn-spin3' });
       } else {
         // console.log("current user: " + this.props.curuser)
         // console.log("posted by " + this.props.user.id)
@@ -1998,11 +1968,7 @@ var PostArea = function (_Component) {
     key: 'render',
     value: function render() {
       if (this.props.initialData.userData == undefined) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          'Loading...'
-        );
+        return _react2.default.createElement('i', { className: 'ayn-spin3' });
       } else {
         return _react2.default.createElement(
           'section',
@@ -2061,7 +2027,7 @@ var _reactDom = __webpack_require__(84);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(107);
+var _reactRouterDom = __webpack_require__(153);
 
 var _axios = __webpack_require__(47);
 

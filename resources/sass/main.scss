@@ -19,14 +19,21 @@
   font-family: $main-font;
 }
 
-
-
-i {
+.send-btn,
+.like-btn,
+.del-btn,
+.photo-btn,
+.video-btn,
+.share-btn {
+  // background: $button-bg;
   background: transparent;
+  border-radius: 20%;
   color: $button-color;
-
+  transition: all .3s ease;
   &:hover {
-    color: $button-bg;
+    color: #AEEE98;
+    transform: scale(1.1);
+    // background: $button-color;
   }
 }
 
@@ -44,7 +51,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // font-family: 'Source Code Pro', monospace;
   font-family: $main-font;
 
   .title {
@@ -93,8 +99,8 @@ body {
     width: 100%;
     // max-width: 1400px;
     margin: 0 auto;
-    min-height: 85vh;
-    height: 85vh;
+    min-height: 80vh;
+    height: 80vh;
     overflow: hidden;
     border: $border-thickness solid $border-color;
   }
