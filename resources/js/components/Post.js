@@ -230,7 +230,9 @@ export default class Post extends Component {
 
     if (this.props.post == undefined || this.props.curuser == undefined) {
         return (
-          <i className="ayn-spin3" />
+          <div className='load'>
+            <i className="ayn-spin3" />
+          </div>
         )
     } else {
       // console.log("current user: " + this.props.curuser)

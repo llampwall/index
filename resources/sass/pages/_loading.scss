@@ -1,21 +1,32 @@
-.ayn-spin3 {
+
+.load {
   width: 100%;
-  font-size: 6rem;
-  animation: spin 1s linear infinite;
-  animation-play-state: running;
-  &::before {
-    animation: spin 1s linear infinite;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .ayn-spin3 {
+    // width: 100%;
+    font-size: 12rem;
+    animation: spin 10s linear infinite;
     animation-play-state: running;
+    &::before {
+      animation: spin 1s linear infinite;
+      animation-play-state: running;
+    }
   }
 }
 
 #loading {
+  
     background: transparent;
     width: 100%;
     height: 100%;
     position: absolute;
     z-index: 1000;
     display: none;
+    text-align: center;
 
     &.active {
       display: block;

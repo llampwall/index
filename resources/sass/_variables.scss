@@ -251,12 +251,10 @@ $post-bg: $secondary;
   -webkit-box-shadow: 5px 5px 0px 0px $shadow-color;
   -moz-box-shadow: 5px 5px 0px 0px $shadow-color;
   box-shadow: 5px 5px 0px 0px $shadow-color;
-  box-shadow: 5px 5px 0px 5px $shadow-color;
 }
 @mixin hard-shadow {
   -webkit-box-shadow: 5px 5px 20px 0px $shadow-color;
   -moz-box-shadow: 5px 5px 20px 0px $shadow-color;
-  box-shadow: 5px 5px 20px 0px $shadow-color;
   box-shadow: 5px 5px 20px 5px $shadow-color;
 }
 

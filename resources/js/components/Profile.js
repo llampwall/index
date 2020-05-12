@@ -79,7 +79,9 @@ export default class Profile extends Component {
   render () {
     if (this.state.user == undefined) {
       return (
-        <i className="ayn-spin3" />
+        <div className='load'>
+          <i className="ayn-spin3" />
+        </div>
       )
     } else {
       // home

@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 229:
+/***/ 231:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38,21 +38,15 @@ var _react = __webpack_require__(11);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(84);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _reactRouterDom = __webpack_require__(153);
-
 var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _PostArea = __webpack_require__(258);
+var _PostArea = __webpack_require__(261);
 
 var _PostArea2 = _interopRequireDefault(_PostArea);
 
-var _Compose = __webpack_require__(256);
+var _Compose = __webpack_require__(259);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
@@ -131,7 +125,11 @@ var Home = function (_Component) {
     key: 'render',
     value: function render() {
       if (this.props.initialData == undefined) {
-        return _react2.default.createElement('i', { className: 'ayn-spin3' });
+        return _react2.default.createElement(
+          'div',
+          { 'class': 'load' },
+          _react2.default.createElement('i', { className: 'ayn-spin3' })
+        );
       } else {
         // console.log(this.props)
         return _react2.default.createElement(
@@ -150,7 +148,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 230:
+/***/ 232:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -203,10 +201,14 @@ var LeftMenu = function (_Component) {
   }
 
   (0, _createClass3.default)(LeftMenu, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       if (this.props.initialData.userData == undefined) {
-        return _react2.default.createElement("i", { className: "ayn-spin3" });
+        return _react2.default.createElement(
+          'div',
+          { className: 'load' },
+          _react2.default.createElement('i', { className: 'ayn-spin3' })
+        );
       } else {
         // console.log(this.props.initialData.userData)
         var _props$initialData$us = this.props.initialData.userData,
@@ -214,101 +216,101 @@ var LeftMenu = function (_Component) {
             lname = _props$initialData$us.lname;
 
         return _react2.default.createElement(
-          "section",
-          { id: "left-menu" },
+          'section',
+          { id: 'left-menu' },
           _react2.default.createElement(
-            "div",
-            { className: "account-dropdown", onClick: this.clickedDropDown },
+            'div',
+            { className: 'account-dropdown', onClick: this.clickedDropDown },
             _react2.default.createElement(
-              "div",
-              { className: "username" },
-              "[: " + fname + " " + lname + " :]"
+              'div',
+              { className: 'username' },
+              '[: ' + fname + ' ' + lname + ' :]'
             )
           ),
           _react2.default.createElement(
-            "div",
-            { className: "dropdown " + (this.state.dropdown ? 'active' : '') },
+            'div',
+            { className: 'dropdown ' + (this.state.dropdown ? 'active' : '') },
             _react2.default.createElement(
-              "nav",
+              'nav',
               null,
               _react2.default.createElement(
-                "a",
-                { href: "/profile/" + this.props.initialData.userData.id },
-                "+ profile +"
+                'a',
+                { href: '/profile/' + this.props.initialData.userData.id },
+                '+ profile +'
               ),
               _react2.default.createElement(
-                "a",
-                { href: "/settings/" + this.props.initialData.userData.id },
-                "* settings *"
+                'a',
+                { href: '/settings/' + this.props.initialData.userData.id },
+                '* settings *'
               ),
               _react2.default.createElement(
-                "a",
-                { href: "/logout" },
-                "- logout -"
+                'a',
+                { href: '/logout' },
+                '- logout -'
               )
             )
           ),
           _react2.default.createElement(
-            "div",
-            { className: "groups" },
+            'div',
+            { className: 'groups' },
             _react2.default.createElement(
-              "div",
-              { className: "title" },
-              "_usr"
+              'div',
+              { className: 'title' },
+              '_usr'
             ),
             _react2.default.createElement(
-              "ul",
+              'ul',
               null,
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "bio"
+                'bio'
               ),
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "work"
+                'work'
               ),
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "media"
+                'media'
               )
             )
           ),
           _react2.default.createElement(
-            "div",
-            { className: "groups" },
+            'div',
+            { className: 'groups' },
             _react2.default.createElement(
-              "div",
-              { className: "title" },
-              "_groups"
+              'div',
+              { className: 'title' },
+              '_groups'
             ),
             _react2.default.createElement(
-              "ul",
+              'ul',
               null,
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "software"
+                'software'
               ),
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "photography"
+                'photography'
               ),
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "design"
+                'design'
               )
             )
           ),
           _react2.default.createElement(
-            "a",
-            { href: "/logout", className: "logout" },
-            "logout ",
-            _react2.default.createElement("i", { className: "ayn-trash" })
+            'a',
+            { href: '/logout', className: 'logout' },
+            'logout ',
+            _react2.default.createElement('i', { className: 'ayn-trash' })
           )
         );
       }
@@ -321,7 +323,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 231:
+/***/ 233:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -382,7 +384,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 232:
+/***/ 234:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -474,7 +476,11 @@ var Messenger = function (_Component) {
 
     _this.displayUsers = function () {
       if (_this.state.users == undefined) {
-        return _react2.default.createElement('i', { className: 'ayn-spin3' });
+        return _react2.default.createElement(
+          'div',
+          { className: 'load' },
+          _react2.default.createElement('i', { className: 'ayn-spin3' })
+        );
       } else {
         return _this.state.users.map(function (user) {
           return _react2.default.createElement(
@@ -570,7 +576,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 233:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -584,7 +590,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(108);
+var _extends2 = __webpack_require__(132);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -736,7 +742,11 @@ var Profile = function (_Component) {
     key: 'render',
     value: function render() {
       if (this.state.user == undefined) {
-        return _react2.default.createElement('i', { className: 'ayn-spin3' });
+        return _react2.default.createElement(
+          'div',
+          { className: 'load' },
+          _react2.default.createElement('i', { className: 'ayn-spin3' })
+        );
       } else {
         // home
         // job
@@ -787,7 +797,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 234:
+/***/ 236:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -852,7 +862,7 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 255:
+/***/ 258:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1044,7 +1054,11 @@ var Comments = function (_Component) {
     key: 'render',
     value: function render() {
       if (this.props.post == undefined) {
-        return _react2.default.createElement('i', { className: 'ayn-spin3' });
+        return _react2.default.createElement(
+          'div',
+          { className: 'load' },
+          _react2.default.createElement('i', { className: 'ayn-spin3' })
+        );
       } else {
         if (this.state.comments.length > 0) {
           return _react2.default.createElement(
@@ -1065,7 +1079,7 @@ exports.default = Comments;
 
 /***/ }),
 
-/***/ 256:
+/***/ 259:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1075,7 +1089,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(161);
+var _defineProperty2 = __webpack_require__(195);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -1083,7 +1097,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(108);
+var _extends2 = __webpack_require__(132);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1365,7 +1379,11 @@ var Compose = function (_Component) {
     key: 'render',
     value: function render() {
       if (this.props.initialData.userData == undefined) {
-        return _react2.default.createElement('i', { className: 'ayn-spin3' });
+        return _react2.default.createElement(
+          'div',
+          { className: 'load' },
+          _react2.default.createElement('i', { className: 'ayn-spin3' })
+        );
       } else {
         return _react2.default.createElement(
           'section',
@@ -1403,7 +1421,7 @@ exports.default = Compose;
 
 /***/ }),
 
-/***/ 257:
+/***/ 260:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1417,7 +1435,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(108);
+var _extends2 = __webpack_require__(132);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1425,7 +1443,7 @@ var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _defineProperty2 = __webpack_require__(161);
+var _defineProperty2 = __webpack_require__(195);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -1449,7 +1467,7 @@ var _react = __webpack_require__(11);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Comments = __webpack_require__(255);
+var _Comments = __webpack_require__(258);
 
 var _Comments2 = _interopRequireDefault(_Comments);
 
@@ -1807,7 +1825,11 @@ var Post = function (_Component) {
     value: function render() {
 
       if (this.props.post == undefined || this.props.curuser == undefined) {
-        return _react2.default.createElement('i', { className: 'ayn-spin3' });
+        return _react2.default.createElement(
+          'div',
+          { className: 'load' },
+          _react2.default.createElement('i', { className: 'ayn-spin3' })
+        );
       } else {
         // console.log("current user: " + this.props.curuser)
         // console.log("posted by " + this.props.user.id)
@@ -1905,7 +1927,7 @@ exports.default = Post;
 
 /***/ }),
 
-/***/ 258:
+/***/ 261:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1935,7 +1957,7 @@ var _react = __webpack_require__(11);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(257);
+var _Post = __webpack_require__(260);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -1968,7 +1990,11 @@ var PostArea = function (_Component) {
     key: 'render',
     value: function render() {
       if (this.props.initialData.userData == undefined) {
-        return _react2.default.createElement('i', { className: 'ayn-spin3' });
+        return _react2.default.createElement(
+          'div',
+          { className: 'load' },
+          _react2.default.createElement('i', { className: 'ayn-spin3' })
+        );
       } else {
         return _react2.default.createElement(
           'section',
@@ -1989,7 +2015,7 @@ exports.default = PostArea;
 
 /***/ }),
 
-/***/ 259:
+/***/ 262:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2023,37 +2049,37 @@ var _react = __webpack_require__(11);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(84);
+var _reactDom = __webpack_require__(103);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(153);
+var _reactRouterDom = __webpack_require__(239);
 
 var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(229);
+var _Home = __webpack_require__(231);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(233);
+var _Profile = __webpack_require__(235);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(230);
+var _LeftMenu = __webpack_require__(232);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(232);
+var _Messenger = __webpack_require__(234);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(234);
+var _SearchHeader = __webpack_require__(236);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(231);
+var _Loading = __webpack_require__(233);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
@@ -2161,4 +2187,4 @@ _reactDom2.default.render(_react2.default.createElement(Layout, null), app);
 
 /***/ })
 
-},[259]);
+},[262]);

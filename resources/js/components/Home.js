@@ -1,10 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import {
-  BrowserRouter as Router,
-  Route, 
-  NavLink
-} from 'react-router-dom'
 import axios from 'axios'
 import PostArea from './PostArea'
 import Compose from './Compose'
@@ -52,7 +46,9 @@ export default class Home extends Component {
   render () {
     if (this.props.initialData == undefined) {
       return (
-        <i className="ayn-spin3" />
+        <div class='load'>
+          <i className="ayn-spin3" />
+        </div>
       )
     } else {
       // console.log(this.props)

@@ -30,7 +30,9 @@ export default class Messenger extends Component {
   displayUsers = () => {
     if (this.state.users == undefined) {
       return (
-        <i className="ayn-spin3" />
+        <div className='load'>
+          <i className="ayn-spin3" />
+        </div>
       )
     } else {
       return (

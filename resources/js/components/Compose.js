@@ -157,7 +157,9 @@ export default class Compose extends Component {
   render () {
     if (this.props.initialData.userData == undefined) {
       return (
-        <i className="ayn-spin3" />
+        <div className='load'>
+          <i className="ayn-spin3" />
+        </div>
       )
     } else {
       return (
