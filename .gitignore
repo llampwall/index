@@ -16,3 +16,4 @@ database/*.sqlite
 .idea
 credentials.csv
 heroku-awskey.csv
+credentials.json

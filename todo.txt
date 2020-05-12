@@ -14,9 +14,24 @@ style stuff
     change title?
     definitely change title styling
 
-LOADING STUFF
+
+
+mobile 
+
+migrate to postgres
+    ** FUCK **
 
 google login
+
+
+- profile
+    - about
+    - photos
+    - groups
+
+
+
+
 
 pagination / infinite scrolling / lazy loading
 
@@ -32,19 +47,17 @@ colors
 
 "sent from my phone"
 
-- profile
-    - about
-    - photos
-    - groups
+
+
 
 - friends or followers
     -only showing posts from you and your friends
     -only allowed to view full profiles of friends
 
 
-finish bio in profile area
 
-
+LOADING STUFF 
+    ** DONE **
 
 registration not working without picture?
     ** fixed**
