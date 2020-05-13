@@ -135,26 +135,27 @@
       position: absolute;
       top: 50%;
       left: -15px;
-      transform: scale(1);
-      transform: rotateZ(0deg);
       transform-style: preserve-3d;
       transition: all .3s ease-in-out;
       border-radius: 20%;
 
       i {
-        position: relative;
-        left: -1.1px;
         font-size: 1.2rem;
-        color: $title-font-color;
+        color: $accents;
+        transform: scale(1);
+        transform: rotateZ(0deg);
+        transition: all .5s ease-in-out;
+        &:hover {
+          transform: scale(1.2);
+        }
+
+        &.closed {
+          color: $title-font-color;
+          transform: rotateZ(180deg);
+        }
       }
 
-      &:hover {
-        transform: scale(1.2);
-      }
-
-      &.closed {
-        transform: rotateZ(180deg);
-      }
+      
     }
 
     .chat {
