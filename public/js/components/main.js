@@ -206,12 +206,21 @@ var LeftMenu = function (_Component) {
 
     _this.state = {
       dropdown: false,
-      open: true
+      open: false
     };
     return _this;
   }
 
   (0, _createClass3.default)(LeftMenu, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (window.innerWidth > 1200) {
+        this.setState((0, _extends3.default)({}, this.state, {
+          open: true
+        }));
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (this.props.initialData.userData == undefined) {
@@ -536,7 +545,7 @@ var Messenger = function (_Component) {
 
     _this.state = {
       users: [],
-      open: true
+      open: false
     };
     return _this;
   }
@@ -545,6 +554,11 @@ var Messenger = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.populate();
+      if (window.innerWidth > 1200) {
+        this.setState((0, _extends3.default)({}, this.state, {
+          open: true
+        }));
+      }
     }
   }, {
     key: 'render',

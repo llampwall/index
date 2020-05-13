@@ -6,12 +6,18 @@ export default class Messenger extends Component {
     super()
     this.state = { 
       users: [],
-      open: true
+      open: false
     }
   }
 
   componentDidMount() {
     this.populate()
+    if (window.innerWidth > 1200) {
+      this.setState({
+        ...this.state,
+        open: true
+      })
+    }
   }
 
   clickedOpen = () => {

@@ -153,18 +153,48 @@ input[type="password"] {
 
     #all-posts>.post-container {
       max-width: 95vw;
+
+      .post-header {
+        .author {
+          .username {
+            font-size: 2rem;
+          }
+        }
+        .time {
+          display: none;
+        }
+        .del-btn {
+          margin-left: auto;
+        }
+      }
+
+      .post-info p {
+        font-size: 2rem;
+      }
     }
+    
   }
 
-  // #left-menu {
-  //   display: none;
-  // }
-  // #messenger {
-  //   display: none;
-  // }
+  #left-menu {
+    &.closed {
+      box-shadow: none;
+    }
+    
+  }
+  #messenger {
+    &.closed {
+      box-shadow: none;
+    }
+  }
 
 
   #all-posts .post-container .post {
     font-size: 1.5rem !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .post-header {
+    font-size: 2rem;
   }
 }
