@@ -148,19 +148,20 @@ input[type="password"] {
 
 @media only screen and (max-width: 1200px) {
   .home-page {
-    display: flex;
+    // display: flex;
+    grid-template-columns: 5% 90% 5%;
 
     #all-posts>.post-container {
       max-width: none;
     }
   }
 
-  #left-menu {
-    display: none;
-  }
-  #messenger {
-    display: none;
-  }
+  // #left-menu {
+  //   display: none;
+  // }
+  // #messenger {
+  //   display: none;
+  // }
 
 
   #all-posts .post-container .post {
