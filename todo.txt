@@ -3,23 +3,11 @@ use componentwillmount (profile.js to do get request (look at 11:06 or 19:51), w
 (see 19:40 but it doesnt have to be usercontroller), which returns sets the state variable userprofile to 
 set the state in profile.js and populate the page
 
-style stuff
-    reorganize scss
-        file splitting
-        variables
-        ** DONE ISH **
-    themeing
-    change welcome page
-        ** DONE ISH **
-    change title?
-    definitely change title styling
 
-
-
-mobile 
 
 migrate to postgres
     ** FUCK **
+    probably not going to bother for now
 
 google login
 
@@ -29,9 +17,7 @@ google login
     - photos
     - groups
 
-
-
-
+images support for png/webp
 
 pagination / infinite scrolling / lazy loading
 
@@ -39,10 +25,6 @@ images
     optimize? kraken.io / aws lambda
     customize file names
     make paths for different image files
-
-
-colors
-
 
 
 "sent from my phone"
@@ -54,6 +36,20 @@ colors
     -only showing posts from you and your friends
     -only allowed to view full profiles of friends
 
+style stuff
+    reorganize scss
+        file splitting
+        variables
+        ** DONE ISH **
+    themeing
+    change welcome page
+        ** DONE ISH **
+    change title?
+    definitely change title styling
+    ** DONE FOR NOW **
+
+mobile 
+    ** DONE FOR NOW **
 
 
 LOADING STUFF 

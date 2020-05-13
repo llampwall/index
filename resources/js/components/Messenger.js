@@ -1,13 +1,17 @@
 import React, { Component} from 'react'
 import axois from 'axios'
+import ChatWindow from './ChatWindow'
 
 export default class Messenger extends Component {
   constructor () {
     super()
     this.state = { 
       users: [],
-      open: false
+      open: false, 
+      chatUser: null
     }
+
+    this.chatRef = React.createRef()
   }
 
   componentDidMount() {
@@ -25,6 +29,24 @@ export default class Messenger extends Component {
       ...this.state,
       open: !this.state.open
     })
+  }
+
+  openChat = (user) => {
+    if (this.state.chatUser != null && user != this.state.chatUser) {
+      this.chatRef.current.switchUser(user)
+    }
+    this.setState({
+      ...this.state,
+      chatUser: user
+    })
+  }
+
+  displayChat = () => {
+    if (this.state.chatUser != null) {
+      return (
+        <ChatWindow ref={this.chatRef} user={this.state.chatUser}></ChatWindow>
+      )
+    }
   }
 
   populate = async () => {
@@ -52,7 +74,7 @@ export default class Messenger extends Component {
       return (
         this.state.users.map((user) => {
           return (
-            <div className="user" key={user.id}>
+            <div className="user" key={user.id} onClick={this.openChat.bind(null, user)}>
               <div className="user-img" style={{
                 backgroundImage: `url("${user.profile_img}")`, 
                 backgroundPosition: 'center center', 
@@ -99,6 +121,9 @@ export default class Messenger extends Component {
           <i className="ayn-search" />
           <input type="text" name="friendSearch" placeholder="search..." />
         </div>
+
+        {this.displayChat()}
+
       </section>
     )
   }
