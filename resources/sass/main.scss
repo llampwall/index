@@ -146,10 +146,9 @@ input[type="password"] {
 }
 
 
+
 @media only screen and (max-width: 1200px) {
   .home-page {
-    // display: flex;
-    grid-template-columns: 5% 90% 5%;
 
     #all-posts>.post-container {
       max-width: 95vw;
@@ -170,31 +169,114 @@ input[type="password"] {
 
       .post-info p {
         font-size: 2rem;
+      } 
+
+      .c-section {
+        textarea {
+          font-size: 2rem;
+        }
+      }
+
+      .buttons {
+        .send-btn {
+          width: 40px;
+          height: 40px;
+          i {
+            font-size: 2rem;
+          }
+        }
+
+        .single-comment {
+          .user>h2 {
+            font-size: 1.5rem;
+          }
+          p {
+            font-size: 1.5rem;
+          }
+        }
       }
     }
-    
+  }
+
+  .send-btn,
+  .like-btn,
+  .del-btn,
+  .photo-btn,
+  .video-btn,
+  .share-btn,
+  .open-btn {
+    width: 40px;
+    height: 40px;
+    i {
+      font-size: 2rem;
+    }
+  }
+
+  #compose {
+    textarea {
+      font-size: 2rem;
+    }
+
+    .send-btn,
+    .photo-btn {
+      width: 40px;
+      height: 40px;
+      i {
+        font-size: 2rem;
+      }
+    }
   }
 
   #left-menu {
+    .account-dropdown>.username {
+      font-size: 1.5rem;
+    }
+    .groups {
+      .title {
+        font-size: 2rem;
+      }
+      ul>li {
+        font-size: 1.3rem;
+      }
+    }
     &.closed {
       box-shadow: none;
+      left: -17rem;
     }
-    
+
+    .open-btn {
+      width: 50px;
+      height: 50px;
+      i {
+        font-size: 3rem;
+      }
+    }
   }
+
   #messenger {
+    .messenger-header>.title {
+      font-size: 1.5rem;
+    }
+
+    .users {
+      .user>.username {
+        font-size: 1.5rem;
+      }
+    }
+
     &.closed {
       box-shadow: none;
+      right: -21rem;
+    }
+
+    .open-btn {
+      width: 50px;
+      height: 50px;
+      i {
+        font-size: 3rem;
+      }
     }
   }
 
-
-  #all-posts .post-container .post {
-    font-size: 1.5rem !important;
-  }
 }
 
-@media only screen and (max-width: 767px) {
-  .post-header {
-    font-size: 2rem;
-  }
-}
