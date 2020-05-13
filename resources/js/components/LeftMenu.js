@@ -4,12 +4,21 @@ export default class LeftMenu extends Component {
   constructor () {
     super()
     this.state = { 
-      dropdown: false
+      dropdown: false,
+      open: true
     }
+  }
+
+  clickedOpen = () => {
+    this.setState({
+      ...this.state,
+      open: !this.state.open
+    })
   }
 
   clickedDropDown = () => {
     this.setState({
+      ...this.state,
       dropdown: !this.state.dropdown
     })
   }
@@ -25,7 +34,7 @@ export default class LeftMenu extends Component {
       // console.log(this.props.initialData.userData)
       const {fname, lname} = this.props.initialData.userData
       return (
-        <section id="left-menu">
+        <section id="left-menu" className={this.state.open ? "open" : "closed"}>
           <div className="account-dropdown" onClick={this.clickedDropDown}>
             <div className="username">
               {`[: ${fname} ${lname} :]`}
@@ -56,6 +65,9 @@ export default class LeftMenu extends Component {
               <li>design</li>
             </ul>
           </div>
+
+          <div className="open-btn" onClick={this.clickedOpen}><i className={`ayn-left-open ${this.state.open ? '' : 'closed'}`}></i></div>
+
           <a href="/logout" className="logout">
             logout <i className="ayn-trash" />
           </a>

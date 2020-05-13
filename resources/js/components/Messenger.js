@@ -5,12 +5,20 @@ export default class Messenger extends Component {
   constructor () {
     super()
     this.state = { 
-      users: []
+      users: [],
+      open: true
     }
   }
 
   componentDidMount() {
     this.populate()
+  }
+
+  clickedOpen = () => {
+    this.setState({
+      ...this.state,
+      open: !this.state.open
+    })
   }
 
   populate = async () => {
@@ -62,7 +70,7 @@ export default class Messenger extends Component {
       this.populate()
     }
     return (
-      <section id="messenger">
+      <section id="messenger" className={this.state.open ? "open" : "closed"}>
         <div className="messenger-header">
           <div className="messenger-icon">
             {/* <i className="ayn-paper-plane" /> */}
@@ -78,6 +86,8 @@ export default class Messenger extends Component {
         <div className="users">
           {this.displayUsers()}
         </div>
+
+        <div className="open-btn" onClick={this.clickedOpen}><i className={`ayn-right-open ${this.state.open ? '' : 'closed'}`}></i></div>
 
         <div className="search">
           <i className="ayn-search" />

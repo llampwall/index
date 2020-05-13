@@ -158,6 +158,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = __webpack_require__(73);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = __webpack_require__(24);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -188,14 +192,21 @@ var LeftMenu = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (LeftMenu.__proto__ || Object.getPrototypeOf(LeftMenu)).call(this));
 
+    _this.clickedOpen = function () {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        open: !_this.state.open
+      }));
+    };
+
     _this.clickedDropDown = function () {
-      _this.setState({
+      _this.setState((0, _extends3.default)({}, _this.state, {
         dropdown: !_this.state.dropdown
-      });
+      }));
     };
 
     _this.state = {
-      dropdown: false
+      dropdown: false,
+      open: true
     };
     return _this;
   }
@@ -217,7 +228,7 @@ var LeftMenu = function (_Component) {
 
         return _react2.default.createElement(
           'section',
-          { id: 'left-menu' },
+          { id: 'left-menu', className: this.state.open ? "open" : "closed" },
           _react2.default.createElement(
             'div',
             { className: 'account-dropdown', onClick: this.clickedDropDown },
@@ -305,6 +316,11 @@ var LeftMenu = function (_Component) {
                 'design'
               )
             )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'open-btn', onClick: this.clickedOpen },
+            _react2.default.createElement('i', { className: 'ayn-left-open ' + (this.state.open ? '' : 'closed') })
           ),
           _react2.default.createElement(
             'a',
@@ -402,6 +418,10 @@ var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
+var _extends2 = __webpack_require__(73);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = __webpack_require__(24);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -437,6 +457,12 @@ var Messenger = function (_Component) {
     (0, _classCallCheck3.default)(this, Messenger);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Messenger.__proto__ || Object.getPrototypeOf(Messenger)).call(this));
+
+    _this.clickedOpen = function () {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        open: !_this.state.open
+      }));
+    };
 
     _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
       var self, allUsers;
@@ -509,7 +535,8 @@ var Messenger = function (_Component) {
     };
 
     _this.state = {
-      users: []
+      users: [],
+      open: true
     };
     return _this;
   }
@@ -527,7 +554,7 @@ var Messenger = function (_Component) {
       }
       return _react2.default.createElement(
         'section',
-        { id: 'messenger' },
+        { id: 'messenger', className: this.state.open ? "open" : "closed" },
         _react2.default.createElement(
           'div',
           { className: 'messenger-header' },
@@ -562,6 +589,11 @@ var Messenger = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
+          { className: 'open-btn', onClick: this.clickedOpen },
+          _react2.default.createElement('i', { className: 'ayn-right-open ' + (this.state.open ? '' : 'closed') })
+        ),
+        _react2.default.createElement(
+          'div',
           { className: 'search' },
           _react2.default.createElement('i', { className: 'ayn-search' }),
           _react2.default.createElement('input', { type: 'text', name: 'friendSearch', placeholder: 'search...' })
@@ -590,7 +622,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(132);
+var _extends2 = __webpack_require__(73);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1097,7 +1129,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(132);
+var _extends2 = __webpack_require__(73);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1435,7 +1467,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(132);
+var _extends2 = __webpack_require__(73);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -2049,7 +2081,7 @@ var _react = __webpack_require__(11);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(103);
+var _reactDom = __webpack_require__(104);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 

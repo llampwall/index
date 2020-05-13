@@ -1,8 +1,29 @@
 #left-menu {
     border-right: $border-thickness solid $border-color;
-    position: relative;
+    position: absolute;
+    height: 100%;
     font-family: $main-font;
     background-color: $left-menu-bg;
+    top: 0;
+    left: 0;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: all .5s ease-in-out;
+    z-index: 2;
+
+    -webkit-box-shadow: 23px 0px 57px -20px rgba(39,61,84,.6);
+    -moz-box-shadow: 23px 0px 57px -20px rgba(39,61,84,.6);
+    box-shadow: 23px 0px 57px -20px rgba(39,61,84,.6);
+
+    &.closed {
+      left: -15rem;
+
+      -webkit-box-shadow: 23px 0px 57px -20px rgba($lr-menu-headers,.4);
+      -moz-box-shadow: 23px 0px 57px -20px rgba($lr-menu-headers,.4);
+      box-shadow: 23px 0px 57px -20px rgba($lr-menu-headers,.4);
+    }
     
     .account-dropdown {
       display: flex;
@@ -13,7 +34,9 @@
       background-color: $left-menu-bg;
       color: $lr-menu-headers;
       min-width: 200px;
+      margin-right: 1rem;
       cursor: pointer;
+
       .username {
         text-transform: lowercase;
         font-size: 1.2rem;
@@ -84,13 +107,50 @@
       }
     }
 
+    .open-btn {
+      height: 30px;
+      width: 30px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: $border-thickness solid $button-color;
+      @include hard-shadow;
+      // background: transparent;
+      background: $secondary;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      right: -15px;
+      transform: scale(1);
+      transform: rotateZ(0deg);
+      transform-style: preserve-3d;
+      transition: all .3s ease-in-out;
+      border-radius: 20%;
+
+      i {
+        position: relative;
+        left: -1.1px;
+        font-size: 1.2rem;
+        color: $title-font-color;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      &.closed {
+        transform: rotateZ(180deg);
+      }
+    }
+
     .logout {
       width: 100%;
+      align-self: center;
       padding: .5rem;
       height: 50px;
       border-top: $border-thickness solid $border-color;
-      position: absolute;
-      bottom: 0;
+      margin-top: auto;
       display: flex;
       align-items: center;
       justify-content: center;
