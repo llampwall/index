@@ -14,14 +14,28 @@ chat messenger
     *connected to 'chat' websocket
     *got info of both users
 
-    send messages from the chat input field
-    display messages in the chatwindow
     add 'status' to users table
+	nevermind
+
+    make 'online' table to store socket connections
+        *DONE*
+
+    chatcontroller constructor / onclose updates user table
+        constructor **DONE**
+
     move connection logic to messenger componentdidmount
-    chatcontroller constructor updates user table
+
+    api function to get all online users
+
+    
+
     new usercontroller method to get all online users
+
     messenger only sees online users
-    add close/minimize to chat window
+
+    send messages from the chat input field
+        
+    display messages in the chatwindow
 
 
 google login
