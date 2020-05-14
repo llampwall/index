@@ -2,6 +2,7 @@ import React, { Component} from 'react'
 import axois from 'axios'
 import ChatWindow from './ChatWindow'
 import Ws from '@adonisjs/websocket-client'
+import { SimpleDB } from 'aws-sdk'
 
 export default class Messenger extends Component {
   constructor () {
@@ -23,10 +24,9 @@ export default class Messenger extends Component {
     if (window.innerWidth > 1200) {
       this.setState({
         ...this.state,
-        open: true
+        open: true,
       })
     }
-
     this.startChat()
   }
 
@@ -59,6 +59,22 @@ export default class Messenger extends Component {
       //   from: this.state.me,
       //   to: this.state.user
       // })
+    })
+
+    const self = this
+    this.chat.on('message', function(message) {
+      console.log('message received')
+      // console.log(message.to)
+      if (message.to != undefined) {
+        // console.log(message.to)
+        // console.log(self.props.initialData.userData)
+        if (message.to.id == self.props.initialData.userData.id) {
+          console.log('MESSAGE TO US!')
+          self.openChat(message.from)
+          setTimeout(self.chatRef.current.addMsg(message), 500)
+        }
+        
+      }
     })
 
     this.chat.on('error', (error) => {

@@ -10,7 +10,8 @@ export default class ChatWindow extends Component {
       from: null,
       to: null,
       chat: null, 
-      message: ''
+      message: '', 
+      messages: []
     }
   }
 
@@ -22,18 +23,6 @@ export default class ChatWindow extends Component {
         chat: this.props.chat
     }, () => {
         console.log(this.state)
-    })
-    this.props.chat.on('message', function(message) {
-      console.log('message received')
-      // console.log(message.to)
-      if (message.to != undefined) {
-        console.log(message.to)
-        console.log(self.state.from)
-        if (message.to.id == self.state.from.id) {
-          console.log('MESSAGE TO US!')
-        }
-        
-      }
     })
   }
 
@@ -48,6 +37,28 @@ export default class ChatWindow extends Component {
         //   body: 'sup homie'
         // })
     })
+  }
+
+  addMsg = (message) => {
+    let newMessages = this.state.messages
+    newMessages.push(message)
+    this.setState({
+      ...this.state,
+      messages: newMessages
+    })
+
+  }
+
+  displayMessages = () => {
+    return (
+      this.state.messages.map((msg, i) => {
+        return (
+          <div className='message' key={i}>
+              <p>{msg.body}</p>   
+          </div>
+        )
+      })
+    )
   }
 
   changeText = (event) => {
@@ -84,18 +95,7 @@ export default class ChatWindow extends Component {
                   <span className='chat-user'>{this.state.to.fname} {this.state.to.lname}</span>
                 </div>
                 <div className='chat-body'>
-                    <div className='message'>
-                        {/* <span className='message-user'>{this.state.user.fname}</span> */}
-                        <p>this is a message. </p>   
-                    </div>
-                    <div className='message self'>
-                        {/* <span className='message-user'>user</span> */}
-                        <p>this is a message. </p>   
-                    </div>
-                    <div className='message'>
-                        {/* <span className='message-user'>user</span> */}
-                        <p>this is a message. </p>   
-                    </div>
+                    {this.displayMessages()}
                 </div>
                 <div className='chat-compose'>
                     <input type='text' name='message' value={this.state.message} onChange={this.changeText} placeholder='enter a message'/>

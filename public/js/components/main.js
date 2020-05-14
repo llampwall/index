@@ -1,6 +1,13 @@
 webpackJsonp([0],{
 
-/***/ 240:
+/***/ 170:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10,43 +17,43 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(54);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(53);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _PostArea = __webpack_require__(272);
+var _PostArea = __webpack_require__(687);
 
 var _PostArea2 = _interopRequireDefault(_PostArea);
 
-var _Compose = __webpack_require__(270);
+var _Compose = __webpack_require__(685);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
@@ -148,7 +155,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 241:
+/***/ 278:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -158,27 +165,27 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(77);
+var _extends2 = __webpack_require__(73);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -348,7 +355,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 242:
+/***/ 279:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -358,23 +365,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -409,7 +416,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 243:
+/***/ 280:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -419,49 +426,51 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(54);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(53);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _extends2 = __webpack_require__(77);
+var _extends2 = __webpack_require__(73);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _ChatWindow = __webpack_require__(268);
+var _ChatWindow = __webpack_require__(683);
 
 var _ChatWindow2 = _interopRequireDefault(_ChatWindow);
 
-var _websocketClient = __webpack_require__(158);
+var _websocketClient = __webpack_require__(172);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
+
+var _awsSdk = __webpack_require__(597);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -496,6 +505,21 @@ var Messenger = function (_Component) {
         //   from: this.state.me,
         //   to: this.state.user
         // })
+      });
+
+      var self = _this;
+      _this.chat.on('message', function (message) {
+        console.log('message received');
+        // console.log(message.to)
+        if (message.to != undefined) {
+          // console.log(message.to)
+          // console.log(self.props.initialData.userData)
+          if (message.to.id == self.props.initialData.userData.id) {
+            console.log('MESSAGE TO US!');
+            self.openChat(message.from);
+            setTimeout(self.chatRef.current.addMsg(message), 500);
+          }
+        }
       });
 
       _this.chat.on('error', function (error) {
@@ -616,7 +640,6 @@ var Messenger = function (_Component) {
           open: true
         }));
       }
-
       this.startChat();
     }
   }, {
@@ -706,7 +729,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 244:
+/***/ 281:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -716,43 +739,43 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(54);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(77);
+var _extends2 = __webpack_require__(73);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(53);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactTransitionGroup = __webpack_require__(564);
+var _reactTransitionGroup = __webpack_require__(986);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -922,7 +945,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 245:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -932,23 +955,23 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -987,7 +1010,7 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 268:
+/***/ 683:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -997,35 +1020,39 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(135);
+var _defineProperty2 = __webpack_require__(147);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _classCallCheck2 = __webpack_require__(19);
+var _extends2 = __webpack_require__(73);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _websocketClient = __webpack_require__(158);
+var _websocketClient = __webpack_require__(172);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
 
@@ -1052,6 +1079,28 @@ var ChatWindow = function (_Component) {
       });
     };
 
+    _this.addMsg = function (message) {
+      var newMessages = _this.state.messages;
+      newMessages.push(message);
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        messages: newMessages
+      }));
+    };
+
+    _this.displayMessages = function () {
+      return _this.state.messages.map(function (msg, i) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'message', key: i },
+          _react2.default.createElement(
+            'p',
+            null,
+            msg.body
+          )
+        );
+      });
+    };
+
     _this.changeText = function (event) {
       var name = event.target.name;
       var value = event.target.value;
@@ -1074,7 +1123,8 @@ var ChatWindow = function (_Component) {
       from: null,
       to: null,
       chat: null,
-      message: ''
+      message: '',
+      messages: []
     };
     return _this;
   }
@@ -1091,17 +1141,6 @@ var ChatWindow = function (_Component) {
         chat: this.props.chat
       }, function () {
         console.log(_this2.state);
-      });
-      this.props.chat.on('message', function (message) {
-        console.log('message received');
-        // console.log(message.to)
-        if (message.to != undefined) {
-          console.log(message.to);
-          console.log(self.state.from);
-          if (message.to.id == self.state.from.id) {
-            console.log('MESSAGE TO US!');
-          }
-        }
       });
     }
   }, {
@@ -1131,33 +1170,7 @@ var ChatWindow = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'chat-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'message' },
-              _react2.default.createElement(
-                'p',
-                null,
-                'this is a message. '
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'message self' },
-              _react2.default.createElement(
-                'p',
-                null,
-                'this is a message. '
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'message' },
-              _react2.default.createElement(
-                'p',
-                null,
-                'this is a message. '
-              )
-            )
+            this.displayMessages()
           ),
           _react2.default.createElement(
             'div',
@@ -1180,7 +1193,7 @@ exports.default = ChatWindow;
 
 /***/ }),
 
-/***/ 269:
+/***/ 684:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1190,35 +1203,35 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(54);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(53);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1397,7 +1410,7 @@ exports.default = Comments;
 
 /***/ }),
 
-/***/ 270:
+/***/ 685:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1407,43 +1420,43 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(135);
+var _defineProperty2 = __webpack_require__(147);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(54);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(77);
+var _extends2 = __webpack_require__(73);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(53);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1739,7 +1752,7 @@ exports.default = Compose;
 
 /***/ }),
 
-/***/ 271:
+/***/ 686:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1749,47 +1762,47 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(54);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(77);
+var _extends2 = __webpack_require__(73);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(53);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _defineProperty2 = __webpack_require__(135);
+var _defineProperty2 = __webpack_require__(147);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Comments = __webpack_require__(269);
+var _Comments = __webpack_require__(684);
 
 var _Comments2 = _interopRequireDefault(_Comments);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -2245,7 +2258,7 @@ exports.default = Post;
 
 /***/ }),
 
-/***/ 272:
+/***/ 687:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2255,27 +2268,27 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(271);
+var _Post = __webpack_require__(686);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -2333,71 +2346,71 @@ exports.default = PostArea;
 
 /***/ }),
 
-/***/ 273:
+/***/ 688:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(54);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(53);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _classCallCheck2 = __webpack_require__(19);
+var _classCallCheck2 = __webpack_require__(22);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(20);
+var _createClass2 = __webpack_require__(23);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(22);
+var _possibleConstructorReturn2 = __webpack_require__(25);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(21);
+var _inherits2 = __webpack_require__(24);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(6);
+var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(70);
+var _reactDom = __webpack_require__(75);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(248);
+var _reactRouterDom = __webpack_require__(285);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(47);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(240);
+var _Home = __webpack_require__(277);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(244);
+var _Profile = __webpack_require__(281);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(241);
+var _LeftMenu = __webpack_require__(278);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(243);
+var _Messenger = __webpack_require__(280);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(245);
+var _SearchHeader = __webpack_require__(282);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(242);
+var _Loading = __webpack_require__(279);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
@@ -2505,4 +2518,4 @@ _reactDom2.default.render(_react2.default.createElement(Layout, null), app);
 
 /***/ })
 
-},[273]);
+},[688]);
