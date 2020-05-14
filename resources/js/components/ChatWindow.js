@@ -7,6 +7,7 @@ export default class ChatWindow extends Component {
   constructor () {
     super()
     this.state = { 
+      from: null,
       user: null,
       chat: null
     }
@@ -14,7 +15,8 @@ export default class ChatWindow extends Component {
 
   componentDidMount() {
     this.setState({
-        user: this.props.user, 
+        from: this.props.from,
+        to: this.props.user, 
         chat: this.props.chat
     }, () => {
         console.log(this.state)
@@ -26,12 +28,17 @@ export default class ChatWindow extends Component {
         user: user
     }, () => {
         console.log('changed user: ' + this.state.user.fname)
+        this.props.chat.emit('message', {
+          from: this.state.from,
+          to: this.state.to, 
+          body: 'sup homie'
+        })
     })
   }
 
 
   render() {
-    if (this.state.user == undefined) {
+    if (this.state.to == undefined) {
         return (
           <div className='load'>
             <i className="ayn-spin3" />

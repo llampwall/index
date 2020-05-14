@@ -1040,10 +1040,16 @@ var ChatWindow = function (_Component) {
         user: user
       }, function () {
         console.log('changed user: ' + _this.state.user.fname);
+        _this.props.chat.emit('message', {
+          from: _this.state.from,
+          to: _this.state.to,
+          body: 'sup homie'
+        });
       });
     };
 
     _this.state = {
+      from: null,
       user: null,
       chat: null
     };
@@ -1056,7 +1062,8 @@ var ChatWindow = function (_Component) {
       var _this2 = this;
 
       this.setState({
-        user: this.props.user,
+        from: this.props.from,
+        to: this.props.user,
         chat: this.props.chat
       }, function () {
         console.log(_this2.state);
@@ -1065,7 +1072,7 @@ var ChatWindow = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (this.state.user == undefined) {
+      if (this.state.to == undefined) {
         return _react2.default.createElement(
           'div',
           { className: 'load' },
