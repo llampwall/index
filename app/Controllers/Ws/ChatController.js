@@ -1,27 +1,42 @@
 'use strict'
 
-const Ws = use('Ws')
 const Online = use('App/Models/Online')
 
 class ChatController {
   constructor ({ socket, request, auth }) {
     this.socket = socket
     this.request = request
-    this.user = auth.user
+    this.auth = auth
     console.log(auth.user.fname + ' ' + auth.user.lname + ' has connected to the server.')
 
-    socket.emit('hello')
-}
+    this.store(auth.user.id, socket.id)
+    
+  }
+
+  // store socket in database
+  async store (u_id, s_id) {
+
+    try {
+      const newSocket = await Online.create({
+          user_id: u_id,
+          socket_id: s_id
+      })
+    } catch (error) {
+        console.log(error)
+    }
+    console.log('connection saved');
+
+    this.socket.emit('new connection')
+  }
 
   onMessage (message) {
 
-    // console.log('new message from: ')
-    // console.log(this.auth.user.fname)
-    // console.log('to')
-    // console.log(message.to.fname)
-    // console.log(message.body)
-    console.log(this.socket.id)
-    console.log(Ws._connections)
+    console.log('new message from: ')
+    console.log(this.auth.user.fname)
+    console.log('to')
+    console.log(message.to.fname)
+    console.log(message.body)
+    // console.log(this.socket.id)
     this.socket.broadcastToAll('message', message.body)
   }
 
