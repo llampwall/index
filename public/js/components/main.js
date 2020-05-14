@@ -491,7 +491,11 @@ var Messenger = function (_Component) {
         _this.setState((0, _extends3.default)({}, _this.state, {
           connected: true
         }));
-        console.log('connected');
+        // this.chat.emit('message', {
+        //   body: 'login',
+        //   from: this.state.me,
+        //   to: this.state.user
+        // })
       });
 
       _this.chat.on('error', function (error) {
@@ -502,27 +506,25 @@ var Messenger = function (_Component) {
         _this.setState((0, _extends3.default)({}, _this.state, {
           connected: false
         }));
-        console.log('disconnected');
       });
 
       _this.chat.on('message', function (message) {
         console.log(message);
       });
-      // console.log(this.ws)
     };
 
     _this.openChat = function (user) {
-      if (_this.state.chatUser != null && user != _this.state.chatUser) {
-        _this.chatRef.current.switchUser(user);
-      }
       _this.setState((0, _extends3.default)({}, _this.state, {
         chatUser: user
       }));
+      if (_this.state.chatUser != null && user != _this.state.chatUser) {
+        _this.chatRef.current.switchUser(user);
+      }
     };
 
     _this.displayChat = function () {
       if (_this.state.chatUser != null) {
-        return _react2.default.createElement(_ChatWindow2.default, { ref: _this.chatRef, chat: _this.chat, to: _this.state.chatUser, from: _this.props.initialData.userData });
+        return _react2.default.createElement(_ChatWindow2.default, { ref: _this.chatRef, from: _this.props.initialData.userData, to: _this.state.chatUser, chat: _this.chat });
       }
     };
 
@@ -609,9 +611,6 @@ var Messenger = function (_Component) {
     return _this;
   }
 
-  // check if user is on mobile and connect to chat
-
-
   (0, _createClass3.default)(Messenger, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
@@ -628,7 +627,7 @@ var Messenger = function (_Component) {
     //open messenger sidebar
 
 
-    // connect and configure websocket client
+    // connect messenger
 
 
     // open chat window / switch to a different one
@@ -1040,17 +1039,21 @@ var ChatWindow = function (_Component) {
         user: user
       }, function () {
         console.log('changed user: ' + _this.state.user.fname);
-        _this.props.chat.emit('message', {
-          from: _this.state.from,
-          to: _this.state.to,
-          body: 'sup homie'
-        });
+        // this.props.chat.emit('message', {
+        //   from: this.state.from,
+        //   to: this.state.to, 
+        //   body: 'sup homie'
+        // })
       });
+    };
+
+    _this.sendMsg = function () {
+      console.log('message sent');
     };
 
     _this.state = {
       from: null,
-      user: null,
+      to: null,
       chat: null
     };
     return _this;
@@ -1063,7 +1066,7 @@ var ChatWindow = function (_Component) {
 
       this.setState({
         from: this.props.from,
-        to: this.props.user,
+        to: this.props.to,
         chat: this.props.chat
       }, function () {
         console.log(_this2.state);
@@ -1088,9 +1091,9 @@ var ChatWindow = function (_Component) {
             _react2.default.createElement(
               'span',
               { className: 'chat-user' },
-              this.state.user.fname,
+              this.state.to.fname,
               ' ',
-              this.state.user.lname
+              this.state.to.lname
             )
           ),
           _react2.default.createElement(
@@ -1130,7 +1133,7 @@ var ChatWindow = function (_Component) {
             _react2.default.createElement('input', { type: 'text', name: 'newmessage', placeholder: 'enter a message' }),
             _react2.default.createElement(
               'div',
-              { className: 'send-btn' },
+              { className: 'send-btn', onClick: this.sendMsg },
               _react2.default.createElement('i', { className: 'ayn-paper-plane-1' })
             )
           )

@@ -18,7 +18,6 @@ export default class Messenger extends Component {
     this.chatRef = React.createRef()
   }
 
-  // check if user is on mobile and connect to chat
   componentDidMount() {
     this.populate()
     if (window.innerWidth > 1200) {
@@ -39,7 +38,7 @@ export default class Messenger extends Component {
     })
   }
 
-  // connect and configure websocket client
+  // connect messenger
   startChat = () => {
     // connect to main chat
     this.ws.connect()
@@ -51,7 +50,11 @@ export default class Messenger extends Component {
         ...this.state,
         connected: true
       })
-      console.log('connected')
+      // this.chat.emit('message', {
+      //   body: 'login',
+      //   from: this.state.me,
+      //   to: this.state.user
+      // })
     })
 
     this.chat.on('error', (error) => {
@@ -63,25 +66,23 @@ export default class Messenger extends Component {
         ...this.state,
         connected: false
       })
-      console.log('disconnected')
     })
 
     this.chat.on('message', function(message) {
       console.log(message)
     })
-    // console.log(this.ws)
   }
 
   
   // open chat window / switch to a different one
   openChat = (user) => {
-    if (this.state.chatUser != null && user != this.state.chatUser) {
-      this.chatRef.current.switchUser(user)
-    }
     this.setState({
       ...this.state,
       chatUser: user
     })
+    if (this.state.chatUser != null && user != this.state.chatUser) {
+      this.chatRef.current.switchUser(user)
+    }
   }
 
 
@@ -89,7 +90,7 @@ export default class Messenger extends Component {
   displayChat = () => {
     if (this.state.chatUser != null) {
       return (
-        <ChatWindow ref={this.chatRef} chat={this.chat} to={this.state.chatUser} from={this.props.initialData.userData}></ChatWindow>
+        <ChatWindow ref={this.chatRef} from={this.props.initialData.userData} to={this.state.chatUser} chat={this.chat}></ChatWindow>
       )
     }
   }

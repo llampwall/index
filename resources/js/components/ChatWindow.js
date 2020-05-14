@@ -8,7 +8,7 @@ export default class ChatWindow extends Component {
     super()
     this.state = { 
       from: null,
-      user: null,
+      to: null,
       chat: null
     }
   }
@@ -16,7 +16,7 @@ export default class ChatWindow extends Component {
   componentDidMount() {
     this.setState({
         from: this.props.from,
-        to: this.props.user, 
+        to: this.props.to,
         chat: this.props.chat
     }, () => {
         console.log(this.state)
@@ -28,14 +28,17 @@ export default class ChatWindow extends Component {
         user: user
     }, () => {
         console.log('changed user: ' + this.state.user.fname)
-        this.props.chat.emit('message', {
-          from: this.state.from,
-          to: this.state.to, 
-          body: 'sup homie'
-        })
+        // this.props.chat.emit('message', {
+        //   from: this.state.from,
+        //   to: this.state.to, 
+        //   body: 'sup homie'
+        // })
     })
   }
 
+  sendMsg = () => {
+    console.log('message sent')
+  }
 
   render() {
     if (this.state.to == undefined) {
@@ -48,7 +51,7 @@ export default class ChatWindow extends Component {
       return (
           <div className='chat'>
                 <div className='chat-header'>
-                  <span className='chat-user'>{this.state.user.fname} {this.state.user.lname}</span>
+                  <span className='chat-user'>{this.state.to.fname} {this.state.to.lname}</span>
                 </div>
                 <div className='chat-body'>
                     <div className='message'>
@@ -65,8 +68,8 @@ export default class ChatWindow extends Component {
                     </div>
                 </div>
                 <div className='chat-compose'>
-                    <input type='text' name='newmessage' placeholder='enter a message' />
-                    <div className='send-btn'><i className='ayn-paper-plane-1'></i></div> 
+                    <input type='text' name='newmessage' placeholder='enter a message'/>
+                    <div className='send-btn' onClick={this.sendMsg}><i className='ayn-paper-plane-1'></i></div> 
                 </div>
           </div>
       )
