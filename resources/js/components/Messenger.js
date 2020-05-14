@@ -30,6 +30,10 @@ export default class Messenger extends Component {
     this.startChat()
   }
 
+  componentWillUnmount() {
+    this.chat.close()
+  }
+
   //open messenger sidebar
   clickedOpen = () => {
     this.setState({
@@ -66,10 +70,6 @@ export default class Messenger extends Component {
         ...this.state,
         connected: false
       })
-    })
-
-    this.chat.on('message', function(message) {
-      console.log(message)
     })
   }
 

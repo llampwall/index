@@ -459,7 +459,7 @@ var _ChatWindow = __webpack_require__(268);
 
 var _ChatWindow2 = _interopRequireDefault(_ChatWindow);
 
-var _websocketClient = __webpack_require__(157);
+var _websocketClient = __webpack_require__(158);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
 
@@ -506,10 +506,6 @@ var Messenger = function (_Component) {
         _this.setState((0, _extends3.default)({}, _this.state, {
           connected: false
         }));
-      });
-
-      _this.chat.on('message', function (message) {
-        console.log(message);
       });
     };
 
@@ -622,6 +618,11 @@ var Messenger = function (_Component) {
       }
 
       this.startChat();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.chat.close();
     }
 
     //open messenger sidebar
@@ -996,6 +997,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = __webpack_require__(135);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _classCallCheck2 = __webpack_require__(19);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -1020,7 +1025,7 @@ var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _websocketClient = __webpack_require__(157);
+var _websocketClient = __webpack_require__(158);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
 
@@ -1036,9 +1041,9 @@ var ChatWindow = function (_Component) {
 
     _this.switchUser = function (user) {
       _this.setState({
-        user: user
+        to: user
       }, function () {
-        console.log('changed user: ' + _this.state.user.fname);
+        console.log('changed user: ' + _this.state.to.fname);
         // this.props.chat.emit('message', {
         //   from: this.state.from,
         //   to: this.state.to, 
@@ -1047,14 +1052,29 @@ var ChatWindow = function (_Component) {
       });
     };
 
+    _this.changeText = function (event) {
+      var name = event.target.name;
+      var value = event.target.value;
+
+      _this.setState((0, _defineProperty3.default)({}, name, value), function () {
+        // console.log(this.state)
+      });
+    };
+
     _this.sendMsg = function () {
-      console.log('message sent');
+      console.log('sending message to ' + _this.state.to.fname);
+      _this.state.chat.emit('message', {
+        from: _this.state.from,
+        to: _this.state.to,
+        body: _this.state.message
+      });
     };
 
     _this.state = {
       from: null,
       to: null,
-      chat: null
+      chat: null,
+      message: ''
     };
     return _this;
   }
@@ -1064,12 +1084,24 @@ var ChatWindow = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      var self = this;
       this.setState({
         from: this.props.from,
         to: this.props.to,
         chat: this.props.chat
       }, function () {
         console.log(_this2.state);
+      });
+      this.props.chat.on('message', function (message) {
+        console.log('message received');
+        // console.log(message.to)
+        if (message.to != undefined) {
+          console.log(message.to);
+          console.log(self.state.from);
+          if (message.to.id == self.state.from.id) {
+            console.log('MESSAGE TO US!');
+          }
+        }
       });
     }
   }, {
@@ -1130,7 +1162,7 @@ var ChatWindow = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'chat-compose' },
-            _react2.default.createElement('input', { type: 'text', name: 'newmessage', placeholder: 'enter a message' }),
+            _react2.default.createElement('input', { type: 'text', name: 'message', value: this.state.message, onChange: this.changeText, placeholder: 'enter a message' }),
             _react2.default.createElement(
               'div',
               { className: 'send-btn', onClick: this.sendMsg },
@@ -1375,7 +1407,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(201);
+var _defineProperty2 = __webpack_require__(135);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -1729,7 +1761,7 @@ var _asyncToGenerator2 = __webpack_require__(49);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _defineProperty2 = __webpack_require__(201);
+var _defineProperty2 = __webpack_require__(135);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 

@@ -9,11 +9,13 @@ export default class ChatWindow extends Component {
     this.state = { 
       from: null,
       to: null,
-      chat: null
+      chat: null, 
+      message: ''
     }
   }
 
   componentDidMount() {
+    const self = this
     this.setState({
         from: this.props.from,
         to: this.props.to,
@@ -21,13 +23,25 @@ export default class ChatWindow extends Component {
     }, () => {
         console.log(this.state)
     })
+    this.props.chat.on('message', function(message) {
+      console.log('message received')
+      // console.log(message.to)
+      if (message.to != undefined) {
+        console.log(message.to)
+        console.log(self.state.from)
+        if (message.to.id == self.state.from.id) {
+          console.log('MESSAGE TO US!')
+        }
+        
+      }
+    })
   }
 
   switchUser = (user) => {
     this.setState({
-        user: user
+        to: user
     }, () => {
-        console.log('changed user: ' + this.state.user.fname)
+        console.log('changed user: ' + this.state.to.fname)
         // this.props.chat.emit('message', {
         //   from: this.state.from,
         //   to: this.state.to, 
@@ -36,8 +50,24 @@ export default class ChatWindow extends Component {
     })
   }
 
+  changeText = (event) => {
+    const name = event.target.name
+    const value = event.target.value
+
+    this.setState({
+      [name]: value
+    }, () => {
+      // console.log(this.state)
+    })
+  }
+
   sendMsg = () => {
-    console.log('message sent')
+    console.log('sending message to ' + this.state.to.fname)
+    this.state.chat.emit('message', {
+      from: this.state.from,
+      to: this.state.to,
+      body: this.state.message
+    })
   }
 
   render() {
@@ -68,7 +98,7 @@ export default class ChatWindow extends Component {
                     </div>
                 </div>
                 <div className='chat-compose'>
-                    <input type='text' name='newmessage' placeholder='enter a message'/>
+                    <input type='text' name='message' value={this.state.message} onChange={this.changeText} placeholder='enter a message'/>
                     <div className='send-btn' onClick={this.sendMsg}><i className='ayn-paper-plane-1'></i></div> 
                 </div>
           </div>

@@ -25,7 +25,7 @@ class ChatController {
     }
     console.log('connection saved');
 
-    this.socket.emit('new connection')
+    this.socket.emit('message', 'new connection')
   }
 
   onMessage (message) {
@@ -39,10 +39,18 @@ class ChatController {
     }
     
     // console.log(this.socket.id)
-    // this.socket.broadcastToAll('message', message.body)
+    this.socket.broadcast('message', message)
   }
 
-  onClose () {
+  onClose ({ socket, request, auth }) {
+    console.log(socket.id + ' is disconnecting from a device.')
+    // try {
+    //     const target = await Online.query().where('socket_id', socket.id).delete()
+    // } catch {
+    //     console.log("error disconnecting: " + error)
+    // }
+    socket.close()
+    console.log("done")
   }
 
   onError () {

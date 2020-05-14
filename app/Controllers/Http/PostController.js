@@ -53,7 +53,7 @@ class PostController {
         let pType = 'text'
         if (file.includes('mp4')) {
             pType = 'video'
-        } else if (file.includes('jpg') || file.includes('png') || file.includes('png')) {
+        } else if (file.includes('jpg') || file.includes('png') || file.includes('webp')) {
             pType = 'image'
         }
         
