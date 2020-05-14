@@ -9,6 +9,21 @@ migrate to postgres
     ** FUCK **
     probably not going to bother for now
 
+
+chat messenger
+    *connected to 'chat' websocket
+    *got info of both users
+
+    send messages from the chat input field
+    display messages in the chatwindow
+    add 'status' to users table
+    move connection logic to messenger componentdidmount
+    chatcontroller constructor updates user table
+    new usercontroller method to get all online users
+    messenger only sees online users
+    add close/minimize to chat window
+
+
 google login
 
 
@@ -145,7 +160,7 @@ likes
 
 
 
-- messenger
+
 
 - search functionality everywhere
 

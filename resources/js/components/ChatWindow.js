@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Ws from '@adonisjs/websocket-client'
 
 
 export default class ChatWindow extends Component {
   constructor () {
     super()
     this.state = { 
-      user: null
+      user: null,
+      me: 'Jordan'
     }
+
+    this.ws = Ws()
+    this.chat = null
   }
 
   componentDidMount() {
@@ -16,6 +21,20 @@ export default class ChatWindow extends Component {
     }, () => {
         console.log(this.state)
     })
+
+    this.ws.connect()
+    this.chat = this.ws.subscribe('chat')
+    this.chat.on('ready', () => {
+      this.chat.emit('message', {
+        body: 'hello there',
+        from: this.state.me,
+        to: this.state.user
+      })
+    })
+    this.chat.on('message', function(message) {
+      console.log(message)
+    })
+    console.log(this.ws)
   }
 
   switchUser = (user) => {
