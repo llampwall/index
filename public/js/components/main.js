@@ -829,30 +829,27 @@ var Profile = function (_Component) {
         return _react2.default.createElement(
           'div',
           { className: 'content-area profile-page' },
+          _react2.default.createElement('div', { className: 'cover' }),
           _react2.default.createElement(
             'div',
             { className: 'user-img' },
             _react2.default.createElement('img', { src: this.state.user.profile_img }),
             _react2.default.createElement(
-              'h1',
-              null,
-              this.state.user.fname,
-              ' ',
-              this.state.user.lname
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'user-info' },
-            this.displayBio(),
-            _react2.default.createElement(
               'div',
               { className: 'follow-btn' },
-              _react2.default.createElement('span', null),
-              _react2.default.createElement('span', null),
-              _react2.default.createElement('span', null),
-              _react2.default.createElement('span', null),
-              'follow'
+              'follow ',
+              _react2.default.createElement('i', { className: 'ayn-bell' })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'lower-5th' },
+              _react2.default.createElement(
+                'h1',
+                null,
+                this.state.user.fname,
+                ' ',
+                this.state.user.lname
+              )
             )
           )
         );

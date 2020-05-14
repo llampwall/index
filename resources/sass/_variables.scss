@@ -20,15 +20,18 @@ $silouette: #5C0C01;
 $darkness: #2E0201;
 
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Electrolize&family=Enriqueta:wght@500;700&family=Russo+One&family=Sriracha&display=swap');// 'Russo One', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Sintony:wght@400;700&display=swap');// 'Russo One', sans-serif;
 // 'Electrolize', sans-serif;
 // 'Bangers', cursive;
 // 'Enriqueta', serif;
-$main-font: 'Electrolize', sans-serif;
+// $main-font: 'Electrolize', sans-serif;
+$main-font: 'Sintony', sans-serif;
+$title-font: 'Julius Sans One', sans-serif;
 *{
   letter-spacing: 2px; 
 }
 $small-font: $main-font;
-$title-font: $main-font;
+// $title-font: $main-font;
 $app-width: 100vw;
 $app-height: 80vh;
 $border-thickness: 1px;

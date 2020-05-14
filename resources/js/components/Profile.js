@@ -95,14 +95,17 @@ export default class Profile extends Component {
       // resume?
       return (
         <div className="content-area profile-page">
+          <div className='cover'></div>
           <div className="user-img">
             <img src={this.state.user.profile_img} />
-            <h1>{this.state.user.fname} {this.state.user.lname}</h1>
+            <div className="follow-btn">follow <i className='ayn-bell'></i></div>
+            <div className='lower-5th'>
+              <h1>{this.state.user.fname} {this.state.user.lname}</h1>
+            </div>
           </div>
-          <div className="user-info">
+          {/* <div className="user-info">
             {this.displayBio()}
-            <div className="follow-btn"><span /><span /><span /><span />follow</div>
-          </div>
+          </div> */}
         </div>
       )
     }

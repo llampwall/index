@@ -166,7 +166,8 @@
       bottom: 0;
       display: flex;
       flex-direction: column;
-      background: $secondary;
+      background: white;
+      padding: 1px;
 
       .chat-header {
         width: 100%;
