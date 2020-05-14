@@ -10,7 +10,6 @@ class ChatController {
     console.log(auth.user.fname + ' ' + auth.user.lname + ' has connected to the server.')
 
     this.store(auth.user.id, socket.id)
-    
   }
 
   // store socket in database
@@ -31,13 +30,16 @@ class ChatController {
 
   onMessage (message) {
 
-    console.log('new message from: ')
-    console.log(this.auth.user.fname)
-    console.log('to')
-    console.log(message.to.fname)
-    console.log(message.body)
+    if (message.to != null) {
+      console.log('new message from: ')
+      console.log(this.auth.user.fname)
+      console.log('to')
+      console.log(message.to.fname)
+      console.log(message.body)
+    }
+    
     // console.log(this.socket.id)
-    this.socket.broadcastToAll('message', message.body)
+    // this.socket.broadcastToAll('message', message.body)
   }
 
   onClose () {

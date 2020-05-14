@@ -8,40 +8,24 @@ export default class ChatWindow extends Component {
     super()
     this.state = { 
       user: null,
-      me: 'Jordan'
+      chat: null
     }
-
-    this.ws = Ws()
-    this.chat = null
   }
 
   componentDidMount() {
     this.setState({
-        user: this.props.user
+        user: this.props.user, 
+        chat: this.props.chat
     }, () => {
         console.log(this.state)
     })
-
-    this.ws.connect()
-    this.chat = this.ws.subscribe('chat')
-    this.chat.on('ready', () => {
-      this.chat.emit('message', {
-        body: 'hello there',
-        from: this.state.me,
-        to: this.state.user
-      })
-    })
-    this.chat.on('message', function(message) {
-      console.log(message)
-    })
-    console.log(this.ws)
   }
 
   switchUser = (user) => {
     this.setState({
         user: user
     }, () => {
-        console.log(this.state)
+        console.log('changed user: ' + this.state.user.fname)
     })
   }
 

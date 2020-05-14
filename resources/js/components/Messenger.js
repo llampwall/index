@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import axois from 'axios'
 import ChatWindow from './ChatWindow'
+import Ws from '@adonisjs/websocket-client'
 
 export default class Messenger extends Component {
   constructor () {
@@ -8,12 +9,16 @@ export default class Messenger extends Component {
     this.state = { 
       users: [],
       open: false, 
+      connected: false,
       chatUser: null
     }
 
+    this.ws = Ws()
+    this.chat = null
     this.chatRef = React.createRef()
   }
 
+  // check if user is on mobile and connect to chat
   componentDidMount() {
     this.populate()
     if (window.innerWidth > 1200) {
@@ -22,8 +27,11 @@ export default class Messenger extends Component {
         open: true
       })
     }
+
+    this.startChat()
   }
 
+  //open messenger sidebar
   clickedOpen = () => {
     this.setState({
       ...this.state,
@@ -31,6 +39,41 @@ export default class Messenger extends Component {
     })
   }
 
+  // connect and configure websocket client
+  startChat = () => {
+    // connect to main chat
+    this.ws.connect()
+    this.chat = this.ws.subscribe('chat')
+
+    // send login
+    this.chat.on('ready', () => {
+      this.setState({
+        ...this.state,
+        connected: true
+      })
+      console.log('connected')
+    })
+
+    this.chat.on('error', (error) => {
+      console.log(error)
+    })
+    
+    this.chat.on('close', () => {
+      this.setState({
+        ...this.state,
+        connected: false
+      })
+      console.log('disconnected')
+    })
+
+    this.chat.on('message', function(message) {
+      console.log(message)
+    })
+    // console.log(this.ws)
+  }
+
+  
+  // open chat window / switch to a different one
   openChat = (user) => {
     if (this.state.chatUser != null && user != this.state.chatUser) {
       this.chatRef.current.switchUser(user)
@@ -41,14 +84,18 @@ export default class Messenger extends Component {
     })
   }
 
+
+  // instantiate chatwindow
   displayChat = () => {
     if (this.state.chatUser != null) {
       return (
-        <ChatWindow ref={this.chatRef} user={this.state.chatUser}></ChatWindow>
+        <ChatWindow ref={this.chatRef} chat={this.chat} to={this.state.chatUser} from={this.props.initialData.userData}></ChatWindow>
       )
     }
   }
 
+  // fill messenger sidebar with users
+  // fix to be only online users
   populate = async () => {
     const self = this
     try {
@@ -63,6 +110,7 @@ export default class Messenger extends Component {
     }
   }
 
+  // render online users
   displayUsers = () => {
     if (this.state.users == undefined) {
       return (
@@ -92,6 +140,7 @@ export default class Messenger extends Component {
       )
     }
   }
+
 
   render () {
     if (this.state.users == undefined) {

@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 239:
+/***/ 240:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -148,7 +148,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 240:
+/***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -348,7 +348,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 241:
+/***/ 242:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -409,7 +409,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 242:
+/***/ 243:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -459,6 +459,10 @@ var _ChatWindow = __webpack_require__(268);
 
 var _ChatWindow2 = _interopRequireDefault(_ChatWindow);
 
+var _websocketClient = __webpack_require__(157);
+
+var _websocketClient2 = _interopRequireDefault(_websocketClient);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Messenger = function (_Component) {
@@ -477,6 +481,36 @@ var Messenger = function (_Component) {
       }));
     };
 
+    _this.startChat = function () {
+      // connect to main chat
+      _this.ws.connect();
+      _this.chat = _this.ws.subscribe('chat');
+
+      // send login
+      _this.chat.on('ready', function () {
+        _this.setState((0, _extends3.default)({}, _this.state, {
+          connected: true
+        }));
+        console.log('connected');
+      });
+
+      _this.chat.on('error', function (error) {
+        console.log(error);
+      });
+
+      _this.chat.on('close', function () {
+        _this.setState((0, _extends3.default)({}, _this.state, {
+          connected: false
+        }));
+        console.log('disconnected');
+      });
+
+      _this.chat.on('message', function (message) {
+        console.log(message);
+      });
+      // console.log(this.ws)
+    };
+
     _this.openChat = function (user) {
       if (_this.state.chatUser != null && user != _this.state.chatUser) {
         _this.chatRef.current.switchUser(user);
@@ -488,7 +522,7 @@ var Messenger = function (_Component) {
 
     _this.displayChat = function () {
       if (_this.state.chatUser != null) {
-        return _react2.default.createElement(_ChatWindow2.default, { ref: _this.chatRef, user: _this.state.chatUser });
+        return _react2.default.createElement(_ChatWindow2.default, { ref: _this.chatRef, chat: _this.chat, to: _this.state.chatUser, from: _this.props.initialData.userData });
       }
     };
 
@@ -565,12 +599,18 @@ var Messenger = function (_Component) {
     _this.state = {
       users: [],
       open: false,
+      connected: false,
       chatUser: null
     };
 
+    _this.ws = (0, _websocketClient2.default)();
+    _this.chat = null;
     _this.chatRef = _react2.default.createRef();
     return _this;
   }
+
+  // check if user is on mobile and connect to chat
+
 
   (0, _createClass3.default)(Messenger, [{
     key: 'componentDidMount',
@@ -581,7 +621,28 @@ var Messenger = function (_Component) {
           open: true
         }));
       }
+
+      this.startChat();
     }
+
+    //open messenger sidebar
+
+
+    // connect and configure websocket client
+
+
+    // open chat window / switch to a different one
+
+
+    // instantiate chatwindow
+
+
+    // fill messenger sidebar with users
+    // fix to be only online users
+
+
+    // render online users
+
   }, {
     key: 'render',
     value: function render() {
@@ -645,7 +706,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 243:
+/***/ 244:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -861,7 +922,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 244:
+/***/ 245:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -960,7 +1021,7 @@ var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _websocketClient = __webpack_require__(248);
+var _websocketClient = __webpack_require__(157);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
 
@@ -978,17 +1039,14 @@ var ChatWindow = function (_Component) {
       _this.setState({
         user: user
       }, function () {
-        console.log(_this.state);
+        console.log('changed user: ' + _this.state.user.fname);
       });
     };
 
     _this.state = {
       user: null,
-      me: 'Jordan'
+      chat: null
     };
-
-    _this.ws = (0, _websocketClient2.default)();
-    _this.chat = null;
     return _this;
   }
 
@@ -998,24 +1056,11 @@ var ChatWindow = function (_Component) {
       var _this2 = this;
 
       this.setState({
-        user: this.props.user
+        user: this.props.user,
+        chat: this.props.chat
       }, function () {
         console.log(_this2.state);
       });
-
-      this.ws.connect();
-      this.chat = this.ws.subscribe('chat');
-      this.chat.on('ready', function () {
-        _this2.chat.emit('message', {
-          body: 'hello there',
-          from: _this2.state.me,
-          to: _this2.state.user
-        });
-      });
-      this.chat.on('message', function (message) {
-        console.log(message);
-      });
-      console.log(this.ws);
     }
   }, {
     key: 'render',
@@ -1320,7 +1365,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(200);
+var _defineProperty2 = __webpack_require__(201);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -1674,7 +1719,7 @@ var _asyncToGenerator2 = __webpack_require__(49);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _defineProperty2 = __webpack_require__(200);
+var _defineProperty2 = __webpack_require__(201);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2284,33 +2329,33 @@ var _reactDom = __webpack_require__(70);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(247);
+var _reactRouterDom = __webpack_require__(248);
 
 var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(239);
+var _Home = __webpack_require__(240);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(243);
+var _Profile = __webpack_require__(244);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(240);
+var _LeftMenu = __webpack_require__(241);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(242);
+var _Messenger = __webpack_require__(243);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(244);
+var _SearchHeader = __webpack_require__(245);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(241);
+var _Loading = __webpack_require__(242);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
