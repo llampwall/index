@@ -31,6 +31,11 @@ class Layout extends Component {
       console.log('index got an update!')
       self.homeRef.current.update()
     })
+
+    //refresh every 10 seconds
+    // setInterval(function() {
+    //   self.chat.emit('message', {update: 'all'})
+    // }, 10000)
   }
 
   componentDidMount() {

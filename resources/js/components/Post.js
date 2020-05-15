@@ -15,12 +15,21 @@ export default class Post extends Component {
         likes: 0,
         lastLike: ""
     }
+    
     this.commentArea = React.createRef()  // ref for updating comments
   }
 
 
   componentDidMount() {
+    const self = this
     this.getLikes()
+
+    this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
+    // update comments whenever someone comments
+    this.chat.on('comments', function() {
+      console.log('new comment')
+      self.commentArea.current.getComments()
+    })
   }
 
   displayMedia = () => {
@@ -66,6 +75,11 @@ export default class Post extends Component {
               self.setState({
                 ...self.state,
                 comment: ""
+              })
+
+              //update everyone else's comments
+              self.chat.emit('message', {
+                comments: 'all'
               })
             
               self.commentArea.current.getComments()

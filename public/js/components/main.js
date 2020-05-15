@@ -136,7 +136,7 @@ var Home = function (_Component) {
           'div',
           { className: 'content-area' },
           _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData, update: this.update, ws: this.props.ws }),
-          _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, initialData: this.state.initialData, update: this.update })
+          _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, initialData: this.state.initialData, ws: this.props.ws, update: this.update })
         );
       }
     }
@@ -1914,6 +1914,11 @@ var Post = function (_Component) {
                   comment: ""
                 }));
 
+                //update everyone else's comments
+                self.chat.emit('message', {
+                  comments: 'all'
+                });
+
                 self.commentArea.current.getComments();
                 return 'comment saved';
               });
@@ -2167,6 +2172,7 @@ var Post = function (_Component) {
       likes: 0,
       lastLike: ""
     };
+
     _this.commentArea = _react2.default.createRef(); // ref for updating comments
     return _this;
   }
@@ -2174,7 +2180,15 @@ var Post = function (_Component) {
   (0, _createClass3.default)(Post, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var self = this;
       this.getLikes();
+
+      this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat');
+      // update comments whenever someone comments
+      this.chat.on('comments', function () {
+        console.log('new comment');
+        self.commentArea.current.getComments();
+      });
     }
 
     // this lets us get the comments from the child
@@ -2353,7 +2367,7 @@ var PostArea = function (_Component) {
       return _this.props.initialData.postData.map(function (item) {
         var post = item.posts;
         var user = item.users;
-        return _react2.default.createElement(_Post2.default, { post: post, user: user, curuser: _this.props.initialData.userData, update: _this.props.update, key: post.id });
+        return _react2.default.createElement(_Post2.default, { post: post, user: user, ws: _this.props.ws, curuser: _this.props.initialData.userData, update: _this.props.update, key: post.id });
       });
     };
 
@@ -2487,6 +2501,11 @@ var Layout = function (_Component) {
       console.log('index got an update!');
       self.homeRef.current.update();
     });
+
+    //refresh every 10 seconds
+    // setInterval(function() {
+    //   self.chat.emit('message', {update: 'all'})
+    // }, 10000)
     return _this;
   }
 

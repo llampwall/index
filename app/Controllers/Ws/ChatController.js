@@ -39,6 +39,13 @@ class ChatController {
       return
     }
 
+    // update comments for a post
+    if (message.comments != null) {
+      console.log('comments')
+      this.updateComments()
+      return
+    }
+
     if (message.to != null) {
       console.log('new message from: ')
       console.log(this.auth.user.fname)
@@ -90,6 +97,10 @@ class ChatController {
 
   async updateFeeds() {
     this.socket.broadcast('update', 'refresh')
+  }
+
+  async updateComments() {
+    this.socket.broadcast('comments', 'refresh')
   }
 
   // handle client leaving
