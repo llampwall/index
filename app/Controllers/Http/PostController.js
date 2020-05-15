@@ -7,6 +7,7 @@ const Like = use('App/Models/Like')
 const Env = use('Env')
 const aws = require('aws-sdk');
 const Helpers = use('Helpers')
+const Ws = use('Ws')
 
 class PostController {
 
@@ -72,6 +73,7 @@ class PostController {
             console.log(error)
         }
         console.log('saved post');
+
         return response.redirect('/')
     }
 

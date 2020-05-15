@@ -110,8 +110,11 @@ export default class Compose extends Component {
       }
     }
     
-
-    //
+    //update everyone else's feed
+    const chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
+    chat.emit('message', {
+      update: 'all'
+    })
   }
 
   handleChange = (event) => {

@@ -38,7 +38,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -53,7 +53,6 @@ var _Compose2 = _interopRequireDefault(_Compose);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Handles updating the postarea when its sibling compose adds a post to the database
-
 
 var Home = function (_Component) {
   (0, _inherits3.default)(Home, _Component);
@@ -85,6 +84,7 @@ var Home = function (_Component) {
               }, function () {
                 // console.log(this.state.initialData)
               });
+
               _context.next = 11;
               break;
 
@@ -135,7 +135,7 @@ var Home = function (_Component) {
         return _react2.default.createElement(
           'div',
           { className: 'content-area' },
-          _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData, update: this.update }),
+          _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData, update: this.update, ws: this.props.ws }),
           _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, initialData: this.state.initialData, update: this.update })
         );
       }
@@ -451,7 +451,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -810,7 +810,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1087,14 +1087,6 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _websocketClient = __webpack_require__(157);
-
-var _websocketClient2 = _interopRequireDefault(_websocketClient);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ChatWindow = function (_Component) {
@@ -1276,7 +1268,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1501,7 +1493,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1522,7 +1514,7 @@ var Compose = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
 
     _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-      var self, fData, response, file, filename, type, _response;
+      var self, fData, response, file, filename, type, _response, chat;
 
       return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
@@ -1699,6 +1691,15 @@ var Compose = function (_Component) {
               console.log("axios didnt work: " + _context3.t0);
 
             case 37:
+
+              //update everyone else's feed
+              chat = _this.props.ws.getSubscription('chat') || _this.props.ws.subscribe('chat');
+
+              chat.emit('message', {
+                update: 'all'
+              });
+
+            case 39:
             case 'end':
               return _context3.stop();
           }
@@ -1847,7 +1848,7 @@ var _Comments = __webpack_require__(269);
 
 var _Comments2 = _interopRequireDefault(_Comments);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -2431,7 +2432,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(248);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -2459,7 +2460,7 @@ var _Loading = __webpack_require__(242);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
-var _websocketClient = __webpack_require__(157);
+var _websocketClient = __webpack_require__(239);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
 
@@ -2565,7 +2566,7 @@ var Layout = function (_Component) {
             { id: 'content-container' },
             _react2.default.createElement(_SearchHeader2.default, null),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: function component(props) {
-                return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData, ref: _this2.homeRef });
+                return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData, ws: _this2.ws, ref: _this2.homeRef });
               } }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/:id', component: function component(props) {
                 return _react2.default.createElement(_Profile2.default, { routeProps: props, initialData: _this2.state.initialData });

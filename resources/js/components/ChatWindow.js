@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import Ws from '@adonisjs/websocket-client'
 
 
 export default class ChatWindow extends Component {
