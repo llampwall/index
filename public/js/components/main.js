@@ -563,7 +563,8 @@ var Messenger = function (_Component) {
       // send login
       _this.setState((0, _extends3.default)({}, _this.state, {
         connected: true,
-        chatUser: user
+        chatUser: user,
+        open: false // should just be for mobile, but whatever
       }));
       if (_this.state.chatUser != null && user != _this.state.chatUser) {
         _this.chatRef.current.switchUser(user);

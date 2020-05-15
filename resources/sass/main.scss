@@ -178,6 +178,9 @@ input[type="password"] {
           .username {
             // font-size: 2rem;
           }
+          .text {
+            font-size: .5rem;
+          }
         }
         .time {
           display: none;
@@ -188,8 +191,19 @@ input[type="password"] {
       }
 
       .post-info p {
-        // font-size: 2rem;
+        text-align: center;
+        color: $title-font-color;
+        font-size: .9rem;
       } 
+
+      .post-stats {
+        .text {
+          font-size: .6rem;
+        }
+        .comment-count {
+          font-size: .6rem;
+        }
+      }
 
       .c-section {
         textarea {
@@ -233,6 +247,7 @@ input[type="password"] {
   }
 
   #compose {
+    width: 80%;
     textarea {
       // font-size: 2rem;
     }
@@ -265,8 +280,9 @@ input[type="password"] {
     }
 
     .open-btn {
-      width: 50px;
-      height: 50px;
+      top: 30%;
+      // width: 50px;
+      // height: 50px;
       i {
         // font-size: 3rem;
       }
@@ -279,6 +295,8 @@ input[type="password"] {
     }
 
     .users {
+      padding-left: .9rem;
+
       .user>.username {
         // font-size: 1.5rem;
       }
@@ -286,16 +304,23 @@ input[type="password"] {
 
     &.closed {
       box-shadow: none;
-      right: -18rem;
+      right: -16.2rem;
     }
 
     .open-btn {
-      width: 50px;
-      height: 50px;
+      top: 30%;
+      // width: 50px;
+      // height: 50px;
       i {
         // font-size: 3rem;
       }
     }
+
+    .chat {
+      width: 300px;
+      height: 350px;
+    }
+    
   }
 
 }

@@ -119,7 +119,8 @@ export default class Messenger extends Component {
     this.setState({
       ...this.state,
       connected: true,
-      chatUser: user
+      chatUser: user,
+      open: false       // should just be for mobile, but whatever
     })
     if (this.state.chatUser != null && user != this.state.chatUser) {
       this.chatRef.current.switchUser(user)
