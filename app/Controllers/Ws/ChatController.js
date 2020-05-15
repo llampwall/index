@@ -1,6 +1,7 @@
 'use strict'
 
 const Online = use('App/Models/Online')
+const Database = use('Database')
 
 class ChatController {
   constructor ({ socket, request, auth }) {
@@ -28,7 +29,8 @@ class ChatController {
     this.socket.emit('message', 'new connection')
   }
 
-  onMessage (message) {
+  // get messages and send them to the right users
+  async onMessage (message) {
 
     if (message.to != null) {
       console.log('new message from: ')
@@ -36,12 +38,59 @@ class ChatController {
       console.log('to')
       console.log(message.to.fname)
       console.log(message.body)
+
+      try {
+        // get the sockets to send to
+        const ids = await this.getUserSockets(message.to.id)
+        if (ids.length == 0) {
+          console.log('no connections found for user ' + message.to.fname)
+          return
+        }
+        // strip the to data
+        let newMsg = {
+          from: this.auth.user,
+          body: message.body
+        }
+        this.socket.emitTo('message', newMsg, ids)
+        // console.log('message sent to specific ids: ')
+        return
+
+      } catch (error) {
+        console.log('error: ' + error)
+      }
     }
-    
-    // console.log(this.socket.id)
+
+    if (message.update != null) {
+      this.updateFeeds()
+      return
+    }
+
+    console.log('not a private message: broadcasting')
     this.socket.broadcast('message', message)
   }
 
+  // gets all open sockets associated with a user id
+  async getUserSockets(u_id) {
+    try {
+      const target = await Database.select('socket_id')
+                        .from('onlines')
+                        .where('user_id', u_id)
+      let ids = []
+      for (var i = 0; i < target.length; i++) {
+        ids.push(target[i].socket_id)
+      }
+      console.log(ids)
+      return ids
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async updateFeeds() {
+    this.socket.broadcast('update', 'refresh')
+  }
+
+  // handle client leaving
   async onClose () {
     console.log(this.socket.id + ' is disconnecting from a device.')
     try {

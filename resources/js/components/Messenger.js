@@ -72,24 +72,12 @@ export default class Messenger extends Component {
     })
 
     this.chat.on('message', function(message) {
-      console.log('message received')
-      // console.log(message.to)
-      if (message.to != undefined) {
-        // console.log(message.to)
-        // console.log(self.props.initialData.userData)
-        if (message.to.id == self.props.initialData.userData.id) {
-          console.log('MESSAGE TO US!')
-          self.openChat(message.from)
-          setTimeout(self.chatRef.current.addMsg(message), 500)
-        }
-        
-      }
+      self.handleMsg(message)
     })
 
     this.ws.on('error', (error) => {
       console.log(error)
-      self.ws.unsubscribe('chat')
-      self.ws.terminate()
+      self.ws.close()
     })
     
     this.ws.on('close', () => {
@@ -109,16 +97,28 @@ export default class Messenger extends Component {
     });
   }
 
+
+  // handle incomming messages
+  handleMsg = async (message) => {
+    console.log('message received!')
+    // console.log(message.to)
+    if (message.from != undefined) {
+        console.log('message to us!: ' + message.body)
+        this.openChat(message.from)
+        console.log(message.body)
+        setTimeout(this.chatRef.current.addMsg(message.body), 500)
+     }
+  }
+
+
   // open chat window / switch to a different one
   openChat = (user) => {
     const self = this
 
-    // if (this.connected == false) {
-    //   this.ws = Ws()
-    //   this.ws.connect()
-    //   this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
-    //   this.chatRef = React.createRef()
-    // }
+    if (this.connected == false) {
+      this.startChat()
+      return
+    }
     // send login
     this.setState({
       ...this.state,

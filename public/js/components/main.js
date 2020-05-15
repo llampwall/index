@@ -514,23 +514,12 @@ var Messenger = function (_Component) {
       });
 
       _this.chat.on('message', function (message) {
-        console.log('message received');
-        // console.log(message.to)
-        if (message.to != undefined) {
-          // console.log(message.to)
-          // console.log(self.props.initialData.userData)
-          if (message.to.id == self.props.initialData.userData.id) {
-            console.log('MESSAGE TO US!');
-            self.openChat(message.from);
-            setTimeout(self.chatRef.current.addMsg(message), 500);
-          }
-        }
+        self.handleMsg(message);
       });
 
       _this.ws.on('error', function (error) {
         console.log(error);
-        self.ws.unsubscribe('chat');
-        self.ws.terminate();
+        self.ws.close();
       });
 
       _this.ws.on('close', function () {
@@ -549,15 +538,41 @@ var Messenger = function (_Component) {
       });
     };
 
+    _this.handleMsg = function () {
+      var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(message) {
+        return _regenerator2.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                console.log('message received!');
+                // console.log(message.to)
+                if (message.from != undefined) {
+                  console.log('message to us!: ' + message.body);
+                  _this.openChat(message.from);
+                  console.log(message.body);
+                  setTimeout(_this.chatRef.current.addMsg(message.body), 500);
+                }
+
+              case 2:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, _this2);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
     _this.openChat = function (user) {
       var self = _this;
 
-      // if (this.connected == false) {
-      //   this.ws = Ws()
-      //   this.ws.connect()
-      //   this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
-      //   this.chatRef = React.createRef()
-      // }
+      if (_this.connected == false) {
+        _this.startChat();
+        return;
+      }
       // send login
       _this.setState((0, _extends3.default)({}, _this.state, {
         connected: true,
@@ -579,40 +594,40 @@ var Messenger = function (_Component) {
       }
     };
 
-    _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+    _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
       var self, allUsers;
-      return _regenerator2.default.wrap(function _callee$(_context) {
+      return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               self = _this;
-              _context.prev = 1;
-              _context.next = 4;
+              _context2.prev = 1;
+              _context2.next = 4;
               return _axios2.default.get('/api/users');
 
             case 4:
-              allUsers = _context.sent;
+              allUsers = _context2.sent;
 
               // console.log("users: ")
               // console.log(allUsers)
               self.setState({
                 users: allUsers.data
               });
-              _context.next = 11;
+              _context2.next = 11;
               break;
 
             case 8:
-              _context.prev = 8;
-              _context.t0 = _context['catch'](1);
+              _context2.prev = 8;
+              _context2.t0 = _context2['catch'](1);
 
-              console.log("error fetching users: " + _context.t0);
+              console.log("error fetching users: " + _context2.t0);
 
             case 11:
             case 'end':
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, _this2, [[1, 8]]);
+      }, _callee2, _this2, [[1, 8]]);
     }));
 
     _this.displayUsers = function () {
@@ -687,6 +702,9 @@ var Messenger = function (_Component) {
 
 
     // connect messenger
+
+
+    // handle incomming messages
 
 
     // open chat window / switch to a different one
@@ -1130,7 +1148,7 @@ var ChatWindow = function (_Component) {
           _react2.default.createElement(
             'p',
             null,
-            msg.body
+            msg
           )
         );
       });
@@ -1148,7 +1166,6 @@ var ChatWindow = function (_Component) {
     _this.sendMsg = function () {
       console.log('sending message to ' + _this.state.to.fname);
       _this.state.chat.emit('message', {
-        from: _this.state.from,
         to: _this.state.to,
         body: _this.state.message
       });
@@ -2474,6 +2491,8 @@ var Layout = function (_Component) {
     _this.state = {
       initialData: {}
     };
+
+    _this.homeRef = _react2.default.createRef();
     return _this;
   }
 
@@ -2527,6 +2546,14 @@ var Layout = function (_Component) {
 
       getUser();
     }
+
+    //method to refresh feeds when others post
+
+  }, {
+    key: 'update',
+    value: function update() {
+      this.homeRef.current.update();
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -2545,7 +2572,7 @@ var Layout = function (_Component) {
             { id: 'content-container' },
             _react2.default.createElement(_SearchHeader2.default, null),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: function component(props) {
-                return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData });
+                return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData, ref: _this2.homeRef });
               } }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/:id', component: function component(props) {
                 return _react2.default.createElement(_Profile2.default, { routeProps: props, initialData: _this2.state.initialData });

@@ -54,7 +54,7 @@ export default class ChatWindow extends Component {
       this.state.messages.map((msg, i) => {
         return (
           <div className='message' key={i}>
-              <p>{msg.body}</p>   
+              <p>{msg}</p>   
           </div>
         )
       })
@@ -75,7 +75,6 @@ export default class ChatWindow extends Component {
   sendMsg = () => {
     console.log('sending message to ' + this.state.to.fname)
     this.state.chat.emit('message', {
-      from: this.state.from,
       to: this.state.to,
       body: this.state.message
     })

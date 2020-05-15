@@ -21,6 +21,8 @@ class Layout extends Component {
     this.state = {
       initialData: {}
     }
+
+    this.homeRef = React.createRef()
   }
 
   componentDidMount() {
@@ -45,6 +47,12 @@ class Layout extends Component {
     getUser()
   }
 
+  //method to refresh feeds when others post
+  update() {
+    this.homeRef.current.update()
+  }
+
+
   render () {
     return (
       <Router>
@@ -57,7 +65,7 @@ class Layout extends Component {
           <section id="content-container">
 
             <SearchHeader />
-            <Route exact path="/" component={ (props) => <Home routeProps={props} initialData={this.state.initialData}/> }/>
+            <Route exact path="/" component={ (props) => <Home routeProps={props} initialData={this.state.initialData} ref={this.homeRef}/> }/>
             <Route exact path="/profile/:id" component={ (props) => <Profile routeProps={props} initialData={this.state.initialData}/> }/>
           
           </section>
