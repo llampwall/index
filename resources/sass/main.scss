@@ -45,7 +45,7 @@ a {
 body {
 
   background: $outer-bg;
-  // @include main-gradient;
+  @include main-gradient;
   min-height: 100vh;
   width: 100vw;
   display: flex;
