@@ -54,12 +54,18 @@ export default class Compose extends Component {
           image: ""
         })
         self.props.update()
+        //update everyone else's feed
+        const chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat')
+        chat.emit('message', {
+          update: 'all'
+        })
         return 'item saved'
       })
 
     } else {
       // disable input while image uploads - maybe add loading symbol
       document.getElementById("content").disabled = true
+      document.getElementById("content").innerText = 'Loading...'
 
       // get signed url from the server
       try {
@@ -97,6 +103,12 @@ export default class Compose extends Component {
                   })
                   document.getElementById("content").disabled = false   // enable input again
                   self.props.update()
+
+                  //update everyone else's feed
+                  const chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat')
+                  chat.emit('message', {
+                    update: 'all'
+                  })
                   return 'item saved'
                 })
               }).catch(function(err) {
@@ -110,11 +122,7 @@ export default class Compose extends Component {
       }
     }
     
-    //update everyone else's feed
-    const chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
-    chat.emit('message', {
-      update: 'all'
-    })
+    
   }
 
   handleChange = (event) => {

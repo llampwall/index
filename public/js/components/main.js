@@ -1518,7 +1518,7 @@ var Compose = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
 
     _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-      var self, fData, response, file, filename, type, _response, chat;
+      var self, fData, response, file, filename, type, _response;
 
       return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
@@ -1587,27 +1587,33 @@ var Compose = function (_Component) {
                   image: ""
                 });
                 self.props.update();
+                //update everyone else's feed
+                var chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat');
+                chat.emit('message', {
+                  update: 'all'
+                });
                 return 'item saved';
               });
 
             case 20:
               response = _context3.sent;
-              _context3.next = 37;
+              _context3.next = 38;
               break;
 
             case 23:
               // disable input while image uploads - maybe add loading symbol
               document.getElementById("content").disabled = true;
+              document.getElementById("content").innerText = 'Loading...';
 
               // get signed url from the server
-              _context3.prev = 24;
+              _context3.prev = 25;
               file = self.state.image;
               filename = file.name;
               type = encodeURIComponent(file.type);
               // console.log(filename)
 
               console.log(type);
-              _context3.next = 31;
+              _context3.next = 32;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
                 var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
                   var options;
@@ -1649,6 +1655,12 @@ var Compose = function (_Component) {
                                         });
                                         document.getElementById("content").disabled = false; // enable input again
                                         self.props.update();
+
+                                        //update everyone else's feed
+                                        var chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat');
+                                        chat.emit('message', {
+                                          update: 'all'
+                                        });
                                         return 'item saved';
                                       });
 
@@ -1683,32 +1695,23 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 31:
+            case 32:
               _response = _context3.sent;
-              _context3.next = 37;
+              _context3.next = 38;
               break;
 
-            case 34:
-              _context3.prev = 34;
-              _context3.t0 = _context3['catch'](24);
+            case 35:
+              _context3.prev = 35;
+              _context3.t0 = _context3['catch'](25);
 
               console.log("axios didnt work: " + _context3.t0);
 
-            case 37:
-
-              //update everyone else's feed
-              chat = _this.props.ws.getSubscription('chat') || _this.props.ws.subscribe('chat');
-
-              chat.emit('message', {
-                update: 'all'
-              });
-
-            case 39:
+            case 38:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[24, 34]]);
+      }, _callee3, _this2, [[25, 35]]);
     }));
 
     _this.handleChange = function (event) {
