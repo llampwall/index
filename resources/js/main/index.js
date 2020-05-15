@@ -12,7 +12,7 @@ import LeftMenu from '../components/LeftMenu'
 import Messenger from '../components/Messenger'
 import SearchHeader from '../components/SearchHeader'
 import Loading from '../components/Loading'
-
+import Ws from '@adonisjs/websocket-client'
 
 
 class Layout extends Component {
@@ -22,7 +22,15 @@ class Layout extends Component {
       initialData: {}
     }
 
+    this.ws = Ws()
     this.homeRef = React.createRef()
+    this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
+
+    const self = this
+    this.chat.on('update', function(message) {
+      console.log('index got an update!')
+      self.homeRef.current.update()
+    })
   }
 
   componentDidMount() {
@@ -70,7 +78,7 @@ class Layout extends Component {
           
           </section>
 
-          <Messenger initialData={this.state.initialData}/>
+          <Messenger initialData={this.state.initialData} ws={this.ws}/>
         </div>
       </Router>
     )

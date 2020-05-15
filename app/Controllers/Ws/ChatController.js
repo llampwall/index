@@ -32,6 +32,13 @@ class ChatController {
   // get messages and send them to the right users
   async onMessage (message) {
 
+    // update everyone's feed
+    if (message.update != null) {
+      console.log('update')
+      this.updateFeeds()
+      return
+    }
+
     if (message.to != null) {
       console.log('new message from: ')
       console.log(this.auth.user.fname)
@@ -58,11 +65,6 @@ class ChatController {
       } catch (error) {
         console.log('error: ' + error)
       }
-    }
-
-    if (message.update != null) {
-      this.updateFeeds()
-      return
     }
 
     console.log('not a private message: broadcasting')

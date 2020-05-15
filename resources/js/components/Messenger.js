@@ -1,8 +1,8 @@
 import React, { Component} from 'react'
 import axois from 'axios'
 import ChatWindow from './ChatWindow'
-import Ws from '@adonisjs/websocket-client'
-import { SimpleDB } from 'aws-sdk'
+// import Ws from '@adonisjs/websocket-client'
+// import { SimpleDB } from 'aws-sdk'
 
 export default class Messenger extends Component {
   constructor () {
@@ -14,12 +14,11 @@ export default class Messenger extends Component {
       chatUser: null
     }
 
-    this.ws = Ws()
     this.chat = null
     this.chatRef = React.createRef()
 
     this.pingTimeout = setTimeout(() => {
-      this.ws.close();
+      this.props.ws.close();
     }, 30000);
   }
 
@@ -35,11 +34,11 @@ export default class Messenger extends Component {
   }
 
   componentWillUnmount() {
-    this.ws.close()
+    this.props.ws.close()
   }
 
   disconnect = () => {
-    this.ws.close()
+    this.props.ws.close()
   }
 
   //open messenger sidebar
@@ -54,9 +53,8 @@ export default class Messenger extends Component {
   startChat = () => {
     const self = this
     // connect to main chat
-    this.ws = Ws()
-    this.ws.connect()
-    this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
+    this.props.ws.connect()
+    this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
 
     // send login
     this.chat.on('ready', () => {
@@ -75,12 +73,12 @@ export default class Messenger extends Component {
       self.handleMsg(message)
     })
 
-    this.ws.on('error', (error) => {
+    this.props.ws.on('error', (error) => {
       console.log(error)
-      self.ws.close()
+      self.props.ws.close()
     })
     
-    this.ws.on('close', () => {
+    this.props.ws.on('close', () => {
       clearTimeout(this.pingTimeout);
       self.setState({
         ...self.state,
@@ -89,10 +87,10 @@ export default class Messenger extends Component {
       })
     })
 
-    this.ws.on('open', () => {
+    this.props.ws.on('open', () => {
       clearTimeout(this.pingTimeout);
     });
-    this.ws.on('ping', () => {
+    this.props.ws.on('ping', () => {
       clearTimeout(this.pingTimeout);
     });
   }
@@ -100,8 +98,6 @@ export default class Messenger extends Component {
 
   // handle incomming messages
   handleMsg = async (message) => {
-    console.log('message received!')
-    // console.log(message.to)
     if (message.from != undefined) {
         console.log('message to us!: ' + message.body)
         this.openChat(message.from)

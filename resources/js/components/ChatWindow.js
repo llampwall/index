@@ -31,11 +31,6 @@ export default class ChatWindow extends Component {
         to: user
     }, () => {
         console.log('changed user: ' + this.state.to.fname)
-        // this.props.chat.emit('message', {
-        //   from: this.state.from,
-        //   to: this.state.to, 
-        //   body: 'sup homie'
-        // })
     })
   }
 
