@@ -17,6 +17,10 @@ export default class Messenger extends Component {
     this.ws = Ws()
     this.chat = null
     this.chatRef = React.createRef()
+
+    this.pingTimeout = setTimeout(() => {
+      this.ws.close();
+    }, 30000);
   }
 
   componentDidMount() {
@@ -31,7 +35,11 @@ export default class Messenger extends Component {
   }
 
   componentWillUnmount() {
-    this.chat.close()
+    this.ws.close()
+  }
+
+  disconnect = () => {
+    this.ws.close()
   }
 
   //open messenger sidebar
@@ -44,14 +52,16 @@ export default class Messenger extends Component {
 
   // connect messenger
   startChat = () => {
+    const self = this
     // connect to main chat
+    this.ws = Ws()
     this.ws.connect()
-    this.chat = this.ws.subscribe('chat')
+    this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
 
     // send login
     this.chat.on('ready', () => {
-      this.setState({
-        ...this.state,
+      self.setState({
+        ...self.state,
         connected: true
       })
       // this.chat.emit('message', {
@@ -61,7 +71,6 @@ export default class Messenger extends Component {
       // })
     })
 
-    const self = this
     this.chat.on('message', function(message) {
       console.log('message received')
       // console.log(message.to)
@@ -77,23 +86,43 @@ export default class Messenger extends Component {
       }
     })
 
-    this.chat.on('error', (error) => {
+    this.ws.on('error', (error) => {
       console.log(error)
+      self.ws.unsubscribe('chat')
+      self.ws.terminate()
     })
     
-    this.chat.on('close', () => {
-      this.setState({
-        ...this.state,
-        connected: false
+    this.ws.on('close', () => {
+      clearTimeout(this.pingTimeout);
+      self.setState({
+        ...self.state,
+        connected: false,
+        chatUser: null
       })
     })
+
+    this.ws.on('open', () => {
+      clearTimeout(this.pingTimeout);
+    });
+    this.ws.on('ping', () => {
+      clearTimeout(this.pingTimeout);
+    });
   }
 
-  
   // open chat window / switch to a different one
   openChat = (user) => {
+    const self = this
+
+    // if (this.connected == false) {
+    //   this.ws = Ws()
+    //   this.ws.connect()
+    //   this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
+    //   this.chatRef = React.createRef()
+    // }
+    // send login
     this.setState({
       ...this.state,
+      connected: true,
       chatUser: user
     })
     if (this.state.chatUser != null && user != this.state.chatUser) {
@@ -106,7 +135,12 @@ export default class Messenger extends Component {
   displayChat = () => {
     if (this.state.chatUser != null) {
       return (
-        <ChatWindow ref={this.chatRef} from={this.props.initialData.userData} to={this.state.chatUser} chat={this.chat}></ChatWindow>
+        <ChatWindow ref={this.chatRef} 
+          from={this.props.initialData.userData} 
+          to={this.state.chatUser} 
+          chat={this.chat} 
+          disconnect={this.disconnect}
+        ></ChatWindow>
       )
     }
   }

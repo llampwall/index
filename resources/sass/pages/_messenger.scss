@@ -177,10 +177,21 @@
         align-items: center;
         background: $secondary;
         color: $accents;
+        position: relative;
 
         .chat-user {
           font-size: 1.2rem;
           color: $primary-font-color;
+        }
+
+        .close-btn {
+          position: absolute;
+          right: .3rem;
+          cursor: pointer;
+          font-size: 1.3rem;
+          &:hover {
+            color: red;
+          }
         }
       }
 

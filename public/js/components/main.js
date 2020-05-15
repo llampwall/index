@@ -484,6 +484,10 @@ var Messenger = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Messenger.__proto__ || Object.getPrototypeOf(Messenger)).call(this));
 
+    _this.disconnect = function () {
+      _this.ws.close();
+    };
+
     _this.clickedOpen = function () {
       _this.setState((0, _extends3.default)({}, _this.state, {
         open: !_this.state.open
@@ -491,13 +495,15 @@ var Messenger = function (_Component) {
     };
 
     _this.startChat = function () {
+      var self = _this;
       // connect to main chat
+      _this.ws = (0, _websocketClient2.default)();
       _this.ws.connect();
-      _this.chat = _this.ws.subscribe('chat');
+      _this.chat = _this.ws.getSubscription('chat') || _this.ws.subscribe('chat');
 
       // send login
       _this.chat.on('ready', function () {
-        _this.setState((0, _extends3.default)({}, _this.state, {
+        self.setState((0, _extends3.default)({}, self.state, {
           connected: true
         }));
         // this.chat.emit('message', {
@@ -507,7 +513,6 @@ var Messenger = function (_Component) {
         // })
       });
 
-      var self = _this;
       _this.chat.on('message', function (message) {
         console.log('message received');
         // console.log(message.to)
@@ -522,19 +527,40 @@ var Messenger = function (_Component) {
         }
       });
 
-      _this.chat.on('error', function (error) {
+      _this.ws.on('error', function (error) {
         console.log(error);
+        self.ws.unsubscribe('chat');
+        self.ws.terminate();
       });
 
-      _this.chat.on('close', function () {
-        _this.setState((0, _extends3.default)({}, _this.state, {
-          connected: false
+      _this.ws.on('close', function () {
+        clearTimeout(_this.pingTimeout);
+        self.setState((0, _extends3.default)({}, self.state, {
+          connected: false,
+          chatUser: null
         }));
+      });
+
+      _this.ws.on('open', function () {
+        clearTimeout(_this.pingTimeout);
+      });
+      _this.ws.on('ping', function () {
+        clearTimeout(_this.pingTimeout);
       });
     };
 
     _this.openChat = function (user) {
+      var self = _this;
+
+      // if (this.connected == false) {
+      //   this.ws = Ws()
+      //   this.ws.connect()
+      //   this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
+      //   this.chatRef = React.createRef()
+      // }
+      // send login
       _this.setState((0, _extends3.default)({}, _this.state, {
+        connected: true,
         chatUser: user
       }));
       if (_this.state.chatUser != null && user != _this.state.chatUser) {
@@ -544,7 +570,12 @@ var Messenger = function (_Component) {
 
     _this.displayChat = function () {
       if (_this.state.chatUser != null) {
-        return _react2.default.createElement(_ChatWindow2.default, { ref: _this.chatRef, from: _this.props.initialData.userData, to: _this.state.chatUser, chat: _this.chat });
+        return _react2.default.createElement(_ChatWindow2.default, { ref: _this.chatRef,
+          from: _this.props.initialData.userData,
+          to: _this.state.chatUser,
+          chat: _this.chat,
+          disconnect: _this.disconnect
+        });
       }
     };
 
@@ -628,6 +659,10 @@ var Messenger = function (_Component) {
     _this.ws = (0, _websocketClient2.default)();
     _this.chat = null;
     _this.chatRef = _react2.default.createRef();
+
+    _this.pingTimeout = setTimeout(function () {
+      _this.ws.close();
+    }, 30000);
     return _this;
   }
 
@@ -645,7 +680,7 @@ var Messenger = function (_Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      this.chat.close();
+      this.ws.close();
     }
 
     //open messenger sidebar
@@ -1119,6 +1154,10 @@ var ChatWindow = function (_Component) {
       });
     };
 
+    _this.closeChat = function () {
+      // this.props.disconnect()
+    };
+
     _this.state = {
       from: null,
       to: null,
@@ -1143,6 +1182,9 @@ var ChatWindow = function (_Component) {
         console.log(_this2.state);
       });
     }
+
+    // for now we will have this disconnect the client
+
   }, {
     key: 'render',
     value: function render() {
@@ -1165,6 +1207,11 @@ var ChatWindow = function (_Component) {
               this.state.to.fname,
               ' ',
               this.state.to.lname
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'close-btn', onClick: this.closeChat },
+              _react2.default.createElement('i', { className: 'ayn-cancel' })
             )
           ),
           _react2.default.createElement(

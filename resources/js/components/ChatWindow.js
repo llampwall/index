@@ -81,6 +81,11 @@ export default class ChatWindow extends Component {
     })
   }
 
+  // for now we will have this disconnect the client
+  closeChat = () => {
+    // this.props.disconnect()
+  }
+
   render() {
     if (this.state.to == undefined) {
         return (
@@ -93,6 +98,7 @@ export default class ChatWindow extends Component {
           <div className='chat'>
                 <div className='chat-header'>
                   <span className='chat-user'>{this.state.to.fname} {this.state.to.lname}</span>
+                  <div className='close-btn' onClick={this.closeChat}><i className='ayn-cancel'></i></div>
                 </div>
                 <div className='chat-body'>
                     {this.displayMessages()}
