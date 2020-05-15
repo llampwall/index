@@ -45,7 +45,7 @@ a {
 body {
 
   background: $outer-bg;
-  @include main-gradient;
+  // @include main-gradient;
   min-height: 100vh;
   width: 100vw;
   display: flex;
@@ -65,7 +65,7 @@ body {
       width: 4.3em;
       overflow: hidden;
       margin-bottom: 1rem;
-      animation: type 4s steps(15, end); 
+      // animation: type 4s steps(15, end); 
       pointer-events: none;
       &::selection {
         text-shadow: 5px 5px black;
@@ -149,15 +149,34 @@ input[type="password"] {
 
 
 @media only screen and (max-width: 1200px) {
+
+
+  .welcome-container{
+    .login {
+      .button {
+        &:hover {
+          transform: none;
+        }
+      }
+    }
+  }
+
   .home-page {
 
+    .content-area>#compose {
+      position: relative;
+      left: -1rem;
+    }
+
     #all-posts>.post-container {
-      max-width: 95vw;
+      // max-width: 95vw;
+      position: relative;
+      left: -1rem;
 
       .post-header {
         .author {
           .username {
-            font-size: 2rem;
+            // font-size: 2rem;
           }
         }
         .time {
@@ -169,12 +188,12 @@ input[type="password"] {
       }
 
       .post-info p {
-        font-size: 2rem;
+        // font-size: 2rem;
       } 
 
       .c-section {
         textarea {
-          font-size: 2rem;
+          // font-size: 2rem;
         }
       }
 
@@ -183,16 +202,16 @@ input[type="password"] {
           width: 40px;
           height: 40px;
           i {
-            font-size: 2rem;
+            // font-size: 2rem;
           }
         }
 
         .single-comment {
           .user>h2 {
-            font-size: 1.5rem;
+            // font-size: 1.5rem;
           }
           p {
-            font-size: 1.5rem;
+            // font-size: 1.5rem;
           }
         }
       }
@@ -209,13 +228,13 @@ input[type="password"] {
     width: 40px;
     height: 40px;
     i {
-      font-size: 2rem;
+      // font-size: 2rem;
     }
   }
 
   #compose {
     textarea {
-      font-size: 2rem;
+      // font-size: 2rem;
     }
 
     .send-btn,
@@ -223,21 +242,21 @@ input[type="password"] {
       width: 40px;
       height: 40px;
       i {
-        font-size: 2rem;
+        // font-size: 2rem;
       }
     }
   }
 
   #left-menu {
     .account-dropdown>.username {
-      font-size: 1.5rem;
+      // font-size: 1.5rem;
     }
     .groups {
       .title {
-        font-size: 2rem;
+        // font-size: 2rem;
       }
       ul>li {
-        font-size: 1.3rem;
+        // font-size: 1.3rem;
       }
     }
     &.closed {
@@ -249,32 +268,32 @@ input[type="password"] {
       width: 50px;
       height: 50px;
       i {
-        font-size: 3rem;
+        // font-size: 3rem;
       }
     }
   }
 
   #messenger {
     .messenger-header>.title {
-      font-size: 1.5rem;
+      // font-size: 1.5rem;
     }
 
     .users {
       .user>.username {
-        font-size: 1.5rem;
+        // font-size: 1.5rem;
       }
     }
 
     &.closed {
       box-shadow: none;
-      right: -21rem;
+      right: -18rem;
     }
 
     .open-btn {
       width: 50px;
       height: 50px;
       i {
-        font-size: 3rem;
+        // font-size: 3rem;
       }
     }
   }
