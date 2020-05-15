@@ -564,8 +564,9 @@ var Messenger = function (_Component) {
       _this.setState((0, _extends3.default)({}, _this.state, {
         connected: true,
         chatUser: user,
-        open: false // should just be for mobile, but whatever
+        open: window.innerWidth > 600 //close on small devices
       }));
+
       if (_this.state.chatUser != null && user != _this.state.chatUser) {
         _this.chatRef.current.switchUser(user);
       }
@@ -1146,7 +1147,9 @@ var ChatWindow = function (_Component) {
     };
 
     _this.closeChat = function () {
-      // this.props.disconnect()
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        to: undefined
+      }));
     };
 
     _this.state = {
