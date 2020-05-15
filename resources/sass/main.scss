@@ -152,6 +152,7 @@ input[type="password"] {
 
 
   .welcome-page {
+    height: 100%;
     overflow-y: hidden;
   }
   .welcome-container{
@@ -279,7 +280,7 @@ input[type="password"] {
     }
     &.closed {
       box-shadow: none;
-      left: -17rem;
+      left: -16rem;
     }
 
     .open-btn {
@@ -298,7 +299,7 @@ input[type="password"] {
     }
 
     .users {
-      padding-left: .9rem;
+      padding-left: 1.2rem;
 
       .user>.username {
         // font-size: 1.5rem;
@@ -307,7 +308,7 @@ input[type="password"] {
 
     &.closed {
       box-shadow: none;
-      right: -16.2rem;
+      right: -15.5rem;
     }
 
     .open-btn {
@@ -320,8 +321,10 @@ input[type="password"] {
     }
 
     .chat {
-      width: 300px;
-      height: 350px;
+      width: 270px;
+      height: 300px;
+      left: -110%;
+      bottom: 1rem;
     }
     
   }

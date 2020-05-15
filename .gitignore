@@ -17,3 +17,4 @@ database/*.sqlite
 credentials.csv
 heroku-awskey.csv
 credentials.json
+.env - jawsdb.txt
