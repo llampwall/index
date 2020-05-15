@@ -151,6 +151,9 @@ input[type="password"] {
 @media only screen and (max-width: 1200px) {
 
 
+  .welcome-page {
+    overflow-y: hidden;
+  }
   .welcome-container{
     .login {
       .button {
