@@ -7,11 +7,12 @@
 
   #content-container {
     border-right: $border-thickness solid $border-color;
-    color: $primary-font-color;
+    // color: $primary-font-color;
     width: 100%;
     max-height: 85vh;
     overflow: hidden;
     background-color: $content-area-bg;
+    // background-color: transparent;
 
     .header {
       display: flex;
@@ -20,6 +21,7 @@
       align-items: center;
       border-bottom: $border-thickness solid $border-color;
       background-color: $search-header-bg;
+      // background-color: transparent;
       .nothing {
         width: 116px;
       }
@@ -69,6 +71,7 @@
       height: calc(80vh - 57px);
       overflow: auto;
       background: linear-gradient(-180deg, #1c252e, #212c37);
+      // @include forest-gradient;
       // box-shadow: 5px 5px 5px 5px $shadow-color inset;
     }
     
