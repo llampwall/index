@@ -2003,6 +2003,10 @@ var Post = function (_Component) {
               return _axios2.default.get('/posts/' + self.props.post.id + '/delete').then(function (response) {
                 console.log('post deleted: ' + response);
                 self.props.update();
+                //update everyone else's comments
+                self.chat.emit('message', {
+                  update: 'all'
+                });
               });
 
             case 4:
@@ -2100,8 +2104,12 @@ var Post = function (_Component) {
                   liked: !_this.state.liked
                 }));
                 _this.getLikes();
+                //update everyone elses feed
+                self.chat.emit('message', {
+                  comments: 'all'
+                });
 
-              case 22:
+              case 23:
               case 'end':
                 return _context3.stop();
             }

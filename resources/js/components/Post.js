@@ -117,6 +117,10 @@ export default class Post extends Component {
         .then(function(response) {
           console.log('post deleted: ' + response)
           self.props.update()
+          //update everyone else's comments
+          self.chat.emit('message', {
+            update: 'all'
+          })
         })
     } catch (error) {
       console.log('error deleting post: ' + error)
@@ -168,6 +172,10 @@ export default class Post extends Component {
       liked: !this.state.liked
     })
     this.getLikes()
+    //update everyone elses feed
+    self.chat.emit('message', {
+      comments: 'all'
+    })
   }
 
 
