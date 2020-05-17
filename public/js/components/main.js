@@ -501,7 +501,7 @@ var Messenger = function (_Component) {
 
       // update users online
       _this.chat.on('login', function (message) {
-        setTimeout(self.populate(), 30000); // wait 5 seconds so that chatcontroller can send it before termination
+        self.populate();
       });
 
       _this.chat.on('message', function (message) {

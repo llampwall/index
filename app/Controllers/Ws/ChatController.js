@@ -14,16 +14,16 @@ class ChatController {
     this.store(auth.user.id, socket.id)
     this.updateChat()
 
-    this.isAlive = true;
-    this.socket.on('ping', function() {
-      this.heartbeat()
-    })
-
 
     // UNCOMMENT THIS TO SET A 10 minute connection timeout.
     // something is wrong with the logic - heartbeat doesn't work
     // connection will close 10 minutes from the time it starts
     // regardless of activity.
+
+    // this.isAlive = true;
+    // this.socket.on('ping', function() {
+    //   this.heartbeat()
+    // })
 
     // const self = this
     // const interval = setInterval(function ping() {
@@ -37,9 +37,9 @@ class ChatController {
 
   }
 
-  heartbeat() {
-    this.isAlive = true;
-  }
+  // heartbeat() {
+  //   this.isAlive = true;
+  // }
   
 
   // store socket in database
@@ -61,14 +61,7 @@ class ChatController {
   // get messages and send them to the right users
   async onMessage (message) {
 
-    // // update everyone's online chat users
-    // if (message.login != null) {
-    //   console.log('login')
-    //   this.updateChat()
-    //   return
-    // }
-
-    this.heartbeat()
+    // this.heartbeat()
 
     // update everyone's feed
     if (message.update != null) {
@@ -160,7 +153,7 @@ class ChatController {
   async onClose () {
     console.log(this.socket.id + ' is disconnecting from a device.')
     // clearInterval(interval);
-    this.updateChat()
+    // this.updateChat()
     try {
         const target = await Online.query().where('socket_id', this.socket.id).delete()
     } catch {
@@ -173,7 +166,7 @@ class ChatController {
   async onError () {
     console.log('error')
     console.log(this.socket.id + ' had an error - disconnecting')
-    this.updateChat()
+    // this.updateChat()
     try {
         const target = await Online.query().where('socket_id', this.socket.id).delete()
     } catch {
