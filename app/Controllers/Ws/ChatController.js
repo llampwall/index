@@ -11,6 +11,7 @@ class ChatController {
     console.log(auth.user.fname + ' ' + auth.user.lname + ' has connected to the server.')
 
     this.store(auth.user.id, socket.id)
+    this.updateChat()
   }
 
   // store socket in database
@@ -31,6 +32,13 @@ class ChatController {
 
   // get messages and send them to the right users
   async onMessage (message) {
+
+    // // update everyone's online chat users
+    // if (message.login != null) {
+    //   console.log('login')
+    //   this.updateChat()
+    //   return
+    // }
 
     // update everyone's feed
     if (message.update != null) {
@@ -106,6 +114,10 @@ class ChatController {
     this.socket.broadcast('update', 'refresh')
   }
 
+  async updateChat() {
+    this.socket.broadcast('login', 'refresh')
+  }
+
   async updateComments() {
     this.socket.broadcast('comments', 'refresh')
   }
@@ -122,7 +134,7 @@ class ChatController {
     } catch {
         console.log("error disconnecting")
     }
-    // this.socket.close()
+    this.updateChat()
     console.log("done")
   }
 

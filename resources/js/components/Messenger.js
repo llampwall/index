@@ -23,14 +23,13 @@ export default class Messenger extends Component {
   }
 
   componentDidMount() {
-    this.populate()
+    this.startChat()
     if (window.innerWidth > 1200) {
       this.setState({
         ...this.state,
         open: true,
       })
     }
-    this.startChat()
   }
 
   componentWillUnmount() {
@@ -62,11 +61,18 @@ export default class Messenger extends Component {
         ...self.state,
         connected: true
       })
+      // display online users
+      this.populate()
+
+      // tell everyone else you're online
       // this.chat.emit('message', {
-      //   body: 'login',
-      //   from: this.state.me,
-      //   to: this.state.user
+      //   login: 'user'
       // })
+    })
+
+    // update users online
+    this.chat.on('login', function(message) {
+      self.populate()
     })
 
     this.chat.on('message', function(message) {
@@ -149,11 +155,11 @@ export default class Messenger extends Component {
   populate = async () => {
     const self = this
     try {
-      const allUsers = await axois.get('/api/users')
+      const allOnline = await axois.get('/api/online')
       // console.log("users: ")
       // console.log(allUsers)
       self.setState({
-        users: allUsers.data
+        users: allOnline.data
       })
     } catch(error) {
       console.log("error fetching users: " + error)

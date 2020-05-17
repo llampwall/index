@@ -495,11 +495,18 @@ var Messenger = function (_Component) {
         self.setState((0, _extends3.default)({}, self.state, {
           connected: true
         }));
+        // display online users
+        _this.populate();
+
+        // tell everyone else you're online
         // this.chat.emit('message', {
-        //   body: 'login',
-        //   from: this.state.me,
-        //   to: this.state.user
+        //   login: 'user'
         // })
+      });
+
+      // update users online
+      _this.chat.on('login', function (message) {
+        self.populate();
       });
 
       _this.chat.on('message', function (message) {
@@ -584,7 +591,7 @@ var Messenger = function (_Component) {
     };
 
     _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      var self, allUsers;
+      var self, allOnline;
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -592,15 +599,15 @@ var Messenger = function (_Component) {
               self = _this;
               _context2.prev = 1;
               _context2.next = 4;
-              return _axios2.default.get('/api/users');
+              return _axios2.default.get('/api/online');
 
             case 4:
-              allUsers = _context2.sent;
+              allOnline = _context2.sent;
 
               // console.log("users: ")
               // console.log(allUsers)
               self.setState({
-                users: allUsers.data
+                users: allOnline.data
               });
               _context2.next = 11;
               break;
@@ -672,13 +679,12 @@ var Messenger = function (_Component) {
   (0, _createClass3.default)(Messenger, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.populate();
+      this.startChat();
       if (window.innerWidth > 1200) {
         this.setState((0, _extends3.default)({}, this.state, {
           open: true
         }));
       }
-      this.startChat();
     }
   }, {
     key: 'componentWillUnmount',
