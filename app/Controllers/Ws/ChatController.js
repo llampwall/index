@@ -15,21 +15,26 @@ class ChatController {
     this.updateChat()
 
     this.isAlive = true;
-    this.socket.on('pong', this.heartbeat)
+    this.socket.on('ping', function() {
+      this.heartbeat()
+    })
 
-    const self = this
-    const interval = setInterval(function ping() {
-      Ws._wsServer.clients.forEach(function each(ws) {
-        if (ws.isAlive === false) return ws.terminate();
+
+    // UNCOMMENT THIS TO SET A 10 minute connection timeout.
+    // something is wrong with the logic - heartbeat doesn't work
+    // connection will close 10 minutes from the time it starts
+    // regardless of activity.
+
+    // const self = this
+    // const interval = setInterval(function ping() {
+    //   Ws._wsServer.clients.forEach(function each(ws) {
+    //     if (ws.isAlive === false) return ws.close();
     
-        ws.isAlive = false;
-        ws.ping();
-      });
-    }, 600000);     //remove connection after 20 minutes of inactivity
+    //     ws.isAlive = false;
+    //     ws.ping();
+    //   });
+    // }, 600000); 
 
-    Ws._wsServer.on('close', function close() {
-      clearInterval(interval);
-    });
   }
 
   heartbeat() {
@@ -63,7 +68,7 @@ class ChatController {
     //   return
     // }
 
-    // console.log(Ws._wsServer.clients)
+    this.heartbeat()
 
     // update everyone's feed
     if (message.update != null) {
@@ -154,18 +159,21 @@ class ChatController {
   // handle client leaving
   async onClose () {
     console.log(this.socket.id + ' is disconnecting from a device.')
+    // clearInterval(interval);
+    this.updateChat()
     try {
         const target = await Online.query().where('socket_id', this.socket.id).delete()
     } catch {
         console.log("error disconnecting")
     }
-    // this.updateChat()
+    
     console.log("done")
   }
 
   async onError () {
     console.log('error')
     console.log(this.socket.id + ' had an error - disconnecting')
+    this.updateChat()
     try {
         const target = await Online.query().where('socket_id', this.socket.id).delete()
     } catch {

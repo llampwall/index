@@ -69,7 +69,7 @@ export default class Messenger extends Component {
 
     // update users online
     this.chat.on('login', function(message) {
-      self.populate()
+      setTimeout(self.populate(), 30000)    // wait 5 seconds so that chatcontroller can send it before termination
     })
 
     this.chat.on('message', function(message) {
@@ -119,11 +119,12 @@ export default class Messenger extends Component {
 
 
   // open chat window / switch to a different one
-  openChat = (user) => {
+  openChat = async (user) => {
     const self = this
 
     if (this.connected == false) {
-      this.startChat()
+      await this.props.ws.connect()
+      this.chat = await this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
       // return
     }
     // send login

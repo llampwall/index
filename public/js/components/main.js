@@ -501,7 +501,7 @@ var Messenger = function (_Component) {
 
       // update users online
       _this.chat.on('login', function (message) {
-        self.populate();
+        setTimeout(self.populate(), 30000); // wait 5 seconds so that chatcontroller can send it before termination
       });
 
       _this.chat.on('message', function (message) {
@@ -562,24 +562,64 @@ var Messenger = function (_Component) {
       };
     }();
 
-    _this.openChat = function (user) {
-      var self = _this;
+    _this.openChat = function () {
+      var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(user) {
+        var self;
+        return _regenerator2.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                self = _this;
 
-      if (_this.connected == false) {
-        _this.startChat();
-        // return
-      }
-      // send login
-      _this.setState((0, _extends3.default)({}, _this.state, {
-        connected: true,
-        chatUser: user,
-        open: window.innerWidth > 600 //close on small devices
+                if (!(_this.connected == false)) {
+                  _context2.next = 10;
+                  break;
+                }
+
+                _context2.next = 4;
+                return _this.props.ws.connect();
+
+              case 4:
+                _context2.next = 6;
+                return _this.props.ws.getSubscription('chat');
+
+              case 6:
+                _context2.t0 = _context2.sent;
+
+                if (_context2.t0) {
+                  _context2.next = 9;
+                  break;
+                }
+
+                _context2.t0 = _this.props.ws.subscribe('chat');
+
+              case 9:
+                _this.chat = _context2.t0;
+
+              case 10:
+                // send login
+                _this.setState((0, _extends3.default)({}, _this.state, {
+                  connected: true,
+                  chatUser: user,
+                  open: window.innerWidth > 600 //close on small devices
+                }));
+
+                if (_this.state.chatUser != null && user != _this.state.chatUser) {
+                  _this.chatRef.current.switchUser(user);
+                }
+
+              case 12:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, _this2);
       }));
 
-      if (_this.state.chatUser != null && user != _this.state.chatUser) {
-        _this.chatRef.current.switchUser(user);
-      }
-    };
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }();
 
     _this.displayChat = function () {
       if (_this.state.chatUser != null) {
@@ -592,24 +632,24 @@ var Messenger = function (_Component) {
       }
     };
 
-    _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+    _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
       var self, allOnline, allOffline;
-      return _regenerator2.default.wrap(function _callee2$(_context2) {
+      return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               self = _this;
-              _context2.prev = 1;
-              _context2.next = 4;
+              _context3.prev = 1;
+              _context3.next = 4;
               return _axios2.default.get('/api/online');
 
             case 4:
-              allOnline = _context2.sent;
-              _context2.next = 7;
+              allOnline = _context3.sent;
+              _context3.next = 7;
               return _axios2.default.get('/api/offline');
 
             case 7:
-              allOffline = _context2.sent;
+              allOffline = _context3.sent;
 
               // console.log("users: ")
               // console.log(allUsers)
@@ -617,21 +657,21 @@ var Messenger = function (_Component) {
                 users_on: allOnline.data,
                 users_off: allOffline.data
               });
-              _context2.next = 14;
+              _context3.next = 14;
               break;
 
             case 11:
-              _context2.prev = 11;
-              _context2.t0 = _context2['catch'](1);
+              _context3.prev = 11;
+              _context3.t0 = _context3['catch'](1);
 
-              console.log("error fetching users: " + _context2.t0);
+              console.log("error fetching users: " + _context3.t0);
 
             case 14:
             case 'end':
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2, _this2, [[1, 11]]);
+      }, _callee3, _this2, [[1, 11]]);
     }));
 
     _this.displayUsers = function () {

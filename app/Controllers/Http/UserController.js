@@ -48,7 +48,7 @@ class UserController {
         if (auth.user) {
             try {
                const allOffline = await Database.raw('select * from users where not exists (select * from onlines where users.id = onlines.user_id)')
-               console.log(allOffline[0])
+            //    console.log(allOffline[0])
                return allOffline[0]
             } catch (error) {
                 console.log(error)
