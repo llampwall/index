@@ -65,11 +65,35 @@ export default class ChatWindow extends Component {
     })
   }
 
+  // allows posts to be submit with the enter key
+  checkSubmit = (event) => {
+    if (event.keyCode == 13) {
+      event.preventDefault()
+      this.sendMsg()
+    }
+  }
+
+  // sends message, adds message to window, and clears message box
   sendMsg = () => {
+    if (this.state.message == '\n') {
+      this.setState({
+        ...this.state, 
+        postContent: ''
+      })
+      return
+    }
+    if (this.state.message.length == 0) {
+      return
+    }
     console.log('sending message to ' + this.state.to.fname)
     this.state.chat.emit('message', {
       to: this.state.to,
       body: this.state.message
+    })
+    this.addMsg(this.state.message)
+    this.setState({
+      ...this.state,
+      message: ''
     })
   }
 
@@ -77,7 +101,7 @@ export default class ChatWindow extends Component {
   closeChat = () => {
     this.setState({
       ...this.state,
-      to: undefined
+      to: undefined 
     })
   }
 
@@ -99,8 +123,8 @@ export default class ChatWindow extends Component {
                     {this.displayMessages()}
                 </div>
                 <div className='chat-compose'>
-                    <input type='text' name='message' value={this.state.message} onChange={this.changeText} placeholder='enter a message'/>
-                    <div className='send-btn' onClick={this.sendMsg}><i className='ayn-paper-plane-1'></i></div> 
+                    <input type='text' name='message' value={this.state.message} onKeyUp={this.checkSubmit} onChange={this.changeText} placeholder='enter a message'/>
+                    <div className='send-btn' onTouchStart={this.sendMsg} onClick={this.sendMsg}><i className='ayn-paper-plane-1'></i></div> 
                 </div>
           </div>
       )

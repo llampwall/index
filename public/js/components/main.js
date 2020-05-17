@@ -1138,12 +1138,32 @@ var ChatWindow = function (_Component) {
       });
     };
 
+    _this.checkSubmit = function (event) {
+      if (event.keyCode == 13) {
+        event.preventDefault();
+        _this.sendMsg();
+      }
+    };
+
     _this.sendMsg = function () {
+      if (_this.state.message == '\n') {
+        _this.setState((0, _extends3.default)({}, _this.state, {
+          postContent: ''
+        }));
+        return;
+      }
+      if (_this.state.message.length == 0) {
+        return;
+      }
       console.log('sending message to ' + _this.state.to.fname);
       _this.state.chat.emit('message', {
         to: _this.state.to,
         body: _this.state.message
       });
+      _this.addMsg(_this.state.message);
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        message: ''
+      }));
     };
 
     _this.closeChat = function () {
@@ -1176,6 +1196,12 @@ var ChatWindow = function (_Component) {
         console.log(_this2.state);
       });
     }
+
+    // allows posts to be submit with the enter key
+
+
+    // sends message, adds message to window, and clears message box
+
 
     // for now we will have this disconnect the client
 
@@ -1216,10 +1242,10 @@ var ChatWindow = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'chat-compose' },
-            _react2.default.createElement('input', { type: 'text', name: 'message', value: this.state.message, onChange: this.changeText, placeholder: 'enter a message' }),
+            _react2.default.createElement('input', { type: 'text', name: 'message', value: this.state.message, onKeyUp: this.checkSubmit, onChange: this.changeText, placeholder: 'enter a message' }),
             _react2.default.createElement(
               'div',
-              { className: 'send-btn', onClick: this.sendMsg },
+              { className: 'send-btn', onTouchStart: this.sendMsg, onClick: this.sendMsg },
               _react2.default.createElement('i', { className: 'ayn-paper-plane-1' })
             )
           )
