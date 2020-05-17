@@ -195,6 +195,15 @@ input[type="password"] {
   .home-page {
 
     #content-container {
+
+      .header {
+        .search {
+          input[type="text"] {
+            font-size: .9rem;
+          }
+        }
+      }
+
       .content-area {
         width: 85%;
         margin: 0 auto;
@@ -205,6 +214,7 @@ input[type="password"] {
           // position: relative;
           // left: -1rem;
           // width: 80%;
+          margin-bottom: 1.5rem;
 
           .send-btn,
           .photo-btn {
