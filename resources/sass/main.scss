@@ -149,25 +149,18 @@ input[type="password"] {
 
 
 // ALL MEDIA QUERIES
+
+
+// disable hover on touchscreens 
 @media (hover: none) {
   *:hover {
      color: inherit;
-    //  background-color: inherit;
-     scale: inherit;
+     scale: initial;
   }
 }
 
 
-
 @media only screen and (max-width: 1200px) {
-
-  // // disable hover on small devices
-  // *{
-  //   &:hover {
-  //     color: inherit !important;
-  //     background: inherit !important;
-  //   }
-  // }
 
   .welcome-page {
     height: 100vh;
