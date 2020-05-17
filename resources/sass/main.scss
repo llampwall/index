@@ -195,10 +195,28 @@ input[type="password"] {
 
   .home-page {
 
-    .content-area>#compose {
-      position: relative;
-      left: -1rem;
+    #content-container {
+      .content-area {
+        width: 90%;
+        margin: 0 auto;
+
+        #compose {
+          // position: relative;
+          // left: -1rem;
+          // width: 80%;
+
+          .send-btn,
+          .photo-btn {
+            width: 40px;
+            height: 40px;
+            i {
+              // font-size: 2rem;
+            }
+          }
+        }
+      }
     }
+
 
     #all-posts>.post-container {
       // max-width: 95vw;
@@ -208,7 +226,7 @@ input[type="password"] {
       .post-header {
         .author {
           .username {
-            // font-size: 2rem;
+            font-size: .7rem;
           }
           .text {
             font-size: .5rem;
@@ -254,10 +272,10 @@ input[type="password"] {
 
         .single-comment {
           .user>h2 {
-            // font-size: 1.5rem;
+            font-size: .7rem;
           }
           p {
-            // font-size: 1.5rem;
+            font-size: .7rem;
           }
         }
       }
@@ -275,22 +293,6 @@ input[type="password"] {
     height: 40px;
     i {
       // font-size: 2rem;
-    }
-  }
-
-  #compose {
-    width: 80%;
-    textarea {
-      // font-size: 2rem;
-    }
-
-    .send-btn,
-    .photo-btn {
-      width: 40px;
-      height: 40px;
-      i {
-        // font-size: 2rem;
-      }
     }
   }
 
@@ -336,7 +338,7 @@ input[type="password"] {
 
     &.closed {
       box-shadow: none;
-      right: -14rem;
+      right: -14.8rem;
     }
 
     .open-btn {
