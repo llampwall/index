@@ -497,11 +497,6 @@ var Messenger = function (_Component) {
         }));
         // display online users
         _this.populate();
-
-        // tell everyone else you're online
-        // this.chat.emit('message', {
-        //   login: 'user'
-        // })
       });
 
       // update users online
@@ -529,8 +524,11 @@ var Messenger = function (_Component) {
       _this.props.ws.on('open', function () {
         clearTimeout(_this.pingTimeout);
       });
+
       _this.props.ws.on('ping', function () {
         clearTimeout(_this.pingTimeout);
+        console.log('ping');
+        self.populate();
       });
     };
 
@@ -672,7 +670,7 @@ var Messenger = function (_Component) {
 
     _this.pingTimeout = setTimeout(function () {
       _this.props.ws.close();
-    }, 30000);
+    }, 32000);
     return _this;
   }
 

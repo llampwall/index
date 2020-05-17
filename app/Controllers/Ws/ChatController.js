@@ -2,6 +2,7 @@
 
 const Online = use('App/Models/Online')
 const Database = use('Database')
+const Ws = use('Ws')
 
 class ChatController {
   constructor ({ socket, request, auth }) {
@@ -12,7 +13,29 @@ class ChatController {
 
     this.store(auth.user.id, socket.id)
     this.updateChat()
+
+    this.isAlive = true;
+    this.socket.on('pong', this.heartbeat)
+
+    const self = this
+    const interval = setInterval(function ping() {
+      Ws._wsServer.clients.forEach(function each(ws) {
+        if (ws.isAlive === false) return ws.terminate();
+    
+        ws.isAlive = false;
+        ws.ping();
+      });
+    }, 600000);     //remove connection after 20 minutes of inactivity
+
+    Ws._wsServer.on('close', function close() {
+      clearInterval(interval);
+    });
   }
+
+  heartbeat() {
+    this.isAlive = true;
+  }
+  
 
   // store socket in database
   async store (u_id, s_id) {
@@ -39,6 +62,8 @@ class ChatController {
     //   this.updateChat()
     //   return
     // }
+
+    // console.log(Ws._wsServer.clients)
 
     // update everyone's feed
     if (message.update != null) {
@@ -138,9 +163,15 @@ class ChatController {
     console.log("done")
   }
 
-  onError () {
+  async onError () {
     console.log('error')
-    // this.socket.close()
+    console.log(this.socket.id + ' had an error - disconnecting')
+    try {
+        const target = await Online.query().where('socket_id', this.socket.id).delete()
+    } catch {
+        console.log("error disconnecting")
+    }
+    // console.log("done")
   }
 }
 

@@ -19,7 +19,7 @@ export default class Messenger extends Component {
 
     this.pingTimeout = setTimeout(() => {
       this.props.ws.close();
-    }, 30000);
+    }, 32000);
   }
 
   componentDidMount() {
@@ -63,11 +63,6 @@ export default class Messenger extends Component {
       })
       // display online users
       this.populate()
-
-      // tell everyone else you're online
-      // this.chat.emit('message', {
-      //   login: 'user'
-      // })
     })
 
     // update users online
@@ -95,9 +90,12 @@ export default class Messenger extends Component {
 
     this.props.ws.on('open', () => {
       clearTimeout(this.pingTimeout);
-    });
+    })
+    
     this.props.ws.on('ping', () => {
-      clearTimeout(this.pingTimeout);
+      clearTimeout(this.pingTimeout)
+      console.log('ping');
+      self.populate()
     });
   }
 
