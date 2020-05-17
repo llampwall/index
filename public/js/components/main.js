@@ -567,7 +567,7 @@ var Messenger = function (_Component) {
 
       if (_this.connected == false) {
         _this.startChat();
-        return;
+        // return
       }
       // send login
       _this.setState((0, _extends3.default)({}, _this.state, {
@@ -757,7 +757,7 @@ var Messenger = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (this.state.users == undefined) {
+      if (this.state.users_off == undefined) {
         this.populate();
       }
       return _react2.default.createElement(

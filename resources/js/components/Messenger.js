@@ -124,7 +124,7 @@ export default class Messenger extends Component {
 
     if (this.connected == false) {
       this.startChat()
-      return
+      // return
     }
     // send login
     this.setState({
@@ -226,7 +226,7 @@ export default class Messenger extends Component {
 
 
   render () {
-    if (this.state.users == undefined) {
+    if (this.state.users_off == undefined) {
       this.populate()
     }
     return (
