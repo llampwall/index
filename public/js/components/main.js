@@ -546,7 +546,7 @@ var Messenger = function (_Component) {
                   console.log('message to us!: ' + message.body);
                   _this.openChat(message.from);
                   console.log(message.body);
-                  setTimeout(_this.chatRef.current.addMsg(message.body), 500);
+                  // this.chatRef.current.getMessages()
                 }
 
               case 1:
@@ -1152,13 +1152,13 @@ var _defineProperty2 = __webpack_require__(135);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _extends2 = __webpack_require__(68);
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _extends2 = __webpack_require__(68);
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _asyncToGenerator2 = __webpack_require__(44);
 
@@ -1210,7 +1210,7 @@ var ChatWindow = function (_Component) {
     };
 
     _this.getMessages = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-      var data;
+      var messages;
       return _regenerator2.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -1221,12 +1221,16 @@ var ChatWindow = function (_Component) {
                   from: _this.state.from.id,
                   to: _this.state.to.id
                 }
-              }).then(function () {
-                console.log(data);
+              }).then(function (response) {
+                console.log(response.data.messages);
+
+                _this.setState((0, _extends3.default)({}, _this.state, {
+                  messages: response.data.messages
+                }));
               });
 
             case 2:
-              data = _context.sent;
+              messages = _context.sent;
 
             case 3:
             case 'end':
@@ -1236,23 +1240,16 @@ var ChatWindow = function (_Component) {
       }, _callee, _this2);
     }));
 
-    _this.addMsg = function (message) {
-      var newMessages = _this.state.messages;
-      newMessages.push(message);
-      _this.setState((0, _extends3.default)({}, _this.state, {
-        messages: newMessages
-      }));
-    };
-
     _this.displayMessages = function () {
+      var self = _this;
       return _this.state.messages.map(function (msg, i) {
         return _react2.default.createElement(
           'div',
-          { className: 'message', key: i },
+          { className: 'message ' + (msg.sender_id == self.props.from.id ? 'self' : ''), key: msg.id },
           _react2.default.createElement(
             'p',
             null,
-            msg
+            msg.content
           )
         );
       });
@@ -1293,6 +1290,8 @@ var ChatWindow = function (_Component) {
       _this.setState((0, _extends3.default)({}, _this.state, {
         message: ''
       }));
+
+      _this.getMessages();
     };
 
     _this.closeChat = function () {
@@ -1326,6 +1325,15 @@ var ChatWindow = function (_Component) {
         _this3.getMessages();
       });
     }
+
+    // addMsg = (message) => {
+    //   let newMessages = this.state.messages
+    //   newMessages.push(message)
+    //   this.setState({
+    //     ...this.state,
+    //     messages: newMessages
+    //   })
+    // }
 
     // allows posts to be submit with the enter key
 

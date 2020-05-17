@@ -37,38 +37,38 @@ export default class ChatWindow extends Component {
 
 
   getMessages = async () => {
-    const data  = await Axios.get('/api/convo', { 
+    const messages  = await Axios.get('/api/convo', { 
       params: { 
         from: this.state.from.id,
         to: this.state.to.id
       }
-    }).then(() => {
-      console.log(data)
-    })
+    }).then((response) => {
+      console.log(response.data.messages)
 
-    // this.setState({
-    //   ...this.state,
-    //   messages: history
-    // })
+      this.setState({
+        ...this.state,
+        messages: response.data.messages
+      })
+    })
   }
 
 
-  addMsg = (message) => {
-    let newMessages = this.state.messages
-    newMessages.push(message)
-    this.setState({
-      ...this.state,
-      messages: newMessages
-    })
-
-  }
+  // addMsg = (message) => {
+  //   let newMessages = this.state.messages
+  //   newMessages.push(message)
+  //   this.setState({
+  //     ...this.state,
+  //     messages: newMessages
+  //   })
+  // }
 
   displayMessages = () => {
+    const self = this
     return (
       this.state.messages.map((msg, i) => {
         return (
-          <div className='message' key={i}>
-              <p>{msg}</p>   
+          <div className={`message ${(msg.sender_id == self.props.from.id) ? 'self' : ''}`} key={msg.id}>
+              <p>{msg.content}</p>   
           </div>
         )
       })
@@ -116,6 +116,8 @@ export default class ChatWindow extends Component {
       ...this.state,
       message: ''
     })
+
+    this.getMessages()
   }
 
   // for now this doesn't do much

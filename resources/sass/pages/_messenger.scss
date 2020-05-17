@@ -182,7 +182,7 @@
       bottom: 0;
       display: flex;
       flex-direction: column;
-      background: white;
+      // background: white;
       padding: 1px;
       z-index: 1000;
 
@@ -192,14 +192,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: $secondary;
+        background: $write-comment-bg;
         color: $accents;
         position: relative;
         z-index: inherit;
 
         .chat-user {
           font-size: 1.2rem;
-          color: $primary-font-color;
+          color: $accents;
           z-index: inherit;
         }
 
@@ -217,28 +217,35 @@
 
       .chat-body {
         width: 100%;
-        background: $primary-font-color;
+        background: $secondary;
         height: 300px;
+        overflow: auto;
         padding: .5rem 1rem;
         z-index: inherit;
-        @include hard-shadow;
+        // @include hard-shadow;
+        &::-webkit-scrollbar {
+          display: none;
+        }
 
         .message {
           background: transparent;
           margin-bottom: .5rem;
           z-index: inherit;
 
-          & > .self {
+          &.self {
             text-align: right;
-            color: $lr-menu-headers;
+            p {
+              color: $lr-menu-headers;
+            }
           }
 
           .message-user {
             font-size: 1.1rem;
             color: $accents;
           }
-          .p {
-            color: $primary;
+
+          p {
+            color: $primary-font-color;
           }
         }
       }
@@ -254,11 +261,11 @@
         input[type='text'] {
           background: $write-comment-bg;
           color: $accents;
-          overflow: wrap;
+          font-size: .8rem;
           &::placeholder {
             color: $placeholder-font-color;
             opacity: .8;
-            font-weight: 700;
+            // font-weight: 700;
           }
           &:focus::placeholder {
             color: transparent;

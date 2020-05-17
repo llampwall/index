@@ -29,10 +29,26 @@ class ApiController {
         const { from, to }= request._qs
         // console.log(from)
         
-        const myMessages = await Database.table('messages').select('*').where('sender_id', from).andWhere('receiver_id', to)
-        const theirMessages = await Database.table('messages').select('*').where('sender_id', to).andWhere('receiver_id', from)
+        const myMessages = await Database.table('messages').select('*')
+        .where('sender_id', from).andWhere('receiver_id', to)
+        const theirMessages = await Database.table('messages').select('*')
+        .where('sender_id', to).andWhere('receiver_id', from)
         const messages = myMessages.concat(theirMessages)
+        messages.sort(this.compare)
         console.log(messages)
+        return {messages}
+    }
+
+    compare(a, b) {
+        const timeA = a.read_at
+        const timeB = b.read_at
+        let comparison = 0
+        if (timeA > timeB) {
+            comparison = 1
+        } else if (timeB > timeA) {
+            comparison = -1
+        }
+        return comparison
     }
 }
 
