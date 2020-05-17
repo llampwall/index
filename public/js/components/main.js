@@ -2106,7 +2106,7 @@ var Post = function (_Component) {
                 _this.getLikes();
                 //update everyone elses feed
                 self.chat.emit('message', {
-                  update: 'all'
+                  likes: 'all'
                 });
 
               case 23:
@@ -2229,6 +2229,10 @@ var Post = function (_Component) {
       this.chat.on('comments', function () {
         console.log('new comment');
         self.commentArea.current.getComments();
+      });
+      this.chat.on('likes', function () {
+        console.log('new likes');
+        self.getLikes();
       });
     }
 

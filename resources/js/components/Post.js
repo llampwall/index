@@ -30,6 +30,10 @@ export default class Post extends Component {
       console.log('new comment')
       self.commentArea.current.getComments()
     })
+    this.chat.on('likes', function() {
+      console.log('new likes')
+      self.getLikes()
+    })
   }
 
   displayMedia = () => {
@@ -174,7 +178,7 @@ export default class Post extends Component {
     this.getLikes()
     //update everyone elses feed
     self.chat.emit('message', {
-      update: 'all'
+      likes: 'all'
     })
   }
 
