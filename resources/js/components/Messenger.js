@@ -204,7 +204,7 @@ export default class Messenger extends Component {
           <div className="divider">- offline -</div>
           {this.state.users_off.map((user) => {
             return (
-              <div className="user" key={user.id} onClick={this.openChat.bind(null, user)}>
+              <div className="user off" key={user.id} onClick={this.openChat.bind(null, user)}>
                 <div className="user-img" style={{
                   backgroundImage: `url("${user.profile_img}")`, 
                   backgroundPosition: 'center center', 

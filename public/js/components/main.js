@@ -676,7 +676,7 @@ var Messenger = function (_Component) {
           _this.state.users_off.map(function (user) {
             return _react2.default.createElement(
               'div',
-              { className: 'user', key: user.id, onClick: _this.openChat.bind(null, user) },
+              { className: 'user off', key: user.id, onClick: _this.openChat.bind(null, user) },
               _react2.default.createElement('div', { className: 'user-img', style: {
                   backgroundImage: 'url("' + user.profile_img + '")',
                   backgroundPosition: 'center center',
