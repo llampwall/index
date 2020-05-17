@@ -229,6 +229,11 @@ export default class Messenger extends Component {
   render () {
     if (this.state.users_off == undefined) {
       this.populate()
+      return (
+        <div className='load'>
+          <i className="ayn-spin3" />
+        </div>
+      )
     }
     return (
       <section id="messenger" className={this.state.open ? "open" : "closed"}>

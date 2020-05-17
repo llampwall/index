@@ -799,6 +799,11 @@ var Messenger = function (_Component) {
     value: function render() {
       if (this.state.users_off == undefined) {
         this.populate();
+        return _react2.default.createElement(
+          'div',
+          { className: 'load' },
+          _react2.default.createElement('i', { className: 'ayn-spin3' })
+        );
       }
       return _react2.default.createElement(
         'section',
