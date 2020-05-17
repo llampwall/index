@@ -134,7 +134,7 @@ class ChatController {
     } catch {
         console.log("error disconnecting")
     }
-    this.updateChat()
+    // this.updateChat()
     console.log("done")
   }
 

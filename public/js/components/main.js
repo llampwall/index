@@ -333,7 +333,7 @@ var LeftMenu = function (_Component) {
           ),
           _react2.default.createElement(
             'a',
-            { href: '/logout', className: 'logout' },
+            { href: '/logout', className: 'logout', onClick: this.props.ws.close() },
             'logout ',
             _react2.default.createElement('i', { className: 'ayn-trash' })
           )
@@ -1209,7 +1209,7 @@ var ChatWindow = function (_Component) {
     // sends message, adds message to window, and clears message box
 
 
-    // for now we will have this disconnect the client
+    // for now this doesn't do much
 
   }, {
     key: 'render',
@@ -2630,7 +2630,7 @@ var Layout = function (_Component) {
           'div',
           { className: 'app-container home-page' },
           _react2.default.createElement(_Loading2.default, { active: this.state.initialData != undefined ? "" : 'active' }),
-          _react2.default.createElement(_LeftMenu2.default, { initialData: this.state.initialData }),
+          _react2.default.createElement(_LeftMenu2.default, { initialData: this.state.initialData, ws: this.ws }),
           _react2.default.createElement(
             'section',
             { id: 'content-container' },

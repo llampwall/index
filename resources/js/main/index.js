@@ -73,7 +73,7 @@ class Layout extends Component {
 
           <Loading active={(this.state.initialData != undefined) ? "" : 'active'}/>
 
-          <LeftMenu initialData={this.state.initialData}/>
+          <LeftMenu initialData={this.state.initialData} ws={this.ws}/>
 
           <section id="content-container">
 
