@@ -291,7 +291,7 @@ export default class Post extends Component {
 
                     <Comments ref={this.commentArea} post={this.props.post} update={this.state.update} sendUp={this.sendUp} curuser={this.props.curuser}/>
 
-                    <div className="send-btn" onClick={this.submitComment}>
+                    <div className="send-btn" onClick={this.submitComment} onTouchStart={this.submitComment}>
                         <i className="ayn-right" />
                     </div>
                     

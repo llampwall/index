@@ -2336,7 +2336,7 @@ var Post = function (_Component) {
             _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
             _react2.default.createElement(
               'div',
-              { className: 'send-btn', onClick: this.submitComment },
+              { className: 'send-btn', onClick: this.submitComment, onTouchStart: this.submitComment },
               _react2.default.createElement('i', { className: 'ayn-right' })
             )
           )
