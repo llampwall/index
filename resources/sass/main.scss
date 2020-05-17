@@ -162,6 +162,11 @@ input[type="password"] {
 
 @media only screen and (max-width: 1200px) {
 
+  .body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+
   .welcome-page {
     height: 100vh;
     overflow-y: hidden;
@@ -319,7 +324,7 @@ input[type="password"] {
 
     &.closed {
       box-shadow: none;
-      right: -15.5rem;
+      right: -14rem;
     }
 
     .open-btn {

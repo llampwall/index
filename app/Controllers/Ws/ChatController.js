@@ -103,8 +103,16 @@ class ChatController {
           from: this.auth.user,
           body: message.body
         }
+        
+        // add message to database
+        const msg = await Database.insert({
+          sender_id: this.auth.user.id,
+          receiver_id: message.to.id,
+          content: message.body
+        }).into('messages')
+
         this.socket.emitTo('message', newMsg, ids)
-        // console.log('message sent to specific ids: ')
+
         return
 
       } catch (error) {

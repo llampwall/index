@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Axios from 'axios'
 
 
 export default class ChatWindow extends Component {
@@ -21,6 +22,7 @@ export default class ChatWindow extends Component {
         chat: this.props.chat
     }, () => {
         console.log(this.state)
+        this.getMessages()
     })
   }
 
@@ -29,8 +31,27 @@ export default class ChatWindow extends Component {
         to: user
     }, () => {
         console.log('changed user: ' + this.state.to.fname)
+        this.getMessages()
     })
   }
+
+
+  getMessages = async () => {
+    const data  = await Axios.get('/api/convo', { 
+      params: { 
+        from: this.state.from.id,
+        to: this.state.to.id
+      }
+    }).then(() => {
+      console.log(data)
+    })
+
+    // this.setState({
+    //   ...this.state,
+    //   messages: history
+    // })
+  }
+
 
   addMsg = (message) => {
     let newMessages = this.state.messages
@@ -90,7 +111,7 @@ export default class ChatWindow extends Component {
       to: this.state.to,
       body: this.state.message
     })
-    this.addMsg(this.state.message)
+    // this.addMsg(this.state.message)
     this.setState({
       ...this.state,
       message: ''

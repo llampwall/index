@@ -10,11 +10,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(44);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -38,7 +38,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(48);
+var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -419,11 +419,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(44);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -451,7 +451,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(48);
+var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -867,7 +867,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
@@ -875,7 +875,7 @@ var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(44);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -899,7 +899,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(48);
+var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1156,6 +1156,14 @@ var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
+var _regenerator = __webpack_require__(45);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__(44);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
 var _classCallCheck2 = __webpack_require__(19);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -1176,12 +1184,18 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _axios = __webpack_require__(43);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ChatWindow = function (_Component) {
   (0, _inherits3.default)(ChatWindow, _Component);
 
   function ChatWindow() {
+    var _this2 = this;
+
     (0, _classCallCheck3.default)(this, ChatWindow);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (ChatWindow.__proto__ || Object.getPrototypeOf(ChatWindow)).call(this));
@@ -1191,8 +1205,36 @@ var ChatWindow = function (_Component) {
         to: user
       }, function () {
         console.log('changed user: ' + _this.state.to.fname);
+        _this.getMessages();
       });
     };
+
+    _this.getMessages = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var data;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _axios2.default.get('/api/convo', {
+                params: {
+                  from: _this.state.from.id,
+                  to: _this.state.to.id
+                }
+              }).then(function () {
+                console.log(data);
+              });
+
+            case 2:
+              data = _context.sent;
+
+            case 3:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this2);
+    }));
 
     _this.addMsg = function (message) {
       var newMessages = _this.state.messages;
@@ -1247,7 +1289,7 @@ var ChatWindow = function (_Component) {
         to: _this.state.to,
         body: _this.state.message
       });
-      _this.addMsg(_this.state.message);
+      // this.addMsg(this.state.message)
       _this.setState((0, _extends3.default)({}, _this.state, {
         message: ''
       }));
@@ -1272,7 +1314,7 @@ var ChatWindow = function (_Component) {
   (0, _createClass3.default)(ChatWindow, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this3 = this;
 
       var self = this;
       this.setState({
@@ -1280,7 +1322,8 @@ var ChatWindow = function (_Component) {
         to: this.props.to,
         chat: this.props.chat
       }, function () {
-        console.log(_this2.state);
+        console.log(_this3.state);
+        _this3.getMessages();
       });
     }
 
@@ -1357,11 +1400,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(44);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1385,7 +1428,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(48);
+var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1578,7 +1621,7 @@ var _defineProperty2 = __webpack_require__(135);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
@@ -1586,7 +1629,7 @@ var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(44);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1610,7 +1653,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(48);
+var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1928,7 +1971,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
@@ -1936,7 +1979,7 @@ var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(44);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1968,7 +2011,7 @@ var _Comments = __webpack_require__(269);
 
 var _Comments2 = _interopRequireDefault(_Comments);
 
-var _axios = __webpack_require__(48);
+var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -2544,11 +2587,11 @@ exports.default = PostArea;
 "use strict";
 
 
-var _regenerator = __webpack_require__(50);
+var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(49);
+var _asyncToGenerator2 = __webpack_require__(44);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -2578,7 +2621,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(248);
 
-var _axios = __webpack_require__(48);
+var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 

@@ -41,6 +41,7 @@ Route.get('/api/user/:id', 'UserController.profile')
 Route.get('/api/users', 'UserController.getAll')
 Route.get('/api/online', 'UserController.getAllOnline')
 Route.get('/api/offline', 'UserController.getAllOffline')
+Route.get('/api/convo', 'ApiController.getConvo')
 
 // posts
 // Route.resource('/posts', 'PostController').except(['delete'])

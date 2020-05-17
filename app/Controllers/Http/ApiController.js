@@ -1,5 +1,6 @@
 'use strict'
 const Post = use('App/Models/Post')
+const Database = use('Database')
 
 class ApiController {
 
@@ -13,7 +14,7 @@ class ApiController {
             const latestPosts = await Post.query()
             .innerJoin('users', 'users.id', 'posts.user_id')
             .options({nestTables:true})
-            .orderBy('posts.created_at', 'desc').limit(10).fetch()
+            .orderBy('posts.created_at', 'desc').limit(20).fetch()
             return {
                 userData: auth.user,
                 postData: latestPosts
@@ -24,7 +25,14 @@ class ApiController {
         }
     }
 
-    // async getPoster({auth})
+    async getConvo( { request, response } ) {
+        const { from, to }= request._qs
+        console.log(from)
+        
+        const myMessages = await Database.table('messages').select('*').where('sender_id', from).andWhere('receiver_id', to)
+        const theirMessages = await Database.table('messages').select('*').where('sender_id', to).andWhere('receiver_id', from)
+        // console.log(myMessages.innerJoin(theirMessages))
+    }
 }
 
 module.exports = ApiController
