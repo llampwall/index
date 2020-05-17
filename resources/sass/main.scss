@@ -155,7 +155,6 @@ input[type="password"] {
 @media (hover: none) {
   *:hover {
      color: inherit;
-     scale: initial;
   }
 }
 
@@ -356,7 +355,7 @@ input[type="password"] {
     .chat {
       width: 270px;
       height: 300px;
-      left: -110%;
+      left: -100%;
       bottom: 1rem;
     }
     
