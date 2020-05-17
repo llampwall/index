@@ -27,11 +27,12 @@ class ApiController {
 
     async getConvo( { request, response } ) {
         const { from, to }= request._qs
-        console.log(from)
+        // console.log(from)
         
         const myMessages = await Database.table('messages').select('*').where('sender_id', from).andWhere('receiver_id', to)
         const theirMessages = await Database.table('messages').select('*').where('sender_id', to).andWhere('receiver_id', from)
-        // console.log(myMessages.innerJoin(theirMessages))
+        const messages = myMessages.concat(theirMessages)
+        console.log(messages)
     }
 }
 
