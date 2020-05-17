@@ -333,7 +333,7 @@ var LeftMenu = function (_Component) {
           ),
           _react2.default.createElement(
             'a',
-            { href: '/logout', className: 'logout', onClick: this.props.ws.close() },
+            { href: '/logout', className: 'logout', onClick: this.props.ws.close },
             'logout ',
             _react2.default.createElement('i', { className: 'ayn-trash' })
           )

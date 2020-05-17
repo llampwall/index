@@ -77,7 +77,7 @@ export default class LeftMenu extends Component {
 
           <div className="open-btn" onClick={this.clickedOpen}><i className={`ayn-left-open ${this.state.open ? '' : 'closed'}`}></i></div>
 
-          <a href="/logout" className="logout" onClick={this.props.ws.close()}>
+          <a href="/logout" className="logout" onClick={this.props.ws.close}>
             logout <i className="ayn-trash" />
           </a>
         </section>
