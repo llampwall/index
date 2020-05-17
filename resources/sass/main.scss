@@ -197,8 +197,10 @@ input[type="password"] {
 
     #content-container {
       .content-area {
-        width: 90%;
+        width: 85%;
         margin: 0 auto;
+        padding-right: 0;
+        padding-left: 0;
 
         #compose {
           // position: relative;
@@ -227,10 +229,10 @@ input[type="password"] {
       .post-header {
         .author {
           .username {
-            font-size: .7rem;
+            font-size: .9rem;
           }
           .text {
-            font-size: .5rem;
+            display: none;
           }
         }
         .time {
@@ -252,7 +254,7 @@ input[type="password"] {
           font-size: .6rem;
         }
         .comment-count {
-          font-size: .6rem;
+          display: none;
         }
       }
 
