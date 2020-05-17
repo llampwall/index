@@ -108,7 +108,8 @@ class ChatController {
         const msg = await Database.insert({
           sender_id: this.auth.user.id,
           receiver_id: message.to.id,
-          content: message.body
+          content: message.body,
+          read_at: null,
         }).into('messages')
 
         this.socket.emitTo('message', newMsg, ids)
