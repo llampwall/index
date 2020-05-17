@@ -174,7 +174,7 @@ export default class Post extends Component {
     this.getLikes()
     //update everyone elses feed
     self.chat.emit('message', {
-      comments: 'all'
+      update: 'all'
     })
   }
 

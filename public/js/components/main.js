@@ -2106,7 +2106,7 @@ var Post = function (_Component) {
                 _this.getLikes();
                 //update everyone elses feed
                 self.chat.emit('message', {
-                  comments: 'all'
+                  update: 'all'
                 });
 
               case 23:
