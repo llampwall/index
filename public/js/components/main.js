@@ -511,6 +511,10 @@ var Messenger = function (_Component) {
       _this.props.ws.on('error', function (error) {
         console.log(error);
         self.props.ws.close();
+        self.setState((0, _extends3.default)({}, self.state, {
+          connected: false,
+          chatUser: null
+        }));
       });
 
       _this.props.ws.on('close', function () {
@@ -589,7 +593,7 @@ var Messenger = function (_Component) {
     };
 
     _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      var self, allOnline;
+      var self, allOnline, allOffline;
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -601,65 +605,104 @@ var Messenger = function (_Component) {
 
             case 4:
               allOnline = _context2.sent;
+              _context2.next = 7;
+              return _axios2.default.get('/api/offline');
+
+            case 7:
+              allOffline = _context2.sent;
 
               // console.log("users: ")
               // console.log(allUsers)
               self.setState({
-                users: allOnline.data
+                users_on: allOnline.data,
+                users_off: allOffline.data
               });
-              _context2.next = 11;
+              _context2.next = 14;
               break;
 
-            case 8:
-              _context2.prev = 8;
+            case 11:
+              _context2.prev = 11;
               _context2.t0 = _context2['catch'](1);
 
               console.log("error fetching users: " + _context2.t0);
 
-            case 11:
+            case 14:
             case 'end':
               return _context2.stop();
           }
         }
-      }, _callee2, _this2, [[1, 8]]);
+      }, _callee2, _this2, [[1, 11]]);
     }));
 
     _this.displayUsers = function () {
-      if (_this.state.users == undefined) {
+      if (_this.state.users_off == undefined) {
         return _react2.default.createElement(
           'div',
           { className: 'load' },
           _react2.default.createElement('i', { className: 'ayn-spin3' })
         );
       } else {
-        return _this.state.users.map(function (user) {
-          return _react2.default.createElement(
+        return _react2.default.createElement(
+          'div',
+          null,
+          _this.state.users_on.map(function (user) {
+            return _react2.default.createElement(
+              'div',
+              { className: 'user', key: user.id, onClick: _this.openChat.bind(null, user) },
+              _react2.default.createElement('div', { className: 'user-img', style: {
+                  backgroundImage: 'url("' + user.profile_img + '")',
+                  backgroundPosition: 'center center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover' } }),
+              _react2.default.createElement(
+                'div',
+                { className: 'username' },
+                user.fname,
+                ' ',
+                user.lname
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'message-icon' },
+                _react2.default.createElement('i', { className: 'ayn-comment-1' })
+              )
+            );
+          }),
+          _react2.default.createElement(
             'div',
-            { className: 'user', key: user.id, onClick: _this.openChat.bind(null, user) },
-            _react2.default.createElement('div', { className: 'user-img', style: {
-                backgroundImage: 'url("' + user.profile_img + '")',
-                backgroundPosition: 'center center',
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover' } }),
-            _react2.default.createElement(
+            { className: 'divider' },
+            '- offline -'
+          ),
+          _this.state.users_off.map(function (user) {
+            return _react2.default.createElement(
               'div',
-              { className: 'username' },
-              user.fname,
-              ' ',
-              user.lname
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'message-icon' },
-              _react2.default.createElement('i', { className: 'ayn-comment-1' })
-            )
-          );
-        });
+              { className: 'user', key: user.id, onClick: _this.openChat.bind(null, user) },
+              _react2.default.createElement('div', { className: 'user-img', style: {
+                  backgroundImage: 'url("' + user.profile_img + '")',
+                  backgroundPosition: 'center center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover' } }),
+              _react2.default.createElement(
+                'div',
+                { className: 'username' },
+                user.fname,
+                ' ',
+                user.lname
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'message-icon' },
+                _react2.default.createElement('i', { className: 'ayn-comment-1' })
+              )
+            );
+          })
+        );
       }
     };
 
     _this.state = {
-      users: [],
+      users_on: [],
+      users_off: [],
       open: false,
       connected: false,
       chatUser: null

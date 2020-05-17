@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import axois from 'axios'
 import ChatWindow from './ChatWindow'
+import Axios from 'axios'
 // import Ws from '@adonisjs/websocket-client'
 // import { SimpleDB } from 'aws-sdk'
 
@@ -8,7 +9,8 @@ export default class Messenger extends Component {
   constructor () {
     super()
     this.state = { 
-      users: [],
+      users_on: [],
+      users_off: [],
       open: false, 
       connected: false,
       chatUser: null
@@ -77,6 +79,11 @@ export default class Messenger extends Component {
     this.props.ws.on('error', (error) => {
       console.log(error)
       self.props.ws.close()
+      self.setState({
+        ...self.state,
+        connected: false,
+        chatUser: null
+      })
     })
     
     this.props.ws.on('close', () => {
@@ -154,10 +161,12 @@ export default class Messenger extends Component {
     const self = this
     try {
       const allOnline = await axois.get('/api/online')
+      const allOffline = await Axios.get('/api/offline')
       // console.log("users: ")
       // console.log(allUsers)
       self.setState({
-        users: allOnline.data
+        users_on: allOnline.data,
+        users_off: allOffline.data
       })
     } catch(error) {
       console.log("error fetching users: " + error)
@@ -166,7 +175,7 @@ export default class Messenger extends Component {
 
   // render online users
   displayUsers = () => {
-    if (this.state.users == undefined) {
+    if (this.state.users_off == undefined) {
       return (
         <div className='load'>
           <i className="ayn-spin3" />
@@ -174,23 +183,43 @@ export default class Messenger extends Component {
       )
     } else {
       return (
-        this.state.users.map((user) => {
-          return (
-            <div className="user" key={user.id} onClick={this.openChat.bind(null, user)}>
-              <div className="user-img" style={{
-                backgroundImage: `url("${user.profile_img}")`, 
-                backgroundPosition: 'center center', 
-                backgroundRepeat: 'no-repeat', 
-                backgroundSize: 'cover'}} />
-              <div className="username">
-                {user.fname} {user.lname}
+        <div>
+          {this.state.users_on.map((user) => {
+            return (
+              <div className="user" key={user.id} onClick={this.openChat.bind(null, user)}>
+                <div className="user-img" style={{
+                  backgroundImage: `url("${user.profile_img}")`, 
+                  backgroundPosition: 'center center', 
+                  backgroundRepeat: 'no-repeat', 
+                  backgroundSize: 'cover'}} />
+                <div className="username">
+                  {user.fname} {user.lname}
+                </div>
+                <div className="message-icon">
+                  <i className="ayn-comment-1" />
+                </div>
               </div>
-              <div className="message-icon">
-                <i className="ayn-comment-1" />
+            )
+          })}
+          <div className="divider">- offline -</div>
+          {this.state.users_off.map((user) => {
+            return (
+              <div className="user" key={user.id} onClick={this.openChat.bind(null, user)}>
+                <div className="user-img" style={{
+                  backgroundImage: `url("${user.profile_img}")`, 
+                  backgroundPosition: 'center center', 
+                  backgroundRepeat: 'no-repeat', 
+                  backgroundSize: 'cover'}} />
+                <div className="username">
+                  {user.fname} {user.lname}
+                </div>
+                <div className="message-icon">
+                  <i className="ayn-comment-1" />
+                </div>
               </div>
-            </div>
-          )
-        })
+            )
+          })}
+        </div>
       )
     }
   }

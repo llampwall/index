@@ -40,6 +40,7 @@ Route.get('/api/intialize', 'ApiController.initialize')
 Route.get('/api/user/:id', 'UserController.profile')
 Route.get('/api/users', 'UserController.getAll')
 Route.get('/api/online', 'UserController.getAllOnline')
+Route.get('/api/offline', 'UserController.getAllOffline')
 
 // posts
 // Route.resource('/posts', 'PostController').except(['delete'])
