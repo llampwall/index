@@ -244,7 +244,7 @@ var LeftMenu = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'username' },
-              '[: ' + fname + ' ' + lname + ' :]'
+              '[ ' + fname + ' ' + lname + ' ]'
             )
           ),
           _react2.default.createElement(

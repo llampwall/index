@@ -345,20 +345,28 @@ input[type="password"] {
   }
 
   #left-menu {
-    .account-dropdown>.username {
-      // font-size: 1.5rem;
+    padding: 0;
+
+    .account-dropdown {
+      height: 3rem;
+      margin-right: 0;
+      .username {
+        font-size: 1rem;
+        letter-spacing: 1px;
+      }
     }
     .groups {
+      padding-left: 2rem;
       .title {
-        // font-size: 2rem;
+        font-size: 1rem;
       }
       ul>li {
-        // font-size: 1.3rem;
+        font-size: .7rem;
       }
     }
     &.closed {
       box-shadow: none;
-      left: -16rem;
+      left: -11rem;
     }
 
     .open-btn {

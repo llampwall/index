@@ -46,7 +46,7 @@ export default class LeftMenu extends Component {
         <section id="left-menu" className={this.state.open ? "open" : "closed"}>
           <div className="account-dropdown" onClick={this.clickedDropDown}>
             <div className="username">
-              {`[: ${fname} ${lname} :]`}
+              {`[ ${fname} ${lname} ]`}
             </div>
           </div>
   
