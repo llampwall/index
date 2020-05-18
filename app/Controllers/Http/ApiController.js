@@ -35,7 +35,7 @@ class ApiController {
         .where('sender_id', to).andWhere('receiver_id', from)
         const messages = myMessages.concat(theirMessages)
         messages.sort(this.compare)
-        console.log(messages)
+        // console.log(messages)
         return {messages}
     }
 

@@ -12,6 +12,8 @@ export default class ChatWindow extends Component {
       message: '', 
       messages: []
     }
+
+    this.msgEndRef = React.createRef()
   }
 
   componentDidMount() {
@@ -21,7 +23,7 @@ export default class ChatWindow extends Component {
         to: this.props.to,
         chat: this.props.chat
     }, () => {
-        console.log(this.state)
+        // console.log(this.state)
         this.getMessages()
     })
   }
@@ -43,24 +45,19 @@ export default class ChatWindow extends Component {
         to: this.state.to.id
       }
     }).then((response) => {
-      console.log(response.data.messages)
-
+      // console.log(response.data.messages)
       this.setState({
         ...this.state,
         messages: response.data.messages
       })
+      this.scrollToBottom()
     })
   }
 
-
-  // addMsg = (message) => {
-  //   let newMessages = this.state.messages
-  //   newMessages.push(message)
-  //   this.setState({
-  //     ...this.state,
-  //     messages: newMessages
-  //   })
-  // }
+  // keeps the chat window always at the bottom
+  scrollToBottom = () => {
+    this.msgEndRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
 
   displayMessages = () => {
     const self = this
@@ -144,6 +141,7 @@ export default class ChatWindow extends Component {
                 </div>
                 <div className='chat-body'>
                     {this.displayMessages()}
+                    <div ref={this.msgEndRef}></div>
                 </div>
                 <div className='chat-compose'>
                     <input type='text' name='message' value={this.state.message} onKeyUp={this.checkSubmit} onChange={this.changeText} placeholder='enter a message'/>

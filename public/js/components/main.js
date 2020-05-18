@@ -1227,11 +1227,11 @@ var ChatWindow = function (_Component) {
                   to: _this.state.to.id
                 }
               }).then(function (response) {
-                console.log(response.data.messages);
-
+                // console.log(response.data.messages)
                 _this.setState((0, _extends3.default)({}, _this.state, {
                   messages: response.data.messages
                 }));
+                _this.scrollToBottom();
               });
 
             case 2:
@@ -1244,6 +1244,10 @@ var ChatWindow = function (_Component) {
         }
       }, _callee, _this2);
     }));
+
+    _this.scrollToBottom = function () {
+      _this.msgEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    };
 
     _this.displayMessages = function () {
       var self = _this;
@@ -1312,6 +1316,8 @@ var ChatWindow = function (_Component) {
       message: '',
       messages: []
     };
+
+    _this.msgEndRef = _react2.default.createRef();
     return _this;
   }
 
@@ -1326,19 +1332,13 @@ var ChatWindow = function (_Component) {
         to: this.props.to,
         chat: this.props.chat
       }, function () {
-        console.log(_this3.state);
+        // console.log(this.state)
         _this3.getMessages();
       });
     }
 
-    // addMsg = (message) => {
-    //   let newMessages = this.state.messages
-    //   newMessages.push(message)
-    //   this.setState({
-    //     ...this.state,
-    //     messages: newMessages
-    //   })
-    // }
+    // keeps the chat window always at the bottom
+
 
     // allows posts to be submit with the enter key
 
@@ -1380,7 +1380,8 @@ var ChatWindow = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'chat-body' },
-            this.displayMessages()
+            this.displayMessages(),
+            _react2.default.createElement('div', { ref: this.msgEndRef })
           ),
           _react2.default.createElement(
             'div',
