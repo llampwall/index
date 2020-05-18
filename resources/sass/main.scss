@@ -67,9 +67,9 @@ body {
       margin-bottom: 1rem;
       // animation: type 4s steps(15, end); 
       pointer-events: none;
-      &::selection {
-        text-shadow: 5px 5px black;
-      }
+      // &::selection {
+      //   text-shadow: 5px 5px black;
+      // }
     }
   
     // h1:nth-child(2) {
@@ -170,8 +170,11 @@ input[type="password"] {
     }
 
     .title {
+      margin-bottom: 0;
+      padding: 0;
       h1 {
-        font-size: 50px;
+        font-size: 20px;
+        margin-bottom: none;
       }
     }
   }
