@@ -40,8 +40,8 @@ class ApiController {
     }
 
     compare(a, b) {
-        const timeA = a.read_at
-        const timeB = b.read_at
+        const timeA = a.created_at
+        const timeB = b.created_at
         let comparison = 0
         if (timeA > timeB) {
             comparison = 1

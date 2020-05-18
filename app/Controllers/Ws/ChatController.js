@@ -2,6 +2,7 @@
 
 const Online = use('App/Models/Online')
 const Database = use('Database')
+const Message = use('App/Models/Message')
 const Ws = use('Ws')
 
 class ChatController {
@@ -105,12 +106,13 @@ class ChatController {
         }
         
         // add message to database
-        const msg = await Database.insert({
+        const msg = await Message.create({
           sender_id: this.auth.user.id,
           receiver_id: message.to.id,
           content: message.body,
           read_at: null,
-        }).into('messages')
+        })
+        console.log('message saved')
 
         this.socket.emitTo('message', newMsg, ids)
 
