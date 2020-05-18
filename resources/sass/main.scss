@@ -169,7 +169,7 @@ input[type="password"] {
       width: auto;
     }
 
-    .title {
+    .title.app {
       margin-bottom: 0;
       padding: 0;
       h1 {
@@ -212,6 +212,7 @@ input[type="password"] {
       }
 
       .content-area {
+        position: sticky;
         width: 80%;
         margin: 0 auto;
         padding-right: 0;
