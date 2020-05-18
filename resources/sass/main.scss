@@ -161,6 +161,10 @@ input[type="password"] {
 
 @media only screen and (max-width: 1200px) {
 
+  .notify.success.active {
+    width: 100%;
+  }
+
   body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
@@ -172,9 +176,11 @@ input[type="password"] {
     .title.app {
       margin-bottom: 0;
       padding: 0;
+      height: 20px;
       h1 {
         font-size: 20px;
         margin-bottom: none;
+        line-height: 20px;
       }
     }
   }
@@ -363,7 +369,7 @@ input[type="password"] {
 
     &.closed {
       box-shadow: none;
-      right: -16.4rem;
+      right: -17.4rem;
     }
 
     .open-btn {
