@@ -168,9 +168,21 @@ input[type="password"] {
   body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
+    overflow: hidden;
 
     #app {
       width: auto;
+    }
+
+    .title {
+      margin-bottom: 0;
+      padding: 0;
+      height: 40px;
+      h1 {
+        font-size: 40px;
+        margin-bottom: none;
+        line-height: 40px;
+      }
     }
 
     .title.app {
@@ -192,6 +204,11 @@ input[type="password"] {
     overflow-y: hidden;
 
     .welcome-container{
+      .welcome {
+        h1 {
+          font-size: 35px;
+        }
+      }
       .login {
         margin-top: 2rem;
   
