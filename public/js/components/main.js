@@ -571,32 +571,42 @@ var Messenger = function (_Component) {
               case 0:
                 self = _this;
 
-                if (!(_this.connected == false)) {
-                  _context2.next = 10;
+                // do nothing if clicking your own name
+
+                if (!(user.id == _this.props.initialData.userData.id)) {
+                  _context2.next = 3;
                   break;
                 }
 
-                _context2.next = 4;
+                return _context2.abrupt('return');
+
+              case 3:
+                if (!(_this.connected == false)) {
+                  _context2.next = 12;
+                  break;
+                }
+
+                _context2.next = 6;
                 return _this.props.ws.connect();
 
-              case 4:
-                _context2.next = 6;
+              case 6:
+                _context2.next = 8;
                 return _this.props.ws.getSubscription('chat');
 
-              case 6:
+              case 8:
                 _context2.t0 = _context2.sent;
 
                 if (_context2.t0) {
-                  _context2.next = 9;
+                  _context2.next = 11;
                   break;
                 }
 
                 _context2.t0 = _this.props.ws.subscribe('chat');
 
-              case 9:
+              case 11:
                 _this.chat = _context2.t0;
 
-              case 10:
+              case 12:
                 // send login
                 _this.setState((0, _extends3.default)({}, _this.state, {
                   connected: true,
@@ -608,7 +618,7 @@ var Messenger = function (_Component) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-              case 12:
+              case 14:
               case 'end':
                 return _context2.stop();
             }
@@ -716,7 +726,7 @@ var Messenger = function (_Component) {
           _this.state.users_off.map(function (user) {
             return _react2.default.createElement(
               'div',
-              { className: 'user off', key: user.id, onClick: _this.openChat.bind(null, user) },
+              { className: 'user off', key: user.id },
               _react2.default.createElement('div', { className: 'user-img', style: {
                   backgroundImage: 'url("' + user.profile_img + '")',
                   backgroundPosition: 'center center',
@@ -1314,7 +1324,8 @@ var ChatWindow = function (_Component) {
       to: null,
       chat: null,
       message: '',
-      messages: []
+      messages: [],
+      new: false
     };
 
     _this.msgEndRef = _react2.default.createRef();
@@ -1324,8 +1335,6 @@ var ChatWindow = function (_Component) {
   (0, _createClass3.default)(ChatWindow, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this3 = this;
-
       var self = this;
       this.setState({
         from: this.props.from,
@@ -1333,7 +1342,7 @@ var ChatWindow = function (_Component) {
         chat: this.props.chat
       }, function () {
         // console.log(this.state)
-        _this3.getMessages();
+        self.getMessages();
       });
     }
 

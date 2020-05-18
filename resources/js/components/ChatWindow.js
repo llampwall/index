@@ -10,7 +10,8 @@ export default class ChatWindow extends Component {
       to: null,
       chat: null, 
       message: '', 
-      messages: []
+      messages: [],
+      new: false
     }
 
     this.msgEndRef = React.createRef()
@@ -24,9 +25,10 @@ export default class ChatWindow extends Component {
         chat: this.props.chat
     }, () => {
         // console.log(this.state)
-        this.getMessages()
+        self.getMessages()
     })
   }
+
 
   switchUser = (user) => {
     this.setState({
