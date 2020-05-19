@@ -2161,7 +2161,7 @@ var Post = function (_Component) {
     _this.touchSubmitComment = function (event) {
       event.stopPropagation();
       event.preventDefault();
-      _this.submitComment();
+      // this.submitComment()
     };
 
     _this.sendUp = function (num) {
@@ -2544,7 +2544,7 @@ var Post = function (_Component) {
             _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
             _react2.default.createElement(
               'div',
-              { className: 'send-btn', onTouchStart: this.touchSubmitComment, onMouseUp: this.submitComment },
+              { className: 'send-btn', onTouchStart: this.touchSubmitComment(event, { passive: false }), onMouseUp: this.submitComment },
               _react2.default.createElement('i', { className: 'ayn-right' })
             )
           )

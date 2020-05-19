@@ -113,7 +113,7 @@ export default class Post extends Component {
   touchSubmitComment = (event) => {
     event.stopPropagation()
     event.preventDefault()
-    this.submitComment()
+    // this.submitComment()
   }
 
   // this lets us get the comments from the child
@@ -324,7 +324,7 @@ export default class Post extends Component {
 
                     <Comments ref={this.commentArea} post={this.props.post} update={this.state.update} sendUp={this.sendUp} curuser={this.props.curuser}/>
 
-                    <div className="send-btn" onTouchStart={this.touchSubmitComment} onMouseUp={this.submitComment}>
+                    <div className="send-btn" onTouchStart={this.touchSubmitComment(event, {passive: false})} onMouseUp={this.submitComment}>
                         <i className="ayn-right" />
                     </div>
                     
