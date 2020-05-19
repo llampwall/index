@@ -33,27 +33,27 @@ export default class Messenger extends Component {
       })
     }
 
-    var pageVisibility = document.visibilityState
-    document.addEventListener('visibilitychange', this.wakeUp)
+    // var pageVisibility = document.visibilityState
+    // document.addEventListener('visibilitychange', this.wakeUp)
   }
 
 
-  wakeUp = () => {
-    const self = this
+  // wakeUp = () => {
+  //   const self = this
   
-    if (document.visibilityState == 'hidden') {
-      document.title = 'hidden'
-      self.props.ws.close()
-      self.setState({
-        ...self.state,
-        connected: false
-      })
-    }
+  //   if (document.visibilityState == 'hidden') {
+  //     document.title = 'hidden'
+  //     self.props.ws.close()
+  //     self.setState({
+  //       ...self.state,
+  //       connected: false
+  //     })
+  //   }
 
-    if (document.visibilityState == 'visible') {
-      self.startChat()
-    }
-  }
+  //   if (document.visibilityState == 'visible') {
+  //     self.startChat()
+  //   }
+  // }
 
   componentWillUnmount() {
     this.props.ws.close()

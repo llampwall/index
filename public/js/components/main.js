@@ -474,22 +474,6 @@ var Messenger = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Messenger.__proto__ || Object.getPrototypeOf(Messenger)).call(this));
 
-    _this.wakeUp = function () {
-      var self = _this;
-
-      if (document.visibilityState == 'hidden') {
-        document.title = 'hidden';
-        self.props.ws.close();
-        self.setState((0, _extends3.default)({}, self.state, {
-          connected: false
-        }));
-      }
-
-      if (document.visibilityState == 'visible') {
-        self.startChat();
-      }
-    };
-
     _this.disconnect = function () {
       _this.props.ws.close();
     };
@@ -805,9 +789,27 @@ var Messenger = function (_Component) {
         }));
       }
 
-      var pageVisibility = document.visibilityState;
-      document.addEventListener('visibilitychange', this.wakeUp);
+      // var pageVisibility = document.visibilityState
+      // document.addEventListener('visibilitychange', this.wakeUp)
     }
+
+    // wakeUp = () => {
+    //   const self = this
+
+    //   if (document.visibilityState == 'hidden') {
+    //     document.title = 'hidden'
+    //     self.props.ws.close()
+    //     self.setState({
+    //       ...self.state,
+    //       connected: false
+    //     })
+    //   }
+
+    //   if (document.visibilityState == 'visible') {
+    //     self.startChat()
+    //   }
+    // }
+
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
