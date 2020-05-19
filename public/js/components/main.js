@@ -1800,7 +1800,11 @@ var Compose = function (_Component) {
                   image: ""
                 });
                 self.props.update();
-
+                //update everyone else's feed
+                var chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat');
+                chat.emit('message', {
+                  update: 'all'
+                });
                 return 'item saved';
               });
 
@@ -1868,6 +1872,11 @@ var Compose = function (_Component) {
                                         document.getElementById("content").disabled = false; // enable input again
                                         self.props.update();
 
+                                        //update everyone else's feed
+                                        var chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat');
+                                        chat.emit('message', {
+                                          update: 'all'
+                                        });
                                         return 'item saved';
                                       });
 
@@ -2824,6 +2833,11 @@ var Layout = function (_Component) {
     key: 'update',
     value: function update() {
       this.homeRef.current.update();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.ws.close();
     }
   }, {
     key: 'render',

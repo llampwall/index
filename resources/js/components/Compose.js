@@ -54,7 +54,11 @@ export default class Compose extends Component {
           image: ""
         })
         self.props.update()
-
+        //update everyone else's feed
+        const chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat')
+        chat.emit('message', {
+          update: 'all'
+        })
         return 'item saved'
       })
 
@@ -102,6 +106,11 @@ export default class Compose extends Component {
                   document.getElementById("content").disabled = false   // enable input again
                   self.props.update()
 
+                  //update everyone else's feed
+                  const chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat')
+                  chat.emit('message', {
+                    update: 'all'
+                  })
                   return 'item saved'
                 })
               }).catch(function(err) {

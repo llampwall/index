@@ -66,6 +66,10 @@ class Layout extends Component {
     this.homeRef.current.update()
   }
 
+  componentWillUnmount() {
+    this.ws.close()
+  }
+
 
   render () {
     return (
