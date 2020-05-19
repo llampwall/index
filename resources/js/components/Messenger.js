@@ -141,7 +141,7 @@ export default class Messenger extends Component {
       open: (window.innerWidth > 600)  //close on small devices
     })
 
-    if (this.chatRef.current != null && this.chatRef.current.state.to == undefined) {
+    if (this.chatRef.current != null) {
       this.chatRef.current.switchUser(user)
     }
 

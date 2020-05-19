@@ -621,7 +621,7 @@ var Messenger = function (_Component) {
                   open: window.innerWidth > 600 //close on small devices
                 }));
 
-                if (_this.chatRef.current != null && _this.chatRef.current.state.to == undefined) {
+                if (_this.chatRef.current != null) {
                   _this.chatRef.current.switchUser(user);
                 }
 
@@ -2411,7 +2411,7 @@ var Post = function (_Component) {
       // update comments whenever someone comments
       this.chat.on('comments', function () {
         console.log('new comment');
-        self.commentArea.current.getComments();
+        self.commentArea.current.getComments(); // look into fixing this
       });
       this.chat.on('likes', function () {
         console.log('new likes');
