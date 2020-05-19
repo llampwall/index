@@ -113,7 +113,7 @@ export default class Messenger extends Component {
         console.log('message to us!: ' + message.body)
         this.openChat(message.from)
         console.log(message.body)
-        this.chatRef.current.getMessages()
+        // this.chatRef.current.getMessages()
      }
   }
 

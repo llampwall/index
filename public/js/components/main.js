@@ -546,7 +546,7 @@ var Messenger = function (_Component) {
                   console.log('message to us!: ' + message.body);
                   _this.openChat(message.from);
                   console.log(message.body);
-                  _this.chatRef.current.getMessages();
+                  // this.chatRef.current.getMessages()
                 }
 
               case 1:
