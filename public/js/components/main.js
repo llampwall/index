@@ -1780,6 +1780,8 @@ var Compose = function (_Component) {
               break;
 
             case 23:
+              // there is an image or video in the post
+
               // disable input while image uploads - maybe add loading symbol
               document.getElementById("content").disabled = true;
               document.getElementById("content").innerText = 'Loading...';
@@ -1792,6 +1794,12 @@ var Compose = function (_Component) {
               // console.log(filename)
 
               console.log(type);
+
+              // if (filename.split('.').pop() == 'mov') {
+              //   console.log('mov file -')
+              //   return
+              // }
+
               _context3.next = 32;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
                 var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
@@ -1961,7 +1969,7 @@ var Compose = function (_Component) {
             'div',
             { className: 'photo-btn', onClick: this.imageSelect },
             _react2.default.createElement('i', { className: 'ayn-camera' }),
-            _react2.default.createElement('input', { type: 'file', id: 'hidden-input', name: 'post_img', onChange: this.getImage })
+            _react2.default.createElement('input', { type: 'file', id: 'hidden-input', name: 'post_img', accept: 'image/png, image/jpeg, image/jpg, image/gif, video/mp4, video/webm, video/ogg', onChange: this.getImage })
           ),
           _react2.default.createElement('div', { className: 'preview ' + (this.state.image == "" ? "" : "active"), onClick: this.removeImage, style: {
               backgroundImage: 'url("' + (this.state.image == "" ? "" : URL.createObjectURL(this.state.image)) + '")',
@@ -2064,6 +2072,13 @@ var Post = function (_Component) {
           _react2.default.createElement('source', { src: _this.props.post.image_url, type: 'video/mp4' }),
           'Your browser does not support html5 videos.'
         );
+      }
+    };
+
+    _this.getFileType = function (filename) {
+      var ext = filename.split('.').pop();
+      if (ext == 'mp4') {
+        return 'video/mp4';
       }
     };
 

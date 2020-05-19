@@ -56,6 +56,13 @@ export default class Post extends Component {
     }
   }
 
+  getFileType = (filename) => {
+    let ext = filename.split('.').pop();
+    if (ext == 'mp4') {
+      return 'video/mp4'
+    }
+  }
+
   handleChange = (event) => {
     const name = event.target.name
     const value = (event.target.type == 'checkbox') ? event.target.checked : event.target.value

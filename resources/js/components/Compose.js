@@ -62,7 +62,8 @@ export default class Compose extends Component {
         return 'item saved'
       })
 
-    } else {
+    } else {      // there is an image or video in the post
+
       // disable input while image uploads - maybe add loading symbol
       document.getElementById("content").disabled = true
       document.getElementById("content").innerText = 'Loading...'
@@ -74,6 +75,12 @@ export default class Compose extends Component {
           const type = encodeURIComponent(file.type)
           // console.log(filename)
           console.log(type)
+
+          // if (filename.split('.').pop() == 'mov') {
+          //   console.log('mov file -')
+          //   return
+          // }
+
           const response = await axios.get(`/posts/url/${filename}/${type}`)
           .then (async function(response) {   
             console.log('signed url: ' + response.data)
@@ -183,7 +190,7 @@ export default class Compose extends Component {
             backgroundSize: 'cover'}} />
           <div className="photo-btn" onClick={this.imageSelect}>
             <i className="ayn-camera" />
-            <input type='file' id='hidden-input' name='post_img' onChange={this.getImage}/>
+            <input type='file' id='hidden-input' name='post_img' accept="image/png, image/jpeg, image/jpg, image/gif, video/mp4, video/webm, video/ogg" onChange={this.getImage}/>
           </div>
           <div className={`preview ${(this.state.image == "") ? "" : "active"}`} onClick={this.removeImage} style= {{
               backgroundImage: `url("${(this.state.image == "") ? "" : URL.createObjectURL(this.state.image)}")`, 
