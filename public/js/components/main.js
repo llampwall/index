@@ -2158,6 +2158,12 @@ var Post = function (_Component) {
       }, _callee, _this2, [[2, 8]]);
     }));
 
+    _this.touchSubmitComment = function (event) {
+      event.stopPropagation();
+      event.preventDefault();
+      _this.submitComment();
+    };
+
     _this.sendUp = function (num) {
       _this.setState((0, _extends3.default)({}, _this.state, {
         numComments: num
@@ -2423,6 +2429,9 @@ var Post = function (_Component) {
     // because it wont work on chrome if we call it a quicktime file
 
 
+    // fix to avoid double submits on mobile
+
+
     // this lets us get the comments from the child
 
 
@@ -2535,7 +2544,7 @@ var Post = function (_Component) {
             _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
             _react2.default.createElement(
               'div',
-              { className: 'send-btn', onClick: this.submitComment, onTouchStart: this.submitComment },
+              { className: 'send-btn', onClick: this.submitComment, onTouchStart: this.touchSubmitComment },
               _react2.default.createElement('i', { className: 'ayn-right' })
             )
           )

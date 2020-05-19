@@ -109,6 +109,13 @@ export default class Post extends Component {
       }
   }
 
+  // fix to avoid double submits on mobile
+  touchSubmitComment = (event) => {
+    event.stopPropagation()
+    event.preventDefault()
+    this.submitComment()
+  }
+
   // this lets us get the comments from the child
   sendUp = (num) => {
     this.setState({
@@ -317,7 +324,7 @@ export default class Post extends Component {
 
                     <Comments ref={this.commentArea} post={this.props.post} update={this.state.update} sendUp={this.sendUp} curuser={this.props.curuser}/>
 
-                    <div className="send-btn" onClick={this.submitComment} onTouchStart={this.submitComment}>
+                    <div className="send-btn" onClick={this.submitComment} onTouchStart={this.touchSubmitComment}>
                         <i className="ayn-right" />
                     </div>
                     
