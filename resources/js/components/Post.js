@@ -49,15 +49,20 @@ export default class Post extends Component {
     } else if (this.props.post.type == 'video') {
         return (
             <video className="post-media" autoPlay muted controls loop>
-              <source src={this.props.post.image_url} type="video/mp4" />
+              <source src={this.props.post.image_url} type={this.getFileType(this.props.post.image_url)} />
               Your browser does not support html5 videos.
             </video>
         )
+    } else {
+      return null
     }
   }
 
   getFileType = (filename) => {
     let ext = filename.split('.').pop();
+    if (ext == 'mov' || ext == 'MOV') {
+      return 'video/quicktime'
+    }
     if (ext == 'mp4') {
       return 'video/mp4'
     }

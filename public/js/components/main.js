@@ -1922,12 +1922,12 @@ var Compose = function (_Component) {
       if (event.target.files[0]) {
 
         // prevent mov files from new iphones
-        var filename = event.target.files[0].name;
-        if (filename.split('.').pop() == 'mov' || filename.split('.').pop() == 'MOV') {
-          console.log('mov file');
-          window.confirm('Sorry, ".mov" files are not supported');
-          return;
-        }
+        // let filename = event.target.files[0].name
+        // if (filename.split('.').pop() == 'mov' || filename.split('.').pop() == 'MOV') {
+        //   console.log('mov file')
+        //   window.confirm('Sorry, ".mov" files are not supported');
+        //   return
+        // }
 
         _this.setState((0, _extends3.default)({}, _this.state, {
           image: event.target.files[0]
@@ -2076,14 +2076,19 @@ var Post = function (_Component) {
         return _react2.default.createElement(
           'video',
           { className: 'post-media', autoPlay: true, muted: true, controls: true, loop: true },
-          _react2.default.createElement('source', { src: _this.props.post.image_url, type: 'video/mp4' }),
+          _react2.default.createElement('source', { src: _this.props.post.image_url, type: _this.getFileType(_this.props.post.image_url) }),
           'Your browser does not support html5 videos.'
         );
+      } else {
+        return null;
       }
     };
 
     _this.getFileType = function (filename) {
       var ext = filename.split('.').pop();
+      if (ext == 'mov' || ext == 'MOV') {
+        return 'video/quicktime';
+      }
       if (ext == 'mp4') {
         return 'video/mp4';
       }

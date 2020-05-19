@@ -52,9 +52,9 @@ class PostController {
         // console.log(request.input('user_id'))
         // console.log(url)
         let pType = 'text'
-        if (file.includes('mp4')) {
+        if (file.includes('mp4') || file.includes('mov') || file.includes('MOV') || file.includes('m4v') || file.includes('webm') || file.includes('ogg')) {
             pType = 'video'
-        } else if (file.includes('jpg') || file.includes('png') || file.includes('webp')) {
+        } else if (file.includes('jpg') || file.includes('jpeg') || file.includes('gif') || file.includes('png') || file.includes('webp')) {
             pType = 'image'
         }
         

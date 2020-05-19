@@ -156,12 +156,12 @@ export default class Compose extends Component {
     if (event.target.files[0]) {
 
       // prevent mov files from new iphones
-      let filename = event.target.files[0].name
-      if (filename.split('.').pop() == 'mov' || filename.split('.').pop() == 'MOV') {
-        console.log('mov file')
-        window.confirm('Sorry, ".mov" files are not supported');
-        return
-      }
+      // let filename = event.target.files[0].name
+      // if (filename.split('.').pop() == 'mov' || filename.split('.').pop() == 'MOV') {
+      //   console.log('mov file')
+      //   window.confirm('Sorry, ".mov" files are not supported');
+      //   return
+      // }
 
       this.setState({
         ...this.state,
