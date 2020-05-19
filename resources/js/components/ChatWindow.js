@@ -105,6 +105,9 @@ export default class ChatWindow extends Component {
     if (this.state.message.length == 0) {
       return
     }
+
+    
+
     console.log('sending message to ' + this.state.to.fname)
     this.state.chat.emit('message', {
       to: this.state.to,

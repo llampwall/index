@@ -22,8 +22,9 @@ class Layout extends Component {
       initialData: {}
     }
 
-    this.ws = Ws()
     this.homeRef = React.createRef()
+
+    this.ws = Ws()
     this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
 
     const self = this

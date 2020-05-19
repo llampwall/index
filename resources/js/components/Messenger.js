@@ -32,6 +32,27 @@ export default class Messenger extends Component {
         open: true,
       })
     }
+
+    var pageVisibility = document.visibilityState
+    document.addEventListener('visibilitychange', this.wakeUp)
+  }
+
+
+  wakeUp = () => {
+    const self = this
+  
+    if (document.visibilityState == 'hidden') {
+      document.title = 'hidden'
+      self.props.ws.close()
+      self.setState({
+        ...self.state,
+        connected: false
+      })
+    }
+
+    if (document.visibilityState == 'visible') {
+      self.startChat()
+    }
   }
 
   componentWillUnmount() {
@@ -158,6 +179,7 @@ export default class Messenger extends Component {
         <ChatWindow ref={this.chatRef} 
           from={this.props.initialData.userData} 
           to={this.state.chatUser} 
+          ws={this.props.ws}
           chat={this.chat} 
           disconnect={this.disconnect}
         ></ChatWindow>

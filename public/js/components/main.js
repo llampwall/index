@@ -474,6 +474,22 @@ var Messenger = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Messenger.__proto__ || Object.getPrototypeOf(Messenger)).call(this));
 
+    _this.wakeUp = function () {
+      var self = _this;
+
+      if (document.visibilityState == 'hidden') {
+        document.title = 'hidden';
+        self.props.ws.close();
+        self.setState((0, _extends3.default)({}, self.state, {
+          connected: false
+        }));
+      }
+
+      if (document.visibilityState == 'visible') {
+        self.startChat();
+      }
+    };
+
     _this.disconnect = function () {
       _this.props.ws.close();
     };
@@ -647,6 +663,7 @@ var Messenger = function (_Component) {
         return _react2.default.createElement(_ChatWindow2.default, { ref: _this.chatRef,
           from: _this.props.initialData.userData,
           to: _this.state.chatUser,
+          ws: _this.props.ws,
           chat: _this.chat,
           disconnect: _this.disconnect
         });
@@ -787,6 +804,9 @@ var Messenger = function (_Component) {
           open: true
         }));
       }
+
+      var pageVisibility = document.visibilityState;
+      document.addEventListener('visibilitychange', this.wakeUp);
     }
   }, {
     key: 'componentWillUnmount',
@@ -1311,6 +1331,7 @@ var ChatWindow = function (_Component) {
       if (_this.state.message.length == 0) {
         return;
       }
+
       console.log('sending message to ' + _this.state.to.fname);
       _this.state.chat.emit('message', {
         to: _this.state.to,
@@ -2735,8 +2756,9 @@ var Layout = function (_Component) {
       initialData: {}
     };
 
-    _this.ws = (0, _websocketClient2.default)();
     _this.homeRef = _react2.default.createRef();
+
+    _this.ws = (0, _websocketClient2.default)();
     _this.chat = _this.ws.getSubscription('chat') || _this.ws.subscribe('chat');
 
     var self = _this;
