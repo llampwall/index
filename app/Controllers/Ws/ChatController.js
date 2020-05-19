@@ -64,13 +64,6 @@ class ChatController {
 
     // this.heartbeat()
 
-    // update everyone's feed
-    if (message.update != null) {
-      console.log('update')
-      this.updateFeeds()
-      return
-    }
-
     // update comments for a post
     if (message.comments != null) {
       console.log('comments')
@@ -142,10 +135,6 @@ class ChatController {
     } catch (error) {
       console.log(error)
     }
-  }
-
-  async updateFeeds() {
-    // this.socket.broadcast('update', 'refresh')
   }
 
   async updateChat() {

@@ -1800,11 +1800,7 @@ var Compose = function (_Component) {
                   image: ""
                 });
                 self.props.update();
-                //update everyone else's feed
-                var chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat');
-                chat.emit('message', {
-                  update: 'all'
-                });
+
                 return 'item saved';
               });
 
@@ -1872,11 +1868,6 @@ var Compose = function (_Component) {
                                         document.getElementById("content").disabled = false; // enable input again
                                         self.props.update();
 
-                                        //update everyone else's feed
-                                        var chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat');
-                                        chat.emit('message', {
-                                          update: 'all'
-                                        });
                                         return 'item saved';
                                       });
 
