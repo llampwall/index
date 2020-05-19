@@ -113,7 +113,7 @@ export default class Post extends Component {
   touchSubmitComment = (event) => {
     event.stopPropagation()
     event.preventDefault()
-    // this.submitComment()
+    this.submitComment()
   }
 
   // this lets us get the comments from the child

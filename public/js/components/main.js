@@ -2161,7 +2161,7 @@ var Post = function (_Component) {
     _this.touchSubmitComment = function (event) {
       event.stopPropagation();
       event.preventDefault();
-      // this.submitComment()
+      _this.submitComment();
     };
 
     _this.sendUp = function (num) {
