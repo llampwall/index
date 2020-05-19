@@ -324,7 +324,7 @@ export default class Post extends Component {
 
                     <Comments ref={this.commentArea} post={this.props.post} update={this.state.update} sendUp={this.sendUp} curuser={this.props.curuser}/>
 
-                    <div className="send-btn" onTouchStart={this.touchSubmitComment.bind(null, event, {passive: false})} onMouseUp={this.submitComment}>
+                    <div className="send-btn" onTouchStart={this.touchSubmitComment.bind(null, {passive: false})} onMouseUp={this.submitComment}>
                         <i className="ayn-right" />
                     </div>
                     
