@@ -49,7 +49,7 @@ export default class Post extends Component {
     } else if (this.props.post.type == 'video') {
         return (
             <video className="post-media" autoPlay muted controls loop>
-              <source src={this.props.post.image_url} type={this.getFileType(this.props.post.image_url)} />
+              <source src={this.props.post.image_url} type='video/mp4'/>
               Your browser does not support html5 videos.
             </video>
         )
@@ -58,6 +58,8 @@ export default class Post extends Component {
     }
   }
 
+  // dont really need this because we are just lying and saying its mp4 anyway
+  // because it wont work on chrome if we call it a quicktime file
   getFileType = (filename) => {
     let ext = filename.split('.').pop();
     if (ext == 'mov' || ext == 'MOV') {

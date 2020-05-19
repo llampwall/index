@@ -155,14 +155,6 @@ export default class Compose extends Component {
 
     if (event.target.files[0]) {
 
-      // prevent mov files from new iphones
-      // let filename = event.target.files[0].name
-      // if (filename.split('.').pop() == 'mov' || filename.split('.').pop() == 'MOV') {
-      //   console.log('mov file')
-      //   window.confirm('Sorry, ".mov" files are not supported');
-      //   return
-      // }
-
       this.setState({
         ...this.state,
         image: event.target.files[0]
@@ -198,7 +190,7 @@ export default class Compose extends Component {
             backgroundSize: 'cover'}} />
           <div className="photo-btn" onClick={this.imageSelect}>
             <i className="ayn-camera" />
-            <input type='file' id='hidden-input' name='post_img' accept="image/png, image/jpeg, image/jpg, image/gif, video/mp4, video/webm, video/ogg" onChange={this.getImage}/>
+            <input type='file' id='hidden-input' name='post_img' accept="image/png, image/jpeg, image/jpg, image/gif, video/*" onChange={this.getImage}/>
           </div>
           <div className={`preview ${(this.state.image == "") ? "" : "active"}`} onClick={this.removeImage} style= {{
               backgroundImage: `url("${(this.state.image == "") ? "" : URL.createObjectURL(this.state.image)}")`, 

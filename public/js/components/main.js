@@ -1921,14 +1921,6 @@ var Compose = function (_Component) {
 
       if (event.target.files[0]) {
 
-        // prevent mov files from new iphones
-        // let filename = event.target.files[0].name
-        // if (filename.split('.').pop() == 'mov' || filename.split('.').pop() == 'MOV') {
-        //   console.log('mov file')
-        //   window.confirm('Sorry, ".mov" files are not supported');
-        //   return
-        // }
-
         _this.setState((0, _extends3.default)({}, _this.state, {
           image: event.target.files[0]
         }), function () {
@@ -1976,7 +1968,7 @@ var Compose = function (_Component) {
             'div',
             { className: 'photo-btn', onClick: this.imageSelect },
             _react2.default.createElement('i', { className: 'ayn-camera' }),
-            _react2.default.createElement('input', { type: 'file', id: 'hidden-input', name: 'post_img', accept: 'image/png, image/jpeg, image/jpg, image/gif, video/mp4, video/webm, video/ogg', onChange: this.getImage })
+            _react2.default.createElement('input', { type: 'file', id: 'hidden-input', name: 'post_img', accept: 'image/png, image/jpeg, image/jpg, image/gif, video/*', onChange: this.getImage })
           ),
           _react2.default.createElement('div', { className: 'preview ' + (this.state.image == "" ? "" : "active"), onClick: this.removeImage, style: {
               backgroundImage: 'url("' + (this.state.image == "" ? "" : URL.createObjectURL(this.state.image)) + '")',
@@ -2076,7 +2068,7 @@ var Post = function (_Component) {
         return _react2.default.createElement(
           'video',
           { className: 'post-media', autoPlay: true, muted: true, controls: true, loop: true },
-          _react2.default.createElement('source', { src: _this.props.post.image_url, type: _this.getFileType(_this.props.post.image_url) }),
+          _react2.default.createElement('source', { src: _this.props.post.image_url, type: 'video/mp4' }),
           'Your browser does not support html5 videos.'
         );
       } else {
@@ -2415,6 +2407,10 @@ var Post = function (_Component) {
         self.getLikes();
       });
     }
+
+    // dont really need this because we are just lying and saying its mp4 anyway
+    // because it wont work on chrome if we call it a quicktime file
+
 
     // this lets us get the comments from the child
 
