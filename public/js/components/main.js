@@ -1795,11 +1795,6 @@ var Compose = function (_Component) {
 
               console.log(type);
 
-              // if (filename.split('.').pop() == 'mov') {
-              //   console.log('mov file -')
-              //   return
-              // }
-
               _context3.next = 32;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
                 var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
@@ -1923,8 +1918,17 @@ var Compose = function (_Component) {
     };
 
     _this.getImage = function (event) {
+
+      var filename = event.target.files[0];
+
+      if (filename.split('.').pop() == 'mov') {
+        console.log('mov file');
+        window.confirm('Sorry, ".mov" files are not supported');
+        return;
+      }
+
       _this.setState((0, _extends3.default)({}, _this.state, {
-        image: event.target.files[0]
+        image: filename
       }), function () {
         // console.log(this.state)
       });

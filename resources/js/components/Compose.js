@@ -76,11 +76,6 @@ export default class Compose extends Component {
           // console.log(filename)
           console.log(type)
 
-          // if (filename.split('.').pop() == 'mov') {
-          //   console.log('mov file -')
-          //   return
-          // }
-
           const response = await axios.get(`/posts/url/${filename}/${type}`)
           .then (async function(response) {   
             console.log('signed url: ' + response.data)
@@ -157,9 +152,18 @@ export default class Compose extends Component {
   }
 
   getImage = (event) => {
+
+    let filename = event.target.files[0]
+
+    if (filename.split('.').pop() == 'mov') {
+      console.log('mov file')
+      window.confirm('Sorry, ".mov" files are not supported');
+      return
+    }
+
     this.setState({
       ...this.state,
-      image: event.target.files[0]
+      image: filename
     }, () => {
       // console.log(this.state)
     })
