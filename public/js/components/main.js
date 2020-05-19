@@ -833,7 +833,7 @@ var Messenger = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'title' },
-            '[:   connect   :]'
+            '[ connect ]'
           ),
           _react2.default.createElement(
             'div',

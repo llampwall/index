@@ -380,21 +380,48 @@ input[type="password"] {
   }
 
   #messenger {
-    .messenger-header>.title {
-      // font-size: 1.5rem;
+    .messenger-header {
+      height: 3rem;
+
+      .title {
+        font-size: 1rem;
+      }
     }
 
     .users {
-      padding-left: 1.2rem;
+      padding-left: 2rem;
 
-      .user>.username {
-        // font-size: 1.5rem;
+      .user {
+        padding-left: 0;
+        width: 13rem;
+
+        .username {
+          font-size: .8rem;
+        }
+
+        .message-icon {
+          display: none;
+        }
+      }
+
+      .divider {
+        justify-content: left;
+        padding-left: 2rem;
+        font-size: .8rem;
       }
     }
 
     &.closed {
       box-shadow: none;
-      right: -17.4rem;
+      // right: -17.4rem;
+      right: -14rem;
+    }
+
+    .search {
+      margin-left: 1rem;
+      input[type='text'] {
+        font-size: 1rem;
+      }
     }
 
     .open-btn {

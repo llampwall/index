@@ -248,7 +248,7 @@ export default class Messenger extends Component {
             <span> </span>
           </div>
           <div className="title">
-            [:   connect   :]
+            [ connect ]
           </div>
           <div className="options-icon">
             <span> </span>
