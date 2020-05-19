@@ -145,7 +145,7 @@ class ChatController {
   }
 
   async updateFeeds() {
-    this.socket.broadcast('update', 'refresh')
+    // this.socket.broadcast('update', 'refresh')
   }
 
   async updateChat() {

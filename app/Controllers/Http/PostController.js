@@ -74,6 +74,17 @@ class PostController {
         }
         console.log('saved post');
 
+        try {
+            const topic = Ws.getChannel('chat').topic('chat')
+            if (topic){
+                topic.broadcast('update', 'refresh')
+            } else {
+                console.log('no chat')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
         return response.redirect('/')
     }
 
