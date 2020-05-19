@@ -302,7 +302,6 @@ export default class Post extends Component {
 
                 {this.displayMedia()}
                 <div className="post-info">
-                    {/* <h3 className="title">How to Become a Web Developer in 2020</h3> */}
                     <p>{this.props.post.content}</p>
                 </div>
                 <div className="post-stats">
