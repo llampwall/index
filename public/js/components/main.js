@@ -2067,7 +2067,7 @@ var Post = function (_Component) {
       } else if (_this.props.post.type == 'video') {
         return _react2.default.createElement(
           'video',
-          { className: 'post-media', autoPlay: true, muted: true, controls: true, loop: true },
+          { className: 'post-media', controls: true },
           _react2.default.createElement('source', { src: _this.props.post.image_url, type: 'video/mp4' }),
           'Your browser does not support html5 videos.'
         );

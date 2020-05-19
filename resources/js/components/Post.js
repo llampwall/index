@@ -48,7 +48,7 @@ export default class Post extends Component {
         )
     } else if (this.props.post.type == 'video') {
         return (
-            <video className="post-media" autoPlay muted controls loop>
+            <video className="post-media" controls>
               <source src={this.props.post.image_url} type='video/mp4'/>
               Your browser does not support html5 videos.
             </video>
