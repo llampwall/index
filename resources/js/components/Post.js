@@ -28,7 +28,9 @@ export default class Post extends Component {
     // update comments whenever someone comments
     this.chat.on('comments', function() {
       console.log('new comment')
-      self.commentArea.current.getComments()        // look into fixing this
+      if (self.commentArea.current) {
+        self.commentArea.current.getComments()        // look into fixing this
+      }
     })
     this.chat.on('likes', function() {
       console.log('new likes')
