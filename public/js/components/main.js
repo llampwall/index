@@ -2441,7 +2441,7 @@ var Post = function (_Component) {
       this.chat.on('comments', function () {
         console.log('new comment');
         if (self.commentArea.current) {
-          self.commentArea.current.getComments(); // look into fixing this
+          self.commentArea.current.getComments();
         }
       });
       this.chat.on('likes', function () {

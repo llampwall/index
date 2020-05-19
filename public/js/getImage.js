@@ -7,8 +7,10 @@ input.addEventListener('change', uploadIt);
 
 var img_name = document.getElementById("img_name")
 
+var submit_btn = document.querySelector('button')
 
-function uploadIt() {
+
+async function uploadIt() {
     var file = input.files[0]
     var filename = file.name
     var type = encodeURIComponent(file.type)
@@ -16,6 +18,8 @@ function uploadIt() {
     // console.log(getStr)
 
     // get the signed url
+    submit_btn.innerText = 'uploading image'
+    submit_btn.disabled = true
     axios.get(getStr)
     .then (function(response) {   
         signedUrl = response.data
@@ -32,6 +36,8 @@ function uploadIt() {
             console.log(response)
             img_name.value = filename
             console.log(document.getElementById("img_name").value)
+            submit_btn.innerText = '[register]'
+            submit_btn.disabled = false
           })
     })
 
