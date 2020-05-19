@@ -111,9 +111,10 @@ export default class Messenger extends Component {
   handleMsg = async (message) => {
     if (message.from != undefined) {
         console.log('message to us!: ' + message.body)
-        this.openChat(message.from)
-        console.log(message.body)
-        // this.chatRef.current.getMessages()
+
+        await this.openChat(message.from)
+
+        this.chatRef.current.getMessages()
      }
   }
 
@@ -140,6 +141,9 @@ export default class Messenger extends Component {
       open: (window.innerWidth > 600)  //close on small devices
     })
 
+    if (this.chatRef.current != null && this.chatRef.current.state.to == undefined) {
+      this.chatRef.current.switchUser(user)
+    }
 
     if (this.state.chatUser != null && user != this.state.chatUser) {
       this.chatRef.current.switchUser(user)

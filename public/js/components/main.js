@@ -542,14 +542,21 @@ var Messenger = function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (message.from != undefined) {
-                  console.log('message to us!: ' + message.body);
-                  _this.openChat(message.from);
-                  console.log(message.body);
-                  // this.chatRef.current.getMessages()
+                if (!(message.from != undefined)) {
+                  _context.next = 5;
+                  break;
                 }
 
-              case 1:
+                console.log('message to us!: ' + message.body);
+
+                _context.next = 4;
+                return _this.openChat(message.from);
+
+              case 4:
+
+                _this.chatRef.current.getMessages();
+
+              case 5:
               case 'end':
                 return _context.stop();
             }
@@ -614,11 +621,15 @@ var Messenger = function (_Component) {
                   open: window.innerWidth > 600 //close on small devices
                 }));
 
+                if (_this.chatRef.current != null && _this.chatRef.current.state.to == undefined) {
+                  _this.chatRef.current.switchUser(user);
+                }
+
                 if (_this.state.chatUser != null && user != _this.state.chatUser) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-              case 14:
+              case 15:
               case 'end':
                 return _context2.stop();
             }
