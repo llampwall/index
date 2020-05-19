@@ -153,20 +153,24 @@ export default class Compose extends Component {
 
   getImage = (event) => {
 
-    let filename = event.target.files[0]
+    if (event.target.files[0]) {
 
-    if (filename.split('.').pop() == 'mov') {
-      console.log('mov file')
-      window.confirm('Sorry, ".mov" files are not supported');
-      return
+      // prevent mov files from new iphones
+      let filename = event.target.files[0].name
+      if (filename.split('.').pop() == 'mov' || filename.split('.').pop() == 'MOV') {
+        console.log('mov file')
+        window.confirm('Sorry, ".mov" files are not supported');
+        return
+      }
+
+      this.setState({
+        ...this.state,
+        image: event.target.files[0]
+      }, () => {
+        // console.log(this.state)
+      })
     }
-
-    this.setState({
-      ...this.state,
-      image: filename
-    }, () => {
-      // console.log(this.state)
-    })
+    
   }
 
   removeImage = () => {
