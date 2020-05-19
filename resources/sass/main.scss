@@ -305,7 +305,7 @@ input[type="password"] {
 
       .c-section {
         textarea {
-          // font-size: 2rem;
+          padding: .3rem 2rem .3rem .5rem;
         }
       }
 
@@ -313,6 +313,7 @@ input[type="password"] {
         .send-btn {
           width: 40px;
           height: 40px;
+          margin-right: 0;
           i {
             // font-size: 2rem;
           }
@@ -435,10 +436,27 @@ input[type="password"] {
 
     .chat {
       @include hard-shadow;
-      width: 270px;
+      // padding-right: 1rem;
+      width: 230px;
       height: 300px;
-      left: -100%;
-      bottom: 1rem;
+      left: -95%;
+      bottom: 0;
+
+      .chat-header {
+        .chat-user {
+          font-size: .9rem;
+        }
+
+        .close-btn {
+          font-size: 1.1rem;
+        }
+      }
+
+      .chat-body {
+        p {
+          font-size: .9rem;
+        }
+      }
     }
     
   }
