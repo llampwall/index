@@ -24,6 +24,9 @@ export default class Messenger extends Component {
     this.pingTimeout = setTimeout(() => {
       this.props.ws.close();
     }, 32000);
+
+    this.blinkInt = null
+    this.blinkTo = null
   }
 
   componentDidMount() {
@@ -135,24 +138,27 @@ export default class Messenger extends Component {
     if (message.from != undefined) {
         console.log('message to us!: ' + message.body)
 
-        this.blink(message.from.id, 3000)    // blink this users name for 3 seconds, then add it to unread
-
-        if (this.state.chatUser.id == message.from.id) {
-          
+        if (!this.state.blinkIds.has(message.from.id)) {
+          this.blink(message.from.id, 3000)    // blink this users name for 4 seconds, then add it to unread
         }
-        //await this.openChat(message.from)
 
-        //this.chatRef.current.getMessages()
+        if (this.state.chatUser == null) {
+          await this.openChat(message.from, false)
+        }
+
+        this.chatRef.current.getMessages()
      }
   }
 
   // blink username color change when message received
   blink = (u_id, ms) => {
     const self = this
+
     let oldBlink = new Set(self.state.blinkIds)
     let newBlink = new Set(self.state.blinkIds.add(u_id))
     let blinking = false
-    let blink = setInterval(function() { 
+    
+    this.blinkInt = setInterval(function() { 
       if (blinking == false) {
         console.log('blinking on')
         self.setState({
@@ -167,19 +173,19 @@ export default class Messenger extends Component {
         blinking = false
       }
     }, 500)
-    setTimeout(function() {
-      clearInterval(blink)
+    this.blinkTo = setTimeout(function() {
+      clearInterval(self.blinkInt)
       self.setState({
         ...self.state,
         blinkIds: oldBlink,
-        unread: self.state.unread.add(u_id)      // mark it as unread
+        unread: (self.state.chatUser != null && self.state.chatUser.id != u_id) ? self.state.unread.add(u_id) : self.state.unread     // mark it as unread
       })
     }, ms)
   }
 
 
   // open chat window / switch to a different one
-  openChat = async (user) => {
+  openChat = async (user, clicked) => {
     const self = this
 
     // do nothing if clicking your own name
@@ -200,11 +206,33 @@ export default class Messenger extends Component {
       open: (window.innerWidth > 600)  //close on small devices
     })
 
-    if (this.chatRef.current != null) {
+    // if blinking, stop blinking
+    if (this.state.blinkIds.has(user.id)) {
+      let newBlink = new Set(this.state.blinkIds)
+      newBlink.delete(user.id)
+      this.setState({
+        ...this.state,
+        blinkIds: newBlink
+      })
+      clearInterval(this.blinkInt)
+      clearTimeout(this.blinkTo)
+    }
+
+    // if unread, dont make it unread
+    if (this.state.unread.has(user.id)) {
+      let newUnread = new Set(this.state.unread)
+      newUnread.delete(user.id)
+      this.setState({
+        ...this.state,
+        unread: newUnread
+      })
+    }
+
+    if (this.chatRef.current != null && clicked) {
       this.chatRef.current.switchUser(user)
     }
 
-    if (this.state.chatUser != null && user != this.state.chatUser) {
+    if (this.state.chatUser != null && user != this.state.chatUser && clicked) {
       this.chatRef.current.switchUser(user)
     }
   }
@@ -220,7 +248,7 @@ export default class Messenger extends Component {
           ws={this.props.ws}
           chat={this.chat} 
           disconnect={this.disconnect}
-          blink={this.state.blink}
+          blink={this.state.blinkIds.has(this.state.chatUser.id)}
         ></ChatWindow>
       )
     }
@@ -258,7 +286,7 @@ export default class Messenger extends Component {
         <div>
           {this.state.users_on.map((user) => {
             return (
-              <div className={`user ${self.state.blinkIds.has(user.id) ? 'blink' : ''}`} key={user.id} onClick={this.openChat.bind(null, user)}>
+              <div className={`user ${(self.state.blinkIds.has(user.id) && self.state.chatUser != null && self.state.chatUser.id != user.id) ? 'blink' : ''}`} key={user.id} onClick={this.openChat.bind(null, user, true)}>
                 <div className="user-img" style={{
                   backgroundImage: `url("${user.profile_img}")`, 
                   backgroundPosition: 'center center', 

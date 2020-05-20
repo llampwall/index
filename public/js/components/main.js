@@ -542,18 +542,30 @@ var Messenger = function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (message.from != undefined) {
-                  console.log('message to us!: ' + message.body);
-
-                  _this.blink(message.from.id, 3000); // blink this users name for 3 seconds, then add it to unread
-
-                  if (_this.state.chatUser.id == message.from.id) {}
-                  //await this.openChat(message.from)
-
-                  //this.chatRef.current.getMessages()
+                if (!(message.from != undefined)) {
+                  _context.next = 7;
+                  break;
                 }
 
-              case 1:
+                console.log('message to us!: ' + message.body);
+
+                if (!_this.state.blinkIds.has(message.from.id)) {
+                  _this.blink(message.from.id, 3000); // blink this users name for 4 seconds, then add it to unread
+                }
+
+                if (!(_this.state.chatUser == null)) {
+                  _context.next = 6;
+                  break;
+                }
+
+                _context.next = 6;
+                return _this.openChat(message.from, false);
+
+              case 6:
+
+                _this.chatRef.current.getMessages();
+
+              case 7:
               case 'end':
                 return _context.stop();
             }
@@ -568,10 +580,12 @@ var Messenger = function (_Component) {
 
     _this.blink = function (u_id, ms) {
       var self = _this;
+
       var oldBlink = new Set(self.state.blinkIds);
       var newBlink = new Set(self.state.blinkIds.add(u_id));
       var blinking = false;
-      var blink = setInterval(function () {
+
+      _this.blinkInt = setInterval(function () {
         if (blinking == false) {
           console.log('blinking on');
           self.setState({
@@ -586,18 +600,18 @@ var Messenger = function (_Component) {
           blinking = false;
         }
       }, 500);
-      setTimeout(function () {
-        clearInterval(blink);
+      _this.blinkTo = setTimeout(function () {
+        clearInterval(self.blinkInt);
         self.setState((0, _extends3.default)({}, self.state, {
           blinkIds: oldBlink,
-          unread: self.state.unread.add(u_id) // mark it as unread
+          unread: self.state.chatUser != null && self.state.chatUser.id != u_id ? self.state.unread.add(u_id) : self.state.unread // mark it as unread
         }));
       }, ms);
     };
 
     _this.openChat = function () {
-      var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(user) {
-        var self;
+      var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(user, clicked) {
+        var self, newBlink, newUnread;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -647,15 +661,37 @@ var Messenger = function (_Component) {
                   open: window.innerWidth > 600 //close on small devices
                 }));
 
-                if (_this.chatRef.current != null) {
+                // if blinking, stop blinking
+                if (_this.state.blinkIds.has(user.id)) {
+                  newBlink = new Set(_this.state.blinkIds);
+
+                  newBlink.delete(user.id);
+                  _this.setState((0, _extends3.default)({}, _this.state, {
+                    blinkIds: newBlink
+                  }));
+                  clearInterval(_this.blinkInt);
+                  clearTimeout(_this.blinkTo);
+                }
+
+                // if unread, dont make it unread
+                if (_this.state.unread.has(user.id)) {
+                  newUnread = new Set(_this.state.unread);
+
+                  newUnread.delete(user.id);
+                  _this.setState((0, _extends3.default)({}, _this.state, {
+                    unread: newUnread
+                  }));
+                }
+
+                if (_this.chatRef.current != null && clicked) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-                if (_this.state.chatUser != null && user != _this.state.chatUser) {
+                if (_this.state.chatUser != null && user != _this.state.chatUser && clicked) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-              case 15:
+              case 17:
               case 'end':
                 return _context2.stop();
             }
@@ -663,7 +699,7 @@ var Messenger = function (_Component) {
         }, _callee2, _this2);
       }));
 
-      return function (_x2) {
+      return function (_x2, _x3) {
         return _ref2.apply(this, arguments);
       };
     }();
@@ -676,7 +712,7 @@ var Messenger = function (_Component) {
           ws: _this.props.ws,
           chat: _this.chat,
           disconnect: _this.disconnect,
-          blink: _this.state.blink
+          blink: _this.state.blinkIds.has(_this.state.chatUser.id)
         });
       }
     };
@@ -738,7 +774,7 @@ var Messenger = function (_Component) {
           _this.state.users_on.map(function (user) {
             return _react2.default.createElement(
               'div',
-              { className: 'user ' + (self.state.blinkIds.has(user.id) ? 'blink' : ''), key: user.id, onClick: _this.openChat.bind(null, user) },
+              { className: 'user ' + (self.state.blinkIds.has(user.id) && self.state.chatUser != null && self.state.chatUser.id != user.id ? 'blink' : ''), key: user.id, onClick: _this.openChat.bind(null, user, true) },
               _react2.default.createElement('div', { className: 'user-img', style: {
                   backgroundImage: 'url("' + user.profile_img + '")',
                   backgroundPosition: 'center center',
@@ -806,6 +842,9 @@ var Messenger = function (_Component) {
     _this.pingTimeout = setTimeout(function () {
       _this.props.ws.close();
     }, 32000);
+
+    _this.blinkInt = null;
+    _this.blinkTo = null;
     return _this;
   }
 
