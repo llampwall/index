@@ -87,6 +87,12 @@
         transition: all .3s ease;
         color: $right-menu-names;
         background: $right-menu-bg;
+
+        &.blink {
+          background-color: $accents;
+          color: white;
+        }
+
         &:hover {
           color: $primary-font-color;
           transform: scale(1.05);

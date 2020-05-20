@@ -542,21 +542,18 @@ var Messenger = function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(message.from != undefined)) {
-                  _context.next = 5;
-                  break;
+                if (message.from != undefined) {
+                  console.log('message to us!: ' + message.body);
+
+                  _this.blink(message.from.id, 3000); // blink this users name for 3 seconds, then add it to unread
+
+                  if (_this.state.chatUser.id == message.from.id) {}
+                  //await this.openChat(message.from)
+
+                  //this.chatRef.current.getMessages()
                 }
 
-                console.log('message to us!: ' + message.body);
-
-                _context.next = 4;
-                return _this.openChat(message.from);
-
-              case 4:
-
-                _this.chatRef.current.getMessages();
-
-              case 5:
+              case 1:
               case 'end':
                 return _context.stop();
             }
@@ -569,17 +566,31 @@ var Messenger = function (_Component) {
       };
     }();
 
-    _this.blink = function (ms) {
+    _this.blink = function (u_id, ms) {
       var self = _this;
+      var oldBlink = new Set(self.state.blinkIds);
+      var newBlink = new Set(self.state.blinkIds.add(u_id));
+      var blinking = false;
       var blink = setInterval(function () {
-        self.setState((0, _extends3.default)({}, self.state, {
-          blink: !self.state.blink
-        }));
+        if (blinking == false) {
+          console.log('blinking on');
+          self.setState({
+            blinkIds: newBlink
+          });
+          blinking = true;
+        } else {
+          console.log('blinking off');
+          self.setState({
+            blinkIds: oldBlink
+          });
+          blinking = false;
+        }
       }, 500);
       setTimeout(function () {
         clearInterval(blink);
         self.setState((0, _extends3.default)({}, self.state, {
-          blink: false
+          blinkIds: oldBlink,
+          unread: self.state.unread.add(u_id) // mark it as unread
         }));
       }, ms);
     };
@@ -713,6 +724,7 @@ var Messenger = function (_Component) {
     }));
 
     _this.displayUsers = function () {
+      var self = _this;
       if (_this.state.users_off == undefined) {
         return _react2.default.createElement(
           'div',
@@ -726,7 +738,7 @@ var Messenger = function (_Component) {
           _this.state.users_on.map(function (user) {
             return _react2.default.createElement(
               'div',
-              { className: 'user', key: user.id, onClick: _this.openChat.bind(null, user) },
+              { className: 'user ' + (self.state.blinkIds.has(user.id) ? 'blink' : ''), key: user.id, onClick: _this.openChat.bind(null, user) },
               _react2.default.createElement('div', { className: 'user-img', style: {
                   backgroundImage: 'url("' + user.profile_img + '")',
                   backgroundPosition: 'center center',
@@ -742,7 +754,7 @@ var Messenger = function (_Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'message-icon' },
-                _react2.default.createElement('i', { className: 'ayn-comment-1' })
+                _react2.default.createElement('i', { className: 'ayn-comment' + (self.state.unread.has(user.id) ? '' : '-1') })
               )
             );
           }),
@@ -784,7 +796,8 @@ var Messenger = function (_Component) {
       open: false,
       connected: false,
       chatUser: null,
-      blink: false
+      blinkIds: new Set(),
+      unread: new Set()
     };
 
     _this.chat = null;

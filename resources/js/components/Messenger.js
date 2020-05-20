@@ -14,7 +14,8 @@ export default class Messenger extends Component {
       open: false, 
       connected: false,
       chatUser: null, 
-      blink: false
+      blinkIds: new Set(),
+      unread: new Set()
     }
 
     this.chat = null
@@ -134,26 +135,44 @@ export default class Messenger extends Component {
     if (message.from != undefined) {
         console.log('message to us!: ' + message.body)
 
-        await this.openChat(message.from)
+        this.blink(message.from.id, 3000)    // blink this users name for 3 seconds, then add it to unread
 
-        this.chatRef.current.getMessages()
+        if (this.state.chatUser.id == message.from.id) {
+          
+        }
+        //await this.openChat(message.from)
+
+        //this.chatRef.current.getMessages()
      }
   }
 
   // blink username color change when message received
-  blink = (ms) => {
+  blink = (u_id, ms) => {
     const self = this
-    let blink = setInterval(function() {
-      self.setState({
-        ...self.state,
-        blink: !self.state.blink
-      })
+    let oldBlink = new Set(self.state.blinkIds)
+    let newBlink = new Set(self.state.blinkIds.add(u_id))
+    let blinking = false
+    let blink = setInterval(function() { 
+      if (blinking == false) {
+        console.log('blinking on')
+        self.setState({
+          blinkIds: newBlink
+        })
+        blinking = true
+      } else {
+        console.log('blinking off')
+        self.setState({
+          blinkIds: oldBlink
+        })
+        blinking = false
+      }
     }, 500)
     setTimeout(function() {
       clearInterval(blink)
       self.setState({
         ...self.state,
-        blink: false
+        blinkIds: oldBlink,
+        unread: self.state.unread.add(u_id)      // mark it as unread
       })
     }, ms)
   }
@@ -227,6 +246,7 @@ export default class Messenger extends Component {
 
   // render online users
   displayUsers = () => {
+    const self = this
     if (this.state.users_off == undefined) {
       return (
         <div className='load'>
@@ -238,17 +258,17 @@ export default class Messenger extends Component {
         <div>
           {this.state.users_on.map((user) => {
             return (
-              <div className="user" key={user.id} onClick={this.openChat.bind(null, user)}>
+              <div className={`user ${self.state.blinkIds.has(user.id) ? 'blink' : ''}`} key={user.id} onClick={this.openChat.bind(null, user)}>
                 <div className="user-img" style={{
                   backgroundImage: `url("${user.profile_img}")`, 
                   backgroundPosition: 'center center', 
                   backgroundRepeat: 'no-repeat', 
                   backgroundSize: 'cover'}} />
-                <div className="username">
+                <div className='username'>
                   {user.fname} {user.lname}
                 </div>
                 <div className="message-icon">
-                  <i className="ayn-comment-1" />
+                  <i className={`ayn-comment${self.state.unread.has(user.id) ? '' : '-1'}`} />
                 </div>
               </div>
             )
