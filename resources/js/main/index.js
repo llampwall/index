@@ -25,8 +25,6 @@ class Layout extends Component {
     this.homeRef = React.createRef()
 
     this.ws = Ws()
-
-    this.startChat()
   }
 
   startChat = () => {
@@ -38,15 +36,15 @@ class Layout extends Component {
       console.log('index got an update!')
       self.homeRef.current.update()
     })
-    this.ws.on('close', function() {
-      // self.retry = setInterval(() => {
-      //   console.log('attempting to reconnect every 10 seconds')
-      //   self.ws = null
-      //   self.ws = Ws().connect()
-      //   self.chat = self.ws.subscribe('chat')
-      //   self.chat.on('ready', clearInterval(self.retry))
-      // }, 10000);
-    })
+    // this.ws.on('close', function() {
+    //   self.retry = setInterval(() => {
+    //     console.log('attempting to reconnect every 10 seconds')
+    //     self.ws = null
+    //     self.ws = Ws().connect()
+    //     self.chat = self.ws.subscribe('chat')
+    //     self.chat.on('ready', clearInterval(self.retry))
+    //   }, 10000);
+    // })
   }
 
   componentDidMount() {
@@ -67,6 +65,8 @@ class Layout extends Component {
         console.log("Initialization error: " + error)
       }
     }
+
+    this.startChat()
 
     getUser()
   }

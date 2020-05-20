@@ -70,7 +70,7 @@ class PostController {
                 type: pType
             })
 
-            // this will ensure messages get delivered even if you arent connected to websockets
+            // this will ensure updates happen for others even if you arent connected to websockets
             const topic = Ws.getChannel('chat').topic('chat')
             if (topic){
                 topic.broadcastToAll('update', 'refresh')

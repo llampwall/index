@@ -75,7 +75,7 @@ export default class Messenger extends Component {
   startChat = () => {
     const self = this
     // connect to main chat
-    this.props.ws.connect()
+    // this.props.ws.connect()
     this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
 
     // send login

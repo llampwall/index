@@ -487,7 +487,7 @@ var Messenger = function (_Component) {
     _this.startChat = function () {
       var self = _this;
       // connect to main chat
-      _this.props.ws.connect();
+      // this.props.ws.connect()
       _this.chat = _this.props.ws.getSubscription('chat') || _this.props.ws.subscribe('chat');
 
       // send login
@@ -2763,15 +2763,15 @@ var Layout = function (_Component) {
         console.log('index got an update!');
         self.homeRef.current.update();
       });
-      _this.ws.on('close', function () {
-        // self.retry = setInterval(() => {
-        //   console.log('attempting to reconnect every 10 seconds')
-        //   self.ws = null
-        //   self.ws = Ws().connect()
-        //   self.chat = self.ws.subscribe('chat')
-        //   self.chat.on('ready', clearInterval(self.retry))
-        // }, 10000);
-      });
+      // this.ws.on('close', function() {
+      //   self.retry = setInterval(() => {
+      //     console.log('attempting to reconnect every 10 seconds')
+      //     self.ws = null
+      //     self.ws = Ws().connect()
+      //     self.chat = self.ws.subscribe('chat')
+      //     self.chat.on('ready', clearInterval(self.retry))
+      //   }, 10000);
+      // })
     };
 
     _this.state = {
@@ -2781,8 +2781,6 @@ var Layout = function (_Component) {
     _this.homeRef = _react2.default.createRef();
 
     _this.ws = (0, _websocketClient2.default)();
-
-    _this.startChat();
     return _this;
   }
 
@@ -2833,6 +2831,8 @@ var Layout = function (_Component) {
           return _ref.apply(this, arguments);
         };
       }();
+
+      this.startChat();
 
       getUser();
     }
