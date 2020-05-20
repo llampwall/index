@@ -13,7 +13,8 @@ export default class Messenger extends Component {
       users_off: [],
       open: false, 
       connected: false,
-      chatUser: null
+      chatUser: null, 
+      blink: false
     }
 
     this.chat = null
@@ -139,6 +140,24 @@ export default class Messenger extends Component {
      }
   }
 
+  // blink username color change when message received
+  blink = (ms) => {
+    const self = this
+    let blink = setInterval(function() {
+      self.setState({
+        ...self.state,
+        blink: !self.state.blink
+      })
+    }, 500)
+    setTimeout(function() {
+      clearInterval(blink)
+      self.setState({
+        ...self.state,
+        blink: false
+      })
+    }, ms)
+  }
+
 
   // open chat window / switch to a different one
   openChat = async (user) => {
@@ -182,6 +201,7 @@ export default class Messenger extends Component {
           ws={this.props.ws}
           chat={this.chat} 
           disconnect={this.disconnect}
+          blink={this.state.blink}
         ></ChatWindow>
       )
     }

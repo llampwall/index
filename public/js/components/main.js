@@ -569,6 +569,21 @@ var Messenger = function (_Component) {
       };
     }();
 
+    _this.blink = function (ms) {
+      var self = _this;
+      var blink = setInterval(function () {
+        self.setState((0, _extends3.default)({}, self.state, {
+          blink: !self.state.blink
+        }));
+      }, 500);
+      setTimeout(function () {
+        clearInterval(blink);
+        self.setState((0, _extends3.default)({}, self.state, {
+          blink: false
+        }));
+      }, ms);
+    };
+
     _this.openChat = function () {
       var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(user) {
         var self;
@@ -649,7 +664,8 @@ var Messenger = function (_Component) {
           to: _this.state.chatUser,
           ws: _this.props.ws,
           chat: _this.chat,
-          disconnect: _this.disconnect
+          disconnect: _this.disconnect,
+          blink: _this.state.blink
         });
       }
     };
@@ -767,7 +783,8 @@ var Messenger = function (_Component) {
       users_off: [],
       open: false,
       connected: false,
-      chatUser: null
+      chatUser: null,
+      blink: false
     };
 
     _this.chat = null;
@@ -823,6 +840,9 @@ var Messenger = function (_Component) {
 
 
     // handle incomming messages
+
+
+    // blink username color change when message received
 
 
     // open chat window / switch to a different one
@@ -1409,7 +1429,7 @@ var ChatWindow = function (_Component) {
             { className: 'chat-header' },
             _react2.default.createElement(
               'span',
-              { className: 'chat-user' },
+              { className: 'chat-user ' + (this.props.blink ? 'blink' : '') },
               this.state.to.fname,
               ' ',
               this.state.to.lname

@@ -56,6 +56,7 @@ export default class ChatWindow extends Component {
     })
   }
 
+
   // keeps the chat window always at the bottom
   scrollToBottom = () => {
     this.msgEndRef.current.scrollIntoView({ behavior: 'auto' })
@@ -106,8 +107,6 @@ export default class ChatWindow extends Component {
       return
     }
 
-
-
     console.log('sending message to ' + this.state.to.fname)
     this.state.chat.emit('message', {
       to: this.state.to,
@@ -141,7 +140,7 @@ export default class ChatWindow extends Component {
       return (
           <div className='chat'>
                 <div className='chat-header'>
-                  <span className='chat-user'>{this.state.to.fname} {this.state.to.lname}</span>
+                  <span className={`chat-user ${this.props.blink ? 'blink' : ''}`}>{this.state.to.fname} {this.state.to.lname}</span>
                   <div className='close-btn' onClick={this.closeChat}><i className='ayn-cancel'></i></div>
                 </div>
                 <div className='chat-body'>

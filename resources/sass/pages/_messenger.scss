@@ -201,6 +201,10 @@
           font-size: 1.2rem;
           color: $accents;
           z-index: inherit;
+
+          &.blink {
+            color: white;
+          }
         }
 
         .close-btn {
