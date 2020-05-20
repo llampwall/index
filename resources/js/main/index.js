@@ -25,18 +25,28 @@ class Layout extends Component {
     this.homeRef = React.createRef()
 
     this.ws = Ws()
-    this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
 
+    this.startChat()
+  }
+
+  startChat = () => {
     const self = this
+
+    this.ws.connect()
+    this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
     this.chat.on('update', function(message) {
       console.log('index got an update!')
       self.homeRef.current.update()
     })
-
-    //refresh every 10 seconds
-    // setInterval(function() {
-    //   self.chat.emit('message', {update: 'all'})
-    // }, 10000)
+    this.ws.on('close', function() {
+      // self.retry = setInterval(() => {
+      //   console.log('attempting to reconnect every 10 seconds')
+      //   self.ws = null
+      //   self.ws = Ws().connect()
+      //   self.chat = self.ws.subscribe('chat')
+      //   self.chat.on('ready', clearInterval(self.retry))
+      // }, 10000);
+    })
   }
 
   componentDidMount() {

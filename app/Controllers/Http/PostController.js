@@ -52,9 +52,9 @@ class PostController {
         // console.log(request.input('user_id'))
         // console.log(url)
         let pType = 'text'
-        if (file.includes('mp4') || file.includes('mov') || file.includes('MOV') || file.includes('m4v') || file.includes('webm') || file.includes('ogg')) {
+        if (file.toLocaleLowerCase().includes('mp4') || file.toLocaleLowerCase().includes('mov') || file.toLocaleLowerCase().includes('m4v') || file.toLocaleLowerCase().includes('webm') || file.toLocaleLowerCase().includes('ogg')) {
             pType = 'video'
-        } else if (file.includes('jpg') || file.includes('jpeg') || file.includes('gif') || file.includes('png') || file.includes('webp')) {
+        } else if (file.toLocaleLowerCase().includes('jpg') || file.toLocaleLowerCase().includes('jpeg') || file.toLocaleLowerCase().includes('gif') || file.toLocaleLowerCase().includes('png') || file.toLocaleLowerCase().includes('webp')) {
             pType = 'image'
         }
         
@@ -69,9 +69,19 @@ class PostController {
                 image_url: url,
                 type: pType
             })
+
+            // this will ensure messages get delivered even if you arent connected to websockets
+            const topic = Ws.getChannel('chat').topic('chat')
+            if (topic){
+                topic.broadcastToAll('update', 'refresh')
+            } else {
+                console.log('no topic')
+            }
+
         } catch (error) {
             console.log(error)
         }
+
         console.log('saved post');
 
         return response.redirect('/')

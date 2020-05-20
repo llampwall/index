@@ -1289,7 +1289,7 @@ var ChatWindow = function (_Component) {
     }));
 
     _this.scrollToBottom = function () {
-      _this.msgEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      _this.msgEndRef.current.scrollIntoView({ behavior: 'auto' });
     };
 
     _this.displayMessages = function () {
@@ -2754,6 +2754,26 @@ var Layout = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this));
 
+    _this.startChat = function () {
+      var self = _this;
+
+      _this.ws.connect();
+      _this.chat = _this.ws.getSubscription('chat') || _this.ws.subscribe('chat');
+      _this.chat.on('update', function (message) {
+        console.log('index got an update!');
+        self.homeRef.current.update();
+      });
+      _this.ws.on('close', function () {
+        // self.retry = setInterval(() => {
+        //   console.log('attempting to reconnect every 10 seconds')
+        //   self.ws = null
+        //   self.ws = Ws().connect()
+        //   self.chat = self.ws.subscribe('chat')
+        //   self.chat.on('ready', clearInterval(self.retry))
+        // }, 10000);
+      });
+    };
+
     _this.state = {
       initialData: {}
     };
@@ -2761,18 +2781,8 @@ var Layout = function (_Component) {
     _this.homeRef = _react2.default.createRef();
 
     _this.ws = (0, _websocketClient2.default)();
-    _this.chat = _this.ws.getSubscription('chat') || _this.ws.subscribe('chat');
 
-    var self = _this;
-    _this.chat.on('update', function (message) {
-      console.log('index got an update!');
-      self.homeRef.current.update();
-    });
-
-    //refresh every 10 seconds
-    // setInterval(function() {
-    //   self.chat.emit('message', {update: 'all'})
-    // }, 10000)
+    _this.startChat();
     return _this;
   }
 

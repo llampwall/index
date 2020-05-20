@@ -58,7 +58,7 @@ export default class ChatWindow extends Component {
 
   // keeps the chat window always at the bottom
   scrollToBottom = () => {
-    this.msgEndRef.current.scrollIntoView({ behavior: 'smooth' })
+    this.msgEndRef.current.scrollIntoView({ behavior: 'auto' })
   }
 
   displayMessages = () => {
@@ -106,7 +106,7 @@ export default class ChatWindow extends Component {
       return
     }
 
-    
+
 
     console.log('sending message to ' + this.state.to.fname)
     this.state.chat.emit('message', {
