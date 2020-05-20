@@ -205,7 +205,7 @@ export default class Messenger extends Component {
       open: (window.innerWidth > 600)  //close on small devices
     })
 
-    if (clicked) {
+    if (clicked || this.state.chatUser == null) {
       this.setState({
         ...this.state,
         chatUser: user

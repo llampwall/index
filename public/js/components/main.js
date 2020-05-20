@@ -660,7 +660,7 @@ var Messenger = function (_Component) {
                   open: window.innerWidth > 600 //close on small devices
                 }));
 
-                if (clicked) {
+                if (clicked || _this.state.chatUser == null) {
                   _this.setState((0, _extends3.default)({}, _this.state, {
                     chatUser: user
                   }));
