@@ -155,18 +155,18 @@ export default class Messenger extends Component {
     const self = this
 
     let oldBlink = new Set(self.state.blinkIds)
-    let newBlink = new Set(self.state.blinkIds.add(u_id))
+    let newBlink = new Set(oldBlink).add(u_id)
     let blinking = false
     
     this.blinkInt = setInterval(function() { 
       if (blinking == false) {
-        console.log('blinking on')
+        // console.log('blinking on')
         self.setState({
           blinkIds: newBlink
         })
         blinking = true
       } else {
-        console.log('blinking off')
+        // console.log('blinking off')
         self.setState({
           blinkIds: oldBlink
         })
@@ -193,7 +193,7 @@ export default class Messenger extends Component {
       return
     }
 
-    if (this.connected == false) {
+    if (this.state.connected == false) {
       await this.props.ws.connect()
       this.chat = await this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
       // return
@@ -202,9 +202,15 @@ export default class Messenger extends Component {
     this.setState({
       ...this.state,
       connected: true,
-      chatUser: user,
       open: (window.innerWidth > 600)  //close on small devices
     })
+
+    if (clicked) {
+      this.setState({
+        ...this.state,
+        chatUser: user
+      })
+    }
 
     // if blinking, stop blinking
     if (this.state.blinkIds.has(user.id)) {
@@ -248,7 +254,7 @@ export default class Messenger extends Component {
           ws={this.props.ws}
           chat={this.chat} 
           disconnect={this.disconnect}
-          blink={this.state.blinkIds.has(this.state.chatUser.id)}
+          blink={this.state.blinkIds.has(this.state.chatUser.id)}     // this doesnt work because if one chatuser is blinking it will pass true down to all the chatwindows
         ></ChatWindow>
       )
     }

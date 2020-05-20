@@ -582,18 +582,18 @@ var Messenger = function (_Component) {
       var self = _this;
 
       var oldBlink = new Set(self.state.blinkIds);
-      var newBlink = new Set(self.state.blinkIds.add(u_id));
+      var newBlink = new Set(oldBlink).add(u_id);
       var blinking = false;
 
       _this.blinkInt = setInterval(function () {
         if (blinking == false) {
-          console.log('blinking on');
+          // console.log('blinking on')
           self.setState({
             blinkIds: newBlink
           });
           blinking = true;
         } else {
-          console.log('blinking off');
+          // console.log('blinking off')
           self.setState({
             blinkIds: oldBlink
           });
@@ -628,7 +628,7 @@ var Messenger = function (_Component) {
                 return _context2.abrupt('return');
 
               case 3:
-                if (!(_this.connected == false)) {
+                if (!(_this.state.connected == false)) {
                   _context2.next = 12;
                   break;
                 }
@@ -657,9 +657,14 @@ var Messenger = function (_Component) {
                 // send login
                 _this.setState((0, _extends3.default)({}, _this.state, {
                   connected: true,
-                  chatUser: user,
                   open: window.innerWidth > 600 //close on small devices
                 }));
+
+                if (clicked) {
+                  _this.setState((0, _extends3.default)({}, _this.state, {
+                    chatUser: user
+                  }));
+                }
 
                 // if blinking, stop blinking
                 if (_this.state.blinkIds.has(user.id)) {
@@ -691,7 +696,7 @@ var Messenger = function (_Component) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-              case 17:
+              case 18:
               case 'end':
                 return _context2.stop();
             }
@@ -712,7 +717,7 @@ var Messenger = function (_Component) {
           ws: _this.props.ws,
           chat: _this.chat,
           disconnect: _this.disconnect,
-          blink: _this.state.blinkIds.has(_this.state.chatUser.id)
+          blink: _this.state.blinkIds.has(_this.state.chatUser.id) // this doesnt work because if one chatuser is blinking it will pass true down to all the chatwindows
         });
       }
     };
