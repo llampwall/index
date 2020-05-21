@@ -659,21 +659,23 @@ var Messenger = function (_Component) {
                   _this.chat = _this.props.ws.getSubscription('chat') || _this.props.ws.subscribe('chat');
                 }
                 // send login
-                _this.setState((0, _extends3.default)({}, _this.state, {
+                _this.setState({
+                  // ...this.state,
                   connected: true,
                   open: isDesktop //close on small devices
-                }));
+                });
 
                 // if blinking, stop blinking
                 if (_this.state.blinkIds.has(user.id)) {
                   newBlink = new Set(_this.state.blinkIds);
 
                   newBlink.delete(user.id);
-                  _this.setState((0, _extends3.default)({}, _this.state, {
+                  _this.setState({
+                    // ...this.state,
                     connected: true,
                     open: isDesktop,
                     blinkIds: newBlink
-                  }));
+                  });
                   clearInterval(_this.blinkInt);
                   _this.blinkInt = null;
                   clearTimeout(_this.blinkTo);
@@ -685,20 +687,22 @@ var Messenger = function (_Component) {
                   newUnread = new Set(_this.state.unread);
 
                   newUnread.delete(user.id);
-                  _this.setState((0, _extends3.default)({}, _this.state, {
+                  _this.setState({
+                    // ...this.state,
                     connected: true,
                     open: isDesktop,
                     unread: newUnread
-                  }));
+                  });
                 }
 
                 if (clicked == true || _this.state.chatUser == null) {
                   console.log('setting state');
-                  _this.setState((0, _extends3.default)({}, _this.state, {
+                  _this.setState({
+                    // ...this.state,
                     connected: true,
                     open: isDesktop,
                     chatUser: user
-                  }));
+                  });
                 }
 
                 if (_this.chatRef.current != null && clicked == true) {

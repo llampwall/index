@@ -218,7 +218,7 @@ export default class Messenger extends Component {
     }
     // send login
     this.setState({
-      ...this.state,
+      // ...this.state,
       connected: true,
       open: isDesktop  //close on small devices
     })
@@ -228,7 +228,7 @@ export default class Messenger extends Component {
       let newBlink = new Set(this.state.blinkIds)
       newBlink.delete(user.id)
       this.setState({
-        ...this.state,
+        // ...this.state,
         connected: true,
         open: isDesktop, 
         blinkIds: newBlink
@@ -244,7 +244,7 @@ export default class Messenger extends Component {
       let newUnread = new Set(this.state.unread)
       newUnread.delete(user.id)
       this.setState({
-        ...this.state,
+        // ...this.state,
         connected: true,
         open: isDesktop, 
         unread: newUnread
@@ -254,7 +254,7 @@ export default class Messenger extends Component {
     if (clicked == true || this.state.chatUser == null) {
       console.log('setting state')
       this.setState({
-        ...this.state,
+        // ...this.state,
         connected: true,
         open: isDesktop, 
         chatUser: user
