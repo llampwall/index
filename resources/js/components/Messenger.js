@@ -204,8 +204,7 @@ export default class Messenger extends Component {
   openChat = async (user, clicked) => {
     const self = this
     let isDesktop = (window.innerWidth > 600)
-    console.log(isDesktop)
-    console.log('clicked: ' + clicked)
+    // console.log('clicked: ' + clicked)
 
     // do nothing if clicking your own name
     if (user.id == this.props.initialData.userData.id) {
@@ -252,7 +251,6 @@ export default class Messenger extends Component {
     }
 
     if (clicked == true || this.state.chatUser == null) {
-      console.log('setting state')
       this.setState({
         // ...this.state,
         connected: true,

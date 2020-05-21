@@ -73,8 +73,15 @@ class Layout extends Component {
     }
 
     this.startChat()
-
     getUser()
+
+    setTimeout(this.closeNotify, 3000)  // notification bar stays for 3 seconds
+  }
+
+
+  // get rid of notification bar
+  closeNotify = () => {
+    document.getElementsByClassName('notify')[0].classList.remove('active')
   }
 
   //method to refresh feeds when others post

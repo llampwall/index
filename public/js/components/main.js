@@ -639,20 +639,18 @@ var Messenger = function (_Component) {
               case 0:
                 self = _this;
                 isDesktop = window.innerWidth > 600;
-
-                console.log(isDesktop);
-                console.log('clicked: ' + clicked);
+                // console.log('clicked: ' + clicked)
 
                 // do nothing if clicking your own name
 
                 if (!(user.id == _this.props.initialData.userData.id)) {
-                  _context2.next = 6;
+                  _context2.next = 4;
                   break;
                 }
 
                 return _context2.abrupt('return');
 
-              case 6:
+              case 4:
 
                 if (_this.state.connected == false) {
                   _this.props.ws.connect();
@@ -696,7 +694,6 @@ var Messenger = function (_Component) {
                 }
 
                 if (clicked == true || _this.state.chatUser == null) {
-                  console.log('setting state');
                   _this.setState({
                     // ...this.state,
                     connected: true,
@@ -713,7 +710,7 @@ var Messenger = function (_Component) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-              case 13:
+              case 11:
               case 'end':
                 return _context2.stop();
             }
@@ -2893,6 +2890,10 @@ var Layout = function (_Component) {
       // })
     };
 
+    _this.closeNotify = function () {
+      document.getElementsByClassName('notify')[0].classList.remove('active');
+    };
+
     _this.state = {
       initialData: {}
     };
@@ -2954,14 +2955,18 @@ var Layout = function (_Component) {
       }();
 
       this.startChat();
-
       getUser();
+
+      setTimeout(this.closeNotify, 3000); // notification bar stays for 3 seconds
     }
 
-    //method to refresh feeds when others post
+    // get rid of notification bar
 
   }, {
     key: 'update',
+
+
+    //method to refresh feeds when others post
     value: function update() {
       this.homeRef.current.update();
     }
