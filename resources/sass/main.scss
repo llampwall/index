@@ -369,6 +369,8 @@ input[type="password"] {
   }
 
   #messenger {
+    width: 15rem;
+
     .messenger-header {
       height: 3rem;
 
@@ -424,7 +426,7 @@ input[type="password"] {
       // padding-right: 1rem;
       width: 230px;
       height: 300px;
-      left: -95%;
+      left: -15rem;
       bottom: 0;
 
       .chat-header {
