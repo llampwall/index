@@ -196,9 +196,7 @@
 
       &.min {
         height: 40px;
-        >.chat-header {
-          // display: none;
-        }
+        
         >.chat-body {
           height: 0;
           padding: 0;
