@@ -563,7 +563,9 @@ var Messenger = function (_Component) {
 
               case 6:
 
-                _this.chatRef.current.getMessages();
+                if (_this.chatRef != null) {
+                  _this.chatRef.current.getMessages();
+                }
 
               case 7:
               case 'end':
@@ -618,42 +620,44 @@ var Messenger = function (_Component) {
               case 0:
                 self = _this;
 
+                console.log('clicked: ' + clicked);
+
                 // do nothing if clicking your own name
 
                 if (!(user.id == _this.props.initialData.userData.id)) {
-                  _context2.next = 3;
+                  _context2.next = 4;
                   break;
                 }
 
                 return _context2.abrupt('return');
 
-              case 3:
+              case 4:
                 if (!(_this.state.connected == false)) {
-                  _context2.next = 12;
+                  _context2.next = 13;
                   break;
                 }
 
-                _context2.next = 6;
+                _context2.next = 7;
                 return _this.props.ws.connect();
 
-              case 6:
-                _context2.next = 8;
+              case 7:
+                _context2.next = 9;
                 return _this.props.ws.getSubscription('chat');
 
-              case 8:
+              case 9:
                 _context2.t0 = _context2.sent;
 
                 if (_context2.t0) {
-                  _context2.next = 11;
+                  _context2.next = 12;
                   break;
                 }
 
                 _context2.t0 = _this.props.ws.subscribe('chat');
 
-              case 11:
+              case 12:
                 _this.chat = _context2.t0;
 
-              case 12:
+              case 13:
                 // send login
                 _this.setState((0, _extends3.default)({}, _this.state, {
                   connected: true,
@@ -696,7 +700,7 @@ var Messenger = function (_Component) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-              case 18:
+              case 19:
               case 'end':
                 return _context2.stop();
             }
@@ -717,9 +721,16 @@ var Messenger = function (_Component) {
           ws: _this.props.ws,
           chat: _this.chat,
           disconnect: _this.disconnect,
+          close: _this.closeChatWindow,
           blink: _this.state.blinkIds.has(_this.state.chatUser.id) // this doesnt work because if one chatuser is blinking it will pass true down to all the chatwindows
         });
       }
+    };
+
+    _this.closeChatWindow = function () {
+      _this.setState({
+        chatUser: null
+      });
     };
 
     _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
@@ -1428,6 +1439,7 @@ var ChatWindow = function (_Component) {
       _this.setState((0, _extends3.default)({}, _this.state, {
         to: undefined
       }));
+      _this.props.close();
     };
 
     _this.state = {

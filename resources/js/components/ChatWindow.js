@@ -127,6 +127,7 @@ export default class ChatWindow extends Component {
       ...this.state,
       to: undefined 
     })
+    this.props.close()
   }
 
   render() {

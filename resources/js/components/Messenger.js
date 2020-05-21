@@ -146,7 +146,10 @@ export default class Messenger extends Component {
           await this.openChat(message.from, false)
         }
 
-        this.chatRef.current.getMessages()
+        if(this.chatRef != null)  {
+          this.chatRef.current.getMessages()
+        }
+        
      }
   }
 
@@ -187,6 +190,7 @@ export default class Messenger extends Component {
   // open chat window / switch to a different one
   openChat = async (user, clicked) => {
     const self = this
+    console.log('clicked: ' + clicked)
 
     // do nothing if clicking your own name
     if (user.id == this.props.initialData.userData.id) {
@@ -254,10 +258,17 @@ export default class Messenger extends Component {
           ws={this.props.ws}
           chat={this.chat} 
           disconnect={this.disconnect}
+          close={this.closeChatWindow}
           blink={this.state.blinkIds.has(this.state.chatUser.id)}     // this doesnt work because if one chatuser is blinking it will pass true down to all the chatwindows
         ></ChatWindow>
       )
     }
+  }
+
+  closeChatWindow = () => {
+    this.setState({
+      chatUser: null
+    })
   }
 
   // fill messenger sidebar with users
