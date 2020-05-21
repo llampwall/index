@@ -617,9 +617,13 @@ var Messenger = function (_Component) {
       }
       _this.blinkTo = setTimeout(function () {
         clearInterval(self.blinkInt);
+        var isUnread = new Set(self.state.unread);
+        if (self.state.chatUser != null && self.state.chatUser.id != u_id && !self.state.unread.has(u_id)) {
+          isUnread.add(u_id);
+        }
         self.setState((0, _extends3.default)({}, self.state, {
           blinkIds: oldBlink,
-          unread: self.state.chatUser != null && self.state.chatUser.id != u_id ? self.state.unread.add(u_id) : self.state.unread // mark it as unread
+          unread: isUnread
         }));
       }, ms);
     };
