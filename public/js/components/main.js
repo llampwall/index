@@ -735,7 +735,7 @@ var Messenger = function (_Component) {
           chat: _this.chat,
           disconnect: _this.disconnect,
           close: _this.closeChatWindow,
-          blink: _this.state.blinkIds.has(_this.state.chatUser.id) // this doesnt work because if one chatuser is blinking it will pass true down to all the chatwindows
+          blink: _this.state.blinkIds.has(_this.state.chatUser.id)
         });
       }
     };

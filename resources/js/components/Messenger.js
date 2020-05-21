@@ -282,7 +282,7 @@ export default class Messenger extends Component {
           chat={this.chat} 
           disconnect={this.disconnect}
           close={this.closeChatWindow}
-          blink={this.state.blinkIds.has(this.state.chatUser.id)}     // this doesnt work because if one chatuser is blinking it will pass true down to all the chatwindows
+          blink={this.state.blinkIds.has(this.state.chatUser.id)}
         ></ChatWindow>
       )
     }
