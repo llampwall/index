@@ -158,24 +158,32 @@ export default class Messenger extends Component {
     const self = this
 
     let oldBlink = new Set(self.state.blinkIds)
+    if (oldBlink.has(u_id)) {oldBlink.delete(u_id)}   // deal with already blinking
     let newBlink = new Set(oldBlink).add(u_id)
     let blinking = false
     
+    // if (this.blinkInt) {                            // deal with already blinking
+    //   clearInterval(this.blinkInt)
+    //   this.blinkInt = null
+    // }
     this.blinkInt = setInterval(function() { 
       if (blinking == false) {
-        // console.log('blinking on')
         self.setState({
           blinkIds: newBlink
         })
         blinking = true
       } else {
-        // console.log('blinking off')
         self.setState({
           blinkIds: oldBlink
         })
         blinking = false
       }
     }, 500)
+
+    if (this.blinkTo) {                            // deal with already blinking
+      clearTimeout(this.blinkTo)
+      this.blinkTo = null
+    }
     this.blinkTo = setTimeout(function() {
       clearInterval(self.blinkInt)
       self.setState({
@@ -210,6 +218,7 @@ export default class Messenger extends Component {
     })
 
     if (clicked || this.state.chatUser == null) {
+      console.log('setting state')
       this.setState({
         ...this.state,
         chatUser: user
@@ -225,7 +234,9 @@ export default class Messenger extends Component {
         blinkIds: newBlink
       })
       clearInterval(this.blinkInt)
+      this.blinkInt = null
       clearTimeout(this.blinkTo)
+      this.blinkTo = null
     }
 
     // if unread, dont make it unread

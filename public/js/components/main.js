@@ -584,24 +584,35 @@ var Messenger = function (_Component) {
       var self = _this;
 
       var oldBlink = new Set(self.state.blinkIds);
+      if (oldBlink.has(u_id)) {
+        oldBlink.delete(u_id);
+      } // deal with already blinking
       var newBlink = new Set(oldBlink).add(u_id);
       var blinking = false;
 
+      // if (this.blinkInt) {                            // deal with already blinking
+      //   clearInterval(this.blinkInt)
+      //   this.blinkInt = null
+      // }
       _this.blinkInt = setInterval(function () {
         if (blinking == false) {
-          // console.log('blinking on')
           self.setState({
             blinkIds: newBlink
           });
           blinking = true;
         } else {
-          // console.log('blinking off')
           self.setState({
             blinkIds: oldBlink
           });
           blinking = false;
         }
       }, 500);
+
+      if (_this.blinkTo) {
+        // deal with already blinking
+        clearTimeout(_this.blinkTo);
+        _this.blinkTo = null;
+      }
       _this.blinkTo = setTimeout(function () {
         clearInterval(self.blinkInt);
         self.setState((0, _extends3.default)({}, self.state, {
@@ -665,6 +676,7 @@ var Messenger = function (_Component) {
                 }));
 
                 if (clicked || _this.state.chatUser == null) {
+                  console.log('setting state');
                   _this.setState((0, _extends3.default)({}, _this.state, {
                     chatUser: user
                   }));
@@ -679,7 +691,9 @@ var Messenger = function (_Component) {
                     blinkIds: newBlink
                   }));
                   clearInterval(_this.blinkInt);
+                  _this.blinkInt = null;
                   clearTimeout(_this.blinkTo);
+                  _this.blinkTo = null;
                 }
 
                 // if unread, dont make it unread
