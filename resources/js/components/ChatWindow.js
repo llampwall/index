@@ -11,7 +11,7 @@ export default class ChatWindow extends Component {
       chat: null, 
       message: '', 
       messages: [],
-      new: false
+      min: false
     }
 
     this.msgEndRef = React.createRef()
@@ -32,7 +32,8 @@ export default class ChatWindow extends Component {
 
   switchUser = (user) => {
     this.setState({
-        to: user
+        to: user,
+        min: false
     }, () => {
         console.log('changed user: ' + this.state.to.fname)
         this.getMessages()
@@ -121,11 +122,18 @@ export default class ChatWindow extends Component {
     this.getMessages()
   }
 
+  minChat = () => {
+    this.setState({
+      min: !this.state.min
+    })
+  }
+
   // for now this doesn't do much
   closeChat = () => {
     this.setState({
       ...this.state,
-      to: undefined 
+      to: undefined,
+      min: false 
     })
     this.props.close()
   }
@@ -139,8 +147,9 @@ export default class ChatWindow extends Component {
         )
     } else {
       return (
-          <div className='chat'>
+          <div className={`chat ${this.state.min ? 'min' : ''}`}>
                 <div className='chat-header'>
+                  <div className='min-btn' onClick={this.minChat}><i className={`ayn-down-open ${this.state.min ? 'min' : ''}`}></i></div>
                   <span className={`chat-user ${this.props.blink ? 'blink' : ''}`}>{this.state.to.fname} {this.state.to.lname}</span>
                   <div className='close-btn' onClick={this.closeChat}><i className='ayn-cancel'></i></div>
                 </div>

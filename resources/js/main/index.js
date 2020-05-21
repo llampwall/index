@@ -22,6 +22,8 @@ class Layout extends Component {
       initialData: {}
     }
 
+    this.retry = null
+
     this.homeRef = React.createRef()
 
     this.ws = Ws()
@@ -40,9 +42,13 @@ class Layout extends Component {
     //   self.retry = setInterval(() => {
     //     console.log('attempting to reconnect every 10 seconds')
     //     self.ws = null
-    //     self.ws = Ws().connect()
-    //     self.chat = self.ws.subscribe('chat')
-    //     self.chat.on('ready', clearInterval(self.retry))
+    //     self.ws = Ws()
+    //     self.ws.connect()
+    //     self.chat = self.ws.getSubscription('chat') || self.ws.subscribe('chat')
+    //     self.chat.on('ready', () => {
+    //       clearInterval(self.retry)
+    //       self.retry = null
+    //     })
     //   }, 10000);
     // })
   }

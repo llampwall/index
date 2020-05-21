@@ -1351,7 +1351,8 @@ var ChatWindow = function (_Component) {
 
     _this.switchUser = function (user) {
       _this.setState({
-        to: user
+        to: user,
+        min: false
       }, function () {
         console.log('changed user: ' + _this.state.to.fname);
         _this.getMessages();
@@ -1448,9 +1449,16 @@ var ChatWindow = function (_Component) {
       _this.getMessages();
     };
 
+    _this.minChat = function () {
+      _this.setState({
+        min: !_this.state.min
+      });
+    };
+
     _this.closeChat = function () {
       _this.setState((0, _extends3.default)({}, _this.state, {
-        to: undefined
+        to: undefined,
+        min: false
       }));
       _this.props.close();
     };
@@ -1461,7 +1469,7 @@ var ChatWindow = function (_Component) {
       chat: null,
       message: '',
       messages: [],
-      new: false
+      min: false
     };
 
     _this.msgEndRef = _react2.default.createRef();
@@ -1505,10 +1513,15 @@ var ChatWindow = function (_Component) {
       } else {
         return _react2.default.createElement(
           'div',
-          { className: 'chat' },
+          { className: 'chat ' + (this.state.min ? 'min' : '') },
           _react2.default.createElement(
             'div',
             { className: 'chat-header' },
+            _react2.default.createElement(
+              'div',
+              { className: 'min-btn', onClick: this.minChat },
+              _react2.default.createElement('i', { className: 'ayn-down-open ' + (this.state.min ? 'min' : '') })
+            ),
             _react2.default.createElement(
               'span',
               { className: 'chat-user ' + (this.props.blink ? 'blink' : '') },
@@ -2869,9 +2882,13 @@ var Layout = function (_Component) {
       //   self.retry = setInterval(() => {
       //     console.log('attempting to reconnect every 10 seconds')
       //     self.ws = null
-      //     self.ws = Ws().connect()
-      //     self.chat = self.ws.subscribe('chat')
-      //     self.chat.on('ready', clearInterval(self.retry))
+      //     self.ws = Ws()
+      //     self.ws.connect()
+      //     self.chat = self.ws.getSubscription('chat') || self.ws.subscribe('chat')
+      //     self.chat.on('ready', () => {
+      //       clearInterval(self.retry)
+      //       self.retry = null
+      //     })
       //   }, 10000);
       // })
     };
@@ -2879,6 +2896,8 @@ var Layout = function (_Component) {
     _this.state = {
       initialData: {}
     };
+
+    _this.retry = null;
 
     _this.homeRef = _react2.default.createRef();
 

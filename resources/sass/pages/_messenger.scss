@@ -191,6 +191,21 @@
       // background: white;
       padding: 1px;
       z-index: 1000;
+      transition: all .3s ease-in-out;
+
+      &.min {
+        height: 40px;
+        >.chat-header {
+          // display: none;
+        }
+        >.chat-body {
+          height: 0;
+          padding: 0;
+        }
+        >.chat-compose {
+          height: 0;
+        }
+      }
 
       .chat-header {
         width: 100%;
@@ -202,6 +217,7 @@
         color: $accents;
         position: relative;
         z-index: inherit;
+        transition: all .3s ease-in-out;
 
         .chat-user {
           font-size: 1.2rem;
@@ -211,6 +227,24 @@
           &.blink {
             color: white;
           }
+        }
+
+        .min-btn {
+          position: absolute;
+          left: .3rem;
+          cursor: pointer;
+          font-size: 1.3rem;
+          z-index: inherit;
+
+          i {
+            transform: rotateZ(0deg);
+            transition: all .3s ease-in-out;
+
+            &.min {
+              transform: rotateZ(180deg);
+            }
+          }
+          
         }
 
         .close-btn {
@@ -232,6 +266,7 @@
         overflow: auto;
         padding: .5rem 1rem;
         z-index: inherit;
+        transition: all .3s ease-in-out;
         // @include hard-shadow;
         &::-webkit-scrollbar {
           display: none;
