@@ -159,13 +159,14 @@ export default class Messenger extends Component {
 
     let oldBlink = new Set(self.state.blinkIds)
     if (oldBlink.has(u_id)) {oldBlink.delete(u_id)}   // deal with already blinking
-    let newBlink = new Set(oldBlink).add(u_id)
+    let newBlink = new Set(oldBlink)
+    newBlink.add(u_id)
     let blinking = false
     
-    // if (this.blinkInt) {                            // deal with already blinking
-    //   clearInterval(this.blinkInt)
-    //   this.blinkInt = null
-    // }
+    if (this.blinkInt) {                            // deal with already blinking
+      clearInterval(this.blinkInt)
+      this.blinkInt = null
+    }
     this.blinkInt = setInterval(function() { 
       if (blinking == false) {
         self.setState({

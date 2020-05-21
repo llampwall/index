@@ -587,13 +587,15 @@ var Messenger = function (_Component) {
       if (oldBlink.has(u_id)) {
         oldBlink.delete(u_id);
       } // deal with already blinking
-      var newBlink = new Set(oldBlink).add(u_id);
+      var newBlink = new Set(oldBlink);
+      newBlink.add(u_id);
       var blinking = false;
 
-      // if (this.blinkInt) {                            // deal with already blinking
-      //   clearInterval(this.blinkInt)
-      //   this.blinkInt = null
-      // }
+      if (_this.blinkInt) {
+        // deal with already blinking
+        clearInterval(_this.blinkInt);
+        _this.blinkInt = null;
+      }
       _this.blinkInt = setInterval(function () {
         if (blinking == false) {
           self.setState({
