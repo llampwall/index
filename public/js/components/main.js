@@ -597,6 +597,7 @@ var Messenger = function (_Component) {
         _this.blinkInt = null;
       }
       _this.blinkInt = setInterval(function () {
+        // blink every .5 seconds
         if (blinking == false) {
           self.setState({
             blinkIds: newBlink
@@ -616,6 +617,7 @@ var Messenger = function (_Component) {
         _this.blinkTo = null;
       }
       _this.blinkTo = setTimeout(function () {
+        // stop blinking after ms milliseconds
         clearInterval(self.blinkInt);
         var isUnread = new Set(self.state.unread);
         if (self.state.chatUser != null && self.state.chatUser.id != u_id && !self.state.unread.has(u_id)) {
@@ -630,63 +632,37 @@ var Messenger = function (_Component) {
 
     _this.openChat = function () {
       var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(user, clicked) {
-        var self, newBlink, newUnread;
+        var self, isDesktop, newBlink, newUnread;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 self = _this;
+                isDesktop = window.innerWidth > 600;
 
+                console.log(isDesktop);
                 console.log('clicked: ' + clicked);
 
                 // do nothing if clicking your own name
 
                 if (!(user.id == _this.props.initialData.userData.id)) {
-                  _context2.next = 4;
+                  _context2.next = 6;
                   break;
                 }
 
                 return _context2.abrupt('return');
 
-              case 4:
-                if (!(_this.state.connected == false)) {
-                  _context2.next = 13;
-                  break;
+              case 6:
+
+                if (_this.state.connected == false) {
+                  _this.props.ws.connect();
+                  _this.chat = _this.props.ws.getSubscription('chat') || _this.props.ws.subscribe('chat');
                 }
-
-                _context2.next = 7;
-                return _this.props.ws.connect();
-
-              case 7:
-                _context2.next = 9;
-                return _this.props.ws.getSubscription('chat');
-
-              case 9:
-                _context2.t0 = _context2.sent;
-
-                if (_context2.t0) {
-                  _context2.next = 12;
-                  break;
-                }
-
-                _context2.t0 = _this.props.ws.subscribe('chat');
-
-              case 12:
-                _this.chat = _context2.t0;
-
-              case 13:
                 // send login
                 _this.setState((0, _extends3.default)({}, _this.state, {
                   connected: true,
-                  open: window.innerWidth > 600 //close on small devices
+                  open: isDesktop //close on small devices
                 }));
-
-                if (clicked || _this.state.chatUser == null) {
-                  console.log('setting state');
-                  _this.setState((0, _extends3.default)({}, _this.state, {
-                    chatUser: user
-                  }));
-                }
 
                 // if blinking, stop blinking
                 if (_this.state.blinkIds.has(user.id)) {
@@ -694,6 +670,8 @@ var Messenger = function (_Component) {
 
                   newBlink.delete(user.id);
                   _this.setState((0, _extends3.default)({}, _this.state, {
+                    connected: true,
+                    open: isDesktop,
                     blinkIds: newBlink
                   }));
                   clearInterval(_this.blinkInt);
@@ -708,19 +686,30 @@ var Messenger = function (_Component) {
 
                   newUnread.delete(user.id);
                   _this.setState((0, _extends3.default)({}, _this.state, {
+                    connected: true,
+                    open: isDesktop,
                     unread: newUnread
                   }));
                 }
 
-                if (_this.chatRef.current != null && clicked) {
+                if (clicked == true || _this.state.chatUser == null) {
+                  console.log('setting state');
+                  _this.setState((0, _extends3.default)({}, _this.state, {
+                    connected: true,
+                    open: isDesktop,
+                    chatUser: user
+                  }));
+                }
+
+                if (_this.chatRef.current != null && clicked == true) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-                if (_this.state.chatUser != null && user != _this.state.chatUser && clicked) {
+                if (_this.state.chatUser != null && user != _this.state.chatUser && clicked == true) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-              case 19:
+              case 13:
               case 'end':
                 return _context2.stop();
             }

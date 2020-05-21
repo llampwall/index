@@ -167,7 +167,7 @@ export default class Messenger extends Component {
       clearInterval(this.blinkInt)
       this.blinkInt = null
     }
-    this.blinkInt = setInterval(function() { 
+    this.blinkInt = setInterval(function() {        // blink every .5 seconds
       if (blinking == false) {
         self.setState({
           blinkIds: newBlink
@@ -185,7 +185,7 @@ export default class Messenger extends Component {
       clearTimeout(this.blinkTo)
       this.blinkTo = null
     }
-    this.blinkTo = setTimeout(function() {
+    this.blinkTo = setTimeout(function() {        // stop blinking after ms milliseconds
       clearInterval(self.blinkInt)
       let isUnread = new Set(self.state.unread)
       if (self.state.chatUser != null && self.state.chatUser.id != u_id && !self.state.unread.has(u_id)) {
@@ -203,6 +203,8 @@ export default class Messenger extends Component {
   // open chat window / switch to a different one
   openChat = async (user, clicked) => {
     const self = this
+    let isDesktop = (window.innerWidth > 600)
+    console.log(isDesktop)
     console.log('clicked: ' + clicked)
 
     // do nothing if clicking your own name
@@ -211,24 +213,15 @@ export default class Messenger extends Component {
     }
 
     if (this.state.connected == false) {
-      await this.props.ws.connect()
-      this.chat = await this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
-      // return
+      this.props.ws.connect()
+      this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
     }
     // send login
     this.setState({
       ...this.state,
       connected: true,
-      open: (window.innerWidth > 600)  //close on small devices
+      open: isDesktop  //close on small devices
     })
-
-    if (clicked || this.state.chatUser == null) {
-      console.log('setting state')
-      this.setState({
-        ...this.state,
-        chatUser: user
-      })
-    }
 
     // if blinking, stop blinking
     if (this.state.blinkIds.has(user.id)) {
@@ -236,6 +229,8 @@ export default class Messenger extends Component {
       newBlink.delete(user.id)
       this.setState({
         ...this.state,
+        connected: true,
+        open: isDesktop, 
         blinkIds: newBlink
       })
       clearInterval(this.blinkInt)
@@ -250,15 +245,27 @@ export default class Messenger extends Component {
       newUnread.delete(user.id)
       this.setState({
         ...this.state,
+        connected: true,
+        open: isDesktop, 
         unread: newUnread
       })
     }
 
-    if (this.chatRef.current != null && clicked) {
+    if (clicked == true || this.state.chatUser == null) {
+      console.log('setting state')
+      this.setState({
+        ...this.state,
+        connected: true,
+        open: isDesktop, 
+        chatUser: user
+      })
+    }
+
+    if (this.chatRef.current != null && clicked == true) {
       this.chatRef.current.switchUser(user)
     }
 
-    if (this.state.chatUser != null && user != this.state.chatUser && clicked) {
+    if (this.state.chatUser != null && user != this.state.chatUser && clicked == true) {
       this.chatRef.current.switchUser(user)
     }
   }
