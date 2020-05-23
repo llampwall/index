@@ -16,7 +16,8 @@
 @endsection 
 
 @section('content')
-  <div class="welcome-container">
+  <video class="welcome-container" autoplay muted loop playsinline>
+    <source src="/img/index.mp4" type="video/mp4">
 
     <div class="welcome">
       <h1>welcome
@@ -38,5 +39,5 @@
       <hr>
       <a href="/register" class="register">~{new users click me}~</a>
     </div>
-  </div>
+  </video>
 @endsection

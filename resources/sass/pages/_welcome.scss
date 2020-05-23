@@ -1,7 +1,6 @@
 .welcome-page {
     display: flex;
-    // justify-content: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     .welcome-container {
@@ -10,10 +9,9 @@
         // background: -webkit-linear-gradient(45deg, rgba(255,255,255,0) 0%,rgba(255,255,255,0.35) 35%,rgba(255,255,255,0.7) 64%,rgba(255,255,255,.6) 65%,rgba(255,255,255,.5) 100%); /* Chrome10-25,Safari5.1-6 */
         // background: linear-gradient(45deg, rgba(255,255,255,0) 0%,rgba(255,255,255,0.35) 35%,rgba(255,255,255,0.7) 64%,rgba(255,255,255,.6) 65%,rgba(255,255,255,.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */;
         height: 100%;
-        // width: 100%;
-        width: 300%;
-        // max-width: 400px;
-        // padding: 1rem;
+        width: 100%;
+        max-width: 400px;
+        padding: 1rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
