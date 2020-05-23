@@ -239,35 +239,12 @@ var LeftMenu = function (_Component) {
           'section',
           { id: 'left-menu', className: this.state.open ? "open" : "closed" },
           _react2.default.createElement(
-            'div',
-            { className: 'account-dropdown', onClick: this.clickedDropDown },
+            'a',
+            { className: 'account-dropdown', href: '/profile/' + this.props.initialData.userData.id },
             _react2.default.createElement(
               'div',
               { className: 'username' },
               '[ ' + fname + ' ' + lname + ' ]'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'dropdown ' + (this.state.dropdown ? 'active' : '') },
-            _react2.default.createElement(
-              'nav',
-              null,
-              _react2.default.createElement(
-                'a',
-                { href: '/profile/' + this.props.initialData.userData.id },
-                '+ profile +'
-              ),
-              _react2.default.createElement(
-                'a',
-                { href: '/settings/' + this.props.initialData.userData.id },
-                '* settings *'
-              ),
-              _react2.default.createElement(
-                'a',
-                { href: '/logout' },
-                '- logout -'
-              )
             )
           ),
           _react2.default.createElement(

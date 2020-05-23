@@ -44,19 +44,11 @@ export default class LeftMenu extends Component {
       const {fname, lname} = this.props.initialData.userData
       return (
         <section id="left-menu" className={this.state.open ? "open" : "closed"}>
-          <div className="account-dropdown" onClick={this.clickedDropDown}>
+          <a className="account-dropdown" href={`/profile/${this.props.initialData.userData.id}`}>
             <div className="username">
               {`[ ${fname} ${lname} ]`}
             </div>
-          </div>
-  
-          <div className={`dropdown ${this.state.dropdown ? 'active' : ''}`}>
-            <nav>
-              <a href={`/profile/${this.props.initialData.userData.id}`}>+ profile +</a>
-              <a href={`/settings/${this.props.initialData.userData.id}`}>* settings *</a>
-              <a href="/logout">- logout -</a>
-            </nav>
-          </div>
+          </a>
   
           <div className="groups">
             <div className="title">_usr</div>
