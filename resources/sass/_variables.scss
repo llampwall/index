@@ -11,6 +11,7 @@ $apricot: #ed8e74;
 $geraldine: #f98673;
 $rose: #f02caa;
 $thunder: #432943;
+$vampire: #62214D;
 
 // sun theme
 $sunlight: #FDC300;
@@ -63,6 +64,30 @@ $write-comment-bg: #273D54;
 $shadow-light: #829AB1;
 $shadow-color: #1D2025;
 // $shadow-color: #273D54;
+// area specific color vars
+$content-area-bg: $third;
+$menus: $secondary;
+$search-header-bg: $menus;
+
+// $lr-menu-headers: $primary-font-color;
+
+$left-menu-bg: $menus;
+$left-menu-primary: $primary-font-color;
+$left-menu-secondary: $secondary-font-color;
+
+$right-menu-bg: $menus;
+$right-menu-names: $secondary-font-color;
+$right-menu-icons: $accents;
+
+$compose-bg: $third;
+
+$post-header-bg: $secondary;
+$post-bg: $secondary;
+// $comment-bg: $secondary;
+// $write-comment-bg: white;
+
+
+
 * {
   border: none !important;
 
@@ -177,28 +202,7 @@ $shadow-color: #1D2025;
 // $button-bg: $accents;
 
 
-// area specific color vars
-$content-area-bg: $third;
 
-$menus: $secondary;
-$search-header-bg: $menus;
-
-// $lr-menu-headers: $primary-font-color;
-
-$left-menu-bg: $menus;
-$left-menu-primary: $primary-font-color;
-$left-menu-secondary: $secondary-font-color;
-
-$right-menu-bg: $menus;
-$right-menu-names: $secondary-font-color;
-$right-menu-icons: $accents;
-
-$compose-bg: $third;
-
-$post-header-bg: $secondary;
-$post-bg: $secondary;
-// $comment-bg: $secondary;
-// $write-comment-bg: white;
 
 
 
