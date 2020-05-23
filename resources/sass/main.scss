@@ -91,20 +91,22 @@ body {
   #app {
     // max-width: 1600px;
     // min-width: 1400px;
-    width: $app-width;
-    height: $app-height;
+    width: 100vw;
+    height: 100vh;
     // max-width: 1600px;
+
+    .app-container {
+      width: 100%;
+      // max-width: 1400px;
+      margin: 0 auto;
+      min-height: 80vh;
+      height: 100vh;
+      overflow: hidden;
+      border: $border-thickness solid $border-color;
+    }
   }
 
-  .app-container {
-    width: 100%;
-    // max-width: 1400px;
-    margin: 0 auto;
-    min-height: 80vh;
-    height: 80vh;
-    overflow: hidden;
-    border: $border-thickness solid $border-color;
-  }
+  
     
 }
 
@@ -191,6 +193,14 @@ input[type="password"] {
         line-height: 20px;
       }
     }
+
+    #app {
+      height: 80vh;
+
+      .app-container {
+        height: 80vh;
+      }
+    }
   }
 
  
@@ -222,6 +232,8 @@ input[type="password"] {
 
     #content-container {
 
+      height: 85vh;
+
       .header {
         .search {
           input[type="text"] {
@@ -236,6 +248,8 @@ input[type="password"] {
         margin: 0 auto;
         padding-right: 0;
         padding-left: 0;
+
+        height: calc(85vh - 57px);
         overflow-x: hidden;
 
         #compose {
@@ -358,7 +372,7 @@ input[type="password"] {
     }
 
     .open-btn {
-      top: 30%;
+      top: 50%;
       // width: 50px;
       // height: 50px;
     }
@@ -412,7 +426,7 @@ input[type="password"] {
     }
 
     .open-btn {
-      top: 30%;
+      top: 50%;
       // width: 50px;
       // height: 50px;
     }

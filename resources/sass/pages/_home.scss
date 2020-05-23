@@ -9,7 +9,6 @@
     border-right: $border-thickness solid $border-color;
     // color: $primary-font-color;
     width: 100%;
-    max-height: 85vh;
     overflow: hidden;
     background-color: $content-area-bg;
     // background-color: transparent;
@@ -68,7 +67,7 @@
       padding-top: 1rem;
       box-sizing: content-box;
       width: 100%;
-      height: calc(80vh - 57px);
+      height: calc(100vh - 57px);
       overflow: auto;
       background: linear-gradient(-180deg, #1c252e, #212c37);
       // @include forest-gradient;
