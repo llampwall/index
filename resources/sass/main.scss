@@ -48,6 +48,7 @@ body {
   // @include forest-gradient;
   min-height: 100vh;
   width: 100vw;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,19 +95,16 @@ body {
     width: 100vw;
     height: 100vh;
     // max-width: 1600px;
-
-    .app-container {
-      width: 100%;
-      // max-width: 1400px;
-      margin: 0 auto;
-      min-height: 80vh;
-      height: 100vh;
-      overflow: hidden;
-      border: $border-thickness solid $border-color;
-    }
   }
-
-  
+  .app-container {
+    width: 100%;
+    // max-width: 1400px;
+    margin: 0 auto;
+    min-height: 80vh;
+    height: 100vh;
+    overflow: hidden;
+    border: $border-thickness solid $border-color;
+  }
     
 }
 
@@ -196,10 +194,10 @@ input[type="password"] {
 
     #app {
       height: 80vh;
+    }
 
-      .app-container {
-        height: 80vh;
-      }
+    .app-container {
+      height: 80vh;
     }
   }
 
