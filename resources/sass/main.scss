@@ -244,7 +244,8 @@ input[type="password"] {
 
       .content-area {
         position: sticky;
-        width: 80%;
+        // width: 80%;
+        width: 100%;
         margin: 0 auto;
         padding-right: 0;
         padding-left: 0;
@@ -256,6 +257,7 @@ input[type="password"] {
           // position: relative;
           // left: -1rem;
           // width: 80%;
+          width: 95%;
           margin-bottom: 1.5rem;
 
           .send-btn,
@@ -368,13 +370,26 @@ input[type="password"] {
     }
     &.closed {
       box-shadow: none;
-      left: -11rem;
+      // left: -11rem;
+      left: -12.3rem;
     }
 
     .open-btn {
       top: 50%;
-      // width: 50px;
-      // height: 50px;
+      // background: $title-font-color;
+      background: $accents;
+      color: black;
+      transform: rotateZ(0deg) translateX(0px);
+      
+      i {
+        color: black;
+
+        &.closed {
+            color: black;
+            transform: translateX(10px);
+            transform: rotateZ(180deg) translateX(-10px);
+        }
+      }
     }
   }
 
@@ -415,7 +430,7 @@ input[type="password"] {
     &.closed {
       box-shadow: none;
       // right: -17.4rem;
-      right: -14rem;
+      right: -14.8rem;
     }
 
     .search {
@@ -427,8 +442,19 @@ input[type="password"] {
 
     .open-btn {
       top: 50%;
-      // width: 50px;
-      // height: 50px;
+      // background: $title-font-color;
+      background: $accents;
+      color: black;
+      transform: rotateZ(0deg) translateX(0px);
+      
+      i {
+        color: black;
+
+        &.closed {
+            color: black;
+            transform: rotateZ(180deg) translateX(10px);
+        }
+      }
     }
 
     .chat {
