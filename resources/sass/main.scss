@@ -162,6 +162,11 @@ input[type="password"] {
 
 @media only screen and (max-width: 767px) {
 
+
+  * {
+    letter-spacing: 1px;
+  }
+
   .notify.success.active {
     width: 100%;
   }
@@ -302,7 +307,7 @@ input[type="password"] {
       }
 
       .post-info p {
-        text-align: center;
+        // text-align: center;
         color: $title-font-color;
         font-size: .9rem;
       } 
