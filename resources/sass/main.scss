@@ -284,10 +284,11 @@ input[type="password"] {
 
 
     #all-posts>.post-container {
-      // max-width: 95vw;
-      // position: relative;
-      // left: -1rem;
       width: 95%;
+
+      .post {
+        margin-bottom: 1rem;
+      }
 
       .post-header {
         .author {
@@ -310,10 +311,14 @@ input[type="password"] {
         // text-align: center;
         color: $title-font-color;
         font-size: .9rem;
+        padding: .8rem .5rem;
       } 
 
       .post-stats {
+        padding: 0;
+
         .text {
+          margin-left: 0;
           font-size: .6rem;
         }
         .comment-count {
@@ -334,12 +339,16 @@ input[type="password"] {
           margin-right: 0;
         }
 
-        .single-comment {
-          .user>h2 {
-            font-size: .7rem;
-          }
-          p {
-            font-size: .7rem;
+        .comments {
+          .single-comment {
+            padding: .1rem;
+  
+            .user>h2 {
+              font-size: .7rem;
+            }
+            p {
+              font-size: .7rem;
+            }
           }
         }
       }
