@@ -73,6 +73,7 @@
 
         .post-media {
           width: 100%;
+          image-orientation: from-image;
           border-bottom: $border-thickness solid $border-color;
           margin: 0 auto;
           transition: all .3s ease;
