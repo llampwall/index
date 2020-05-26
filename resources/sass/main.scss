@@ -262,8 +262,12 @@ input[type="password"] {
 
           .send-btn,
           .photo-btn {
-            width: 40px;
-            height: 40px;
+            // width: 40px;
+            // height: 40px;
+          }
+
+          .preview {
+            right: 2rem;
           }
 
           textarea {
