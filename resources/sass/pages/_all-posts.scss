@@ -86,7 +86,9 @@
 
         .post-link {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
+          overflow-y: hidden;
+          height: 100px;
           width: 100%;
 
           .link-image {
