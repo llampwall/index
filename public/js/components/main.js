@@ -1825,7 +1825,7 @@ var Compose = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
 
     _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-      var self, fData, text, response, file, filename, type, _response;
+      var self, fData, _ref2, text, link, response, file, filename, type, _response;
 
       return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
@@ -1855,9 +1855,14 @@ var Compose = function (_Component) {
               return _this.checkLink();
 
             case 7:
-              text = _context3.sent;
+              _ref2 = _context3.sent;
+              text = _ref2.text;
+              link = _ref2.link;
 
-              if (text && _this.state.linkUrl != '') {
+              console.log(text);
+              console.log(link);
+              if (text && link != '') {
+                console.log('ahjsdbasjhbd');
                 fData.append('link_url', _this.state.linkUrl);
                 fData.append('link_title', _this.state.linkTitle);
                 fData.append('link_image', _this.state.linkImage);
@@ -1865,40 +1870,43 @@ var Compose = function (_Component) {
               }
 
               if (!(text == '' && _this.state.linkUrl == '')) {
-                _context3.next = 17;
+                _context3.next = 21;
                 break;
               }
 
               if (!(_this.state.image == '')) {
-                _context3.next = 14;
+                _context3.next = 18;
                 break;
               }
 
               return _context3.abrupt('return');
 
-            case 14:
+            case 18:
               // if there is just an image append a space for the content
               fData.append('content', ' ');
 
-            case 15:
-              _context3.next = 19;
+            case 19:
+              _context3.next = 22;
               break;
 
-            case 17:
-              console.log(text);
-              fData.append('content', text);
+            case 21:
+              if (text == '' && _this.state.linkUrl != '') {
+                fData.append('content', ' ');
+              } else {
+                fData.append('content', text);
+              }
 
-            case 19:
+            case 22:
               fData.append('user_id', _this.props.initialData.userData.id);
 
               if (!(_this.state.image == '')) {
-                _context3.next = 28;
+                _context3.next = 31;
                 break;
               }
 
               fData.append('img_name', '');
               console.log('no image');
-              _context3.next = 25;
+              _context3.next = 28;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -1922,12 +1930,12 @@ var Compose = function (_Component) {
                 return 'item saved';
               });
 
-            case 25:
+            case 28:
               response = _context3.sent;
-              _context3.next = 43;
+              _context3.next = 46;
               break;
 
-            case 28:
+            case 31:
               // there is an image or video in the post
 
               // disable input while image uploads - maybe add loading symbol
@@ -1935,7 +1943,7 @@ var Compose = function (_Component) {
               document.getElementById("content").innerText = 'Loading...';
 
               // get signed url from the server
-              _context3.prev = 30;
+              _context3.prev = 33;
               file = self.state.image;
               filename = file.name;
               type = encodeURIComponent(file.type);
@@ -1943,9 +1951,9 @@ var Compose = function (_Component) {
 
               console.log(type);
 
-              _context3.next = 37;
+              _context3.next = 40;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
-                var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
+                var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
                   var options;
                   return _regenerator2.default.wrap(function _callee2$(_context2) {
                     while (1) {
@@ -1961,7 +1969,7 @@ var Compose = function (_Component) {
                           };
 
                           _axios2.default.put(response.data, file, options).then(function () {
-                            var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(response) {
+                            var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(response) {
                               var res;
                               return _regenerator2.default.wrap(function _callee$(_context) {
                                 while (1) {
@@ -2010,7 +2018,7 @@ var Compose = function (_Component) {
                             }));
 
                             return function (_x2) {
-                              return _ref3.apply(this, arguments);
+                              return _ref4.apply(this, arguments);
                             };
                           }()).catch(function (err) {
                             console.log('upload failed: ' + err);
@@ -2025,73 +2033,75 @@ var Compose = function (_Component) {
                 }));
 
                 return function (_x) {
-                  return _ref2.apply(this, arguments);
+                  return _ref3.apply(this, arguments);
                 };
               }());
 
-            case 37:
+            case 40:
               _response = _context3.sent;
-              _context3.next = 43;
+              _context3.next = 46;
               break;
 
-            case 40:
-              _context3.prev = 40;
-              _context3.t0 = _context3['catch'](30);
+            case 43:
+              _context3.prev = 43;
+              _context3.t0 = _context3['catch'](33);
 
               console.log("axios didnt work: " + _context3.t0);
 
-            case 43:
+            case 46:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[30, 40]]);
+      }, _callee3, _this2, [[33, 43]]);
     }));
     _this.checkLink = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
-      var self, text, expression, regex, data, i;
+      var self, text, link, expression, regex, data, i;
       return _regenerator2.default.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
               self = _this;
-              text = '';
+              text = ' ';
+              link = '';
               expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
               regex = new RegExp(expression);
 
               if (!(_this.state.postContent.length > 0)) {
-                _context5.next = 24;
+                _context5.next = 27;
                 break;
               }
 
               data = _this.state.postContent.split(' ');
-              // console.log(data)
+
+              console.log(data);
 
               if (!(data.length > 0)) {
-                _context5.next = 24;
+                _context5.next = 27;
                 break;
               }
 
               i = 0;
 
-            case 8:
+            case 10:
               if (!(i < data.length)) {
-                _context5.next = 24;
+                _context5.next = 27;
                 break;
               }
 
               if (!data[i].match(regex)) {
-                _context5.next = 20;
+                _context5.next = 22;
                 break;
               }
 
-              _context5.prev = 10;
-              _context5.next = 13;
+              _context5.prev = 12;
+              _context5.next = 15;
               return _axios2.default.post( // get preview info from link metadata
               'https://api.linkpreview.net', {
                 q: encodeURIComponent(data[i]),
                 key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
               }).then(function () {
-                var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(resp) {
+                var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(resp) {
                   return _regenerator2.default.wrap(function _callee4$(_context4) {
                     while (1) {
                       switch (_context4.prev = _context4.next) {
@@ -2104,8 +2114,9 @@ var Compose = function (_Component) {
                             linkImage: resp.data.image,
                             linkUrl: resp.data.url
                           });
+                          link = resp.data.url;
 
-                        case 2:
+                        case 3:
                         case 'end':
                           return _context4.stop();
                       }
@@ -2114,41 +2125,43 @@ var Compose = function (_Component) {
                 }));
 
                 return function (_x3) {
-                  return _ref5.apply(this, arguments);
+                  return _ref6.apply(this, arguments);
                 };
               }());
 
-            case 13:
-              _context5.next = 18;
+            case 15:
+              _context5.next = 20;
               break;
 
-            case 15:
-              _context5.prev = 15;
-              _context5.t0 = _context5['catch'](10);
+            case 17:
+              _context5.prev = 17;
+              _context5.t0 = _context5['catch'](12);
 
               console.log(_context5.t0);
 
-            case 18:
-              _context5.next = 21;
-              break;
-
             case 20:
-              text += data[i];
-
-            case 21:
-              i++;
-              _context5.next = 8;
+              _context5.next = 24;
               break;
+
+            case 22:
+              text += data[i];
+              text += ' ';
 
             case 24:
-              return _context5.abrupt('return', text);
+              i++;
+              _context5.next = 10;
+              break;
 
-            case 25:
+            case 27:
+              console.log('text: ' + text);
+              return _context5.abrupt('return', { text: text, link: link });
+
+            case 29:
             case 'end':
               return _context5.stop();
           }
         }
-      }, _callee5, _this2, [[10, 15]]);
+      }, _callee5, _this2, [[12, 17]]);
     }));
 
     _this.handleChange = function (event) {

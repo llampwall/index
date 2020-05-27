@@ -34,8 +34,11 @@ export default class Compose extends Component {
     const fData = new FormData()
 
     // check for link data and get it
-    let text = await this.checkLink()
-    if (text && this.state.linkUrl != '') {
+    let {text, link} = await this.checkLink()
+    console.log(text)
+    console.log(link)
+    if (text && link != '') {
+      console.log('ahjsdbasjhbd')
       fData.append('link_url', this.state.linkUrl)
       fData.append('link_title', this.state.linkTitle)
       fData.append('link_image', this.state.linkImage)
@@ -50,8 +53,11 @@ export default class Compose extends Component {
         fData.append('content', ' ')
       }
     } else {
-      console.log(text)
-      fData.append('content', text)
+      if (text == '' && this.state.linkUrl != '') {
+        fData.append('content', ' ')
+      } else {
+        fData.append('content', text)
+      }
     }
     fData.append('user_id', this.props.initialData.userData.id)
 
@@ -152,42 +158,45 @@ export default class Compose extends Component {
   // check if a link is in the post and update it accordingly
   checkLink = async () => {
       const self = this
-      var text = ''
+      var text = ' '
+      var link = ''
       var expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi
       var regex = new RegExp(expression)
       if(this.state.postContent.length > 0) {
         var data = this.state.postContent.split(' ')
-        // console.log(data)
+        console.log(data)
         if (data.length > 0) {
           for (var i=0; i < data.length; i++) {
             if (data[i].match(regex)) {                 // found a url
-  
               try {
-              await axios.post(                         // get preview info from link metadata
-                'https://api.linkpreview.net',
-                {
-                  q: encodeURIComponent(data[i]),
-                  key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
-                }).then(async function(resp) {
-                  console.log(resp.data)
+                await axios.post(                         // get preview info from link metadata
+                  'https://api.linkpreview.net',
+                  {
+                    q: encodeURIComponent(data[i]),
+                    key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
+                  }).then(async function(resp) {
+                    console.log(resp.data)
 
-                  self.setState({
-                    linkTitle: resp.data.title,
-                    linkDesc: resp.data.description,
-                    linkImage: resp.data.image,
-                    linkUrl: resp.data.url
+                    self.setState({
+                      linkTitle: resp.data.title,
+                      linkDesc: resp.data.description,
+                      linkImage: resp.data.image,
+                      linkUrl: resp.data.url
+                    })
+                    link = resp.data.url
                 })
-              })
-            } catch(error) {
-              console.log(error)
-            }
+              } catch(error) {
+                console.log(error)
+              }
             } else {
               text += data[i]
+              text += ' '
             }
           }
         }
       }
-      return text
+      console.log('text: ' + text)
+      return {text, link}
   }
 
   handleChange = (event) => {
