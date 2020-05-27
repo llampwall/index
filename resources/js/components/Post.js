@@ -22,6 +22,7 @@ export default class Post extends Component {
 
   componentDidMount() {
     const self = this
+
     this.getLikes()
 
     this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')

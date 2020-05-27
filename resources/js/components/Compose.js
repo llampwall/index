@@ -10,7 +10,8 @@ export default class Compose extends Component {
     super()
     this.state = { 
       postContent : '', 
-      image: ''
+      image: '',
+      link: false,
     }
   }
 
@@ -26,6 +27,8 @@ export default class Compose extends Component {
       return
     }
 
+    var content = await this.checkLink()
+
     // get post data
     const fData = new FormData()
     if (this.state.postContent == '') {
@@ -36,6 +39,15 @@ export default class Compose extends Component {
         fData.append('content', ' ')
       }
     } else {
+      var c = ''
+      if (this.state.link) {
+        c += this.state.linkTitle
+        c += ' - '
+        c += this.state.linkDesc
+        c += '\n'
+      }
+      c += this.state.postContent
+      console.log(c)
       fData.append('content', this.state.postContent)
     }
     fData.append('user_id', this.props.initialData.userData.id)
@@ -123,8 +135,42 @@ export default class Compose extends Component {
         console.log("axios didnt work: " + error)
       }
     }
-    
-    
+  }
+
+
+  // check if a link is in the post and update it accordingly
+  checkLink = async () => {
+      var text = ''
+      var expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi
+      var regex = new RegExp(expression)
+      if(this.state.postContent.length > 0) {
+        var data = this.state.postContent.split(' ')
+        // console.log(data)
+        if (data.length > 0) {
+          for (var i=0; i < data.length; i++) {
+            if (data[i].match(regex)) {           // found a url
+  
+              axios.post(                         // get preview info from link metadata
+                'https://api.linkpreview.net',
+                {
+                  q: data[i],
+                  key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
+                }).then(resp => {
+                console.log(resp.data)
+
+                this.setState({
+                  linkTitle: resp.data.title,
+                  linkDesc: resp.data.description,
+                  linkImage: resp.data.image
+                })
+              })
+            } else {
+              text += data[i]
+            }
+          }
+        }
+      }
+      return text
   }
 
   handleChange = (event) => {
