@@ -43,15 +43,26 @@ class PostController {
 
         let url = ''
         let file = ''
+        let link_u = ''
+        let link_t = ''
+        let link_i = ''
+        let link_d = ''
+
         if (request.input('img_name') != null) {
             file = request.input('img_name')
             url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${file}`
         }
+        if (request.input('link_url') != null) {
+            link_u = request.input('link_url')
+            link_t = request.input('link_title')
+            link_i = request.input('link_image')
+            link_d = request.input('link_desc')
+        }
 
-        console.log(request.input('link_url'))
-        console.log(request.input('link_title'))
-        console.log(request.input('link_image'))
-        console.log(request.input('link_desc'))
+        console.log(link_u)
+        console.log(link_t)
+        console.log(link_i)
+        console.log(link_d)
 
         // console.log(request.input('content'))
         // console.log(request.input('user_id'))
@@ -72,7 +83,11 @@ class PostController {
                 content: request.input('content'),
                 user_id: request.input('user_id'),
                 image_url: url,
-                type: pType
+                type: pType,
+                link_url: link_u,
+                link_title: link_t,
+                link_img: link_i,
+                link_desc: link_d
             })
 
             // this will ensure updates happen for others even if you arent connected to websockets
