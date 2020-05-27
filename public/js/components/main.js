@@ -2643,6 +2643,43 @@ var Post = function (_Component) {
       }
     };
 
+    _this.displayLink = function () {
+      if (!_this.state.link) {
+        return;
+      }
+      return _react2.default.createElement(
+        'a',
+        { href: _this.props.post.link_url, target: '_blank', alt: 'external link', className: 'post-link' },
+        _react2.default.createElement(
+          'div',
+          { className: 'link-image' },
+          _react2.default.createElement('img', { src: _this.props.post.link_img })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'link-info' },
+          _react2.default.createElement(
+            'div',
+            { className: 'link-title' },
+            _react2.default.createElement(
+              'h2',
+              null,
+              _this.props.post.link_title
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'link-desc' },
+            _react2.default.createElement(
+              'h5',
+              null,
+              _this.props.post.link_desc
+            )
+          )
+        )
+      );
+    };
+
     _this.state = {
       post: {},
       poster: {},
@@ -2651,7 +2688,8 @@ var Post = function (_Component) {
       update: false,
       liked: false,
       likes: 0,
-      lastLike: ""
+      lastLike: "",
+      link: false
     };
 
     _this.commentArea = _react2.default.createRef(); // ref for updating comments
@@ -2664,6 +2702,12 @@ var Post = function (_Component) {
       var self = this;
 
       this.getLikes();
+
+      if (this.props.post.link_url != '') {
+        this.setState({
+          link: true
+        });
+      }
 
       this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat');
       // update comments whenever someone comments
@@ -2705,6 +2749,9 @@ var Post = function (_Component) {
 
 
     // display the post stats
+
+
+    // display link area if there is a link
 
   }, {
     key: 'render',
@@ -2759,6 +2806,7 @@ var Post = function (_Component) {
             )
           ),
           this.displayMedia(),
+          this.displayLink(),
           _react2.default.createElement(
             'div',
             { className: 'post-info' },

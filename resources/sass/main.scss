@@ -303,6 +303,10 @@ input[type="password"] {
         }
       }
 
+      .post-media {
+        height: 250px;
+      }
+
       .post-info p {
         // text-align: center;
         color: $title-font-color;
@@ -311,7 +315,6 @@ input[type="password"] {
       } 
 
       .post-stats {
-        padding: 0;
 
         .icons {
           .like-btn {

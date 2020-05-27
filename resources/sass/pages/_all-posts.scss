@@ -83,6 +83,43 @@
             width: 100%;
           }
         }
+
+        .post-link {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          padding-left: 1rem;
+
+          .link-image {
+            display: flex;
+            align-items: center;
+            width: 20%;
+            img {
+              width: 100%;
+            }
+          }
+
+          .link-info {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            width: 80%;
+
+            .link-title {
+              h2 {
+                font-weight: 700;
+                color: $accents;
+                margin-bottom: .6rem;
+              }
+            }
+            .link-desc {
+              h5 {
+                color: $secondary-font-color;
+                font-size: .7rem;
+              }
+            }
+          }
+        }
         
         .post-info {
           border-bottom: none;

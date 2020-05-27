@@ -13,7 +13,8 @@ export default class Post extends Component {
         update: false,
         liked: false, 
         likes: 0,
-        lastLike: ""
+        lastLike: "",
+        link: false
     }
     
     this.commentArea = React.createRef()  // ref for updating comments
@@ -24,6 +25,12 @@ export default class Post extends Component {
     const self = this
 
     this.getLikes()
+
+    if (this.props.post.link_url != '') {
+      this.setState({
+        link: true
+      })
+    }
 
     this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
     // update comments whenever someone comments
@@ -275,6 +282,27 @@ export default class Post extends Component {
     }
   }
 
+  // display link area if there is a link
+  displayLink = () => {
+    if (!this.state.link) {
+      return
+    }
+    return (
+      <a href={this.props.post.link_url} target="_blank" alt="external link" className='post-link'>
+        <div className='link-image'>
+          <img src={this.props.post.link_img} />
+        </div>
+        <div className='link-info'>
+          <div className='link-title'>
+            <h2>{this.props.post.link_title}</h2>
+          </div>
+          <div className='link-desc'>
+            <h5>{this.props.post.link_desc}</h5>
+          </div>
+        </div> 
+      </a>
+    )
+  }
 
   render () {
 
@@ -304,6 +332,8 @@ export default class Post extends Component {
                 </div>
 
                 {this.displayMedia()}
+                {this.displayLink()}
+
                 <div className="post-info">
                     <p>{this.props.post.content}</p>
                 </div>
