@@ -30,12 +30,18 @@ export default class Compose extends Component {
       return
     }
 
-    // check for link data and get it
-    let text = await this.checkLink()
-    console.log(text)
-
     // get post data
     const fData = new FormData()
+
+    // check for link data and get it
+    let text = await this.checkLink()
+    if (text && this.state.linkUrl != '') {
+      fData.append('link_url', this.state.linkUrl)
+      fData.append('link_title', this.state.linkTitle)
+      fData.append('link_image', this.state.linkImage)
+      fData.append('link_desc', this.state.linkDesc)
+    }
+
     if (text == '' && this.state.linkUrl == '') {
       if (this.state.image == '') {
         return
@@ -110,7 +116,11 @@ export default class Compose extends Component {
                 }).then (function() {
                   self.setState({
                     postContent: "",
-                    image: ""
+                    image: "", 
+                    linkUrl: "",
+                    linkTitle: "",
+                    linkImage: "",
+                    linkDesc: ""
                   })
                   document.getElementById("content").disabled = false   // enable input again
                   self.props.update()

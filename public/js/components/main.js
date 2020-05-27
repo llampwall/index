@@ -1825,7 +1825,7 @@ var Compose = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
 
     _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-      var self, text, fData, response, file, filename, type, _response;
+      var self, fData, text, response, file, filename, type, _response;
 
       return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
@@ -1845,16 +1845,24 @@ var Compose = function (_Component) {
               return _context3.abrupt('return');
 
             case 4:
-              _context3.next = 6;
-              return _this.checkLink();
-
-            case 6:
-              text = _context3.sent;
-
-              console.log(text);
 
               // get post data
               fData = new FormData();
+
+              // check for link data and get it
+
+              _context3.next = 7;
+              return _this.checkLink();
+
+            case 7:
+              text = _context3.sent;
+
+              if (text && _this.state.linkUrl != '') {
+                fData.append('link_url', _this.state.linkUrl);
+                fData.append('link_title', _this.state.linkTitle);
+                fData.append('link_image', _this.state.linkImage);
+                fData.append('link_desc', _this.state.linkDesc);
+              }
 
               if (!(text == '' && _this.state.linkUrl == '')) {
                 _context3.next = 17;
@@ -1969,7 +1977,11 @@ var Compose = function (_Component) {
                                       }).then(function () {
                                         self.setState({
                                           postContent: "",
-                                          image: ""
+                                          image: "",
+                                          linkUrl: "",
+                                          linkTitle: "",
+                                          linkImage: "",
+                                          linkDesc: ""
                                         });
                                         document.getElementById("content").disabled = false; // enable input again
                                         self.props.update();

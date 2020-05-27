@@ -48,6 +48,11 @@ class PostController {
             url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${file}`
         }
 
+        console.log(request.input('link_url'))
+        console.log(request.input('link_title'))
+        console.log(request.input('link_image'))
+        console.log(request.input('link_desc'))
+
         // console.log(request.input('content'))
         // console.log(request.input('user_id'))
         // console.log(url)
