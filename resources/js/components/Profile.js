@@ -9,7 +9,8 @@ export default class Profile extends Component {
     this.state = {
       initialData: {}, 
       user: "",
-      edit: false
+      edit: false,
+      image: ""
     }
   }
 
@@ -28,14 +29,21 @@ export default class Profile extends Component {
     let user = ''
     try {
       user = await axios.get(`/api/user/${match.params.id}`)
+      .then()
       // console.log(user)
     } catch(error) {
       console.log(error)
     }
 
+    var image = user.data[0].profile_img
+    if (image.slice(-7) == 'normal') {
+      image = image.replace('normal', 'large')
+    }
+
     this.setState({
       ...this.state,
-      user: user.data[0]
+      user: user.data[0],
+      image: image
     }, () => {
       // console.log(this.state)
     })
@@ -95,7 +103,7 @@ export default class Profile extends Component {
         <div className="content-area profile-page">
           <div className='cover'></div>
           <div className="user-img">
-            <img src={this.state.user.profile_img} />
+            <img src={this.state.image} />
             <div className="follow-btn">follow <i className='ayn-bell'></i></div>
             <div className='lower-5th'>
               <h1>{this.state.user.fname} {this.state.user.lname}</h1>

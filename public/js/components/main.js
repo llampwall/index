@@ -1039,7 +1039,7 @@ var Profile = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this));
 
     _this.getUser = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-      var _props$routeProps, match, history, location, self, user;
+      var _props$routeProps, match, history, location, self, user, image;
 
       return _regenerator2.default.wrap(function _callee$(_context) {
         while (1) {
@@ -1050,7 +1050,7 @@ var Profile = function (_Component) {
               user = '';
               _context.prev = 3;
               _context.next = 6;
-              return _axios2.default.get('/api/user/' + match.params.id);
+              return _axios2.default.get('/api/user/' + match.params.id).then();
 
             case 6:
               user = _context.sent;
@@ -1064,14 +1064,20 @@ var Profile = function (_Component) {
               console.log(_context.t0);
 
             case 12:
+              image = user.data[0].profile_img;
+
+              if (image.slice(-7) == 'normal') {
+                image = image.replace('normal', 'large');
+              }
 
               this.setState((0, _extends3.default)({}, this.state, {
-                user: user.data[0]
+                user: user.data[0],
+                image: image
               }), function () {
                 // console.log(this.state)
               });
 
-            case 13:
+            case 15:
             case 'end':
               return _context.stop();
           }
@@ -1121,7 +1127,8 @@ var Profile = function (_Component) {
     _this.state = {
       initialData: {},
       user: "",
-      edit: false
+      edit: false,
+      image: ""
     };
     return _this;
   }
@@ -1166,7 +1173,7 @@ var Profile = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'user-img' },
-            _react2.default.createElement('img', { src: this.state.user.profile_img }),
+            _react2.default.createElement('img', { src: this.state.image }),
             _react2.default.createElement(
               'div',
               { className: 'follow-btn' },
