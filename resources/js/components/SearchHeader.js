@@ -11,6 +11,9 @@ export default class SearchHeader extends Component {
     return (
         <div className="header">
             {/* <div className="nothing" /> */}
+            <a href="/">
+              <img src="/img/sun_small.JPG" alt="index - home"></img>
+            </a>
             <div className="search">
                 <input type="text" name="search" placeholder="search..." />
             </div>

@@ -38,7 +38,7 @@
               font-size: .9rem;
               font-weight: 700;
               cursor: pointer;
-              padding: 0 1rem;
+              padding: 0 .5rem 0 1rem;
             }
 
             .text {
@@ -63,7 +63,7 @@
             align-items: center;
             justify-content: center;
             border: $border-thickness solid $button-color;
-            margin-right: .7rem;
+            margin-right: 0;
             cursor: pointer;
             &.active {
               display: flex;
@@ -136,7 +136,7 @@
               align-items: center;
               justify-content: center;
               border: $border-thickness solid $button-color;
-              margin-right: .7rem;
+              margin-right: 0;
               cursor: pointer;
               
               &.active {

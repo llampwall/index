@@ -1203,7 +1203,7 @@ exports.default = Profile;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _classCallCheck2 = __webpack_require__(19);
@@ -1229,32 +1229,37 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SearchHeader = function (_Component) {
-    (0, _inherits3.default)(SearchHeader, _Component);
+  (0, _inherits3.default)(SearchHeader, _Component);
 
-    function SearchHeader() {
-        (0, _classCallCheck3.default)(this, SearchHeader);
+  function SearchHeader() {
+    (0, _classCallCheck3.default)(this, SearchHeader);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (SearchHeader.__proto__ || Object.getPrototypeOf(SearchHeader)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (SearchHeader.__proto__ || Object.getPrototypeOf(SearchHeader)).call(this));
 
-        _this.state = {};
-        return _this;
+    _this.state = {};
+    return _this;
+  }
+
+  (0, _createClass3.default)(SearchHeader, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "header" },
+        _react2.default.createElement(
+          "a",
+          { href: "/" },
+          _react2.default.createElement("img", { src: "/img/sun_small.JPG", alt: "index - home" })
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "search" },
+          _react2.default.createElement("input", { type: "text", name: "search", placeholder: "search..." })
+        )
+      );
     }
-
-    (0, _createClass3.default)(SearchHeader, [{
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "div",
-                { className: "header" },
-                _react2.default.createElement(
-                    "div",
-                    { className: "search" },
-                    _react2.default.createElement("input", { type: "text", name: "search", placeholder: "search..." })
-                )
-            );
-        }
-    }]);
-    return SearchHeader;
+  }]);
+  return SearchHeader;
 }(_react.Component);
 
 exports.default = SearchHeader;
