@@ -11,7 +11,10 @@ export default class Compose extends Component {
     this.state = { 
       postContent : '', 
       image: '',
-      link: false,
+      linkUrl: '',
+      linkTitle: '',
+      linkImage: '',
+      linkDesc: ''
     }
   }
 
@@ -31,7 +34,7 @@ export default class Compose extends Component {
 
     // get post data
     const fData = new FormData()
-    if (this.state.postContent == '') {
+    if (content == '' && this.state.linkUrl == '') {
       if (this.state.image == '') {
         return
       } else {
@@ -39,16 +42,8 @@ export default class Compose extends Component {
         fData.append('content', ' ')
       }
     } else {
-      var c = ''
-      if (this.state.link) {
-        c += this.state.linkTitle
-        c += ' - '
-        c += this.state.linkDesc
-        c += '\n'
-      }
-      c += this.state.postContent
-      console.log(c)
-      fData.append('content', this.state.postContent)
+      console.log(content)
+      fData.append('content', content)
     }
     fData.append('user_id', this.props.initialData.userData.id)
 
@@ -161,7 +156,8 @@ export default class Compose extends Component {
                 this.setState({
                   linkTitle: resp.data.title,
                   linkDesc: resp.data.description,
-                  linkImage: resp.data.image
+                  linkImage: resp.data.image,
+                  linkUrl: resp.data.url
                 })
               })
             } else {

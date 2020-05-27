@@ -1825,7 +1825,7 @@ var Compose = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
 
     _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-      var self, content, fData, c, response, file, filename, type, _response;
+      var self, content, fData, response, file, filename, type, _response;
 
       return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
@@ -1855,7 +1855,7 @@ var Compose = function (_Component) {
               // get post data
               fData = new FormData();
 
-              if (!(_this.state.postContent == '')) {
+              if (!(content == '' && _this.state.linkUrl == '')) {
                 _context3.next = 16;
                 break;
               }
@@ -1872,33 +1872,24 @@ var Compose = function (_Component) {
               fData.append('content', ' ');
 
             case 14:
-              _context3.next = 21;
+              _context3.next = 18;
               break;
 
             case 16:
-              c = '';
+              console.log(content);
+              fData.append('content', content);
 
-              if (_this.state.link) {
-                c += _this.state.linkTitle;
-                c += ' - ';
-                c += _this.state.linkDesc;
-                c += '\n';
-              }
-              c += _this.state.postContent;
-              console.log(c);
-              fData.append('content', _this.state.postContent);
-
-            case 21:
+            case 18:
               fData.append('user_id', _this.props.initialData.userData.id);
 
               if (!(_this.state.image == '')) {
-                _context3.next = 30;
+                _context3.next = 27;
                 break;
               }
 
               fData.append('img_name', '');
               console.log('no image');
-              _context3.next = 27;
+              _context3.next = 24;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -1918,12 +1909,12 @@ var Compose = function (_Component) {
                 return 'item saved';
               });
 
-            case 27:
+            case 24:
               response = _context3.sent;
-              _context3.next = 45;
+              _context3.next = 42;
               break;
 
-            case 30:
+            case 27:
               // there is an image or video in the post
 
               // disable input while image uploads - maybe add loading symbol
@@ -1931,7 +1922,7 @@ var Compose = function (_Component) {
               document.getElementById("content").innerText = 'Loading...';
 
               // get signed url from the server
-              _context3.prev = 32;
+              _context3.prev = 29;
               file = self.state.image;
               filename = file.name;
               type = encodeURIComponent(file.type);
@@ -1939,7 +1930,7 @@ var Compose = function (_Component) {
 
               console.log(type);
 
-              _context3.next = 39;
+              _context3.next = 36;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
                 var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
                   var options;
@@ -2021,23 +2012,23 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 39:
+            case 36:
               _response = _context3.sent;
-              _context3.next = 45;
+              _context3.next = 42;
               break;
 
-            case 42:
-              _context3.prev = 42;
-              _context3.t0 = _context3['catch'](32);
+            case 39:
+              _context3.prev = 39;
+              _context3.t0 = _context3['catch'](29);
 
               console.log("axios didnt work: " + _context3.t0);
 
-            case 45:
+            case 42:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[32, 42]]);
+      }, _callee3, _this2, [[29, 39]]);
     }));
     _this.checkLink = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
       var text, expression, regex, data, i;
@@ -2068,7 +2059,8 @@ var Compose = function (_Component) {
                         _this.setState({
                           linkTitle: resp.data.title,
                           linkDesc: resp.data.description,
-                          linkImage: resp.data.image
+                          linkImage: resp.data.image,
+                          linkUrl: resp.data.url
                         });
                       });
                     } else {
@@ -2129,7 +2121,10 @@ var Compose = function (_Component) {
     _this.state = {
       postContent: '',
       image: '',
-      link: false
+      linkUrl: '',
+      linkTitle: '',
+      linkImage: '',
+      linkDesc: ''
     };
     return _this;
   }
