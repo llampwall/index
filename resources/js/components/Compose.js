@@ -146,7 +146,6 @@ export default class Compose extends Component {
                 console.log('upload failed: ' + err)
             })
 
-          
         })
       } catch (error) {
         console.log("axios didnt work: " + error)
