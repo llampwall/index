@@ -73,6 +73,7 @@
 
         .post-media {
           width: 100%;
+          padding-top: 1px;
           image-orientation: from-image;
           border-bottom: $border-thickness solid $border-color;
           margin: 0 auto;
@@ -95,7 +96,7 @@
             display: flex;
             align-items: center;
             width: 20%;
-            padding-top: .5rem;
+            padding-top: 1px;
             img {
               width: 100%;
             }
@@ -338,10 +339,10 @@
             align-items: center;
             justify-content: center;
             border: $border-thickness solid $button-color;
-            margin-right: .7rem;
+            // margin-right: .7rem;
             cursor: pointer;
             position: absolute;
-            top: -42px;
+            top: -2.1rem;
             right: 0px;
             z-index: 2;
 

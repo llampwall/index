@@ -87,6 +87,51 @@ $post-bg: $secondary;
 // $write-comment-bg: white;
 
 
+//not dark mode
+// $outer-bg: #475159;
+// $content-area-bg: #D9BEB8;
+// $primary: #666767;
+// $secondary: #7C7170;
+// $third: #A6746F;
+// $fourth:#D9BEB8;
+// $accents: #A6746F;
+// $title-font-color: #BF847E;
+// $lr-menu-headers: #F2E6E4;
+// $primary-font-color: #3D3C3B;
+// $secondary-font-color: #6A5F51;
+// $third-font-color: #F2E6E4;
+// $placeholder-font-color: #829AB1;
+// $border-color: #475159;
+// $button-bg: $primary;
+// $button-color: $accents;
+// $comment-bg: $secondary;
+// $write-comment-bg: #F2E6E4;
+// $shadow-light: #829AB1;
+// $shadow-color: #475159;
+// // $shadow-color: #273D54;
+// // area specific color vars
+
+// $menus: $secondary;
+// $search-header-bg: $menus;
+
+// // $lr-menu-headers: $primary-font-color;
+
+// $left-menu-bg: $menus;
+// $left-menu-primary: $primary-font-color;
+// $left-menu-secondary: $secondary-font-color;
+
+// $right-menu-bg: $menus;
+// $right-menu-names: $secondary-font-color;
+// $right-menu-icons: $accents;
+
+// $compose-bg: $third;
+
+// $post-header-bg: $secondary;
+// $post-bg: $secondary;
+// // $comment-bg: $secondary;
+// // $write-comment-bg: white;
+
+
 
 * {
   border: none !important;
@@ -270,9 +315,9 @@ $post-bg: $secondary;
   box-shadow: 5px 5px 0px 0px $shadow-color;
 }
 @mixin hard-shadow {
-  -webkit-box-shadow: 5px 5px 20px 0px $shadow-color;
-  -moz-box-shadow: 5px 5px 20px 0px $shadow-color;
-  box-shadow: 5px 5px 20px 5px $shadow-color;
+  -webkit-box-shadow: 3px 12px 56px -15px rgba(0,0,0,0.34);
+-moz-box-shadow: 3px 12px 56px -15px rgba(0,0,0,0.34);
+box-shadow: 3px 12px 56px -15px rgba(0,0,0,0.34);
 }
 
 @mixin hard-shadow-white {

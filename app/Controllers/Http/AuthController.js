@@ -90,7 +90,7 @@ class AuthController {
             return response.redirect('back')
         }
 
-        url = img ? `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${img}` : '/img/user.jpg'
+        url = img ? `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${img}` : '/img/user-anon.png'
 
         console.log(first)
         console.log(last)
