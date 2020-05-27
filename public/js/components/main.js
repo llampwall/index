@@ -1907,7 +1907,11 @@ var Compose = function (_Component) {
               }).then(function (response) {
                 self.setState({
                   postContent: "",
-                  image: ""
+                  image: "",
+                  linkUrl: "",
+                  linkTitle: "",
+                  linkImage: "",
+                  linkDesc: ""
                 });
                 self.props.update();
                 //update everyone else's feed
@@ -2055,7 +2059,7 @@ var Compose = function (_Component) {
               regex = new RegExp(expression);
 
               if (!(_this.state.postContent.length > 0)) {
-                _context5.next = 18;
+                _context5.next = 24;
                 break;
               }
 
@@ -2063,7 +2067,7 @@ var Compose = function (_Component) {
               // console.log(data)
 
               if (!(data.length > 0)) {
-                _context5.next = 18;
+                _context5.next = 24;
                 break;
               }
 
@@ -2071,19 +2075,20 @@ var Compose = function (_Component) {
 
             case 8:
               if (!(i < data.length)) {
-                _context5.next = 18;
+                _context5.next = 24;
                 break;
               }
 
               if (!data[i].match(regex)) {
-                _context5.next = 14;
+                _context5.next = 20;
                 break;
               }
 
-              _context5.next = 12;
+              _context5.prev = 10;
+              _context5.next = 13;
               return _axios2.default.post( // get preview info from link metadata
               'https://api.linkpreview.net', {
-                q: data[i],
+                q: encodeURIComponent(data[i]),
                 key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
               }).then(function () {
                 var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(resp) {
@@ -2113,27 +2118,37 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 12:
-              _context5.next = 15;
+            case 13:
+              _context5.next = 18;
               break;
 
-            case 14:
+            case 15:
+              _context5.prev = 15;
+              _context5.t0 = _context5['catch'](10);
+
+              console.log(_context5.t0);
+
+            case 18:
+              _context5.next = 21;
+              break;
+
+            case 20:
               text += data[i];
 
-            case 15:
+            case 21:
               i++;
               _context5.next = 8;
               break;
 
-            case 18:
+            case 24:
               return _context5.abrupt('return', text);
 
-            case 19:
+            case 25:
             case 'end':
               return _context5.stop();
           }
         }
-      }, _callee5, _this2);
+      }, _callee5, _this2, [[10, 15]]);
     }));
 
     _this.handleChange = function (event) {

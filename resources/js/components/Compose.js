@@ -66,7 +66,11 @@ export default class Compose extends Component {
       }).then (function(response) {
         self.setState({
           postContent: "",
-          image: ""
+          image: "",
+          linkUrl: "",
+          linkTitle: "",
+          linkImage: "",
+          linkDesc: ""
         })
         self.props.update()
         //update everyone else's feed
@@ -158,10 +162,11 @@ export default class Compose extends Component {
           for (var i=0; i < data.length; i++) {
             if (data[i].match(regex)) {                 // found a url
   
+              try {
               await axios.post(                         // get preview info from link metadata
                 'https://api.linkpreview.net',
                 {
-                  q: data[i],
+                  q: encodeURIComponent(data[i]),
                   key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
                 }).then(async function(resp) {
                   console.log(resp.data)
@@ -171,8 +176,11 @@ export default class Compose extends Component {
                     linkDesc: resp.data.description,
                     linkImage: resp.data.image,
                     linkUrl: resp.data.url
-                  })
+                })
               })
+            } catch(error) {
+              console.log(error)
+            }
             } else {
               text += data[i]
             }
