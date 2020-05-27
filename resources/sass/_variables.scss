@@ -44,47 +44,79 @@ $shadow-color: rgba(0,0,0,0.75);
 
 
 //dark mode
-$outer-bg: #1D2025;
-$primary: #2d2d2d;
-$secondary: #1D2025;
-$third: #1F2933;
-$fourth:#dbdbdb;
-$accents: #9CC1B5;
-$title-font-color: $shadow;
-$lr-menu-headers: $sandy;
-$primary-font-color: #829AB1;
-$secondary-font-color: #CCD9E3;
-$third-font-color: #CCD9E3;
-$placeholder-font-color: #829AB1;
-$border-color: #102A43;
+// $outer-bg: #1D2025;
+// $primary: #2d2d2d;
+// $secondary: #1D2025;
+// $third: #1F2933;
+// $fourth:#dbdbdb;
+// $accents: #9CC1B5;
+// $title-font-color: $shadow;
+// $lr-menu-headers: $sandy;
+// $primary-font-color: #829AB1;
+// $secondary-font-color: #CCD9E3;
+// $third-font-color: #CCD9E3;
+// $placeholder-font-color: #829AB1;
+// $border-color: #102A43;
+// $button-bg: $primary;
+// $button-color: $accents;
+// $comment-bg: $secondary;
+// $write-comment-bg: #273D54;
+// $shadow-light: #829AB1;
+// $shadow-color: #1D2025;
+// // area specific color vars
+// $content-area-bg: $third;
+// $menus: $secondary;
+// $search-header-bg: $menus;
+// $left-menu-bg: $menus;
+// $left-menu-primary: $primary-font-color;
+// $left-menu-secondary: $secondary-font-color;
+// $right-menu-bg: $menus;
+// $right-menu-names: $secondary-font-color;
+// $right-menu-icons: $accents;
+// $compose-bg: $third;
+// $post-header-bg: $secondary;
+// $post-bg: $secondary;
+
+
+
+
+
+//high contrast
+$outer-bg: #201f28;
+$primary: #201f28;
+$secondary: #16161D;
+$third: #1a191f;
+$fourth:#d3cfd2;
+$accents: #dc568c;
+$title-font-color: #d95788;
+$lr-menu-headers: white;
+$primary-font-color: #94c4d4;
+$secondary-font-color: #9DB688;
+$third-font-color: #94c4d4;
+$placeholder-font-color: white;
+$border-color: $fourth;
 $button-bg: $primary;
 $button-color: $accents;
 $comment-bg: $secondary;
-$write-comment-bg: #273D54;
-$shadow-light: #829AB1;
-$shadow-color: #1D2025;
-// $shadow-color: #273D54;
+$write-comment-bg: #212128;
+$shadow-light: #27272F;
+$shadow-color: #1a191f;
 // area specific color vars
 $content-area-bg: $third;
 $menus: $secondary;
 $search-header-bg: $menus;
-
-// $lr-menu-headers: $primary-font-color;
-
 $left-menu-bg: $menus;
 $left-menu-primary: $primary-font-color;
 $left-menu-secondary: $secondary-font-color;
-
 $right-menu-bg: $menus;
 $right-menu-names: $secondary-font-color;
 $right-menu-icons: $accents;
-
 $compose-bg: $third;
-
 $post-header-bg: $secondary;
 $post-bg: $secondary;
-// $comment-bg: $secondary;
-// $write-comment-bg: white;
+
+
+
 
 
 //not dark mode

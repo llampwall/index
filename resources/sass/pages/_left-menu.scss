@@ -13,16 +13,16 @@
     transition: all .5s ease-in-out;
     z-index: 2;
 
-    -webkit-box-shadow: 23px 0px 57px -20px rgba(39,61,84,.6);
-    -moz-box-shadow: 23px 0px 57px -20px rgba(39,61,84,.6);
-    box-shadow: 23px 0px 57px -20px rgba(39,61,84,.6);
+    -webkit-box-shadow: 23px 0px 57px -20px rgba(39,61,84,.2);
+    -moz-box-shadow: 23px 0px 57px -20px rgba(39,61,84,.2);
+    box-shadow: 23px 0px 57px -20px rgba(39,61,84,.2);
 
     &.closed {
       left: -15rem;
 
-      -webkit-box-shadow: 23px 0px 57px -20px rgba($lr-menu-headers,.4);
-      -moz-box-shadow: 23px 0px 57px -20px rgba($lr-menu-headers,.4);
-      box-shadow: 23px 0px 57px -20px rgba($lr-menu-headers,.4);
+      -webkit-box-shadow: 23px 0px 57px -20px rgba(155,155,155,.2);
+      -moz-box-shadow: 23px 0px 57px -20px rgba(155,155,155,.2);
+      box-shadow: 23px 0px 57px -20px rgba(155,155,155,.2);
     }
     
     .account-dropdown {
