@@ -30,11 +30,13 @@ export default class Compose extends Component {
       return
     }
 
-    var content = await this.checkLink()
+    // check for link data and get it
+    let text = await this.checkLink()
+    console.log(text)
 
     // get post data
     const fData = new FormData()
-    if (content == '' && this.state.linkUrl == '') {
+    if (text == '' && this.state.linkUrl == '') {
       if (this.state.image == '') {
         return
       } else {
@@ -42,8 +44,8 @@ export default class Compose extends Component {
         fData.append('content', ' ')
       }
     } else {
-      console.log(content)
-      fData.append('content', content)
+      console.log(text)
+      fData.append('content', text)
     }
     fData.append('user_id', this.props.initialData.userData.id)
 
@@ -135,6 +137,7 @@ export default class Compose extends Component {
 
   // check if a link is in the post and update it accordingly
   checkLink = async () => {
+      const self = this
       var text = ''
       var expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi
       var regex = new RegExp(expression)
@@ -143,22 +146,22 @@ export default class Compose extends Component {
         // console.log(data)
         if (data.length > 0) {
           for (var i=0; i < data.length; i++) {
-            if (data[i].match(regex)) {           // found a url
+            if (data[i].match(regex)) {                 // found a url
   
-              axios.post(                         // get preview info from link metadata
+              await axios.post(                         // get preview info from link metadata
                 'https://api.linkpreview.net',
                 {
                   q: data[i],
                   key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
-                }).then(resp => {
-                console.log(resp.data)
+                }).then(async function(resp) {
+                  console.log(resp.data)
 
-                this.setState({
-                  linkTitle: resp.data.title,
-                  linkDesc: resp.data.description,
-                  linkImage: resp.data.image,
-                  linkUrl: resp.data.url
-                })
+                  self.setState({
+                    linkTitle: resp.data.title,
+                    linkDesc: resp.data.description,
+                    linkImage: resp.data.image,
+                    linkUrl: resp.data.url
+                  })
               })
             } else {
               text += data[i]

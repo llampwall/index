@@ -1825,7 +1825,7 @@ var Compose = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Compose.__proto__ || Object.getPrototypeOf(Compose)).call(this));
 
     _this.submitPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-      var self, content, fData, response, file, filename, type, _response;
+      var self, text, fData, response, file, filename, type, _response;
 
       return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
@@ -1849,47 +1849,48 @@ var Compose = function (_Component) {
               return _this.checkLink();
 
             case 6:
-              content = _context3.sent;
+              text = _context3.sent;
 
+              console.log(text);
 
               // get post data
               fData = new FormData();
 
-              if (!(content == '' && _this.state.linkUrl == '')) {
-                _context3.next = 16;
+              if (!(text == '' && _this.state.linkUrl == '')) {
+                _context3.next = 17;
                 break;
               }
 
               if (!(_this.state.image == '')) {
-                _context3.next = 13;
+                _context3.next = 14;
                 break;
               }
 
               return _context3.abrupt('return');
 
-            case 13:
+            case 14:
               // if there is just an image append a space for the content
               fData.append('content', ' ');
 
-            case 14:
-              _context3.next = 18;
+            case 15:
+              _context3.next = 19;
               break;
 
-            case 16:
-              console.log(content);
-              fData.append('content', content);
+            case 17:
+              console.log(text);
+              fData.append('content', text);
 
-            case 18:
+            case 19:
               fData.append('user_id', _this.props.initialData.userData.id);
 
               if (!(_this.state.image == '')) {
-                _context3.next = 27;
+                _context3.next = 28;
                 break;
               }
 
               fData.append('img_name', '');
               console.log('no image');
-              _context3.next = 24;
+              _context3.next = 25;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -1909,12 +1910,12 @@ var Compose = function (_Component) {
                 return 'item saved';
               });
 
-            case 24:
+            case 25:
               response = _context3.sent;
-              _context3.next = 42;
+              _context3.next = 43;
               break;
 
-            case 27:
+            case 28:
               // there is an image or video in the post
 
               // disable input while image uploads - maybe add loading symbol
@@ -1922,7 +1923,7 @@ var Compose = function (_Component) {
               document.getElementById("content").innerText = 'Loading...';
 
               // get signed url from the server
-              _context3.prev = 29;
+              _context3.prev = 30;
               file = self.state.image;
               filename = file.name;
               type = encodeURIComponent(file.type);
@@ -1930,7 +1931,7 @@ var Compose = function (_Component) {
 
               console.log(type);
 
-              _context3.next = 36;
+              _context3.next = 37;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
                 var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
                   var options;
@@ -2012,71 +2013,115 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 36:
+            case 37:
               _response = _context3.sent;
-              _context3.next = 42;
+              _context3.next = 43;
               break;
 
-            case 39:
-              _context3.prev = 39;
-              _context3.t0 = _context3['catch'](29);
+            case 40:
+              _context3.prev = 40;
+              _context3.t0 = _context3['catch'](30);
 
               console.log("axios didnt work: " + _context3.t0);
 
-            case 42:
+            case 43:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[29, 39]]);
+      }, _callee3, _this2, [[30, 40]]);
     }));
-    _this.checkLink = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
-      var text, expression, regex, data, i;
-      return _regenerator2.default.wrap(function _callee4$(_context4) {
+    _this.checkLink = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
+      var self, text, expression, regex, data, i;
+      return _regenerator2.default.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
+              self = _this;
               text = '';
               expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
               regex = new RegExp(expression);
 
-              if (_this.state.postContent.length > 0) {
-                data = _this.state.postContent.split(' ');
-                // console.log(data)
-
-                if (data.length > 0) {
-                  for (i = 0; i < data.length; i++) {
-                    if (data[i].match(regex)) {
-                      // found a url
-
-                      _axios2.default.post( // get preview info from link metadata
-                      'https://api.linkpreview.net', {
-                        q: data[i],
-                        key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
-                      }).then(function (resp) {
-                        console.log(resp.data);
-
-                        _this.setState({
-                          linkTitle: resp.data.title,
-                          linkDesc: resp.data.description,
-                          linkImage: resp.data.image,
-                          linkUrl: resp.data.url
-                        });
-                      });
-                    } else {
-                      text += data[i];
-                    }
-                  }
-                }
+              if (!(_this.state.postContent.length > 0)) {
+                _context5.next = 18;
+                break;
               }
-              return _context4.abrupt('return', text);
 
-            case 5:
+              data = _this.state.postContent.split(' ');
+              // console.log(data)
+
+              if (!(data.length > 0)) {
+                _context5.next = 18;
+                break;
+              }
+
+              i = 0;
+
+            case 8:
+              if (!(i < data.length)) {
+                _context5.next = 18;
+                break;
+              }
+
+              if (!data[i].match(regex)) {
+                _context5.next = 14;
+                break;
+              }
+
+              _context5.next = 12;
+              return _axios2.default.post( // get preview info from link metadata
+              'https://api.linkpreview.net', {
+                q: data[i],
+                key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
+              }).then(function () {
+                var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(resp) {
+                  return _regenerator2.default.wrap(function _callee4$(_context4) {
+                    while (1) {
+                      switch (_context4.prev = _context4.next) {
+                        case 0:
+                          console.log(resp.data);
+
+                          self.setState({
+                            linkTitle: resp.data.title,
+                            linkDesc: resp.data.description,
+                            linkImage: resp.data.image,
+                            linkUrl: resp.data.url
+                          });
+
+                        case 2:
+                        case 'end':
+                          return _context4.stop();
+                      }
+                    }
+                  }, _callee4, this);
+                }));
+
+                return function (_x3) {
+                  return _ref5.apply(this, arguments);
+                };
+              }());
+
+            case 12:
+              _context5.next = 15;
+              break;
+
+            case 14:
+              text += data[i];
+
+            case 15:
+              i++;
+              _context5.next = 8;
+              break;
+
+            case 18:
+              return _context5.abrupt('return', text);
+
+            case 19:
             case 'end':
-              return _context4.stop();
+              return _context5.stop();
           }
         }
-      }, _callee4, _this2);
+      }, _callee5, _this2);
     }));
 
     _this.handleChange = function (event) {
