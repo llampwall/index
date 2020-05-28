@@ -1758,7 +1758,7 @@ var Profile = function (_Component) {
             case 12:
               image = user.data[0].profile_img;
 
-              if (image.slice(-7) == 'normal') {
+              if (image.slice(-6) == 'normal') {
                 image = image.replace('normal', 'large');
               }
 

@@ -36,7 +36,7 @@ export default class Profile extends Component {
     }
 
     var image = user.data[0].profile_img
-    if (image.slice(-7) == 'normal') {
+    if (image.slice(-6) == 'normal') {
       image = image.replace('normal', 'large')
     }
 
