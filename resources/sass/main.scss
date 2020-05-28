@@ -290,9 +290,10 @@ input[type="password"] {
           .username {
             font-size: .9rem;
           }
-          .text {
-            display: none;
-          }
+        }
+        .text {
+          font-size: .7rem;
+          letter-spacing: 0;
         }
         .time {
           display: none;
