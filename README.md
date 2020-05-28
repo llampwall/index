@@ -14,6 +14,10 @@
         - posts now have link previews with title, image, description if a link is found in the post
         - users can delete posts and comments that they have made themselves
         - websockets are used to update everyone's feeds when any user posts or comments or likes something
+        - click images to open large view
+        - click videos to pause/mute/download/fullscreen
+        - click user name to go to poster's profile
+        - click link icon to go to individual post page (link to share this post)
 
     {messenger}
         - you are immediately visible to all online as soon as you log in
@@ -32,7 +36,7 @@
         - expanded profile page (right now it is there but it's just your picture)
         - groups / pages (they are visible on the left but not functional)
         - news / weather / popular posts at the top of feed
-        - linking to posts
+        - notifications
         - animations are in the works
         - log in via google
         - post searching

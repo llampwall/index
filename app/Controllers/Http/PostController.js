@@ -15,6 +15,13 @@ class PostController {
 
     }
 
+    async getPost({request, response}) {
+        const { id } = request.params
+        const post = await Post.query().where('posts.id', id).fetch()
+        console.log(post.data)
+        return post
+    }
+
     // get and return a signed aws url for image uploading
     async getUrl({request, response}) {
 

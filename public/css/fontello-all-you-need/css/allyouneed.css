@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'allyouneed';
-  src: url('../font/allyouneed.eot?20021675');
-  src: url('../font/allyouneed.eot?20021675#iefix') format('embedded-opentype'),
-       url('../font/allyouneed.woff2?20021675') format('woff2'),
-       url('../font/allyouneed.woff?20021675') format('woff'),
-       url('../font/allyouneed.ttf?20021675') format('truetype'),
-       url('../font/allyouneed.svg?20021675#allyouneed') format('svg');
+  src: url('../font/allyouneed.eot?43612398');
+  src: url('../font/allyouneed.eot?43612398#iefix') format('embedded-opentype'),
+       url('../font/allyouneed.woff2?43612398') format('woff2'),
+       url('../font/allyouneed.woff?43612398') format('woff'),
+       url('../font/allyouneed.ttf?43612398') format('truetype'),
+       url('../font/allyouneed.svg?43612398#allyouneed') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'allyouneed';
-    src: url('../font/allyouneed.svg?20021675#allyouneed') format('svg');
+    src: url('../font/allyouneed.svg?43612398#allyouneed') format('svg');
   }
 }
 */
@@ -24,7 +24,7 @@
   font-family: "allyouneed";
   font-style: normal;
   font-weight: normal;
-  speak: none;
+  speak: never;
  
   display: inline-block;
   text-decoration: inherit;
@@ -157,6 +157,7 @@
 .ayn-up-open:before { content: '\f005'; } /* '' */
 .ayn-right-open:before { content: '\f006'; } /* '' */
 .ayn-left-open:before { content: '\f007'; } /* '' */
+.ayn-link:before { content: '\f07b'; } /* '' */
 .ayn-twitter:before { content: '\f099'; } /* '' */
 .ayn-github-circled:before { content: '\f09b'; } /* '' */
 .ayn-gplus:before { content: '\f0d5'; } /* '' */

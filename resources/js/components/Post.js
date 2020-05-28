@@ -327,8 +327,10 @@ export default class Post extends Component {
                         backgroundRepeat: 'no-repeat', 
                         backgroundSize: 'cover'}} />
                         <div className="username">{this.props.user.fname} {this.props.user.lname}</div>
-                        <span className="text">shared {this.getType()}</span>
                     </a>
+
+                    <a href={`/post/${this.props.post.id}`} className="text">shared {this.getType()} <i className="ayn-link"></i></a>
+                      
                     <div className="time">{new Date(this.props.post.created_at).toLocaleString()}</div>
                     <div className={`del-btn ${this.props.user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deletePost}><i className="ayn-trash"></i></div>
                 </div>

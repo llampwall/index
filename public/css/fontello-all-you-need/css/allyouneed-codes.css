@@ -101,6 +101,7 @@
 .ayn-up-open:before { content: '\f005'; } /* '' */
 .ayn-right-open:before { content: '\f006'; } /* '' */
 .ayn-left-open:before { content: '\f007'; } /* '' */
+.ayn-link:before { content: '\f07b'; } /* '' */
 .ayn-twitter:before { content: '\f099'; } /* '' */
 .ayn-github-circled:before { content: '\f09b'; } /* '' */
 .ayn-gplus:before { content: '\f0d5'; } /* '' */

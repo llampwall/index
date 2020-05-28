@@ -101,6 +101,7 @@
 .ayn-up-open { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf005;&nbsp;'); }
 .ayn-right-open { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf006;&nbsp;'); }
 .ayn-left-open { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf007;&nbsp;'); }
+.ayn-link { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf07b;&nbsp;'); }
 .ayn-twitter { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf099;&nbsp;'); }
 .ayn-github-circled { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf09b;&nbsp;'); }
 .ayn-gplus { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0d5;&nbsp;'); }

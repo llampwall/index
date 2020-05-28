@@ -1,6 +1,631 @@
 webpackJsonp([0],{
 
-/***/ 240:
+/***/ 164:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _regenerator = __webpack_require__(45);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _extends2 = __webpack_require__(68);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _asyncToGenerator2 = __webpack_require__(44);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _defineProperty2 = __webpack_require__(135);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _classCallCheck2 = __webpack_require__(14);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(15);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(17);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(16);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Comments = __webpack_require__(270);
+
+var _Comments2 = _interopRequireDefault(_Comments);
+
+var _axios = __webpack_require__(43);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _Modal = __webpack_require__(272);
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Post = function (_Component) {
+  (0, _inherits3.default)(Post, _Component);
+
+  function Post() {
+    var _this2 = this;
+
+    (0, _classCallCheck3.default)(this, Post);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this));
+
+    _this.displayMedia = function () {
+      if (_this.props.post.type == 'image') {
+        return _react2.default.createElement('div', { className: 'post-media', onClick: function onClick() {
+            _this.setState({ showModal: true });
+          }, style: {
+            backgroundImage: 'url("' + _this.props.post.image_url + '")',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover' } });
+      } else if (_this.props.post.type == 'video') {
+        return _react2.default.createElement(
+          'video',
+          { className: 'post-media', controls: true, muted: true, autoPlay: true, playsInline: true },
+          _react2.default.createElement('source', { src: _this.props.post.image_url, type: 'video/mp4' }),
+          'Your browser does not support html5 videos.'
+        );
+      } else {
+        return null;
+      }
+    };
+
+    _this.getFileType = function (filename) {
+      var ext = filename.split('.').pop();
+      if (ext == 'mov' || ext == 'MOV') {
+        return 'video/quicktime';
+      }
+      if (ext == 'mp4') {
+        return 'video/mp4';
+      }
+    };
+
+    _this.handleChange = function (event) {
+      var name = event.target.name;
+      var value = event.target.type == 'checkbox' ? event.target.checked : event.target.value;
+
+      _this.setState((0, _defineProperty3.default)({}, name, value), function () {
+        // console.log(this.state)
+      });
+    };
+
+    _this.submitComment = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var self, response;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              self = _this;
+
+              if (!(_this.state.comment.length > 0)) {
+                _context.next = 11;
+                break;
+              }
+
+              _context.prev = 2;
+              _context.next = 5;
+              return _axios2.default.post('/comments', {
+                post_id: self.props.post.id,
+                user_id: self.props.curuser.id,
+                content: self.state.comment
+              }).then(function (response) {
+                self.setState((0, _extends3.default)({}, self.state, {
+                  comment: ""
+                }));
+
+                //update everyone else's comments
+                self.chat.emit('message', {
+                  comments: 'all'
+                });
+
+                self.commentArea.current.getComments();
+                return 'comment saved';
+              });
+
+            case 5:
+              response = _context.sent;
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context['catch'](2);
+
+              console.log("axios didnt work: " + _context.t0);
+
+            case 11:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this2, [[2, 8]]);
+    }));
+
+    _this.touchSubmitComment = function (event) {
+      event.stopPropagation();
+      event.preventDefault();
+      _this.submitComment();
+    };
+
+    _this.sendUp = function (num) {
+      _this.setState((0, _extends3.default)({}, _this.state, {
+        numComments: num
+      }));
+    };
+
+    _this.checkSubmit = function (event) {
+
+      if (event.keyCode == 13) {
+        event.preventDefault();
+        _this.submitComment();
+      }
+    };
+
+    _this.deletePost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+      var self;
+      return _regenerator2.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              self = _this;
+              // console.log("post id: " + self.props.post.id)
+
+              _context2.prev = 1;
+              _context2.next = 4;
+              return _axios2.default.get('/posts/' + self.props.post.id + '/delete').then(function (response) {
+                console.log('post deleted: ' + response);
+                self.props.update();
+                //update everyone else's comments
+                self.chat.emit('message', {
+                  update: 'all'
+                });
+              });
+
+            case 4:
+              _context2.next = 9;
+              break;
+
+            case 6:
+              _context2.prev = 6;
+              _context2.t0 = _context2['catch'](1);
+
+              console.log('error deleting post: ' + _context2.t0);
+
+            case 9:
+              console.log('post deleted');
+              self.props.update();
+
+            case 11:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2, [[1, 6]]);
+    }));
+
+    _this.getCommentCount = function () {
+      if (_this.state.numComments == 0) {
+        return _react2.default.createElement('div', { className: 'comment-count' });
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'comment-count' },
+          _this.state.numComments,
+          ' comments'
+        );
+      }
+    };
+
+    _this.like = function () {
+      var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(u_id, p_id) {
+        var self;
+        return _regenerator2.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                self = _this;
+
+                if (_this.state.liked) {
+                  _context3.next = 12;
+                  break;
+                }
+
+                _context3.prev = 2;
+                _context3.next = 5;
+                return _axios2.default.post('/likes', {
+                  user_id: u_id,
+                  post_id: p_id
+                }).then(function () {
+                  console.log('post liked');
+                });
+
+              case 5:
+                _context3.next = 10;
+                break;
+
+              case 7:
+                _context3.prev = 7;
+                _context3.t0 = _context3['catch'](2);
+
+                console.log("error liking post: " + _context3.t0);
+
+              case 10:
+                _context3.next = 20;
+                break;
+
+              case 12:
+                _context3.prev = 12;
+                _context3.next = 15;
+                return _axios2.default.post('/likes/delete', {
+                  user_id: u_id,
+                  post_id: p_id
+                });
+
+              case 15:
+                _context3.next = 20;
+                break;
+
+              case 17:
+                _context3.prev = 17;
+                _context3.t1 = _context3['catch'](12);
+
+                console.log("error liking post: " + _context3.t1);
+
+              case 20:
+                _this.setState((0, _extends3.default)({}, _this.state, {
+                  liked: !_this.state.liked
+                }));
+                _this.getLikes();
+                //update everyone elses feed
+                self.chat.emit('message', {
+                  likes: 'all'
+                });
+
+              case 23:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, _this2, [[2, 7], [12, 17]]);
+      }));
+
+      return function (_x, _x2) {
+        return _ref3.apply(this, arguments);
+      };
+    }();
+
+    _this.getLikes = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
+      var self, likes;
+      return _regenerator2.default.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              self = _this;
+              _context4.prev = 1;
+              _context4.next = 4;
+              return _axios2.default.get('/posts/' + self.props.post.id + '/likes').then(function (response) {
+                // console.log(response.data.likeData)
+                var like_d = response.data.likeData;
+                if (like_d.length > 0) {
+                  self.setState((0, _extends3.default)({}, self.state, {
+                    likes: like_d.length,
+                    lastLike: like_d[0].users.fname + ' ' + like_d[0].users.lname
+                  }), function () {
+                    // console.log(self.state)
+                  });
+                } else {
+                  self.setState((0, _extends3.default)({}, self.state, {
+                    likes: 0,
+                    lastLike: ""
+                  }), function () {
+                    // console.log(self.state)
+                  });
+                }
+              });
+
+            case 4:
+              likes = _context4.sent;
+              _context4.next = 10;
+              break;
+
+            case 7:
+              _context4.prev = 7;
+              _context4.t0 = _context4['catch'](1);
+
+              console.log("error getting likes: " + _context4.t0);
+
+            case 10:
+            case 'end':
+              return _context4.stop();
+          }
+        }
+      }, _callee4, _this2, [[1, 7]]);
+    }));
+
+    _this.displayStats = function () {
+
+      if (_this.state.liked) {
+        if (_this.state.likes > 2) {
+          return 'You and ' + (_this.state.likes - 1) + ' other people like this.';
+        } else if (_this.state.likes == 2) {
+          return 'You and 1 other person like this.';
+        } else {
+          return 'You like this.';
+        }
+      } else {
+        if (_this.state.likes > 2) {
+          return _this.state.lastLike + ' and ' + (_this.state.likes - 1) + ' other people like this.';
+        } else if (_this.state.likes == 2) {
+          return _this.state.lastLike + ' and 1 other person like this.';
+        } else if (_this.state.likes == 1) {
+          return _this.state.lastLike + ' likes this.';
+        } else {
+          return 'Be the first to like this.';
+        }
+      }
+    };
+
+    _this.getType = function () {
+      if (_this.props.post.type == 'image') {
+        return 'an image';
+      } else if (_this.props.post.type == 'video') {
+        return 'a video';
+      } else {
+        return 'something';
+      }
+    };
+
+    _this.displayLink = function () {
+      if (!_this.state.link) {
+        return;
+      }
+      return _react2.default.createElement(
+        'a',
+        { href: _this.props.post.link_url, target: '_blank', alt: 'external link', className: 'post-link' },
+        _react2.default.createElement(
+          'div',
+          { className: 'link-image' },
+          _react2.default.createElement('img', { src: _this.props.post.link_img })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'link-info' },
+          _react2.default.createElement(
+            'div',
+            { className: 'link-title' },
+            _react2.default.createElement(
+              'h2',
+              null,
+              _this.props.post.link_title
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'link-desc' },
+            _react2.default.createElement(
+              'h5',
+              null,
+              _this.props.post.link_desc
+            )
+          )
+        )
+      );
+    };
+
+    _this.state = {
+      post: {},
+      poster: {},
+      comment: "",
+      numComments: 0,
+      update: false,
+      liked: false,
+      likes: 0,
+      lastLike: "",
+      link: false,
+      showModal: false
+    };
+
+    _this.commentArea = _react2.default.createRef(); // ref for updating comments
+    return _this;
+  }
+
+  (0, _createClass3.default)(Post, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var self = this;
+
+      this.getLikes();
+
+      if (this.props.post.link_url != '') {
+        this.setState({
+          link: true
+        });
+      }
+
+      this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat');
+      // update comments whenever someone comments
+      this.chat.on('comments', function () {
+        console.log('new comment');
+        if (self.commentArea.current) {
+          self.commentArea.current.getComments();
+        }
+      });
+      this.chat.on('likes', function () {
+        console.log('new likes');
+        self.getLikes();
+      });
+    }
+
+    // dont really need this because we are just lying and saying its mp4 anyway
+    // because it wont work on chrome if we call it a quicktime file
+
+
+    // fix to avoid double submits on mobile
+
+
+    // this lets us get the comments from the child
+
+
+    // allows comments to be submitted with the enter key
+
+
+    // delete the post only if you posted it
+
+
+    // displays the current post comments
+
+
+    // like or unlike a post
+
+
+    // get the like stats
+
+
+    // display the post stats
+
+
+    // display link area if there is a link
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      if (this.props.post == undefined || this.props.curuser == undefined) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'load' },
+          _react2.default.createElement('i', { className: 'ayn-spin3' })
+        );
+      } else {
+        // console.log("current user: " + this.props.curuser)
+        // console.log("posted by " + this.props.user.id)
+        return _react2.default.createElement(
+          'div',
+          { className: 'post' },
+          _react2.default.createElement(
+            'div',
+            { className: 'post-header' },
+            _react2.default.createElement(
+              'a',
+              { href: '/profile/' + this.props.user.id, className: 'author' },
+              _react2.default.createElement('div', { className: 'user-img', style: {
+                  backgroundImage: 'url("' + this.props.user.profile_img + '")',
+                  backgroundPosition: 'center center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover' } }),
+              _react2.default.createElement(
+                'div',
+                { className: 'username' },
+                this.props.user.fname,
+                ' ',
+                this.props.user.lname
+              )
+            ),
+            _react2.default.createElement(
+              'a',
+              { href: '/post/' + this.props.post.id, className: 'text' },
+              'shared ',
+              this.getType(),
+              ' ',
+              _react2.default.createElement('i', { className: 'ayn-link' })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'time' },
+              new Date(this.props.post.created_at).toLocaleString()
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'del-btn ' + (this.props.user.id == this.props.curuser.id ? 'active' : ''), onClick: this.deletePost },
+              _react2.default.createElement('i', { className: 'ayn-trash' })
+            )
+          ),
+          this.displayMedia(),
+          this.displayLink(),
+          _react2.default.createElement(
+            _Modal2.default,
+            { show: this.state.showModal, onClose: function onClose() {
+                _this3.setState({ showModal: false });
+              } },
+            _react2.default.createElement('img', { src: this.props.post.image_url })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'post-info' },
+            _react2.default.createElement(
+              'p',
+              null,
+              this.props.post.content
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'post-stats' },
+            _react2.default.createElement(
+              'div',
+              { className: 'icons' },
+              _react2.default.createElement(
+                'div',
+                { className: 'like-btn ' + (this.state.liked ? 'active' : ''), onClick: this.like.bind(null, this.props.curuser.id, this.props.post.id) },
+                _react2.default.createElement('i', { className: 'ayn-thumbs-up-1' })
+              )
+            ),
+            _react2.default.createElement(
+              'span',
+              { className: 'text' },
+              this.displayStats()
+            ),
+            this.getCommentCount()
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'c-section' },
+            _react2.default.createElement('textarea', { name: 'comment', cols: 30, rows: 2, placeholder: 'write a comment...', value: this.state.comment, onChange: this.handleChange, onKeyUp: this.checkSubmit })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'buttons' },
+            _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
+            _react2.default.createElement(
+              'div',
+              { className: 'send-btn', onTouchStart: this.touchSubmitComment.bind(null, { passive: false }), onMouseUp: this.submitComment },
+              _react2.default.createElement('i', { className: 'ayn-right' })
+            )
+          )
+        );
+      }
+    }
+  }]);
+  return Post;
+}(_react.Component);
+
+exports.default = Post;
+
+/***/ }),
+
+/***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46,9 +671,13 @@ var _PostArea = __webpack_require__(273);
 
 var _PostArea2 = _interopRequireDefault(_PostArea);
 
-var _Compose = __webpack_require__(270);
+var _Compose = __webpack_require__(271);
 
 var _Compose2 = _interopRequireDefault(_Compose);
+
+var _Post = __webpack_require__(164);
+
+var _Post2 = _interopRequireDefault(_Post);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64,18 +693,54 @@ var Home = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
-    _this.update = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-      var data, allData;
+    _this.getPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var p_id, postData, u_id, userData;
       return _regenerator2.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
+              p_id = _this.props.routeProps.match.params.id;
               _context.next = 3;
+              return _axios2.default.get('/posts/' + p_id);
+
+            case 3:
+              postData = _context.sent;
+
+              console.log(postData);
+
+              u_id = postData.data[0].user_id;
+              _context.next = 8;
+              return _axios2.default.get('/api/user/' + u_id);
+
+            case 8:
+              userData = _context.sent;
+
+              console.log(userData);
+
+              _this.setState({
+                post: postData.data[0],
+                user: userData.data[0]
+              });
+
+            case 11:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this2);
+    }));
+    _this.update = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+      var data, allData;
+      return _regenerator2.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
               return _axios2.default.get('/api/intialize');
 
             case 3:
-              data = _context.sent;
+              data = _context2.sent;
               allData = data.data;
               // console.log(allData)
 
@@ -85,25 +750,28 @@ var Home = function (_Component) {
                 // console.log(this.state.initialData)
               });
 
-              _context.next = 11;
+              _context2.next = 11;
               break;
 
             case 8:
-              _context.prev = 8;
-              _context.t0 = _context['catch'](0);
+              _context2.prev = 8;
+              _context2.t0 = _context2['catch'](0);
 
-              console.log("Initialization error: " + _context.t0);
+              console.log("Initialization error: " + _context2.t0);
 
             case 11:
             case 'end':
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, _this2, [[0, 8]]);
+      }, _callee2, _this2, [[0, 8]]);
     }));
 
     _this.state = {
-      initialData: {}
+      initialData: {},
+      single: false,
+      post: {},
+      user: {}
     };
     return _this;
   }
@@ -113,11 +781,19 @@ var Home = function (_Component) {
     value: function componentDidMount() {
       // console.log(this.props)
       this.setState({
-        initialData: this.props.initialData
+        initialData: this.props.initialData,
+        single: this.props.single
       }, function () {
         // console.log(this.state)
       });
+
+      if (this.props.single) {
+        this.getPost();
+      }
     }
+
+    // if this is a single post page, get the data for the post and the poster
+
 
     // pass down function to pass down to compose so it can update the whole area
 
@@ -131,13 +807,29 @@ var Home = function (_Component) {
           _react2.default.createElement('i', { className: 'ayn-spin3' })
         );
       } else {
-        // console.log(this.props)
-        return _react2.default.createElement(
-          'div',
-          { className: 'content-area' },
-          _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData, update: this.update, ws: this.props.ws }),
-          _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, initialData: this.state.initialData, ws: this.props.ws, update: this.update })
-        );
+
+        if (this.props.single && this.state.user != undefined) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'content-area' },
+            _react2.default.createElement(
+              'section',
+              { id: 'all-posts' },
+              _react2.default.createElement(
+                'div',
+                { className: 'post-container' },
+                _react2.default.createElement(_Post2.default, { post: this.state.post, user: this.state.user, ws: this.props.ws, curuser: this.props.initialData.userData, update: this.update })
+              )
+            )
+          );
+        } else {
+          return _react2.default.createElement(
+            'div',
+            { className: 'content-area' },
+            _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData, update: this.update, ws: this.props.ws }),
+            _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, initialData: this.state.initialData, ws: this.props.ws, update: this.update })
+          );
+        }
       }
     }
   }]);
@@ -148,7 +840,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 241:
+/***/ 242:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -325,7 +1017,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 242:
+/***/ 243:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -386,7 +1078,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 243:
+/***/ 244:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -432,7 +1124,7 @@ var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _ChatWindow = __webpack_require__(268);
+var _ChatWindow = __webpack_require__(269);
 
 var _ChatWindow2 = _interopRequireDefault(_ChatWindow);
 
@@ -980,7 +1672,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 244:
+/***/ 245:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1203,7 +1895,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 245:
+/***/ 246:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1273,7 +1965,7 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 268:
+/***/ 269:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1548,7 +2240,7 @@ exports.default = ChatWindow;
 
 /***/ }),
 
-/***/ 269:
+/***/ 270:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1765,7 +2457,7 @@ exports.default = Comments;
 
 /***/ }),
 
-/***/ 270:
+/***/ 271:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2273,7 +2965,7 @@ exports.default = Compose;
 
 /***/ }),
 
-/***/ 271:
+/***/ 272:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2371,629 +3063,6 @@ exports.default = Modal;
 
 /***/ }),
 
-/***/ 272:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _regenerator = __webpack_require__(45);
-
-var _regenerator2 = _interopRequireDefault(_regenerator);
-
-var _extends2 = __webpack_require__(68);
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _asyncToGenerator2 = __webpack_require__(44);
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
-var _defineProperty2 = __webpack_require__(135);
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-var _classCallCheck2 = __webpack_require__(14);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(15);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = __webpack_require__(17);
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = __webpack_require__(16);
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = __webpack_require__(6);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Comments = __webpack_require__(269);
-
-var _Comments2 = _interopRequireDefault(_Comments);
-
-var _axios = __webpack_require__(43);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _Modal = __webpack_require__(271);
-
-var _Modal2 = _interopRequireDefault(_Modal);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Post = function (_Component) {
-  (0, _inherits3.default)(Post, _Component);
-
-  function Post() {
-    var _this2 = this;
-
-    (0, _classCallCheck3.default)(this, Post);
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this));
-
-    _this.displayMedia = function () {
-      if (_this.props.post.type == 'image') {
-        return _react2.default.createElement('div', { className: 'post-media', onClick: function onClick() {
-            _this.setState({ showModal: true });
-          }, style: {
-            backgroundImage: 'url("' + _this.props.post.image_url + '")',
-            backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover' } });
-      } else if (_this.props.post.type == 'video') {
-        return _react2.default.createElement(
-          'video',
-          { className: 'post-media', controls: true, muted: true, autoPlay: true, playsInline: true },
-          _react2.default.createElement('source', { src: _this.props.post.image_url, type: 'video/mp4' }),
-          'Your browser does not support html5 videos.'
-        );
-      } else {
-        return null;
-      }
-    };
-
-    _this.getFileType = function (filename) {
-      var ext = filename.split('.').pop();
-      if (ext == 'mov' || ext == 'MOV') {
-        return 'video/quicktime';
-      }
-      if (ext == 'mp4') {
-        return 'video/mp4';
-      }
-    };
-
-    _this.handleChange = function (event) {
-      var name = event.target.name;
-      var value = event.target.type == 'checkbox' ? event.target.checked : event.target.value;
-
-      _this.setState((0, _defineProperty3.default)({}, name, value), function () {
-        // console.log(this.state)
-      });
-    };
-
-    _this.submitComment = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-      var self, response;
-      return _regenerator2.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              self = _this;
-
-              if (!(_this.state.comment.length > 0)) {
-                _context.next = 11;
-                break;
-              }
-
-              _context.prev = 2;
-              _context.next = 5;
-              return _axios2.default.post('/comments', {
-                post_id: self.props.post.id,
-                user_id: self.props.curuser.id,
-                content: self.state.comment
-              }).then(function (response) {
-                self.setState((0, _extends3.default)({}, self.state, {
-                  comment: ""
-                }));
-
-                //update everyone else's comments
-                self.chat.emit('message', {
-                  comments: 'all'
-                });
-
-                self.commentArea.current.getComments();
-                return 'comment saved';
-              });
-
-            case 5:
-              response = _context.sent;
-              _context.next = 11;
-              break;
-
-            case 8:
-              _context.prev = 8;
-              _context.t0 = _context['catch'](2);
-
-              console.log("axios didnt work: " + _context.t0);
-
-            case 11:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, _this2, [[2, 8]]);
-    }));
-
-    _this.touchSubmitComment = function (event) {
-      event.stopPropagation();
-      event.preventDefault();
-      _this.submitComment();
-    };
-
-    _this.sendUp = function (num) {
-      _this.setState((0, _extends3.default)({}, _this.state, {
-        numComments: num
-      }));
-    };
-
-    _this.checkSubmit = function (event) {
-
-      if (event.keyCode == 13) {
-        event.preventDefault();
-        _this.submitComment();
-      }
-    };
-
-    _this.deletePost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      var self;
-      return _regenerator2.default.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              self = _this;
-              // console.log("post id: " + self.props.post.id)
-
-              _context2.prev = 1;
-              _context2.next = 4;
-              return _axios2.default.get('/posts/' + self.props.post.id + '/delete').then(function (response) {
-                console.log('post deleted: ' + response);
-                self.props.update();
-                //update everyone else's comments
-                self.chat.emit('message', {
-                  update: 'all'
-                });
-              });
-
-            case 4:
-              _context2.next = 9;
-              break;
-
-            case 6:
-              _context2.prev = 6;
-              _context2.t0 = _context2['catch'](1);
-
-              console.log('error deleting post: ' + _context2.t0);
-
-            case 9:
-              console.log('post deleted');
-              self.props.update();
-
-            case 11:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, _this2, [[1, 6]]);
-    }));
-
-    _this.getCommentCount = function () {
-      if (_this.state.numComments == 0) {
-        return _react2.default.createElement('div', { className: 'comment-count' });
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'comment-count' },
-          _this.state.numComments,
-          ' comments'
-        );
-      }
-    };
-
-    _this.like = function () {
-      var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(u_id, p_id) {
-        var self;
-        return _regenerator2.default.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                self = _this;
-
-                if (_this.state.liked) {
-                  _context3.next = 12;
-                  break;
-                }
-
-                _context3.prev = 2;
-                _context3.next = 5;
-                return _axios2.default.post('/likes', {
-                  user_id: u_id,
-                  post_id: p_id
-                }).then(function () {
-                  console.log('post liked');
-                });
-
-              case 5:
-                _context3.next = 10;
-                break;
-
-              case 7:
-                _context3.prev = 7;
-                _context3.t0 = _context3['catch'](2);
-
-                console.log("error liking post: " + _context3.t0);
-
-              case 10:
-                _context3.next = 20;
-                break;
-
-              case 12:
-                _context3.prev = 12;
-                _context3.next = 15;
-                return _axios2.default.post('/likes/delete', {
-                  user_id: u_id,
-                  post_id: p_id
-                });
-
-              case 15:
-                _context3.next = 20;
-                break;
-
-              case 17:
-                _context3.prev = 17;
-                _context3.t1 = _context3['catch'](12);
-
-                console.log("error liking post: " + _context3.t1);
-
-              case 20:
-                _this.setState((0, _extends3.default)({}, _this.state, {
-                  liked: !_this.state.liked
-                }));
-                _this.getLikes();
-                //update everyone elses feed
-                self.chat.emit('message', {
-                  likes: 'all'
-                });
-
-              case 23:
-              case 'end':
-                return _context3.stop();
-            }
-          }
-        }, _callee3, _this2, [[2, 7], [12, 17]]);
-      }));
-
-      return function (_x, _x2) {
-        return _ref3.apply(this, arguments);
-      };
-    }();
-
-    _this.getLikes = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
-      var self, likes;
-      return _regenerator2.default.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              self = _this;
-              _context4.prev = 1;
-              _context4.next = 4;
-              return _axios2.default.get('/posts/' + self.props.post.id + '/likes').then(function (response) {
-                // console.log(response.data.likeData)
-                var like_d = response.data.likeData;
-                if (like_d.length > 0) {
-                  self.setState((0, _extends3.default)({}, self.state, {
-                    likes: like_d.length,
-                    lastLike: like_d[0].users.fname + ' ' + like_d[0].users.lname
-                  }), function () {
-                    // console.log(self.state)
-                  });
-                } else {
-                  self.setState((0, _extends3.default)({}, self.state, {
-                    likes: 0,
-                    lastLike: ""
-                  }), function () {
-                    // console.log(self.state)
-                  });
-                }
-              });
-
-            case 4:
-              likes = _context4.sent;
-              _context4.next = 10;
-              break;
-
-            case 7:
-              _context4.prev = 7;
-              _context4.t0 = _context4['catch'](1);
-
-              console.log("error getting likes: " + _context4.t0);
-
-            case 10:
-            case 'end':
-              return _context4.stop();
-          }
-        }
-      }, _callee4, _this2, [[1, 7]]);
-    }));
-
-    _this.displayStats = function () {
-
-      if (_this.state.liked) {
-        if (_this.state.likes > 2) {
-          return 'You and ' + (_this.state.likes - 1) + ' other people like this.';
-        } else if (_this.state.likes == 2) {
-          return 'You and 1 other person like this.';
-        } else {
-          return 'You like this.';
-        }
-      } else {
-        if (_this.state.likes > 2) {
-          return _this.state.lastLike + ' and ' + (_this.state.likes - 1) + ' other people like this.';
-        } else if (_this.state.likes == 2) {
-          return _this.state.lastLike + ' and 1 other person like this.';
-        } else if (_this.state.likes == 1) {
-          return _this.state.lastLike + ' likes this.';
-        } else {
-          return 'Be the first to like this.';
-        }
-      }
-    };
-
-    _this.getType = function () {
-      if (_this.props.post.type == 'image') {
-        return 'an image';
-      } else if (_this.props.post.type == 'video') {
-        return 'a video';
-      } else {
-        return 'something';
-      }
-    };
-
-    _this.displayLink = function () {
-      if (!_this.state.link) {
-        return;
-      }
-      return _react2.default.createElement(
-        'a',
-        { href: _this.props.post.link_url, target: '_blank', alt: 'external link', className: 'post-link' },
-        _react2.default.createElement(
-          'div',
-          { className: 'link-image' },
-          _react2.default.createElement('img', { src: _this.props.post.link_img })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'link-info' },
-          _react2.default.createElement(
-            'div',
-            { className: 'link-title' },
-            _react2.default.createElement(
-              'h2',
-              null,
-              _this.props.post.link_title
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'link-desc' },
-            _react2.default.createElement(
-              'h5',
-              null,
-              _this.props.post.link_desc
-            )
-          )
-        )
-      );
-    };
-
-    _this.state = {
-      post: {},
-      poster: {},
-      comment: "",
-      numComments: 0,
-      update: false,
-      liked: false,
-      likes: 0,
-      lastLike: "",
-      link: false,
-      showModal: false
-    };
-
-    _this.commentArea = _react2.default.createRef(); // ref for updating comments
-    return _this;
-  }
-
-  (0, _createClass3.default)(Post, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var self = this;
-
-      this.getLikes();
-
-      if (this.props.post.link_url != '') {
-        this.setState({
-          link: true
-        });
-      }
-
-      this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat');
-      // update comments whenever someone comments
-      this.chat.on('comments', function () {
-        console.log('new comment');
-        if (self.commentArea.current) {
-          self.commentArea.current.getComments();
-        }
-      });
-      this.chat.on('likes', function () {
-        console.log('new likes');
-        self.getLikes();
-      });
-    }
-
-    // dont really need this because we are just lying and saying its mp4 anyway
-    // because it wont work on chrome if we call it a quicktime file
-
-
-    // fix to avoid double submits on mobile
-
-
-    // this lets us get the comments from the child
-
-
-    // allows comments to be submitted with the enter key
-
-
-    // delete the post only if you posted it
-
-
-    // displays the current post comments
-
-
-    // like or unlike a post
-
-
-    // get the like stats
-
-
-    // display the post stats
-
-
-    // display link area if there is a link
-
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
-
-      if (this.props.post == undefined || this.props.curuser == undefined) {
-        return _react2.default.createElement(
-          'div',
-          { className: 'load' },
-          _react2.default.createElement('i', { className: 'ayn-spin3' })
-        );
-      } else {
-        // console.log("current user: " + this.props.curuser)
-        // console.log("posted by " + this.props.user.id)
-        return _react2.default.createElement(
-          'div',
-          { className: 'post' },
-          _react2.default.createElement(
-            'div',
-            { className: 'post-header' },
-            _react2.default.createElement(
-              'a',
-              { href: '/profile/' + this.props.user.id, className: 'author' },
-              _react2.default.createElement('div', { className: 'user-img', style: {
-                  backgroundImage: 'url("' + this.props.user.profile_img + '")',
-                  backgroundPosition: 'center center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover' } }),
-              _react2.default.createElement(
-                'div',
-                { className: 'username' },
-                this.props.user.fname,
-                ' ',
-                this.props.user.lname
-              ),
-              _react2.default.createElement(
-                'span',
-                { className: 'text' },
-                'shared ',
-                this.getType()
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'time' },
-              new Date(this.props.post.created_at).toLocaleString()
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'del-btn ' + (this.props.user.id == this.props.curuser.id ? 'active' : ''), onClick: this.deletePost },
-              _react2.default.createElement('i', { className: 'ayn-trash' })
-            )
-          ),
-          this.displayMedia(),
-          this.displayLink(),
-          _react2.default.createElement(
-            _Modal2.default,
-            { show: this.state.showModal, onClose: function onClose() {
-                _this3.setState({ showModal: false });
-              } },
-            _react2.default.createElement('img', { src: this.props.post.image_url })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'post-info' },
-            _react2.default.createElement(
-              'p',
-              null,
-              this.props.post.content
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'post-stats' },
-            _react2.default.createElement(
-              'div',
-              { className: 'icons' },
-              _react2.default.createElement(
-                'div',
-                { className: 'like-btn ' + (this.state.liked ? 'active' : ''), onClick: this.like.bind(null, this.props.curuser.id, this.props.post.id) },
-                _react2.default.createElement('i', { className: 'ayn-thumbs-up-1' })
-              )
-            ),
-            _react2.default.createElement(
-              'span',
-              { className: 'text' },
-              this.displayStats()
-            ),
-            this.getCommentCount()
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'c-section' },
-            _react2.default.createElement('textarea', { name: 'comment', cols: 30, rows: 2, placeholder: 'write a comment...', value: this.state.comment, onChange: this.handleChange, onKeyUp: this.checkSubmit })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'buttons' },
-            _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
-            _react2.default.createElement(
-              'div',
-              { className: 'send-btn', onTouchStart: this.touchSubmitComment.bind(null, { passive: false }), onMouseUp: this.submitComment },
-              _react2.default.createElement('i', { className: 'ayn-right' })
-            )
-          )
-        );
-      }
-    }
-  }]);
-  return Post;
-}(_react.Component);
-
-exports.default = Post;
-
-/***/ }),
-
 /***/ 273:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3024,7 +3093,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(272);
+var _Post = __webpack_require__(164);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -3120,37 +3189,37 @@ var _reactDom = __webpack_require__(71);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(248);
+var _reactRouterDom = __webpack_require__(249);
 
 var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(240);
+var _Home = __webpack_require__(241);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(244);
+var _Profile = __webpack_require__(245);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(241);
+var _LeftMenu = __webpack_require__(242);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(243);
+var _Messenger = __webpack_require__(244);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(245);
+var _SearchHeader = __webpack_require__(246);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(242);
+var _Loading = __webpack_require__(243);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
-var _websocketClient = __webpack_require__(239);
+var _websocketClient = __webpack_require__(240);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
 
@@ -3291,7 +3360,10 @@ var Layout = function (_Component) {
             { id: 'content-container' },
             _react2.default.createElement(_SearchHeader2.default, null),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: function component(props) {
-                return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData, ws: _this2.ws, ref: _this2.homeRef });
+                return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData, ws: _this2.ws, ref: _this2.homeRef, single: false });
+              } }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/post/:id', component: function component(props) {
+                return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData, ws: _this2.ws, ref: _this2.homeRef, single: true });
               } }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/:id', component: function component(props) {
                 return _react2.default.createElement(_Profile2.default, { routeProps: props, initialData: _this2.state.initialData });
