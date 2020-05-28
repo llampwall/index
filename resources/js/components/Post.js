@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import Comments from "./Comments"
 import axios from 'axios'
+import Modal from './Modal'
 
 export default class Post extends Component {
   constructor () {
@@ -14,7 +15,8 @@ export default class Post extends Component {
         liked: false, 
         likes: 0,
         lastLike: "",
-        link: false
+        link: false,
+        showModal: false
     }
     
     this.commentArea = React.createRef()  // ref for updating comments
@@ -49,7 +51,7 @@ export default class Post extends Component {
   displayMedia = () => {
     if (this.props.post.type == 'image') {
         return (
-            <div className="post-media" style={{
+            <div className="post-media" onClick={() => {this.setState({showModal: true})}} style={{
                 backgroundImage: `url("${this.props.post.image_url}")`, 
                 backgroundPosition: 'center center', 
                 backgroundRepeat: 'no-repeat', 
@@ -333,6 +335,10 @@ export default class Post extends Component {
 
                 {this.displayMedia()}
                 {this.displayLink()}
+
+                <Modal show={this.state.showModal} onClose={() => {this.setState({showModal: false})}}>
+                  <img src={this.props.post.image_url} />
+                </Modal>
 
                 <div className="post-info">
                     <p>{this.props.post.content}</p>
