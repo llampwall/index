@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Axios from 'axios'
+import axios from 'axios'
 
 
 export default class ChatWindow extends Component {
@@ -42,7 +42,7 @@ export default class ChatWindow extends Component {
 
 
   getMessages = async () => {
-    const messages  = await Axios.get('/api/convo', { 
+    const messages  = await axios.get('/api/convo', { 
       params: { 
         from: this.state.from.id,
         to: this.state.to.id

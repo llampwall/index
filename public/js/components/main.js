@@ -50,7 +50,7 @@ var _Comments = __webpack_require__(270);
 
 var _Comments2 = _interopRequireDefault(_Comments);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(38);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -663,7 +663,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(38);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1120,7 +1120,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(38);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1714,11 +1714,11 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(38);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactTransitionGroup = __webpack_require__(565);
+var _reactTransitionGroup = __webpack_require__(566);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2016,7 +2016,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(38);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -2283,7 +2283,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(38);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -2508,7 +2508,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(38);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -3102,6 +3102,14 @@ var _Post = __webpack_require__(164);
 
 var _Post2 = _interopRequireDefault(_Post);
 
+var _reactInfiniteScrollComponent = __webpack_require__(549);
+
+var _reactInfiniteScrollComponent2 = _interopRequireDefault(_reactInfiniteScrollComponent);
+
+var _axios = __webpack_require__(38);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PostArea = function (_Component) {
@@ -3112,25 +3120,95 @@ var PostArea = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (PostArea.__proto__ || Object.getPrototypeOf(PostArea)).call(this));
 
+    _this.componentDidMount = function () {
+      try {
+        _axios2.default.get('/posts/page/1').then(function (res) {
+          _this.setState({
+            posts: res.data
+          });
+        });
+      } catch (error) {
+        console.log("error fetching next page: " + error);
+      }
+    };
+
+    _this.getNextPage = function () {
+      _this.setState({
+        page: _this.state.page + 1
+      });
+
+      try {
+        _axios2.default.get('/posts/page/' + _this.state.page).then(function (res) {
+          console.log(posts);
+          _this.setState({
+            total: res.total,
+            perPage: res.perPage,
+            lastPage: res.lastPage,
+            posts: _this.state.posts.concat(res.data)
+          });
+        });
+      } catch (error) {
+        console.log("error fetching next page: " + error);
+      }
+    };
+
     _this.showMyPosts = function () {
       // console.log(this.props.initialData.postData)
-      return _this.props.initialData.postData.map(function (item) {
-        var post = item.posts;
-        var user = item.users;
-        return _react2.default.createElement(_Post2.default, { post: post, user: user, ws: _this.props.ws, curuser: _this.props.initialData.userData, update: _this.props.update, key: post.id });
-      });
+      if (_this.state.posts.length > 0) {
+        return _react2.default.createElement(
+          _reactInfiniteScrollComponent2.default,
+          {
+            dataLength: _this.state.posts.length,
+            next: _this.getNextPage,
+            hasMore: !(_this.state.page == _this.state.lastPage),
+            loader: _react2.default.createElement(
+              'h4',
+              null,
+              'Loading...'
+            ),
+            scrollableTarget: "all-posts",
+            endMessage: _react2.default.createElement(
+              'p',
+              { style: { textAlign: 'center' } },
+              _react2.default.createElement(
+                'b',
+                null,
+                'No more posts'
+              )
+            )
+          },
+          _this.state.posts.map(function (post) {
+
+            // FIGURE THIS OUT
+            // let user = item.users
+            // const u_id = post.user_id
+            // const user = await axios.get(`/api/user/${u_id}`)
+            // console.log(userData)
+
+            return _react2.default.createElement(_Post2.default, { post: post, user: _this.state.user, ws: _this.props.ws, curuser: _this.props.initialData.userData, update: _this.props.update, key: post.id });
+          })
+        );
+      }
     };
 
     _this.state = {
-      posts: []
+      total: 0,
+      perPage: 10,
+      lastPage: 100,
+      page: 1,
+      posts: [],
+      user: { id: 1, fname: 'Jordan', lname: 'Hewitt', profile_img: '/img/user.jpg', email: 'hewitj2@gmail.com', password: 'asdkajndajnd', login_source: 'register', info: '', token: '', created_at: '2020-05-26 21:22:04', updated_at: '2020-05-26 21:22:04' }
     };
     return _this;
   }
 
+  // fetch next page of results
+
+
   (0, _createClass3.default)(PostArea, [{
     key: 'render',
     value: function render() {
-      if (this.props.initialData.userData == undefined) {
+      if (this.state.user == undefined) {
         return _react2.default.createElement(
           'div',
           { className: 'load' },
@@ -3196,7 +3274,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(249);
 
-var _axios = __webpack_require__(43);
+var _axios = __webpack_require__(38);
 
 var _axios2 = _interopRequireDefault(_axios);
 

@@ -15,11 +15,22 @@ class PostController {
 
     }
 
+    // get data for a specific post
     async getPost({request, response}) {
         const { id } = request.params
         const post = await Post.query().where('posts.id', id).fetch()
         console.log(post.data)
         return post
+    }
+
+    // get 30 posts paginated
+    async postPage({request, response}) {
+        const { num } = request.params
+        const results = await Database
+            .from('posts')
+            .paginate(num, 10)
+        console.log(results)
+        return results
     }
 
     // get and return a signed aws url for image uploading
