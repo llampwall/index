@@ -2,6 +2,8 @@ import React, { Component} from 'react'
 import Comments from "./Comments"
 import axios from 'axios'
 import Modal from './Modal'
+import LazyLoad from 'react-lazyload';
+
 
 export default class Post extends Component {
   constructor () {
@@ -318,6 +320,7 @@ export default class Post extends Component {
       // console.log("current user: " + this.props.curuser)
       // console.log("posted by " + this.props.user.id)
         return (
+          <LazyLoad height={this.props.post.type == 'text' ? 200 : 600} offset={200} once overflow scrollContainer='.content-area'>
             <div className="post">
                 <div className="post-header">
                     <a href={`/profile/${this.props.user.id}`} className="author">
@@ -370,11 +373,8 @@ export default class Post extends Component {
                     
                 </div>
             </div>
+          </LazyLoad>
         )
     }
   }
 }
-
-
-
-
