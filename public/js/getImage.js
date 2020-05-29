@@ -23,7 +23,7 @@ async function uploadIt() {
     axios.get(getStr)
     .then (function(response) {   
         signedUrl = response.data
-        console.log('signed url: ' + signedUrl)
+        // console.log('signed url: ' + signedUrl)
 
         // upload file to s3
         var options = {
@@ -33,7 +33,7 @@ async function uploadIt() {
           }
           axios.put(signedUrl, file, options)
           .then(function(response) {
-            console.log(response)
+            // console.log(response)
             img_name.value = filename
             console.log(document.getElementById("img_name").value)
             submit_btn.innerText = '[register]'
