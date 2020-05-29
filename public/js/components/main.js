@@ -14,7 +14,7 @@ var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(69);
+var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -57,10 +57,6 @@ var _axios2 = _interopRequireDefault(_axios);
 var _Modal = __webpack_require__(272);
 
 var _Modal2 = _interopRequireDefault(_Modal);
-
-var _reactLazyload = __webpack_require__(551);
-
-var _reactLazyload2 = _interopRequireDefault(_reactLazyload);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -526,100 +522,96 @@ var Post = function (_Component) {
         // console.log("current user: " + this.props.curuser)
         // console.log("posted by " + this.props.user.id)
         return _react2.default.createElement(
-          _reactLazyload2.default,
-          { height: this.props.post.type == 'text' ? 200 : 600, offset: 200, once: true, overflow: true, scrollContainer: '.content-area' },
+          'div',
+          { className: 'post' },
           _react2.default.createElement(
             'div',
-            { className: 'post' },
+            { className: 'post-header' },
             _react2.default.createElement(
-              'div',
-              { className: 'post-header' },
+              'a',
+              { href: '/profile/' + this.props.user.id, className: 'author' },
+              _react2.default.createElement('div', { className: 'user-img', style: {
+                  backgroundImage: 'url("' + this.props.user.profile_img + '")',
+                  backgroundPosition: 'center center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover' } }),
               _react2.default.createElement(
-                'a',
-                { href: '/profile/' + this.props.user.id, className: 'author' },
-                _react2.default.createElement('div', { className: 'user-img', style: {
-                    backgroundImage: 'url("' + this.props.user.profile_img + '")',
-                    backgroundPosition: 'center center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover' } }),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'username' },
-                  this.props.user.fname,
-                  ' ',
-                  this.props.user.lname
-                )
-              ),
-              _react2.default.createElement(
-                'a',
-                { href: '/post/' + this.props.post.id, className: 'text' },
-                'shared ',
-                this.getType(),
+                'div',
+                { className: 'username' },
+                this.props.user.fname,
                 ' ',
-                _react2.default.createElement('i', { className: 'ayn-link' })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'time' },
-                new Date(this.props.post.created_at).toLocaleString()
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'del-btn ' + (this.props.user.id == this.props.curuser.id ? 'active' : ''), onClick: this.deletePost },
-                _react2.default.createElement('i', { className: 'ayn-trash' })
-              )
-            ),
-            this.displayMedia(),
-            this.displayLink(),
-            _react2.default.createElement(
-              _Modal2.default,
-              { show: this.state.showModal, onClose: function onClose() {
-                  _this3.setState({ showModal: false });
-                } },
-              _react2.default.createElement('img', { src: this.props.post.image_url })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'post-info' },
-              _react2.default.createElement(
-                'p',
-                null,
-                this.props.post.content
+                this.props.user.lname
               )
             ),
             _react2.default.createElement(
-              'div',
-              { className: 'post-stats' },
-              _react2.default.createElement(
-                'div',
-                { className: 'icons' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'like-btn ' + (this.state.liked ? 'active' : ''), onClick: this.like.bind(null, this.props.curuser.id, this.props.post.id) },
-                  _react2.default.createElement('i', { className: 'ayn-thumbs-up-1' })
-                )
-              ),
-              _react2.default.createElement(
-                'span',
-                { className: 'text' },
-                this.displayStats()
-              ),
-              this.getCommentCount()
+              'a',
+              { href: '/post/' + this.props.post.id, className: 'text' },
+              'shared ',
+              this.getType(),
+              ' ',
+              _react2.default.createElement('i', { className: 'ayn-link' })
             ),
             _react2.default.createElement(
               'div',
-              { className: 'c-section' },
-              _react2.default.createElement('textarea', { name: 'comment', cols: 30, rows: 2, placeholder: 'write a comment...', value: this.state.comment, onChange: this.handleChange, onKeyUp: this.checkSubmit })
+              { className: 'time' },
+              new Date(this.props.post.created_at).toLocaleString()
             ),
             _react2.default.createElement(
               'div',
-              { className: 'buttons' },
-              _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
+              { className: 'del-btn ' + (this.props.user.id == this.props.curuser.id ? 'active' : ''), onClick: this.deletePost },
+              _react2.default.createElement('i', { className: 'ayn-trash' })
+            )
+          ),
+          this.displayMedia(),
+          this.displayLink(),
+          _react2.default.createElement(
+            _Modal2.default,
+            { show: this.state.showModal, onClose: function onClose() {
+                _this3.setState({ showModal: false });
+              } },
+            _react2.default.createElement('img', { src: this.props.post.image_url })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'post-info' },
+            _react2.default.createElement(
+              'p',
+              null,
+              this.props.post.content
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'post-stats' },
+            _react2.default.createElement(
+              'div',
+              { className: 'icons' },
               _react2.default.createElement(
                 'div',
-                { className: 'send-btn', onTouchStart: this.touchSubmitComment.bind(null, { passive: false }), onMouseUp: this.submitComment },
-                _react2.default.createElement('i', { className: 'ayn-right' })
+                { className: 'like-btn ' + (this.state.liked ? 'active' : ''), onClick: this.like.bind(null, this.props.curuser.id, this.props.post.id) },
+                _react2.default.createElement('i', { className: 'ayn-thumbs-up-1' })
               )
+            ),
+            _react2.default.createElement(
+              'span',
+              { className: 'text' },
+              this.displayStats()
+            ),
+            this.getCommentCount()
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'c-section' },
+            _react2.default.createElement('textarea', { name: 'comment', cols: 30, rows: 2, placeholder: 'write a comment...', value: this.state.comment, onChange: this.handleChange, onKeyUp: this.checkSubmit })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'buttons' },
+            _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
+            _react2.default.createElement(
+              'div',
+              { className: 'send-btn', onTouchStart: this.touchSubmitComment.bind(null, { passive: false }), onMouseUp: this.submitComment },
+              _react2.default.createElement('i', { className: 'ayn-right' })
             )
           )
         );
@@ -858,7 +850,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(69);
+var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1104,7 +1096,7 @@ var _asyncToGenerator2 = __webpack_require__(44);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _extends2 = __webpack_require__(69);
+var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1694,7 +1686,7 @@ var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(69);
+var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1726,7 +1718,7 @@ var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactTransitionGroup = __webpack_require__(570);
+var _reactTransitionGroup = __webpack_require__(565);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1996,7 +1988,7 @@ var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(69);
+var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -2488,7 +2480,7 @@ var _regenerator = __webpack_require__(45);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(69);
+var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -3008,7 +3000,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(23);
+var _propTypes = __webpack_require__(28);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -3198,7 +3190,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(64);
+var _reactDom = __webpack_require__(71);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
