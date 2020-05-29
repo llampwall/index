@@ -109,9 +109,9 @@ export default class Profile extends Component {
               <h1>{this.state.user.fname} {this.state.user.lname}</h1>
             </div>
           </div>
-          {/* <div className="user-info">
+          <div className="user-info">
             {this.displayBio()}
-          </div> */}
+          </div>
         </div>
       )
     }

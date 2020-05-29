@@ -1883,6 +1883,11 @@ var Profile = function (_Component) {
                 this.state.user.lname
               )
             )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'user-info' },
+            this.displayBio()
           )
         );
       }

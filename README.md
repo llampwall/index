@@ -2,7 +2,7 @@
 
 # Features include:
 
-    {logging in}
+    <h3>{logging in}</h3>
         - log in through facebook and it will pull your information and picture
         - log in with email address and you can choose your own picture
         - if you leave and return you will auto log in quickly
@@ -16,7 +16,7 @@
         - websockets are used to update everyone's feeds when any user posts or comments or likes something
         - click images to open large view
         - click videos to pause/mute/download/fullscreen
-        - click user name to go to poster's profile
+        - click user's name to go to their profile
         - click link icon to go to individual post page (link to share this post)
 
     {messenger}
@@ -40,7 +40,7 @@
         - animations are in the works
         - log in via google
         - post searching
-        - infinite scrolling
+        - infinite scrolling / lazy loading
         - service workers to keep functionality when offline / slow connection
         - ability to choose different themes
         - changing the domain name of course

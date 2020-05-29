@@ -7,6 +7,7 @@
     height: 100%;
     font-family: $main-font;
     background-color: $right-menu-bg;
+    border-left: $border-thickness solid $border-color;
     
     transition: all .5s ease-in-out;
     z-index: 2;
@@ -30,7 +31,7 @@
       align-items: center;
       justify-content: center;
       height: 4.25rem;
-      border-bottom: $border-thickness solid $border-color;
+      // border-bottom: $border-thickness solid $border-color;
       min-width: 101%;
 
       .messenger-icon {
