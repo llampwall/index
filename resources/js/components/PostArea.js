@@ -21,7 +21,10 @@ export default class PostArea extends Component {
       axios.get(`/posts/page/1`)
       .then((res) => {
         this.setState({
-          posts: res.data
+          total: res.data.total,
+          perPage: res.data.perPage,
+          lastPage: res.data.lastPage,
+          posts: res.data.data
         })
       })
     } catch (error) {
@@ -31,19 +34,16 @@ export default class PostArea extends Component {
 
   // fetch next page of results
   getNextPage = () => {
-    this.setState({
-      page: this.state.page + 1
-    })
-
     try {
-      axios.get(`/posts/page/${this.state.page}`)
+      axios.get(`/posts/page/${this.state.page + 1}`)
       .then((res) => {
         console.log(posts)
         this.setState({
-          total: res.total,
-          perPage: res.perPage,
-          lastPage: res.lastPage,
-          posts: this.state.posts.concat(res.data)
+          total: res.data.total,
+          perPage: res.data.perPage,
+          lastPage: res.data.lastPage,
+          posts: this.state.posts.concat(res.data.data),
+          page: this.state.page + 1
         })
       })
     } catch (error) {
@@ -60,7 +60,7 @@ export default class PostArea extends Component {
           next={this.getNextPage}
           hasMore={!(this.state.page == this.state.lastPage)}
           loader={<h4>Loading...</h4>}
-          scrollableTarget={"all-posts"}
+          scrollableTarget={".content-area"}
           endMessage={
             <p style={{textAlign: 'center'}}>
               <b>No more posts</b>

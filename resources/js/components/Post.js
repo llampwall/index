@@ -20,15 +20,18 @@ export default class Post extends Component {
     }
     
     this.commentArea = React.createRef()  // ref for updating comments
+    this._isMounted = false
   }
 
 
   componentDidMount() {
     const self = this
 
-    this.getLikes()
+    this._isMounted = true
 
-    if (this.props.post.link_url != '') {
+    this._isMounted && this.getLikes()
+
+    if (this._isMounted && this.props.post.link_url != '') {
       this.setState({
         link: true
       })
@@ -46,6 +49,10 @@ export default class Post extends Component {
       console.log('new likes')
       self.getLikes()
     })
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false
   }
 
   displayMedia = () => {
@@ -220,27 +227,17 @@ export default class Post extends Component {
   getLikes = async () => {
     const self = this;
     try {
-      const likes = await axios.get(`/posts/${self.props.post.id}/likes`)
+      axios.get(`/posts/${self.props.post.id}/likes`)
       .then(function(response) {
         // console.log(response.data.likeData)
         const like_d = response.data.likeData
-        if (like_d.length > 0) {
-          self.setState({
-            ...self.state,
-            likes: like_d.length,
-            lastLike: `${like_d[0].users.fname} ${like_d[0].users.lname}`
-          }, () => {
-            // console.log(self.state)
-          })
-        } else {
-          self.setState({
-            ...self.state,
-            likes: 0,
-            lastLike: ""
-          }, () => {
-            // console.log(self.state)
-          })
-        }
+        const numLikes = like_d.length
+        let last = (like_d.length > 0) ? `${like_d[0].users.fname} ${like_d[0].users.lname}` : ""
+
+        self.setState({
+          likes: numLikes,
+          lastLike: last
+        })
       })
       
     } catch (error) {

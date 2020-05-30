@@ -316,51 +316,35 @@ var Post = function (_Component) {
     }();
 
     _this.getLikes = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
-      var self, likes;
+      var self;
       return _regenerator2.default.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               self = _this;
-              _context4.prev = 1;
-              _context4.next = 4;
-              return _axios2.default.get('/posts/' + self.props.post.id + '/likes').then(function (response) {
-                // console.log(response.data.likeData)
-                var like_d = response.data.likeData;
-                if (like_d.length > 0) {
-                  self.setState((0, _extends3.default)({}, self.state, {
-                    likes: like_d.length,
-                    lastLike: like_d[0].users.fname + ' ' + like_d[0].users.lname
-                  }), function () {
-                    // console.log(self.state)
+
+              try {
+                _axios2.default.get('/posts/' + self.props.post.id + '/likes').then(function (response) {
+                  // console.log(response.data.likeData)
+                  var like_d = response.data.likeData;
+                  var numLikes = like_d.length;
+                  var last = like_d.length > 0 ? like_d[0].users.fname + ' ' + like_d[0].users.lname : "";
+
+                  self.setState({
+                    likes: numLikes,
+                    lastLike: last
                   });
-                } else {
-                  self.setState((0, _extends3.default)({}, self.state, {
-                    likes: 0,
-                    lastLike: ""
-                  }), function () {
-                    // console.log(self.state)
-                  });
-                }
-              });
+                });
+              } catch (error) {
+                console.log("error getting likes: " + error);
+              }
 
-            case 4:
-              likes = _context4.sent;
-              _context4.next = 10;
-              break;
-
-            case 7:
-              _context4.prev = 7;
-              _context4.t0 = _context4['catch'](1);
-
-              console.log("error getting likes: " + _context4.t0);
-
-            case 10:
+            case 2:
             case 'end':
               return _context4.stop();
           }
         }
-      }, _callee4, _this2, [[1, 7]]);
+      }, _callee4, _this2);
     }));
 
     _this.displayStats = function () {
@@ -447,6 +431,7 @@ var Post = function (_Component) {
     };
 
     _this.commentArea = _react2.default.createRef(); // ref for updating comments
+    _this._isMounted = false;
     return _this;
   }
 
@@ -455,9 +440,11 @@ var Post = function (_Component) {
     value: function componentDidMount() {
       var self = this;
 
-      this.getLikes();
+      this._isMounted = true;
 
-      if (this.props.post.link_url != '') {
+      this._isMounted && this.getLikes();
+
+      if (this._isMounted && this.props.post.link_url != '') {
         this.setState({
           link: true
         });
@@ -475,6 +462,11 @@ var Post = function (_Component) {
         console.log('new likes');
         self.getLikes();
       });
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this._isMounted = false;
     }
 
     // dont really need this because we are just lying and saying its mp4 anyway
@@ -3124,7 +3116,10 @@ var PostArea = function (_Component) {
       try {
         _axios2.default.get('/posts/page/1').then(function (res) {
           _this.setState({
-            posts: res.data
+            total: res.data.total,
+            perPage: res.data.perPage,
+            lastPage: res.data.lastPage,
+            posts: res.data.data
           });
         });
       } catch (error) {
@@ -3133,18 +3128,15 @@ var PostArea = function (_Component) {
     };
 
     _this.getNextPage = function () {
-      _this.setState({
-        page: _this.state.page + 1
-      });
-
       try {
-        _axios2.default.get('/posts/page/' + _this.state.page).then(function (res) {
+        _axios2.default.get('/posts/page/' + (_this.state.page + 1)).then(function (res) {
           console.log(posts);
           _this.setState({
-            total: res.total,
-            perPage: res.perPage,
-            lastPage: res.lastPage,
-            posts: _this.state.posts.concat(res.data)
+            total: res.data.total,
+            perPage: res.data.perPage,
+            lastPage: res.data.lastPage,
+            posts: _this.state.posts.concat(res.data.data),
+            page: _this.state.page + 1
           });
         });
       } catch (error) {
@@ -3166,7 +3158,7 @@ var PostArea = function (_Component) {
               null,
               'Loading...'
             ),
-            scrollableTarget: "all-posts",
+            scrollableTarget: ".content-area",
             endMessage: _react2.default.createElement(
               'p',
               { style: { textAlign: 'center' } },
