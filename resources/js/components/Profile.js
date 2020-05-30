@@ -29,7 +29,6 @@ export default class Profile extends Component {
     let user = ''
     try {
       user = await axios.get(`/api/user/${match.params.id}`)
-      .then()
       // console.log(user)
     } catch(error) {
       console.log(error)

@@ -10,21 +10,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(45);
-
-var _regenerator2 = _interopRequireDefault(_regenerator);
-
 var _extends2 = __webpack_require__(68);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(44);
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
 var _defineProperty2 = __webpack_require__(135);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _regenerator = __webpack_require__(45);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__(44);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var _classCallCheck2 = __webpack_require__(14);
 
@@ -70,6 +70,48 @@ var Post = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this));
 
+    _this.getPoster = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var user;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              user = '';
+              _context.prev = 1;
+              _context.next = 4;
+              return _axios2.default.get('/api/user/' + _this.props.post.user_id);
+
+            case 4:
+              user = _context.sent;
+
+              console.log(user);
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context['catch'](1);
+
+              console.log(_context.t0);
+
+            case 11:
+
+              if (_this._isMounted) {
+                _this.setState({
+                  user: user.data[0]
+                }, function () {
+                  console.log(_this.state);
+                });
+              }
+
+            case 12:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this2, [[1, 8]]);
+    }));
+
     _this.displayMedia = function () {
       if (_this.props.post.type == 'image') {
         return _react2.default.createElement('div', { className: 'post-media', onClick: function onClick() {
@@ -110,21 +152,21 @@ var Post = function (_Component) {
       });
     };
 
-    _this.submitComment = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+    _this.submitComment = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
       var self, response;
-      return _regenerator2.default.wrap(function _callee$(_context) {
+      return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               self = _this;
 
               if (!(_this.state.comment.length > 0)) {
-                _context.next = 11;
+                _context2.next = 11;
                 break;
               }
 
-              _context.prev = 2;
-              _context.next = 5;
+              _context2.prev = 2;
+              _context2.next = 5;
               return _axios2.default.post('/comments', {
                 post_id: self.props.post.id,
                 user_id: self.props.curuser.id,
@@ -144,22 +186,22 @@ var Post = function (_Component) {
               });
 
             case 5:
-              response = _context.sent;
-              _context.next = 11;
+              response = _context2.sent;
+              _context2.next = 11;
               break;
 
             case 8:
-              _context.prev = 8;
-              _context.t0 = _context['catch'](2);
+              _context2.prev = 8;
+              _context2.t0 = _context2['catch'](2);
 
-              console.log("axios didnt work: " + _context.t0);
+              console.log("axios didnt work: " + _context2.t0);
 
             case 11:
             case 'end':
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, _this2, [[2, 8]]);
+      }, _callee2, _this2, [[2, 8]]);
     }));
 
     _this.touchSubmitComment = function (event) {
@@ -182,17 +224,17 @@ var Post = function (_Component) {
       }
     };
 
-    _this.deletePost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+    _this.deletePost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
       var self;
-      return _regenerator2.default.wrap(function _callee2$(_context2) {
+      return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               self = _this;
               // console.log("post id: " + self.props.post.id)
 
-              _context2.prev = 1;
-              _context2.next = 4;
+              _context3.prev = 1;
+              _context3.next = 4;
               return _axios2.default.get('/posts/' + self.props.post.id + '/delete').then(function (response) {
                 console.log('post deleted: ' + response);
                 self.props.update();
@@ -203,14 +245,14 @@ var Post = function (_Component) {
               });
 
             case 4:
-              _context2.next = 9;
+              _context3.next = 9;
               break;
 
             case 6:
-              _context2.prev = 6;
-              _context2.t0 = _context2['catch'](1);
+              _context3.prev = 6;
+              _context3.t0 = _context3['catch'](1);
 
-              console.log('error deleting post: ' + _context2.t0);
+              console.log('error deleting post: ' + _context3.t0);
 
             case 9:
               console.log('post deleted');
@@ -218,10 +260,10 @@ var Post = function (_Component) {
 
             case 11:
             case 'end':
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2, _this2, [[1, 6]]);
+      }, _callee3, _this2, [[1, 6]]);
     }));
 
     _this.getCommentCount = function () {
@@ -238,21 +280,21 @@ var Post = function (_Component) {
     };
 
     _this.like = function () {
-      var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(u_id, p_id) {
+      var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(u_id, p_id) {
         var self;
-        return _regenerator2.default.wrap(function _callee3$(_context3) {
+        return _regenerator2.default.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 self = _this;
 
                 if (_this.state.liked) {
-                  _context3.next = 12;
+                  _context4.next = 12;
                   break;
                 }
 
-                _context3.prev = 2;
-                _context3.next = 5;
+                _context4.prev = 2;
+                _context4.next = 5;
                 return _axios2.default.post('/likes', {
                   user_id: u_id,
                   post_id: p_id
@@ -261,36 +303,36 @@ var Post = function (_Component) {
                 });
 
               case 5:
-                _context3.next = 10;
+                _context4.next = 10;
                 break;
 
               case 7:
-                _context3.prev = 7;
-                _context3.t0 = _context3['catch'](2);
+                _context4.prev = 7;
+                _context4.t0 = _context4['catch'](2);
 
-                console.log("error liking post: " + _context3.t0);
+                console.log("error liking post: " + _context4.t0);
 
               case 10:
-                _context3.next = 20;
+                _context4.next = 20;
                 break;
 
               case 12:
-                _context3.prev = 12;
-                _context3.next = 15;
+                _context4.prev = 12;
+                _context4.next = 15;
                 return _axios2.default.post('/likes/delete', {
                   user_id: u_id,
                   post_id: p_id
                 });
 
               case 15:
-                _context3.next = 20;
+                _context4.next = 20;
                 break;
 
               case 17:
-                _context3.prev = 17;
-                _context3.t1 = _context3['catch'](12);
+                _context4.prev = 17;
+                _context4.t1 = _context4['catch'](12);
 
-                console.log("error liking post: " + _context3.t1);
+                console.log("error liking post: " + _context4.t1);
 
               case 20:
                 _this.setState((0, _extends3.default)({}, _this.state, {
@@ -304,22 +346,22 @@ var Post = function (_Component) {
 
               case 23:
               case 'end':
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, _this2, [[2, 7], [12, 17]]);
+        }, _callee4, _this2, [[2, 7], [12, 17]]);
       }));
 
       return function (_x, _x2) {
-        return _ref3.apply(this, arguments);
+        return _ref4.apply(this, arguments);
       };
     }();
 
-    _this.getLikes = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
+    _this.getLikes = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
       var self;
-      return _regenerator2.default.wrap(function _callee4$(_context4) {
+      return _regenerator2.default.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               self = _this;
 
@@ -343,10 +385,10 @@ var Post = function (_Component) {
 
             case 2:
             case 'end':
-              return _context4.stop();
+              return _context5.stop();
           }
         }
-      }, _callee4, _this2);
+      }, _callee5, _this2);
     }));
 
     _this.displayStats = function () {
@@ -421,7 +463,7 @@ var Post = function (_Component) {
 
     _this.state = {
       post: {},
-      poster: {},
+      user: {},
       comment: "",
       numComments: 0,
       update: false,
@@ -444,6 +486,7 @@ var Post = function (_Component) {
 
       this._isMounted = true;
 
+      this._isMounted && this.getPoster();
       this._isMounted && this.getLikes();
 
       if (this._isMounted && this.props.post.link_url != '') {
@@ -470,6 +513,9 @@ var Post = function (_Component) {
     value: function componentWillUnmount() {
       this._isMounted = false;
     }
+
+    // get the user data for the person who posted this post
+
 
     // dont really need this because we are just lying and saying its mp4 anyway
     // because it wont work on chrome if we call it a quicktime file
@@ -523,18 +569,18 @@ var Post = function (_Component) {
             { className: 'post-header' },
             _react2.default.createElement(
               'a',
-              { href: '/profile/' + this.props.user.id, className: 'author' },
+              { href: '/profile/' + this.state.user.id, className: 'author' },
               _react2.default.createElement('div', { className: 'user-img', style: {
-                  backgroundImage: 'url("' + this.props.user.profile_img + '")',
+                  backgroundImage: 'url("' + this.state.user.profile_img + '")',
                   backgroundPosition: 'center center',
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: 'cover' } }),
               _react2.default.createElement(
                 'div',
                 { className: 'username' },
-                this.props.user.fname,
+                this.state.user.fname,
                 ' ',
-                this.props.user.lname
+                this.state.user.lname
               )
             ),
             _react2.default.createElement(
@@ -552,7 +598,7 @@ var Post = function (_Component) {
             ),
             _react2.default.createElement(
               'div',
-              { className: 'del-btn ' + (this.props.user.id == this.props.curuser.id ? 'active' : ''), onClick: this.deletePost },
+              { className: 'del-btn ' + (this.state.user.id == this.props.curuser.id ? 'active' : ''), onClick: this.deletePost },
               _react2.default.createElement('i', { className: 'ayn-trash' })
             )
           ),
@@ -1736,7 +1782,7 @@ var Profile = function (_Component) {
               user = '';
               _context.prev = 3;
               _context.next = 6;
-              return _axios2.default.get('/api/user/' + match.params.id).then();
+              return _axios2.default.get('/api/user/' + match.params.id);
 
             case 6:
               user = _context.sent;
@@ -3179,7 +3225,7 @@ var PostArea = function (_Component) {
             // const user = await axios.get(`/api/user/${u_id}`)
             // console.log(userData)
 
-            return _react2.default.createElement(_Post2.default, { post: post, user: _this.state.user, ws: _this.props.ws, curuser: _this.props.initialData.userData, update: _this.props.update, key: post.id });
+            return _react2.default.createElement(_Post2.default, { post: post, ws: _this.props.ws, curuser: _this.props.initialData.userData, update: _this.props.update, key: post.id });
           })
         );
       }
@@ -3190,8 +3236,7 @@ var PostArea = function (_Component) {
       perPage: 20,
       lastPage: 100,
       page: 1,
-      posts: [],
-      user: { id: 1, fname: 'Jordan', lname: 'Hewitt', profile_img: '/img/user.jpg', email: 'hewitj2@gmail.com', password: 'asdkajndajnd', login_source: 'register', info: '', token: '', created_at: '2020-05-26 21:22:04', updated_at: '2020-05-26 21:22:04' }
+      posts: []
     };
     _this._isMounted = false;
     return _this;
@@ -3231,7 +3276,7 @@ var PostArea = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (this.state.user == undefined) {
+      if (this.state.posts == undefined) {
         return _react2.default.createElement(
           'div',
           { className: 'load' },

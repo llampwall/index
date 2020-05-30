@@ -8,7 +8,7 @@ export default class Post extends Component {
     super()
     this.state = { 
         post: {},
-        poster: {}, 
+        user: {}, 
         comment: "",
         numComments: 0,
         update: false,
@@ -29,6 +29,7 @@ export default class Post extends Component {
 
     this._isMounted = true
 
+    this._isMounted && this.getPoster()
     this._isMounted && this.getLikes()
 
     if (this._isMounted && this.props.post.link_url != '') {
@@ -53,6 +54,25 @@ export default class Post extends Component {
 
   componentWillUnmount() {
     this._isMounted = false
+  }
+
+  // get the user data for the person who posted this post
+  getPoster = async () => {
+    let user = ''
+    try {
+      user = await axios.get(`/api/user/${this.props.post.user_id}`)
+      console.log(user)
+    } catch(error) {
+      console.log(error)
+    }
+
+    if (this._isMounted) {
+      this.setState({
+        user: user.data[0],
+      }, () => {
+        console.log(this.state)
+      })
+    }
   }
 
   displayMedia = () => {
@@ -319,19 +339,19 @@ export default class Post extends Component {
         return (
             <div className="post">
                 <div className="post-header">
-                    <a href={`/profile/${this.props.user.id}`} className="author">
+                    <a href={`/profile/${this.state.user.id}`} className="author">
                         <div className="user-img" style={{
-                        backgroundImage: `url("${this.props.user.profile_img}")`, 
+                        backgroundImage: `url("${this.state.user.profile_img}")`, 
                         backgroundPosition: 'center center', 
                         backgroundRepeat: 'no-repeat', 
                         backgroundSize: 'cover'}} />
-                        <div className="username">{this.props.user.fname} {this.props.user.lname}</div>
+                        <div className="username">{this.state.user.fname} {this.state.user.lname}</div>
                     </a>
 
                     <a href={`/post/${this.props.post.id}`} className="text">shared {this.getType()} <i className="ayn-link"></i></a>
                       
                     <div className="time">{new Date(this.props.post.created_at).toLocaleString()}</div>
-                    <div className={`del-btn ${this.props.user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deletePost}><i className="ayn-trash"></i></div>
+                    <div className={`del-btn ${this.state.user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deletePost}><i className="ayn-trash"></i></div>
                 </div>
 
                 {this.displayMedia()}

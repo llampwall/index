@@ -12,7 +12,6 @@ export default class PostArea extends Component {
       lastPage: 100,
       page: 1,
       posts: [],
-      user: {id: 1, fname: 'Jordan', lname: 'Hewitt', profile_img: '/img/user.jpg', email: 'hewitj2@gmail.com', password: 'asdkajndajnd', login_source: 'register', info: '', token: '', created_at: '2020-05-26 21:22:04', updated_at: '2020-05-26 21:22:04'}
     }
     this._isMounted = false
   }
@@ -97,7 +96,7 @@ export default class PostArea extends Component {
             // const user = await axios.get(`/api/user/${u_id}`)
             // console.log(userData)
   
-            return <Post post={post} user={this.state.user} ws={this.props.ws} curuser={this.props.initialData.userData} update={this.props.update} key={post.id}/>
+            return <Post post={post} ws={this.props.ws} curuser={this.props.initialData.userData} update={this.props.update} key={post.id}/>
           })}
         </InfiniteScroll>
       )
@@ -105,7 +104,7 @@ export default class PostArea extends Component {
   }
 
   render () {
-    if (this.state.user == undefined) {
+    if (this.state.posts == undefined) {
       return (
         <div className='load'>
           <i className="ayn-spin3" />
