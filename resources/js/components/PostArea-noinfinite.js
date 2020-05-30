@@ -10,12 +10,11 @@ export default class PostArea extends Component {
   }
 
   showMyPosts = () => {
-    // console.log(this.props.initialData.postData)
     return (
       this.props.initialData.postData.map((item) => {
         let post = item.posts
         let user = item.users
-        return <Post post={post} user={user} ws={this.props.ws} curuser={this.props.initialData.userData} update={this.props.update} key={post.id}/>
+        return <Post post={post}ws={this.props.ws} curuser={this.props.initialData.userData} update={this.props.update} key={post.id}/>
       })
     )
   }

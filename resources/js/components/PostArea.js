@@ -77,7 +77,6 @@ export default class PostArea extends Component {
   }
 
   showMyPosts = () => {
-    // console.log(this.props.initialData.postData)
     if (this.state.posts.length > 0) {
       return (
         <InfiniteScroll
@@ -90,8 +89,8 @@ export default class PostArea extends Component {
         >
           {this.state.posts.map((post) => {
   
-            return <Post post={post} ws={this.props.ws} curuser={this.props.initialData.userData} update={this.props.update} key={post.id}/>
-            
+            return <Post post={post} ws={this.props.ws} curuser={this.props.user} update={this.props.update} key={post.id}/>
+
           })}
         </InfiniteScroll>
       )

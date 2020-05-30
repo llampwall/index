@@ -40,7 +40,6 @@ export default class LeftMenu extends Component {
         </div>
       )
     } else {
-      // console.log(this.props.initialData.userData)
       const {fname, lname} = this.props.user
       return (
         <section id="left-menu" className={this.state.open ? "open" : "closed"}>

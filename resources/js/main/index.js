@@ -19,8 +19,7 @@ class Layout extends Component {
   constructor () {
     super()
     this.state = {
-      user: {},
-      initialData: {}
+      user: {}
     }
 
     this.retry = null
@@ -63,8 +62,6 @@ class Layout extends Component {
 
         self.setState({
           user: user.data,
-        }, () => {
-          // console.log(self.state.initialData)
         })
       } catch (error) {
         console.log("Initialization error: " + error)
@@ -105,8 +102,8 @@ class Layout extends Component {
           <section id="content-container">
 
             <SearchHeader />
-            <Route exact path="/" component={ (props) => <Home routeProps={props} initialData={this.state.initialData} ws={this.ws} ref={this.homeRef} single={false}/> }/>
-            <Route exact path="/post/:id" component={ (props) => <Home routeProps={props} initialData={this.state.initialData} ws={this.ws} ref={this.homeRef} single={true}/> }/>
+            <Route exact path="/" component={ (props) => <Home routeProps={props} user={this.state.user} ws={this.ws} ref={this.homeRef} single={false}/> }/>
+            <Route exact path="/post/:id" component={ (props) => <Home routeProps={props} user={this.state.user} ws={this.ws} ref={this.homeRef} single={true}/> }/>
             <Route exact path="/profile/:id" component={ (props) => <Profile routeProps={props} user={this.state.user}/> }/>
           
           </section>

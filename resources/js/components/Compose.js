@@ -59,7 +59,7 @@ export default class Compose extends Component {
         fData.append('content', text)
       }
     }
-    fData.append('user_id', this.props.initialData.userData.id)
+    fData.append('user_id', this.props.user.id)
 
     if (this.state.image == '') {
       fData.append('img_name', '')
@@ -244,7 +244,7 @@ export default class Compose extends Component {
   }
 
   render () {
-    if (this.props.initialData.userData == undefined) {
+    if (this.props.user == undefined) {
       return (
         <div className='load'>
           <i className="ayn-spin3" />
@@ -255,7 +255,7 @@ export default class Compose extends Component {
         <section id="compose">
           <textarea name="postContent" id="content" cols={30} rows={10} placeholder="share something..." onChange={this.handleChange} onKeyUp={this.checkSubmit} value={this.state.postContent}/>
           <div className="user-img" style={{
-            backgroundImage: `url("${this.props.initialData.userData.profile_img}")`, 
+            backgroundImage: `url("${this.props.user.profile_img}")`, 
             backgroundPosition: 'center center', 
             backgroundRepeat: 'no-repeat', 
             backgroundSize: 'cover'}} />

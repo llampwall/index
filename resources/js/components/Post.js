@@ -61,7 +61,7 @@ export default class Post extends Component {
     let user = ''
     try {
       user = await axios.get(`/api/user/${this.props.post.user_id}`)
-      console.log(user)
+      // console.log(user)
     } catch(error) {
       console.log(error)
     }
@@ -69,8 +69,6 @@ export default class Post extends Component {
     if (this._isMounted) {
       this.setState({
         user: user.data[0],
-      }, () => {
-        console.log(this.state)
       })
     }
   }
@@ -157,10 +155,11 @@ export default class Post extends Component {
 
   // this lets us get the comments from the child
   sendUp = (num) => {
-    this.setState({
-      ...this.state,
-      numComments: num
-    })
+    if (this._isMounted) {
+      this.setState({
+        numComments: num
+      })
+    }
   }
 
   // allows comments to be submitted with the enter key

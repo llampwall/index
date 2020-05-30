@@ -83,33 +83,29 @@ var Post = function (_Component) {
 
             case 4:
               user = _context.sent;
-
-              console.log(user);
-              _context.next = 11;
+              _context.next = 10;
               break;
 
-            case 8:
-              _context.prev = 8;
+            case 7:
+              _context.prev = 7;
               _context.t0 = _context['catch'](1);
 
               console.log(_context.t0);
 
-            case 11:
+            case 10:
 
               if (_this._isMounted) {
                 _this.setState({
                   user: user.data[0]
-                }, function () {
-                  console.log(_this.state);
                 });
               }
 
-            case 12:
+            case 11:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, _this2, [[1, 8]]);
+      }, _callee, _this2, [[1, 7]]);
     }));
 
     _this.displayMedia = function () {
@@ -211,9 +207,11 @@ var Post = function (_Component) {
     };
 
     _this.sendUp = function (num) {
-      _this.setState((0, _extends3.default)({}, _this.state, {
-        numComments: num
-      }));
+      if (_this._isMounted) {
+        _this.setState({
+          numComments: num
+        });
+      }
     };
 
     _this.checkSubmit = function (event) {
@@ -734,7 +732,7 @@ var Home = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
     _this.getPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-      var p_id, postData, u_id, userData;
+      var p_id, postData;
       return _regenerator2.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -748,21 +746,11 @@ var Home = function (_Component) {
 
               console.log(postData);
 
-              u_id = postData.data[0].user_id;
-              _context.next = 8;
-              return _axios2.default.get('/api/user/' + u_id);
-
-            case 8:
-              userData = _context.sent;
-
-              console.log(userData);
-
               _this.setState({
-                post: postData.data[0],
-                user: userData.data[0]
+                post: postData.data[0]
               });
 
-            case 11:
+            case 6:
             case 'end':
               return _context.stop();
           }
@@ -770,48 +758,19 @@ var Home = function (_Component) {
       }, _callee, _this2);
     }));
     _this.update = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      var data, allData;
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return _axios2.default.get('/api/intialize');
-
-            case 3:
-              data = _context2.sent;
-              allData = data.data;
-              // console.log(allData)
-
-              _this.setState({
-                initialData: allData
-              }, function () {
-                // console.log(this.state.initialData)
-              });
-
-              _context2.next = 11;
-              break;
-
-            case 8:
-              _context2.prev = 8;
-              _context2.t0 = _context2['catch'](0);
-
-              console.log("Initialization error: " + _context2.t0);
-
-            case 11:
             case 'end':
               return _context2.stop();
           }
         }
-      }, _callee2, _this2, [[0, 8]]);
+      }, _callee2, _this2);
     }));
 
     _this.state = {
-      initialData: {},
-      single: false,
-      post: {},
-      user: {}
+      post: {}
     };
     return _this;
   }
@@ -819,13 +778,6 @@ var Home = function (_Component) {
   (0, _createClass3.default)(Home, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      // console.log(this.props)
-      this.setState({
-        initialData: this.props.initialData,
-        single: this.props.single
-      }, function () {
-        // console.log(this.state)
-      });
 
       if (this.props.single) {
         this.getPost();
@@ -840,7 +792,7 @@ var Home = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (this.props.initialData == undefined) {
+      if (this.props.user == undefined) {
         return _react2.default.createElement(
           'div',
           { 'class': 'load' },
@@ -848,7 +800,7 @@ var Home = function (_Component) {
         );
       } else {
 
-        if (this.props.single && this.state.user != undefined) {
+        if (this.props.single && this.state.post != undefined) {
           return _react2.default.createElement(
             'div',
             { className: 'content-area' },
@@ -858,7 +810,7 @@ var Home = function (_Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'post-container' },
-                _react2.default.createElement(_Post2.default, { post: this.state.post, user: this.state.user, ws: this.props.ws, curuser: this.props.initialData.userData, update: this.update })
+                _react2.default.createElement(_Post2.default, { post: this.state.post, ws: this.props.ws, curuser: this.props.user, update: this.update })
               )
             )
           );
@@ -866,8 +818,8 @@ var Home = function (_Component) {
           return _react2.default.createElement(
             'div',
             { className: 'content-area', id: 'scroll-this' },
-            _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData, update: this.update, ws: this.props.ws }),
-            _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, initialData: this.state.initialData, ws: this.props.ws, update: this.update })
+            _react2.default.createElement(_Compose2.default, { user: this.props.user, update: this.update, ws: this.props.ws }),
+            _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, user: this.props.user, ws: this.props.ws, update: this.update })
           );
         }
       }
@@ -962,7 +914,6 @@ var LeftMenu = function (_Component) {
           _react2.default.createElement('i', { className: 'ayn-spin3' })
         );
       } else {
-        // console.log(this.props.initialData.userData)
         var _props$user = this.props.user,
             fname = _props$user.fname,
             lname = _props$user.lname;
@@ -2340,8 +2291,6 @@ var Comments = function (_Component) {
           switch (_context.prev = _context.next) {
             case 0:
               self = this;
-              // console.log(this.props)
-
               _context.prev = 1;
               _context.next = 4;
               return _axios2.default.get('/posts/' + self.props.post.id + '/comments');
@@ -2349,13 +2298,12 @@ var Comments = function (_Component) {
             case 4:
               comments = _context.sent;
 
-              //   console.log(comments.data.commentData)
 
-              self.setState({
-                comments: comments.data.commentData
-              }, function () {
-                //   console.log(self.state)
-              });
+              if (this._isMounted) {
+                self.setState({
+                  comments: comments.data.commentData
+                });
+              }
               _context.next = 11;
               break;
 
@@ -2456,13 +2404,20 @@ var Comments = function (_Component) {
     _this.state = {
       comments: []
     };
+    _this._isMounted = false;
     return _this;
   }
 
   (0, _createClass3.default)(Comments, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.getComments();
+      this._isMounted = true;
+      this._isMounted && this.getComments();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this._isMounted = false;
     }
 
     // delete the comment only if you posted it
@@ -2635,7 +2590,7 @@ var Compose = function (_Component) {
               }
 
             case 22:
-              fData.append('user_id', _this.props.initialData.userData.id);
+              fData.append('user_id', _this.props.user.id);
 
               if (!(_this.state.image == '')) {
                 _context3.next = 31;
@@ -2961,7 +2916,7 @@ var Compose = function (_Component) {
   (0, _createClass3.default)(Compose, [{
     key: 'render',
     value: function render() {
-      if (this.props.initialData.userData == undefined) {
+      if (this.props.user == undefined) {
         return _react2.default.createElement(
           'div',
           { className: 'load' },
@@ -2973,7 +2928,7 @@ var Compose = function (_Component) {
           { id: 'compose' },
           _react2.default.createElement('textarea', { name: 'postContent', id: 'content', cols: 30, rows: 10, placeholder: 'share something...', onChange: this.handleChange, onKeyUp: this.checkSubmit, value: this.state.postContent }),
           _react2.default.createElement('div', { className: 'user-img', style: {
-              backgroundImage: 'url("' + this.props.initialData.userData.profile_img + '")',
+              backgroundImage: 'url("' + this.props.user.profile_img + '")',
               backgroundPosition: 'center center',
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover' } }),
@@ -3187,7 +3142,6 @@ var PostArea = function (_Component) {
     };
 
     _this.showMyPosts = function () {
-      // console.log(this.props.initialData.postData)
       if (_this.state.posts.length > 0) {
         return _react2.default.createElement(
           _reactInfiniteScrollComponent2.default,
@@ -3213,7 +3167,7 @@ var PostArea = function (_Component) {
           },
           _this.state.posts.map(function (post) {
 
-            return _react2.default.createElement(_Post2.default, { post: post, ws: _this.props.ws, curuser: _this.props.initialData.userData, update: _this.props.update, key: post.id });
+            return _react2.default.createElement(_Post2.default, { post: post, ws: _this.props.ws, curuser: _this.props.user, update: _this.props.update, key: post.id });
           })
         );
       }
@@ -3401,8 +3355,7 @@ var Layout = function (_Component) {
     };
 
     _this.state = {
-      user: {},
-      initialData: {}
+      user: {}
     };
 
     _this.retry = null;
@@ -3435,8 +3388,6 @@ var Layout = function (_Component) {
 
                   self.setState({
                     user: user.data
-                  }, function () {
-                    // console.log(self.state.initialData)
                   });
                   _context.next = 10;
                   break;
@@ -3499,10 +3450,10 @@ var Layout = function (_Component) {
             { id: 'content-container' },
             _react2.default.createElement(_SearchHeader2.default, null),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: function component(props) {
-                return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData, ws: _this2.ws, ref: _this2.homeRef, single: false });
+                return _react2.default.createElement(_Home2.default, { routeProps: props, user: _this2.state.user, ws: _this2.ws, ref: _this2.homeRef, single: false });
               } }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/post/:id', component: function component(props) {
-                return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData, ws: _this2.ws, ref: _this2.homeRef, single: true });
+                return _react2.default.createElement(_Home2.default, { routeProps: props, user: _this2.state.user, ws: _this2.ws, ref: _this2.homeRef, single: true });
               } }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/:id', component: function component(props) {
                 return _react2.default.createElement(_Profile2.default, { routeProps: props, user: _this2.state.user });

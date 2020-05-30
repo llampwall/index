@@ -10,21 +10,11 @@ export default class Home extends Component {
   constructor () {
     super()
     this.state = {
-      initialData: {},
-      single: false,
-      post: {},
-      user: {}
+      post: {}
     }
   }
 
   componentDidMount() {
-    // console.log(this.props)
-    this.setState({
-      initialData: this.props.initialData,
-      single: this.props.single
-    }, () => {
-      // console.log(this.state)
-    })
 
     if (this.props.single) {
       this.getPost()
@@ -37,15 +27,9 @@ export default class Home extends Component {
     const postData = await axios.get(`/posts/${p_id}`)
     console.log(postData)
 
-    const u_id = postData.data[0].user_id
-    const userData = await axios.get(`/api/user/${u_id}`)
-    console.log(userData)
-
     this.setState({
-      post: postData.data[0],
-      user: userData.data[0]
+      post: postData.data[0]
     })
-
   }
 
 
@@ -53,24 +37,10 @@ export default class Home extends Component {
   // pass down function to pass down to compose so it can update the whole area
   update = async () => {
 
-    try {
-      const data = await axios.get('/api/intialize')
-      const allData = data.data
-      // console.log(allData)
-
-      this.setState({
-        initialData: allData
-      }, () => {
-        // console.log(this.state.initialData)
-      })
-
-    } catch (error) {
-      console.log("Initialization error: " + error)
-    }
   }
 
   render () {
-    if (this.props.initialData == undefined) {
+    if (this.props.user == undefined) {
       return (
         <div class='load'>
           <i className="ayn-spin3" />
@@ -78,12 +48,12 @@ export default class Home extends Component {
       )
     } else {
       
-      if (this.props.single && this.state.user != undefined) {
+      if (this.props.single && this.state.post != undefined) {
         return (
           <div className="content-area">
             <section id="all-posts">
                 <div className="post-container">
-                  <Post post={this.state.post} user={this.state.user} ws={this.props.ws} curuser={this.props.initialData.userData} update={this.update}/>
+                  <Post post={this.state.post} ws={this.props.ws} curuser={this.props.user} update={this.update}/>
                 </div>
             </section>
           </div>
@@ -92,8 +62,8 @@ export default class Home extends Component {
         return (
           <div className="content-area" id="scroll-this">
             
-              <Compose initialData={this.state.initialData} update={this.update} ws={this.props.ws}/>
-              <PostArea routeProps={this.props.routeProps} initialData={this.state.initialData} ws={this.props.ws} update={this.update}/>
+              <Compose user={this.props.user} update={this.update} ws={this.props.ws}/>
+              <PostArea routeProps={this.props.routeProps} user={this.props.user} ws={this.props.ws} update={this.update}/>
   
           </div>
         )

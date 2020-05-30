@@ -7,25 +7,29 @@ export default class Comments extends Component {
     this.state = { 
         comments: []
     }
+    this._isMounted = false
   }
 
   componentDidMount() {
-    this.getComments()
+    this._isMounted = true
+    this._isMounted && this.getComments()
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false
   }
 
   getComments = async function() {
     const self = this;
-    // console.log(this.props)
     try {
 
       const comments = await axios.get(`/posts/${self.props.post.id}/comments`)
-    //   console.log(comments.data.commentData)
 
-      self.setState({
-        comments: comments.data.commentData
-      }, () => {
-      //   console.log(self.state)
-      })
+      if(this._isMounted) {
+        self.setState({
+          comments: comments.data.commentData
+        })
+      }
     } catch (error) {
       console.log("Initialization error: " + error)
     }

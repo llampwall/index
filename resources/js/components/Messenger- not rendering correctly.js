@@ -87,7 +87,7 @@ export default class Messenger extends Component {
   displayChat = () => {
     if (this.state.chatUser != null) {
       return (
-        <ChatWindow ref={this.chatRef} chat={this.chat} to={this.state.chatUser} from={this.props.initialData.userData}></ChatWindow>
+        <ChatWindow ref={this.chatRef} chat={this.chat} to={this.state.chatUser} from={this.props.user}></ChatWindow>
       )
     }
   }
