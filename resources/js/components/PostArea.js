@@ -17,10 +17,11 @@ export default class PostArea extends Component {
   }
 
   componentDidMount = () => {
+    const self = this
     try {
       axios.get(`/posts/page/1`)
       .then((res) => {
-        this.setState({
+        self.setState({
           total: res.data.total,
           perPage: res.data.perPage,
           lastPage: res.data.lastPage,
@@ -34,11 +35,12 @@ export default class PostArea extends Component {
 
   // fetch next page of results
   getNextPage = () => {
+    const self = this
     try {
       axios.get(`/posts/page/${this.state.page + 1}`)
       .then((res) => {
         console.log(posts)
-        this.setState({
+        self.setState({
           total: res.data.total,
           perPage: res.data.perPage,
           lastPage: res.data.lastPage,

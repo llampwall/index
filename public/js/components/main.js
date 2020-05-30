@@ -3113,9 +3113,10 @@ var PostArea = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (PostArea.__proto__ || Object.getPrototypeOf(PostArea)).call(this));
 
     _this.componentDidMount = function () {
+      var self = _this;
       try {
         _axios2.default.get('/posts/page/1').then(function (res) {
-          _this.setState({
+          self.setState({
             total: res.data.total,
             perPage: res.data.perPage,
             lastPage: res.data.lastPage,
@@ -3128,10 +3129,11 @@ var PostArea = function (_Component) {
     };
 
     _this.getNextPage = function () {
+      var self = _this;
       try {
         _axios2.default.get('/posts/page/' + (_this.state.page + 1)).then(function (res) {
           console.log(posts);
-          _this.setState({
+          self.setState({
             total: res.data.total,
             perPage: res.data.perPage,
             lastPage: res.data.lastPage,
