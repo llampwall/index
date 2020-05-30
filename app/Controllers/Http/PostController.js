@@ -28,6 +28,7 @@ class PostController {
         const { num } = request.params
         const results = await Database
             .from('posts')
+            .orderBy('posts.created_at', 'desc')
             .paginate(num, 10)
         console.log(results)
         return results
