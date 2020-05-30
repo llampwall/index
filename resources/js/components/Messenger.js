@@ -207,7 +207,7 @@ export default class Messenger extends Component {
     // console.log('clicked: ' + clicked)
 
     // do nothing if clicking your own name
-    if (user.id == this.props.initialData.userData.id) {
+    if (user.id == this.props.user.id) {
       return
     }
 
@@ -274,7 +274,7 @@ export default class Messenger extends Component {
     if (this.state.chatUser != null) {
       return (
         <ChatWindow ref={this.chatRef} 
-          from={this.props.initialData.userData} 
+          from={this.props.user} 
           to={this.state.chatUser} 
           ws={this.props.ws}
           chat={this.chat} 

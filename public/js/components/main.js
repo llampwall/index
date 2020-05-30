@@ -1352,7 +1352,7 @@ var Messenger = function (_Component) {
 
                 // do nothing if clicking your own name
 
-                if (!(user.id == _this.props.initialData.userData.id)) {
+                if (!(user.id == _this.props.user.id)) {
                   _context2.next = 4;
                   break;
                 }
@@ -1435,7 +1435,7 @@ var Messenger = function (_Component) {
     _this.displayChat = function () {
       if (_this.state.chatUser != null) {
         return _react2.default.createElement(_ChatWindow2.default, { ref: _this.chatRef,
-          from: _this.props.initialData.userData,
+          from: _this.props.user,
           to: _this.state.chatUser,
           ws: _this.props.ws,
           chat: _this.chat,
@@ -3511,10 +3511,10 @@ var Layout = function (_Component) {
                 return _react2.default.createElement(_Home2.default, { routeProps: props, initialData: _this2.state.initialData, ws: _this2.ws, ref: _this2.homeRef, single: true });
               } }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/:id', component: function component(props) {
-                return _react2.default.createElement(_Profile2.default, { routeProps: props, initialData: _this2.state.initialData });
+                return _react2.default.createElement(_Profile2.default, { routeProps: props, user: _this2.state.user });
               } })
           ),
-          _react2.default.createElement(_Messenger2.default, { initialData: this.state.initialData, ws: this.ws })
+          _react2.default.createElement(_Messenger2.default, { user: this.state.user, ws: this.ws })
         )
       );
     }

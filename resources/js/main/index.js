@@ -107,11 +107,11 @@ class Layout extends Component {
             <SearchHeader />
             <Route exact path="/" component={ (props) => <Home routeProps={props} initialData={this.state.initialData} ws={this.ws} ref={this.homeRef} single={false}/> }/>
             <Route exact path="/post/:id" component={ (props) => <Home routeProps={props} initialData={this.state.initialData} ws={this.ws} ref={this.homeRef} single={true}/> }/>
-            <Route exact path="/profile/:id" component={ (props) => <Profile routeProps={props} initialData={this.state.initialData}/> }/>
+            <Route exact path="/profile/:id" component={ (props) => <Profile routeProps={props} user={this.state.user}/> }/>
           
           </section>
 
-          <Messenger initialData={this.state.initialData} ws={this.ws}/>
+          <Messenger user={this.state.user} ws={this.ws}/>
         </div>
       </Router>
     )
