@@ -36,12 +36,12 @@ class PostController {
 
     // get all new posts 
     async getNewPosts({request, response}) {
-        const { latest } = request.params
+        const { id } = request.params
         const results = await Database
             .from('posts')
-            .where('posts.id', '>', latest)
+            .where('posts.id', '>', id)
             .orderBy('posts.created_at', 'desc')
-        console.log(results)
+        // console.log(results)
         return results
     }
 

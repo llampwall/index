@@ -3106,7 +3106,8 @@ var PostArea = function (_Component) {
 
     _this.getNextPage = function () {
       var self = _this;
-      // debugger;
+
+      _this._isFetching = true;
       try {
         _axios2.default.get('/posts/page/' + (_this.state.page + 1)).then(function (res) {
           self.setState({
@@ -3116,6 +3117,7 @@ var PostArea = function (_Component) {
             posts: _this.state.posts.concat(res.data.data),
             page: _this.state.page + 1
           });
+          _this._isFetching = false;
         });
       } catch (error) {
         console.log("error fetching next page: " + error);
@@ -3124,12 +3126,28 @@ var PostArea = function (_Component) {
 
     _this.getNew = function () {
       var self = _this;
-      // debugger;
+
+      if (_this._isFetching) {
+        // deal with race condition
+        return;
+      }
+
+      _this._isFetching = true;
       try {
         _axios2.default.get('/posts/new/' + _this.state.posts[0].id).then(function (res) {
+          console.log(res.data);
+          var diff = res.data.length;
+          var newTotal = _this.state.total + diff;
+          var newLast = Math.ceil(newTotal / _this.state.perPage);
+          var newPage = Math.round(diff / _this.state.perPage) + _this.state.page;
+
           self.setState({
-            posts: res.data.data.concat(_this.state.posts)
+            total: newTotal,
+            lastPage: newLast,
+            posts: res.data.concat(_this.state.posts),
+            page: newPage
           });
+          _this._isFetching = false;
         });
       } catch (error) {
         console.log("error fetching next page: " + error);
@@ -3158,7 +3176,9 @@ var PostArea = function (_Component) {
                 null,
                 'No more posts'
               )
-            )
+            ),
+            pullDownToRefresh: true,
+            refreshFunction: _this.getNew
           },
           _this.state.posts.map(function (post) {
 
@@ -3176,14 +3196,18 @@ var PostArea = function (_Component) {
       posts: []
     };
     _this._isMounted = false;
+    _this._isFetching = false;
     return _this;
   }
 
   (0, _createClass3.default)(PostArea, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       var self = this;
       this._isMounted = true;
+      this._isFetching = true;
       try {
         _axios2.default.get('/posts/page/1').then(function (res) {
           if (self._isMounted) {
@@ -3193,6 +3217,7 @@ var PostArea = function (_Component) {
               lastPage: res.data.lastPage,
               posts: res.data.data
             });
+            _this2._isFetching = false;
           }
         });
       } catch (error) {
@@ -3209,6 +3234,16 @@ var PostArea = function (_Component) {
 
 
     // gets all new posts when someone else posts
+
+
+    // trackPos = () => {
+    //   var dy = document.getElementById("scroll-this").scrollTop
+    //   var total = document.getElementById("scroll-this").scrollHeight
+    //   var visible = document.getElementById("scroll-this").clientHeight
+    //   var page = Math.ceil()
+    //   console.log(postNum)
+    //   // var newPage = 
+    // }
 
   }, {
     key: 'render',

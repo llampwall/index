@@ -11,14 +11,16 @@ export default class PostArea extends Component {
       perPage: 20,
       lastPage: 100,
       page: 1,
-      posts: [],
+      posts: []
     }
     this._isMounted = false
+    this._isFetching = false
   }
 
   componentDidMount() {
     const self = this
     this._isMounted = true
+    this._isFetching = true
     try {
       axios.get(`/posts/page/1`)
       .then((res) => {
@@ -29,6 +31,7 @@ export default class PostArea extends Component {
             lastPage: res.data.lastPage,
             posts: res.data.data
           })
+          this._isFetching = false
         }
       })
     } catch (error) {
@@ -43,7 +46,8 @@ export default class PostArea extends Component {
   // fetch next page of results
   getNextPage = () => {
     const self = this
-    // debugger;
+
+    this._isFetching = true
     try {
       axios.get(`/posts/page/${this.state.page + 1}`)
       .then((res) => {
@@ -54,6 +58,7 @@ export default class PostArea extends Component {
           posts: this.state.posts.concat(res.data.data),
           page: this.state.page + 1
         })
+        this._isFetching = false
       })
     } catch (error) {
       console.log("error fetching next page: " + error)
@@ -63,18 +68,42 @@ export default class PostArea extends Component {
   // gets all new posts when someone else posts
   getNew = () => {
     const self = this
-    // debugger;
+
+    if (this._isFetching) {     // deal with race condition
+      return
+    }
+    
+    this._isFetching = true
     try {
       axios.get(`/posts/new/${this.state.posts[0].id}`)
       .then((res) => {
+        console.log(res.data)
+        let diff = res.data.length
+        let newTotal = this.state.total + diff
+        let newLast = Math.ceil(newTotal / this.state.perPage)
+        let newPage = Math.round(diff / this.state.perPage) + this.state.page
+
         self.setState({
-          posts: res.data.data.concat(this.state.posts)
+          total: newTotal,
+          lastPage: newLast,
+          posts: res.data.concat(this.state.posts),
+          page: newPage
         })
+        this._isFetching = false
       })
     } catch (error) {
       console.log("error fetching next page: " + error)
     }
   }
+
+  // trackPos = () => {
+  //   var dy = document.getElementById("scroll-this").scrollTop
+  //   var total = document.getElementById("scroll-this").scrollHeight
+  //   var visible = document.getElementById("scroll-this").clientHeight
+  //   var page = Math.ceil()
+  //   console.log(postNum)
+  //   // var newPage = 
+  // }
 
   showMyPosts = () => {
     if (this.state.posts.length > 0) {
@@ -86,6 +115,8 @@ export default class PostArea extends Component {
           loader={<h4>Loading...</h4>}
           scrollableTarget={"scroll-this"}
           endMessage={<p><b>No more posts</b></p>}
+          pullDownToRefresh
+          refreshFunction={this.getNew}
         >
           {this.state.posts.map((post) => {
   
