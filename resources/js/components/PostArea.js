@@ -6,6 +6,7 @@ import axios from 'axios'
 export default class PostArea extends Component {
   constructor () {
     super()
+    this._isMounted = false;
     this.state = { 
       total: 0,
       perPage: 10,
@@ -17,6 +18,7 @@ export default class PostArea extends Component {
   }
 
   componentDidMount = () => {
+    this._isMounted = true;
     try {
       axios.get(`/posts/page/1`)
       .then((res) => {
@@ -29,25 +31,31 @@ export default class PostArea extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   // fetch next page of results
   getNextPage = () => {
-    this.setState({
-      page: this.state.page + 1
-    })
-
-    try {
-      axios.get(`/posts/page/${this.state.page}`)
-      .then((res) => {
-        console.log(posts)
-        this.setState({
-          total: res.total,
-          perPage: res.perPage,
-          lastPage: res.lastPage,
-          posts: this.state.posts.concat(res.data)
-        })
+    if(this._isMounted) {
+      this.setState({
+        page: this.state.page + 1
       })
-    } catch (error) {
-      console.log("error fetching next page: " + error)
+
+      try {
+        axios.get(`/posts/page/${this.state.page}`)
+          .then((res) => {
+            console.log(posts)
+            this.setState({
+              total: res.total,
+              perPage: res.perPage,
+              lastPage: res.lastPage,
+              posts: this.state.posts.concat(res.data)
+            })
+          })
+      } catch (error) {
+        console.log("error fetching next page: " + error)
+      }
     }
   }
 
