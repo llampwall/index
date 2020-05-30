@@ -19,7 +19,7 @@ class PostController {
     async getPost({request, response}) {
         const { id } = request.params
         const post = await Post.query().where('posts.id', id).fetch()
-        console.log(post.data)
+        // console.log(post.data)
         return post
     }
 
@@ -30,6 +30,17 @@ class PostController {
             .from('posts')
             .orderBy('posts.created_at', 'desc')
             .paginate(num, 20)
+        // console.log(results)
+        return results
+    }
+
+    // get all new posts 
+    async getNewPosts({request, response}) {
+        const { latest } = request.params
+        const results = await Database
+            .from('posts')
+            .where('posts.id', '>', latest)
+            .orderBy('posts.created_at', 'desc')
         console.log(results)
         return results
     }
@@ -44,8 +55,8 @@ class PostController {
         const s3 = new aws.S3()
         const fileName = request.params.filename
         const fileType = decodeURIComponent(request.params.type)
-        console.log(fileName)
-        console.log(fileType)
+        // console.log(fileName)
+        // console.log(fileType)
         const s3Params = {
             Bucket: S3_BUCKET,
             Key: fileName,
@@ -53,7 +64,7 @@ class PostController {
             ContentType: fileType,
             ACL: 'public-read'
         }
-        console.log(fileType)
+        // console.log(fileType)
         return await s3.getSignedUrlPromise('putObject', s3Params)
     }
 
@@ -78,10 +89,10 @@ class PostController {
             link_d = request.input('link_desc')
         }
 
-        console.log(link_u)
-        console.log(link_t)
-        console.log(link_i)
-        console.log(link_d)
+        // console.log(link_u)
+        // console.log(link_t)
+        // console.log(link_i)
+        // console.log(link_d)
 
         // console.log(request.input('content'))
         // console.log(request.input('user_id'))
@@ -93,9 +104,10 @@ class PostController {
             pType = 'image'
         }
         
-        console.log(file)
-        console.log(pType)
-        console.log(url)
+        // console.log(file)
+        // console.log(pType)
+        // console.log(url)
+        
         // save post to db
         try {
             const newPost = await Post.create({

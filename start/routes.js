@@ -53,6 +53,7 @@ Route.get('/posts/:id/delete', 'PostController.destroy')
 Route.get('/posts/:id/comments', 'PostController.comments')
 Route.get('/posts/:id/likes', 'PostController.likes')
 Route.get('/posts/page/:num', 'PostController.postPage')
+Route.get('/posts/new/:id', 'PostController.getNewPosts')
 
 
 Route.post('/comments', 'PostController.makeComment')
