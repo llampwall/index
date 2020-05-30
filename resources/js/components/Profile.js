@@ -7,7 +7,6 @@ export default class Profile extends Component {
   constructor () {
     super()
     this.state = {
-      initialData: {}, 
       user: "",
       edit: false,
       image: ""
@@ -15,11 +14,6 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      initialData: this.props.initialData
-    }, () => {
-      // console.log(this.state)
-    })
     this.getUser()
   }
 

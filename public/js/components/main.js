@@ -1857,7 +1857,6 @@ var Profile = function (_Component) {
     };
 
     _this.state = {
-      initialData: {},
       user: "",
       edit: false,
       image: ""
@@ -1868,11 +1867,6 @@ var Profile = function (_Component) {
   (0, _createClass3.default)(Profile, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.setState({
-        initialData: this.props.initialData
-      }, function () {
-        // console.log(this.state)
-      });
       this.getUser();
     }
 
