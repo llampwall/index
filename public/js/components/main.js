@@ -955,7 +955,7 @@ var LeftMenu = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (this.props.initialData.userData == undefined) {
+      if (this.props.user == undefined) {
         return _react2.default.createElement(
           'div',
           { className: 'load' },
@@ -963,16 +963,16 @@ var LeftMenu = function (_Component) {
         );
       } else {
         // console.log(this.props.initialData.userData)
-        var _props$initialData$us = this.props.initialData.userData,
-            fname = _props$initialData$us.fname,
-            lname = _props$initialData$us.lname;
+        var _props$user = this.props.user,
+            fname = _props$user.fname,
+            lname = _props$user.lname;
 
         return _react2.default.createElement(
           'section',
           { id: 'left-menu', className: this.state.open ? "open" : "closed" },
           _react2.default.createElement(
             'a',
-            { className: 'account-dropdown', href: '/profile/' + this.props.initialData.userData.id },
+            { className: 'account-dropdown', href: '/profile/' + this.props.user.id },
             _react2.default.createElement(
               'div',
               { className: 'username' },
@@ -3219,12 +3219,6 @@ var PostArea = function (_Component) {
           },
           _this.state.posts.map(function (post) {
 
-            // FIGURE THIS OUT
-            // let user = item.users
-            // const u_id = post.user_id
-            // const user = await axios.get(`/api/user/${u_id}`)
-            // console.log(userData)
-
             return _react2.default.createElement(_Post2.default, { post: post, ws: _this.props.ws, curuser: _this.props.initialData.userData, update: _this.props.update, key: post.id });
           })
         );
@@ -3413,6 +3407,7 @@ var Layout = function (_Component) {
     };
 
     _this.state = {
+      user: {},
       initialData: {}
     };
 
@@ -3431,40 +3426,39 @@ var Layout = function (_Component) {
       var self = this;
       var getUser = function () {
         var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-          var data, allData;
+          var user;
           return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
                   _context.prev = 0;
                   _context.next = 3;
-                  return _axios2.default.get('/api/intialize');
+                  return _axios2.default.get('/api/authuser');
 
                 case 3:
-                  data = _context.sent;
-                  allData = data.data;
-                  // console.log(allData)
+                  user = _context.sent;
+
 
                   self.setState({
-                    initialData: allData
+                    user: user.data
                   }, function () {
                     // console.log(self.state.initialData)
                   });
-                  _context.next = 11;
+                  _context.next = 10;
                   break;
 
-                case 8:
-                  _context.prev = 8;
+                case 7:
+                  _context.prev = 7;
                   _context.t0 = _context['catch'](0);
 
                   console.log("Initialization error: " + _context.t0);
 
-                case 11:
+                case 10:
                 case 'end':
                   return _context.stop();
               }
             }
-          }, _callee, this, [[0, 8]]);
+          }, _callee, this, [[0, 7]]);
         }));
 
         return function getUser() {
@@ -3504,8 +3498,8 @@ var Layout = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'app-container home-page' },
-          _react2.default.createElement(_Loading2.default, { active: this.state.initialData != undefined ? "" : 'active' }),
-          _react2.default.createElement(_LeftMenu2.default, { initialData: this.state.initialData, ws: this.ws }),
+          _react2.default.createElement(_Loading2.default, { active: this.state.user != undefined ? "" : 'active' }),
+          _react2.default.createElement(_LeftMenu2.default, { user: this.state.user, ws: this.ws }),
           _react2.default.createElement(
             'section',
             { id: 'content-container' },

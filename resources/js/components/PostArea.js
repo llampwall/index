@@ -89,14 +89,9 @@ export default class PostArea extends Component {
           endMessage={<p><b>No more posts</b></p>}
         >
           {this.state.posts.map((post) => {
-            
-            // FIGURE THIS OUT
-            // let user = item.users
-            // const u_id = post.user_id
-            // const user = await axios.get(`/api/user/${u_id}`)
-            // console.log(userData)
   
             return <Post post={post} ws={this.props.ws} curuser={this.props.initialData.userData} update={this.props.update} key={post.id}/>
+            
           })}
         </InfiniteScroll>
       )

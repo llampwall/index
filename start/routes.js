@@ -37,6 +37,7 @@ Route.get('google/authenticated', 'SocialController.callbackg')
 
 // api
 Route.get('/api/intialize', 'ApiController.initialize')
+Route.get('/api/authuser', 'UserController.getLoggedInUser')
 Route.get('/api/user/:id', 'UserController.profile')
 Route.get('/api/users', 'UserController.getAll')
 Route.get('/api/online', 'UserController.getAllOnline')

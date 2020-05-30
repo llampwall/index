@@ -19,6 +19,7 @@ class Layout extends Component {
   constructor () {
     super()
     this.state = {
+      user: {},
       initialData: {}
     }
 
@@ -58,12 +59,10 @@ class Layout extends Component {
     const self = this;
     const getUser = async function() {
       try {
-        const data = await axios.get('/api/intialize')
-        const allData = data.data
-        // console.log(allData)
+        const user = await axios.get('/api/authuser')
 
         self.setState({
-          initialData: allData
+          user: user.data,
         }, () => {
           // console.log(self.state.initialData)
         })
@@ -99,9 +98,9 @@ class Layout extends Component {
       <Router>
         <div className="app-container home-page">
 
-          <Loading active={(this.state.initialData != undefined) ? "" : 'active'}/>
+          <Loading active={(this.state.user != undefined) ? "" : 'active'}/>
 
-          <LeftMenu initialData={this.state.initialData} ws={this.ws}/>
+          <LeftMenu user={this.state.user} ws={this.ws}/>
 
           <section id="content-container">
 

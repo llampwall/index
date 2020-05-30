@@ -4,8 +4,10 @@ const Database = use('Database')
 
 class UserController {
 
-    async getLoggedInUser() {
-        return auth.user
+    async getLoggedInUser({auth, request, response}) {
+       if (auth.user) {
+           return auth.user
+       }
     }
 
     async profile({auth, request, response}) {

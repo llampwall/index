@@ -33,7 +33,7 @@ export default class LeftMenu extends Component {
   }
 
   render () {
-    if (this.props.initialData.userData == undefined) {
+    if (this.props.user == undefined) {
       return (
         <div className='load'>
           <i className="ayn-spin3" />
@@ -41,10 +41,10 @@ export default class LeftMenu extends Component {
       )
     } else {
       // console.log(this.props.initialData.userData)
-      const {fname, lname} = this.props.initialData.userData
+      const {fname, lname} = this.props.user
       return (
         <section id="left-menu" className={this.state.open ? "open" : "closed"}>
-          <a className="account-dropdown" href={`/profile/${this.props.initialData.userData.id}`}>
+          <a className="account-dropdown" href={`/profile/${this.props.user.id}`}>
             <div className="username">
               {`[ ${fname} ${lname} ]`}
             </div>
