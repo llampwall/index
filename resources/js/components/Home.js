@@ -12,6 +12,8 @@ export default class Home extends Component {
     this.state = {
       post: {}
     }
+
+    this.postAreaRef = React.createRef()
   }
 
   componentDidMount() {
@@ -35,8 +37,8 @@ export default class Home extends Component {
 
 
   // pass down function to pass down to compose so it can update the whole area
-  update = async () => {
-
+  update = () => {
+    this.postAreaRef.current.getNew()
   }
 
   render () {
@@ -63,7 +65,7 @@ export default class Home extends Component {
           <div className="content-area" id="scroll-this">
             
               <Compose user={this.props.user} update={this.update} ws={this.props.ws}/>
-              <PostArea routeProps={this.props.routeProps} user={this.props.user} ws={this.props.ws} update={this.update}/>
+              <PostArea routeProps={this.props.routeProps} user={this.props.user} ws={this.props.ws} ref={this.postAreaRef}/>
   
           </div>
         )

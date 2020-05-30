@@ -54,7 +54,6 @@ class Layout extends Component {
   }
 
   componentDidMount() {
-
     const self = this;
     const getUser = async function() {
       try {
@@ -80,10 +79,6 @@ class Layout extends Component {
     document.getElementsByClassName('notify')[0].classList.remove('active')
   }
 
-  //method to refresh feeds when others post
-  update() {
-    this.homeRef.current.update()
-  }
 
   componentWillUnmount() {
     this.ws.close()

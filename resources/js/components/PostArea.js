@@ -89,7 +89,7 @@ export default class PostArea extends Component {
         >
           {this.state.posts.map((post) => {
   
-            return <Post post={post} ws={this.props.ws} curuser={this.props.user} update={this.props.update} key={post.id}/>
+            return <Post post={post} ws={this.props.ws} curuser={this.props.user} update={this.getNew} key={post.id}/>
 
           })}
         </InfiniteScroll>

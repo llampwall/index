@@ -757,21 +757,16 @@ var Home = function (_Component) {
         }
       }, _callee, _this2);
     }));
-    _this.update = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-      return _regenerator2.default.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, _this2);
-    }));
+
+    _this.update = function () {
+      _this.postAreaRef.current.getNew();
+    };
 
     _this.state = {
       post: {}
     };
+
+    _this.postAreaRef = _react2.default.createRef();
     return _this;
   }
 
@@ -819,7 +814,7 @@ var Home = function (_Component) {
             'div',
             { className: 'content-area', id: 'scroll-this' },
             _react2.default.createElement(_Compose2.default, { user: this.props.user, update: this.update, ws: this.props.ws }),
-            _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, user: this.props.user, ws: this.props.ws, update: this.update })
+            _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, user: this.props.user, ws: this.props.ws, ref: this.postAreaRef })
           );
         }
       }
@@ -3167,7 +3162,7 @@ var PostArea = function (_Component) {
           },
           _this.state.posts.map(function (post) {
 
-            return _react2.default.createElement(_Post2.default, { post: post, ws: _this.props.ws, curuser: _this.props.user, update: _this.props.update, key: post.id });
+            return _react2.default.createElement(_Post2.default, { post: post, ws: _this.props.ws, curuser: _this.props.user, update: _this.getNew, key: post.id });
           })
         );
       }
@@ -3369,7 +3364,6 @@ var Layout = function (_Component) {
   (0, _createClass3.default)(Layout, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-
       var self = this;
       var getUser = function () {
         var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
@@ -3419,14 +3413,6 @@ var Layout = function (_Component) {
 
     // get rid of notification bar
 
-  }, {
-    key: 'update',
-
-
-    //method to refresh feeds when others post
-    value: function update() {
-      this.homeRef.current.update();
-    }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
