@@ -4,6 +4,12 @@
       width: 85%;
       max-width: 700px;
 
+      .infinite-scroll-component {
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
       .post {
         position: relative;
         width: 100%;

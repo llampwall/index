@@ -330,10 +330,12 @@ var Post = function (_Component) {
                   var numLikes = like_d.length;
                   var last = like_d.length > 0 ? like_d[0].users.fname + ' ' + like_d[0].users.lname : "";
 
-                  self.setState({
-                    likes: numLikes,
-                    lastLike: last
-                  });
+                  if (self._isMounted) {
+                    self.setState({
+                      likes: numLikes,
+                      lastLike: last
+                    });
+                  }
                 });
               } catch (error) {
                 console.log("error getting likes: " + error);
@@ -817,7 +819,7 @@ var Home = function (_Component) {
         } else {
           return _react2.default.createElement(
             'div',
-            { className: 'content-area' },
+            { className: 'content-area', id: 'scroll-this' },
             _react2.default.createElement(_Compose2.default, { initialData: this.state.initialData, update: this.update, ws: this.props.ws }),
             _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, initialData: this.state.initialData, ws: this.props.ws, update: this.update })
           );
@@ -3112,27 +3114,11 @@ var PostArea = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (PostArea.__proto__ || Object.getPrototypeOf(PostArea)).call(this));
 
-    _this.componentDidMount = function () {
-      var self = _this;
-      try {
-        _axios2.default.get('/posts/page/1').then(function (res) {
-          self.setState({
-            total: res.data.total,
-            perPage: res.data.perPage,
-            lastPage: res.data.lastPage,
-            posts: res.data.data
-          });
-        });
-      } catch (error) {
-        console.log("error fetching next page: " + error);
-      }
-    };
-
     _this.getNextPage = function () {
       var self = _this;
+      // debugger;
       try {
         _axios2.default.get('/posts/page/' + (_this.state.page + 1)).then(function (res) {
-          console.log(posts);
           self.setState({
             total: res.data.total,
             perPage: res.data.perPage,
@@ -3160,10 +3146,10 @@ var PostArea = function (_Component) {
               null,
               'Loading...'
             ),
-            scrollableTarget: ".content-area",
+            scrollableTarget: "scroll-this",
             endMessage: _react2.default.createElement(
               'p',
-              { style: { textAlign: 'center' } },
+              null,
               _react2.default.createElement(
                 'b',
                 null,
@@ -3187,19 +3173,45 @@ var PostArea = function (_Component) {
 
     _this.state = {
       total: 0,
-      perPage: 10,
+      perPage: 20,
       lastPage: 100,
       page: 1,
       posts: [],
       user: { id: 1, fname: 'Jordan', lname: 'Hewitt', profile_img: '/img/user.jpg', email: 'hewitj2@gmail.com', password: 'asdkajndajnd', login_source: 'register', info: '', token: '', created_at: '2020-05-26 21:22:04', updated_at: '2020-05-26 21:22:04' }
     };
+    _this._isMounted = false;
     return _this;
   }
 
-  // fetch next page of results
-
-
   (0, _createClass3.default)(PostArea, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var self = this;
+      this._isMounted = true;
+      try {
+        _axios2.default.get('/posts/page/1').then(function (res) {
+          if (self._isMounted) {
+            self.setState({
+              total: res.data.total,
+              perPage: res.data.perPage,
+              lastPage: res.data.lastPage,
+              posts: res.data.data
+            });
+          }
+        });
+      } catch (error) {
+        console.log("error fetching next page: " + error);
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this._isMounted = false;
+    }
+
+    // fetch next page of results
+
+  }, {
     key: 'render',
     value: function render() {
       if (this.state.user == undefined) {

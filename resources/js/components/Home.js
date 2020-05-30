@@ -90,7 +90,7 @@ export default class Home extends Component {
         )
       } else {
         return (
-          <div className="content-area">
+          <div className="content-area" id="scroll-this">
             
               <Compose initialData={this.state.initialData} update={this.update} ws={this.props.ws}/>
               <PostArea routeProps={this.props.routeProps} initialData={this.state.initialData} ws={this.props.ws} update={this.update}/>

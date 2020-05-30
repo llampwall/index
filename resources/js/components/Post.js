@@ -234,10 +234,12 @@ export default class Post extends Component {
         const numLikes = like_d.length
         let last = (like_d.length > 0) ? `${like_d[0].users.fname} ${like_d[0].users.lname}` : ""
 
-        self.setState({
-          likes: numLikes,
-          lastLike: last
-        })
+        if (self._isMounted) {
+          self.setState({
+            likes: numLikes,
+            lastLike: last
+          })
+        }
       })
       
     } catch (error) {

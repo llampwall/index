@@ -8,38 +8,46 @@ export default class PostArea extends Component {
     super()
     this.state = { 
       total: 0,
-      perPage: 10,
+      perPage: 20,
       lastPage: 100,
       page: 1,
       posts: [],
       user: {id: 1, fname: 'Jordan', lname: 'Hewitt', profile_img: '/img/user.jpg', email: 'hewitj2@gmail.com', password: 'asdkajndajnd', login_source: 'register', info: '', token: '', created_at: '2020-05-26 21:22:04', updated_at: '2020-05-26 21:22:04'}
     }
+    this._isMounted = false
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const self = this
+    this._isMounted = true
     try {
       axios.get(`/posts/page/1`)
       .then((res) => {
-        self.setState({
-          total: res.data.total,
-          perPage: res.data.perPage,
-          lastPage: res.data.lastPage,
-          posts: res.data.data
-        })
+        if (self._isMounted) {
+          self.setState({
+            total: res.data.total,
+            perPage: res.data.perPage,
+            lastPage: res.data.lastPage,
+            posts: res.data.data
+          })
+        }
       })
     } catch (error) {
       console.log("error fetching next page: " + error)
     }
   }
+  
+  componentWillUnmount() {
+    this._isMounted = false
+  }
 
   // fetch next page of results
   getNextPage = () => {
     const self = this
+    // debugger;
     try {
       axios.get(`/posts/page/${this.state.page + 1}`)
       .then((res) => {
-        console.log(posts)
         self.setState({
           total: res.data.total,
           perPage: res.data.perPage,
@@ -62,12 +70,8 @@ export default class PostArea extends Component {
           next={this.getNextPage}
           hasMore={!(this.state.page == this.state.lastPage)}
           loader={<h4>Loading...</h4>}
-          scrollableTarget={".content-area"}
-          endMessage={
-            <p style={{textAlign: 'center'}}>
-              <b>No more posts</b>
-            </p>
-          }
+          scrollableTarget={"scroll-this"}
+          endMessage={<p><b>No more posts</b></p>}
         >
           {this.state.posts.map((post) => {
             
