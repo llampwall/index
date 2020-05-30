@@ -3132,6 +3132,20 @@ var PostArea = function (_Component) {
       }
     };
 
+    _this.getNew = function () {
+      var self = _this;
+      // debugger;
+      try {
+        _axios2.default.get('/posts/new/' + _this.state.posts[0].id).then(function (res) {
+          self.setState({
+            posts: res.data.data.concat(_this.state.posts)
+          });
+        });
+      } catch (error) {
+        console.log("error fetching next page: " + error);
+      }
+    };
+
     _this.showMyPosts = function () {
       // console.log(this.props.initialData.postData)
       if (_this.state.posts.length > 0) {
@@ -3210,6 +3224,9 @@ var PostArea = function (_Component) {
     }
 
     // fetch next page of results
+
+
+    // gets all new posts when someone else posts
 
   }, {
     key: 'render',

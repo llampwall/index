@@ -61,6 +61,22 @@ export default class PostArea extends Component {
     }
   }
 
+  // gets all new posts when someone else posts
+  getNew = () => {
+    const self = this
+    // debugger;
+    try {
+      axios.get(`/posts/new/${this.state.posts[0].id}`)
+      .then((res) => {
+        self.setState({
+          posts: res.data.data.concat(this.state.posts)
+        })
+      })
+    } catch (error) {
+      console.log("error fetching next page: " + error)
+    }
+  }
+
   showMyPosts = () => {
     // console.log(this.props.initialData.postData)
     if (this.state.posts.length > 0) {
