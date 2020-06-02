@@ -1,0 +1,23 @@
+{
+    "name": "Index",
+    "short_name": "Index",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#201f28",
+    "description": "Another social media site.",
+    "theme_color": "#201f28",
+    "icons": [
+      {
+        "src": "./img/index.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "./img/maskable_icon.png",
+        "sizes": "228x228",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ]
+}
