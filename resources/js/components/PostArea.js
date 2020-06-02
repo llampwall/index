@@ -55,6 +55,13 @@ export default class PostArea extends Component {
       this.observer.observe(this.loadingRef.current)
       console.log('observing')
     }
+
+
+    this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
+    this.chat.on('delete', function(message) {
+      console.log('someone deleted post ' + message) 
+      self.removePost(message)
+    })
   }
 
   // observer code to fetch more stuff
@@ -117,7 +124,7 @@ export default class PostArea extends Component {
         let newLast = Math.ceil(newTotal / this.state.perPage)
         let newPage = Math.round(diff / this.state.perPage) + this.state.page
 
-        self.setState({
+        this._isMounted && self.setState({
           total: newTotal,
           lastPage: newLast,
           posts: [...res.data, ...this.state.posts],
@@ -130,22 +137,17 @@ export default class PostArea extends Component {
     }
   }
 
-  // showMyPosts = () => {
-  //   if (this.state.posts.length > 0) {
-  //     return (
-  //       <div className="post-container">
-  //         {this.state.posts.map((post) => {
-  
-  //             return <Post post={post} ws={this.props.ws} curuser={this.props.user} update={this.getNew} key={post.id}/>
-
-  //         })}
-  //         <div ref={this.loadingRef} style={{ height: '100px', margin: '30px'}} >
-  //           <span style={{ display: this._isFetching  ? 'block' : 'none' }}>Loading...</span>
-  //         </div>
-  //       </div>
-  //     )
-  //   }
-  // }
+  // for when a post is deleted
+  removePost = (id) => {
+    let newPosts = this.state.posts.filter(post => {return post.id != id})
+    let newTotal = this.state.total - 1
+    let newLast = Math.ceil(newTotal / this.state.perPage)
+    this._isMounted && this.setState({
+      total: this.state.total - 1,
+      lastPage: newLast,
+      posts: newPosts
+    })
+  }
 
   render () {
     if (this.state.posts == undefined) {
@@ -160,7 +162,7 @@ export default class PostArea extends Component {
               <div className="post-container">
                 {this.state.posts.map((post) => {
         
-                    return <Post post={post} ws={this.props.ws} curuser={this.props.user} update={this.getNew} key={post.id}/>
+                    return <Post post={post} ws={this.props.ws} curuser={this.props.user} update={this.getNew} removePost={this.removePost} key={post.id}/>
 
                 })}
                 <div ref={this.loadingRef} style={{ height: '100px', margin: '30px', color: '#94c4d4'}} >

@@ -234,11 +234,11 @@ var Post = function (_Component) {
               _context3.prev = 1;
               _context3.next = 4;
               return _axios2.default.get('/posts/' + self.props.post.id + '/delete').then(function (response) {
-                console.log('post deleted: ' + response);
-                self.props.update();
+                console.log('post deleted');
+                self.props.removePost(self.props.post.id);
                 //update everyone else's comments
                 self.chat.emit('message', {
-                  update: 'all'
+                  delete: self.props.post.id
                 });
               });
 
@@ -253,10 +253,6 @@ var Post = function (_Component) {
               console.log('error deleting post: ' + _context3.t0);
 
             case 9:
-              console.log('post deleted');
-              self.props.update();
-
-            case 11:
             case 'end':
               return _context3.stop();
           }
@@ -3161,7 +3157,7 @@ var PostArea = function (_Component) {
           var newLast = Math.ceil(newTotal / _this.state.perPage);
           var newPage = Math.round(diff / _this.state.perPage) + _this.state.page;
 
-          self.setState({
+          _this._isMounted && self.setState({
             total: newTotal,
             lastPage: newLast,
             posts: [].concat((0, _toConsumableArray3.default)(res.data), (0, _toConsumableArray3.default)(_this.state.posts)),
@@ -3172,6 +3168,19 @@ var PostArea = function (_Component) {
       } catch (error) {
         console.log("error fetching next page: " + error);
       }
+    };
+
+    _this.removePost = function (id) {
+      var newPosts = _this.state.posts.filter(function (post) {
+        return post.id != id;
+      });
+      var newTotal = _this.state.total - 1;
+      var newLast = Math.ceil(newTotal / _this.state.perPage);
+      _this._isMounted && _this.setState({
+        total: _this.state.total - 1,
+        lastPage: newLast,
+        posts: newPosts
+      });
     };
 
     _this.state = {
@@ -3225,6 +3234,12 @@ var PostArea = function (_Component) {
         this.observer.observe(this.loadingRef.current);
         console.log('observing');
       }
+
+      this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat');
+      this.chat.on('delete', function (message) {
+        console.log('someone deleted post ' + message);
+        self.removePost(message);
+      });
     }
 
     // observer code to fetch more stuff
@@ -3240,27 +3255,11 @@ var PostArea = function (_Component) {
 
     // gets all new posts when someone else posts
 
+
+    // for when a post is deleted
+
   }, {
     key: 'render',
-
-
-    // showMyPosts = () => {
-    //   if (this.state.posts.length > 0) {
-    //     return (
-    //       <div className="post-container">
-    //         {this.state.posts.map((post) => {
-
-    //             return <Post post={post} ws={this.props.ws} curuser={this.props.user} update={this.getNew} key={post.id}/>
-
-    //         })}
-    //         <div ref={this.loadingRef} style={{ height: '100px', margin: '30px'}} >
-    //           <span style={{ display: this._isFetching  ? 'block' : 'none' }}>Loading...</span>
-    //         </div>
-    //       </div>
-    //     )
-    //   }
-    // }
-
     value: function render() {
       var _this3 = this;
 
@@ -3279,7 +3278,7 @@ var PostArea = function (_Component) {
             { className: 'post-container' },
             this.state.posts.map(function (post) {
 
-              return _react2.default.createElement(_Post2.default, { post: post, ws: _this3.props.ws, curuser: _this3.props.user, update: _this3.getNew, key: post.id });
+              return _react2.default.createElement(_Post2.default, { post: post, ws: _this3.props.ws, curuser: _this3.props.user, update: _this3.getNew, removePost: _this3.removePost, key: post.id });
             }),
             _react2.default.createElement(
               'div',

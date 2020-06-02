@@ -71,6 +71,12 @@ class ChatController {
       return
     }
 
+    if (message.delete != null) {
+      console.log('delete ' + message.delete)
+      this.deletePost(message.delete)
+      return
+    }
+
     // update comments for a post
     if (message.comments != null) {
       console.log('comments')
@@ -146,6 +152,10 @@ class ChatController {
 
   async updateFeeds() {
     this.socket.broadcast('update', 'refresh')
+  }
+
+  async deletePost(id) {
+    this.socket.broadcast('delete', id)
   }
 
   async updateChat() {

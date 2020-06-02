@@ -178,18 +178,16 @@ export default class Post extends Component {
     try {
       await axios.get(`/posts/${self.props.post.id}/delete`)
         .then(function(response) {
-          console.log('post deleted: ' + response)
-          self.props.update()
+          console.log('post deleted')
+          self.props.removePost(self.props.post.id)
           //update everyone else's comments
           self.chat.emit('message', {
-            update: 'all'
+            delete: self.props.post.id
           })
         })
     } catch (error) {
       console.log('error deleting post: ' + error)
     }
-    console.log('post deleted')
-    self.props.update()
   }
 
 
