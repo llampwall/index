@@ -38,16 +38,19 @@ class Layout extends Component {
       console.log('index got an update!')
       self.homeRef.current.update()
     })
+    // reconnect function doesnt work
     // this.ws.on('close', function() {
     //   self.retry = setInterval(() => {
     //     console.log('attempting to reconnect every 10 seconds')
     //     self.ws = null
     //     self.ws = Ws()
-    //     self.ws.connect()
-    //     self.chat = self.ws.getSubscription('chat') || self.ws.subscribe('chat')
-    //     self.chat.on('ready', () => {
-    //       clearInterval(self.retry)
-    //       self.retry = null
+    //     self.ws.on('open', () => {
+    //       self.ws.connect()
+    //       self.chat = self.ws.getSubscription('chat') || self.ws.subscribe('chat')
+    //       self.chat.on('ready', () => {
+    //         clearInterval(self.retry)
+    //         self.retry = null
+    //       })
     //     })
     //   }, 10000);
     // })

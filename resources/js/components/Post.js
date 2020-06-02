@@ -319,7 +319,7 @@ export default class Post extends Component {
     return (
       <a href={this.props.post.link_url} target="_blank" alt="external link" className='post-link'>
         <div className='link-image'>
-          <img src={this.props.post.link_img} />
+          <img src={this.props.post.link_img} alt="no image"/>
         </div>
         <div className='link-info'>
           <div className='link-title'>
