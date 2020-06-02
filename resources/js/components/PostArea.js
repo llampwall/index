@@ -169,7 +169,7 @@ export default class PostArea extends Component {
       return (
           <section id="all-posts">
               <div className="post-container">
-                <div className={`scrollUpBtn ${this.state.showBtn ? 'active' : ''}`} onClick={this.scrollUp}><i className='ayn-up-open'></i></div>
+                <div className={`scrollUpBtn ${this.state.showBtn ? 'active' : ''}`} onClick={this.scrollUp}>top</div>
                 {this.state.posts.map((post) => {
         
                     return <Post post={post} ws={this.props.ws} curuser={this.props.user} update={this.getNew} removePost={this.removePost} key={post.id}/>

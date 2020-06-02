@@ -175,19 +175,24 @@ export default class Post extends Component {
     const self = this
     // console.log("post id: " + self.props.post.id)
     try {
-      await axios.get(`/posts/${self.props.post.id}/delete`)
+      let deleted = await axios.get(`/posts/${self.props.post.id}/delete`)
         .then(function(response) {
-          console.log('post deleted')
-          self.props.removePost(self.props.post.id)
-          //update everyone else's comments
-          self.chat.emit('message', {
-            delete: self.props.post.id
-          })
+          console.log(response)
+          // self.props.removePost(self.props.post.id)
+          // //update everyone else's comments
+          // self.chat.emit('message', {
+          //   delete: self.props.post.id
+          // })
         })
     } catch (error) {
       console.log('error deleting post: ' + error)
     }
-  }
+    self.props.removePost(self.props.post.id)
+    //update everyone else's comments
+    self.chat.emit('message', {
+      delete: self.props.post.id
+    })
+}
 
 
   // displays the current post comments

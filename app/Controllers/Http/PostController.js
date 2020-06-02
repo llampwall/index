@@ -139,17 +139,21 @@ class PostController {
     }
 
     // delete post
-    async destroy({request}) {
+    async destroy({request, response}) {
         console.log(request.params)
         const { id } = request.params
         console.log("deleting: " + id)
         try {
-            const target = await Post.query().where('id', id).delete()
+            const affectedRows = await Database.table('posts').where('id', id).delete()
         } catch {
             console.log("error destroying post: " + error)
         }
-        console.log("done")
-        return "destroyed"
+        if (affectedRows < 1) {
+            console.log('delete failed')
+        } else {
+            console.log("done") 
+            return affectedRows
+        }
     }
 
     // get all comments for a specific post

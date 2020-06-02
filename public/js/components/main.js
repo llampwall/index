@@ -223,7 +223,7 @@ var Post = function (_Component) {
     };
 
     _this.deletePost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-      var self;
+      var self, deleted;
       return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -234,30 +234,38 @@ var Post = function (_Component) {
               _context3.prev = 1;
               _context3.next = 4;
               return _axios2.default.get('/posts/' + self.props.post.id + '/delete').then(function (response) {
-                console.log('post deleted');
-                self.props.removePost(self.props.post.id);
-                //update everyone else's comments
-                self.chat.emit('message', {
-                  delete: self.props.post.id
-                });
+                console.log(response);
+                // self.props.removePost(self.props.post.id)
+                // //update everyone else's comments
+                // self.chat.emit('message', {
+                //   delete: self.props.post.id
+                // })
               });
 
             case 4:
-              _context3.next = 9;
+              deleted = _context3.sent;
+              _context3.next = 10;
               break;
 
-            case 6:
-              _context3.prev = 6;
+            case 7:
+              _context3.prev = 7;
               _context3.t0 = _context3['catch'](1);
 
               console.log('error deleting post: ' + _context3.t0);
 
-            case 9:
+            case 10:
+              self.props.removePost(self.props.post.id);
+              //update everyone else's comments
+              self.chat.emit('message', {
+                delete: self.props.post.id
+              });
+
+            case 12:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[1, 6]]);
+      }, _callee3, _this2, [[1, 7]]);
     }));
 
     _this.getCommentCount = function () {
@@ -3308,7 +3316,7 @@ var PostArea = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'scrollUpBtn ' + (this.state.showBtn ? 'active' : ''), onClick: this.scrollUp },
-              _react2.default.createElement('i', { className: 'ayn-up-open' })
+              'top'
             ),
             this.state.posts.map(function (post) {
 
