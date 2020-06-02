@@ -118,7 +118,7 @@ export default class PostArea extends Component {
     try {
       axios.get(`/posts/new/${this.state.posts[0].id}`)
       .then((res) => {
-        console.log(res.data)
+        console.log(res)
         let diff = res.data.length
         let newTotal = this.state.total + diff
         let newLast = Math.ceil(newTotal / this.state.perPage)

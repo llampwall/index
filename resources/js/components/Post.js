@@ -11,7 +11,6 @@ export default class Post extends Component {
         user: {}, 
         comment: "",
         numComments: 0,
-        update: false,
         liked: false, 
         likes: 0,
         lastLike: "",
@@ -264,6 +263,13 @@ export default class Post extends Component {
     }
   }
 
+  deleteComment = () => {
+    console.log('deleting comment')
+    this.chat.emit('message', {
+      comments: 'all'
+    })
+  }
+
 
   // display the post stats
   displayStats = () => {
@@ -378,7 +384,7 @@ export default class Post extends Component {
                 </div>
                 <div className="buttons">
 
-                    <Comments ref={this.commentArea} post={this.props.post} update={this.state.update} sendUp={this.sendUp} curuser={this.props.curuser}/>
+                    <Comments ref={this.commentArea} post={this.props.post} sendUp={this.sendUp} deleteComment={this.deleteComment} curuser={this.props.curuser}/>
 
                     <div className="send-btn" onTouchStart={this.touchSubmitComment.bind(null, {passive: false})} onMouseUp={this.submitComment}>
                         <i className="ayn-right" />

@@ -71,6 +71,12 @@ class ChatController {
       return
     }
 
+    if (message.new != null) {
+      console.log('new post')
+      this.sendNewPost()
+      return
+    }
+
     if (message.delete != null) {
       console.log('delete ' + message.delete)
       this.deletePost(message.delete)

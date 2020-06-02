@@ -47,6 +47,9 @@ export default class Comments extends Component {
           console.log('comment deleted: ' + response)
           self.getComments()
         })
+
+        //update everyone else's comments
+        self.props.deleteComment()
     } catch (error) {
       console.log('error deleting comment: ' + error)
     }

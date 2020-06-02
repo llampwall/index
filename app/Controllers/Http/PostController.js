@@ -41,7 +41,7 @@ class PostController {
             .from('posts')
             .where('posts.id', '>', id)
             .orderBy('posts.created_at', 'desc')
-        // console.log(results)
+        console.log(results)
         return results
     }
 

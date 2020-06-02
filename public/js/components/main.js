@@ -385,6 +385,13 @@ var Post = function (_Component) {
       }, _callee5, _this2);
     }));
 
+    _this.deleteComment = function () {
+      console.log('deleting comment');
+      _this.chat.emit('message', {
+        comments: 'all'
+      });
+    };
+
     _this.displayStats = function () {
 
       if (_this.state.liked) {
@@ -460,7 +467,6 @@ var Post = function (_Component) {
       user: {},
       comment: "",
       numComments: 0,
-      update: false,
       liked: false,
       likes: 0,
       lastLike: "",
@@ -641,7 +647,7 @@ var Post = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'buttons' },
-            _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, update: this.state.update, sendUp: this.sendUp, curuser: this.props.curuser }),
+            _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, sendUp: this.sendUp, deleteComment: this.deleteComment, curuser: this.props.curuser }),
             _react2.default.createElement(
               'div',
               { className: 'send-btn', onTouchStart: this.touchSubmitComment.bind(null, { passive: false }), onMouseUp: this.submitComment },
@@ -2334,21 +2340,24 @@ var Comments = function (_Component) {
                 });
 
               case 5:
-                _context2.next = 10;
+
+                //update everyone else's comments
+                self.props.deleteComment();
+                _context2.next = 11;
                 break;
 
-              case 7:
-                _context2.prev = 7;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2['catch'](2);
 
                 console.log('error deleting comment: ' + _context2.t0);
 
-              case 10:
+              case 11:
               case 'end':
                 return _context2.stop();
             }
           }
-        }, _callee2, _this2, [[2, 7]]);
+        }, _callee2, _this2, [[2, 8]]);
       }));
 
       return function (_x) {
@@ -3151,7 +3160,7 @@ var PostArea = function (_Component) {
       _this._isFetching = true;
       try {
         _axios2.default.get('/posts/new/' + _this.state.posts[0].id).then(function (res) {
-          console.log(res.data);
+          console.log(res);
           var diff = res.data.length;
           var newTotal = _this.state.total + diff;
           var newLast = Math.ceil(newTotal / _this.state.perPage);
