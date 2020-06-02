@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             <label for="email">email</label>
-            <input type="email" name="email" value="{{ old('email', '') }}" class="email
+            <input type="email" name="email" autocomplete="email" value="{{ old('email', '') }}" class="email
             @if(hasErrorFor('email'))
               error
             @endif
@@ -38,7 +38,7 @@
         </div>
         <div class="form-group">
             <label for="password">password</label>
-            <input type="password" name="password" class="password
+            <input type="password" name="password" autocomplete="current-password" class="password
             @if(hasErrorFor('password'))
               error
             @endif
