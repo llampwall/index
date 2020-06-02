@@ -167,19 +167,22 @@ export default class Compose extends Component {
         if (data.length > 0) {
           for (var i=0; i < data.length; i++) {
             if (data[i].match(regex)) {                 // found a url
+              var secureUrl = data[i].replace(/^http:\/\//i, 'https://')     // http to https
               try {
                 await axios.post(                         // get preview info from link metadata
                   'https://api.linkpreview.net',
                   {
-                    q: encodeURIComponent(data[i]),
+                    q: encodeURIComponent(secureUrl),
                     key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
                   }).then(async function(resp) {
                     console.log(resp.data)
 
+                    var secureImg = resp.data.image.replace(/^http:\/\//i, 'https://')  // http to https
+
                     self.setState({
                       linkTitle: resp.data.title,
                       linkDesc: resp.data.description,
-                      linkImage: resp.data.image,
+                      linkImage: secureImg,
                       linkUrl: resp.data.url
                     })
                     link = resp.data.url

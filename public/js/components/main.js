@@ -2744,7 +2744,7 @@ var Compose = function (_Component) {
       }, _callee3, _this2, [[33, 43]]);
     }));
     _this.checkLink = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
-      var self, text, link, expression, regex, data, i;
+      var self, text, link, expression, regex, data, i, secureUrl;
       return _regenerator2.default.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
@@ -2756,7 +2756,7 @@ var Compose = function (_Component) {
               regex = new RegExp(expression);
 
               if (!(_this.state.postContent.length > 0)) {
-                _context5.next = 27;
+                _context5.next = 28;
                 break;
               }
 
@@ -2765,7 +2765,7 @@ var Compose = function (_Component) {
               console.log(data);
 
               if (!(data.length > 0)) {
-                _context5.next = 27;
+                _context5.next = 28;
                 break;
               }
 
@@ -2773,38 +2773,44 @@ var Compose = function (_Component) {
 
             case 10:
               if (!(i < data.length)) {
-                _context5.next = 27;
+                _context5.next = 28;
                 break;
               }
 
               if (!data[i].match(regex)) {
-                _context5.next = 22;
+                _context5.next = 23;
                 break;
               }
 
-              _context5.prev = 12;
-              _context5.next = 15;
+              // found a url
+              secureUrl = data[i].replace(/^http:\/\//i, 'https://'); // http to https
+
+              _context5.prev = 13;
+              _context5.next = 16;
               return _axios2.default.post( // get preview info from link metadata
               'https://api.linkpreview.net', {
-                q: encodeURIComponent(data[i]),
+                q: encodeURIComponent(secureUrl),
                 key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
               }).then(function () {
                 var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(resp) {
+                  var secureImg;
                   return _regenerator2.default.wrap(function _callee4$(_context4) {
                     while (1) {
                       switch (_context4.prev = _context4.next) {
                         case 0:
                           console.log(resp.data);
 
+                          secureImg = resp.data.image.replace(/^http:\/\//i, 'https://'); // http to https
+
                           self.setState({
                             linkTitle: resp.data.title,
                             linkDesc: resp.data.description,
-                            linkImage: resp.data.image,
+                            linkImage: secureImg,
                             linkUrl: resp.data.url
                           });
                           link = resp.data.url;
 
-                        case 3:
+                        case 4:
                         case 'end':
                           return _context4.stop();
                       }
@@ -2817,39 +2823,39 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 15:
-              _context5.next = 20;
+            case 16:
+              _context5.next = 21;
               break;
 
-            case 17:
-              _context5.prev = 17;
-              _context5.t0 = _context5['catch'](12);
+            case 18:
+              _context5.prev = 18;
+              _context5.t0 = _context5['catch'](13);
 
               console.log(_context5.t0);
 
-            case 20:
-              _context5.next = 24;
+            case 21:
+              _context5.next = 25;
               break;
 
-            case 22:
+            case 23:
               text += data[i];
               text += ' ';
 
-            case 24:
+            case 25:
               i++;
               _context5.next = 10;
               break;
 
-            case 27:
+            case 28:
               console.log('text: ' + text);
               return _context5.abrupt('return', { text: text, link: link });
 
-            case 29:
+            case 30:
             case 'end':
               return _context5.stop();
           }
         }
-      }, _callee5, _this2, [[12, 17]]);
+      }, _callee5, _this2, [[13, 18]]);
     }));
 
     _this.handleChange = function (event) {

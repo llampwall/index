@@ -1,8 +1,9 @@
 // add our service worker if supported
 
-window.addEventListener('load', e => {
-    registerSW(); 
-});
+// disabled for now
+// window.addEventListener('load', e => {
+//     registerSW(); 
+// });
 
 
 async function registerSW() { 
