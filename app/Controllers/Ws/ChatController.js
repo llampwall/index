@@ -65,15 +65,16 @@ class ChatController {
     // this.heartbeat()
 
     // update everyone's feed
-    if (message.update != null) {
-      console.log('update')
-      this.updateFeeds()
+    if (message.offline != null) {
+      console.log('logout')
+      this.updateChat()
       return
     }
 
-    if (message.new != null) {
-      console.log('new post')
-      this.sendNewPost()
+    // update everyone's feed
+    if (message.update != null) {
+      console.log('update')
+      this.updateFeeds()
       return
     }
 

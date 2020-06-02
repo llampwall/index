@@ -92,7 +92,7 @@ class Layout extends Component {
 
           <Loading active={(this.state.user != undefined) ? "" : 'active'}/>
 
-          <LeftMenu user={this.state.user} ws={this.ws}/>
+          <LeftMenu user={this.state.user} ws={this.ws} />
 
           <section id="content-container">
 

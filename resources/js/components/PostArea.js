@@ -11,7 +11,8 @@ export default class PostArea extends Component {
       lastPage: 100,
       page: 1,
       posts: [],
-      prevY: 0
+      prevY: 0,
+      showBtn: false
     }
     this._isMounted = false
     this._isFetching = false
@@ -71,7 +72,7 @@ export default class PostArea extends Component {
     }
     const y = entities[0].boundingClientRect.y
     if (this.state.prevY > y) {
-      console.log('bottom')
+      // console.log('bottom')
       this.getNextPage()
     }
     this._isMounted && this.setState({ prevY: y })
@@ -96,7 +97,8 @@ export default class PostArea extends Component {
             perPage: res.data.perPage,
             lastPage: res.data.lastPage,
             posts: [...this.state.posts, ...res.data.data],
-            page: this.state.page + 1
+            page: this.state.page + 1,
+            showBtn: true
           })
           this._isFetching = false
         }
@@ -149,6 +151,13 @@ export default class PostArea extends Component {
     })
   }
 
+  // scroll to top
+  scrollUp = () => {
+    document.querySelector('#scroll-this').scrollTop = 0;
+    this.setState({showBtn: false})
+  }
+  
+
   render () {
     if (this.state.posts == undefined) {
       return (
@@ -160,6 +169,7 @@ export default class PostArea extends Component {
       return (
           <section id="all-posts">
               <div className="post-container">
+                <div className={`scrollUpBtn ${this.state.showBtn ? 'active' : ''}`} onClick={this.scrollUp}><i className='ayn-up-open'></i></div>
                 {this.state.posts.map((post) => {
         
                     return <Post post={post} ws={this.props.ws} curuser={this.props.user} update={this.getNew} removePost={this.removePost} key={post.id}/>

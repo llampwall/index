@@ -386,7 +386,7 @@ var Post = function (_Component) {
     }));
 
     _this.deleteComment = function () {
-      console.log('deleting comment');
+      // console.log('deleting comment')
       _this.chat.emit('message', {
         comments: 'all'
       });
@@ -885,6 +885,16 @@ var LeftMenu = function (_Component) {
       }));
     };
 
+    _this.logout = function () {
+      _this.chat = _this.props.ws.getSubscription('chat') || _this.props.ws.subscribe('chat');
+      _this.chat.emit('message', {
+        offline: _this.props.user
+      });
+      _this.props.ws.close();
+
+      window.location.href = '/logout';
+    };
+
     _this.state = {
       dropdown: false,
       open: false
@@ -989,8 +999,8 @@ var LeftMenu = function (_Component) {
             _react2.default.createElement('i', { className: 'ayn-left-open ' + (this.state.open ? '' : 'closed') })
           ),
           _react2.default.createElement(
-            'a',
-            { href: '/logout', className: 'logout', onClick: this.props.ws.close },
+            'div',
+            { className: 'logout', onClick: this.logout },
             'logout ',
             _react2.default.createElement('i', { className: 'ayn-trash' })
           )
@@ -3121,7 +3131,7 @@ var PostArea = function (_Component) {
       }
       var y = entities[0].boundingClientRect.y;
       if (_this.state.prevY > y) {
-        console.log('bottom');
+        // console.log('bottom')
         _this.getNextPage();
       }
       _this._isMounted && _this.setState({ prevY: y });
@@ -3139,7 +3149,8 @@ var PostArea = function (_Component) {
               perPage: res.data.perPage,
               lastPage: res.data.lastPage,
               posts: [].concat((0, _toConsumableArray3.default)(_this.state.posts), (0, _toConsumableArray3.default)(res.data.data)),
-              page: _this.state.page + 1
+              page: _this.state.page + 1,
+              showBtn: true
             });
             _this._isFetching = false;
           }
@@ -3192,13 +3203,19 @@ var PostArea = function (_Component) {
       });
     };
 
+    _this.scrollUp = function () {
+      document.querySelector('#scroll-this').scrollTop = 0;
+      _this.setState({ showBtn: false });
+    };
+
     _this.state = {
       total: 0,
       perPage: 20,
       lastPage: 100,
       page: 1,
       posts: [],
-      prevY: 0
+      prevY: 0,
+      showBtn: false
     };
     _this._isMounted = false;
     _this._isFetching = false;
@@ -3267,6 +3284,9 @@ var PostArea = function (_Component) {
 
     // for when a post is deleted
 
+
+    // scroll to top
+
   }, {
     key: 'render',
     value: function render() {
@@ -3285,6 +3305,11 @@ var PostArea = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'post-container' },
+            _react2.default.createElement(
+              'div',
+              { className: 'scrollUpBtn ' + (this.state.showBtn ? 'active' : ''), onClick: this.scrollUp },
+              _react2.default.createElement('i', { className: 'ayn-up-open' })
+            ),
             this.state.posts.map(function (post) {
 
               return _react2.default.createElement(_Post2.default, { post: post, ws: _this3.props.ws, curuser: _this3.props.user, update: _this3.getNew, removePost: _this3.removePost, key: post.id });

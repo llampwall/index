@@ -264,7 +264,7 @@ export default class Post extends Component {
   }
 
   deleteComment = () => {
-    console.log('deleting comment')
+    // console.log('deleting comment')
     this.chat.emit('message', {
       comments: 'all'
     })

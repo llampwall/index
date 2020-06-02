@@ -32,6 +32,16 @@ export default class LeftMenu extends Component {
     })
   }
 
+  logout = () => {
+    this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
+    this.chat.emit('message', {
+      offline: this.props.user
+    })
+    this.props.ws.close()
+
+    window.location.href = '/logout'
+  }
+
   render () {
     if (this.props.user == undefined) {
       return (
@@ -68,9 +78,9 @@ export default class LeftMenu extends Component {
 
           <div className="open-btn" onClick={this.clickedOpen}><i className={`ayn-left-open ${this.state.open ? '' : 'closed'}`}></i></div>
 
-          <a href="/logout" className="logout" onClick={this.props.ws.close}>
+          <div className="logout" onClick={this.logout}>
             logout <i className="ayn-trash" />
-          </a>
+          </div>
         </section>
       )
     }
