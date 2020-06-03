@@ -17,7 +17,9 @@
         - click images to open large view
         - click videos to pause/mute/download/fullscreen
         - click user's name to go to their profile
-        - click link icon to go to individual post page (link to share this post)
+        - link to individual posts (chain icon)
+        - lazy loading of images/videos
+        - infinite scrolling
 
     {messenger}
         - you are immediately visible to all online as soon as you log in
@@ -40,7 +42,6 @@
         - animations are in the works
         - log in via google
         - post searching
-        - infinite scrolling / lazy loading
         - service workers to keep functionality when offline / slow connection
         - ability to choose different themes
         - changing the domain name of course

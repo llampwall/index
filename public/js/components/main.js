@@ -950,7 +950,7 @@ var LeftMenu = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'username' },
-              '[ ' + fname + ' ' + lname + ' ]'
+              fname + ' ' + lname
             )
           ),
           _react2.default.createElement(
@@ -1647,7 +1647,7 @@ var Messenger = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'title' },
-            '[ connect ]'
+            'connect'
           ),
           _react2.default.createElement(
             'div',

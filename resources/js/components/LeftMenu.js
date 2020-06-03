@@ -55,7 +55,7 @@ export default class LeftMenu extends Component {
         <section id="left-menu" className={this.state.open ? "open" : "closed"}>
           <a className="account-dropdown" href={`/profile/${this.props.user.id}`}>
             <div className="username">
-              {`[ ${fname} ${lname} ]`}
+              {`${fname} ${lname}`}
             </div>
           </a>
   
