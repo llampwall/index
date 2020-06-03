@@ -1800,34 +1800,25 @@ var Profile = function (_Component) {
     };
 
     _this.displayBio = function () {
-      if (_this.state.user == undefined) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          'bio loading...'
-        );
-      } else {
+      // if (this.state.user == undefined) {
+      //   return <div>bio loading...</div>
+      // } else {
 
-        // console.log(this.state.user)
-        if (_this.state.user.info == "") {
-          return _react2.default.createElement(
-            'div',
-            { className: 'bio' },
-            _react2.default.createElement('textarea', { className: 'bio-text ' + (_this.state.edit ? 'active' : '') + ' ' }),
-            _react2.default.createElement(
-              'div',
-              { className: 'bio-btn', onClick: _this.editBio },
-              ' Add a bio '
-            )
-          );
-        } else {
-          return _react2.default.createElement(
-            'p',
-            null,
-            _this.state.user.info
-          );
-        }
-      }
+      //   // console.log(this.state.user)
+      //   if (this.state.user.info == "") {
+      //     return (
+      //       <div className="bio">
+      //         <textarea className={`bio-text ${this.state.edit ? 'active' : ''} `} ></textarea>
+      //         <div className='bio-btn' onClick={this.editBio}> Add a bio </div>
+      //       </div>
+      //     )
+      //   } else {
+      //     return (
+      //       <p>{this.state.user.info}</p>
+      //     )
+      //   }
+      // }
+      return;
     };
 
     _this.state = {
@@ -1879,22 +1870,11 @@ var Profile = function (_Component) {
               { className: 'follow-btn' },
               'follow ',
               _react2.default.createElement('i', { className: 'ayn-bell' })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'lower-5th' },
-              _react2.default.createElement(
-                'h1',
-                null,
-                this.state.user.fname,
-                ' ',
-                this.state.user.lname
-              )
             )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'user-info' },
+            { className: 'user-info', style: { display: 'none' } },
             this.displayBio()
           )
         );

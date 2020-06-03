@@ -104,7 +104,8 @@ $write-comment-bg: #212128;
 $shadow-light: #27272F;
 $shadow-color: #1a191f;
 // area specific color vars
-$content-area-bg: $third;
+// $content-area-bg: $third;
+$content-area-bg:rgb(25, 26, 36);
 $menus: $secondary;
 $search-header-bg: $menus;
 $left-menu-bg: $menus;

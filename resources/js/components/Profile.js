@@ -15,6 +15,7 @@ export default class Profile extends Component {
 
   componentDidMount() {
     this.getUser()
+
   }
 
   getUser = async function() {
@@ -54,24 +55,25 @@ export default class Profile extends Component {
   // value={this.state.comment} onChange={this.handleChange} onKeyUp={this.checkSubmit}
 
   displayBio = () => {
-    if (this.state.user == undefined) {
-      return <div>bio loading...</div>
-    } else {
+    // if (this.state.user == undefined) {
+    //   return <div>bio loading...</div>
+    // } else {
 
-      // console.log(this.state.user)
-      if (this.state.user.info == "") {
-        return (
-          <div className="bio">
-            <textarea className={`bio-text ${this.state.edit ? 'active' : ''} `} ></textarea>
-            <div className='bio-btn' onClick={this.editBio}> Add a bio </div>
-          </div>
-        )
-      } else {
-        return (
-          <p>{this.state.user.info}</p>
-        )
-      }
-    }
+    //   // console.log(this.state.user)
+    //   if (this.state.user.info == "") {
+    //     return (
+    //       <div className="bio">
+    //         <textarea className={`bio-text ${this.state.edit ? 'active' : ''} `} ></textarea>
+    //         <div className='bio-btn' onClick={this.editBio}> Add a bio </div>
+    //       </div>
+    //     )
+    //   } else {
+    //     return (
+    //       <p>{this.state.user.info}</p>
+    //     )
+    //   }
+    // }
+    return
   }
 
   render () {
@@ -98,11 +100,11 @@ export default class Profile extends Component {
           <div className="user-img">
             <img src={this.state.image} />
             <div className="follow-btn">follow <i className='ayn-bell'></i></div>
-            <div className='lower-5th'>
+            {/* <div className='lower-5th'>
               <h1>{this.state.user.fname} {this.state.user.lname}</h1>
-            </div>
+            </div> */}
           </div>
-          <div className="user-info">
+          <div className="user-info" style={{display: 'none'}}>
             {this.displayBio()}
           </div>
         </div>

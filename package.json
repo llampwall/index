@@ -42,6 +42,7 @@
     "@adonisjs/validator": "^5.0.6",
     "@adonisjs/websocket": "^1.0.12",
     "@adonisjs/websocket-client": "^1.0.9",
+    "@verdigris/adonis-compression": "^1.0.0",
     "adonis-websocket-client": "^1.0.2",
     "aws-sdk": "^2.672.0",
     "axios": "^0.16.1",
