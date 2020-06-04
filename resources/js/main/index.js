@@ -29,15 +29,12 @@ class Layout extends Component {
     this.ws = Ws()
   }
 
+  // hook up to the websockets
   startChat = () => {
     const self = this
 
     this.ws.connect()
     this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
-    this.chat.on('update', function(message) {
-      console.log('index got an update!')
-      self.homeRef.current.update()
-    })
     // reconnect function doesnt work
     // this.ws.on('close', function() {
     //   self.retry = setInterval(() => {

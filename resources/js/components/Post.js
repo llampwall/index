@@ -16,7 +16,8 @@ export default class Post extends Component {
         likes: 0,
         lastLike: "",
         link: false,
-        showModal: false
+        showModal: false,
+        height: 0
     }
     
     this.commentArea = React.createRef()  // ref for updating comments
@@ -38,6 +39,7 @@ export default class Post extends Component {
       })
     }
 
+    // chat setup
     this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
     // update comments whenever someone comments
     this.chat.on('comments', function() {
@@ -50,6 +52,38 @@ export default class Post extends Component {
       console.log('new likes')
       self.getLikes()
     })
+
+    // get height for lazy loading
+    const height = this.getHeight()
+    this._isMounted && this.setState({ height })
+  }
+
+  getHeight = () => {
+    var height = 192
+    if ( (window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) ) {
+      if (this.props.post.content != " ") {
+        height += 40
+      }
+      if (this.props.post.link_url != '') {
+        height += 100
+      }
+      if (this.props.post.type != "text") {
+        height += 250
+      }
+      height += (this.state.numComments * 28)
+    } else {
+      if (this.props.post.content != " ") {
+        height += 52
+      }
+      if (this.props.post.link_url != '') {
+        height += 100
+      }
+      if (this.props.post.type != "text") {
+        height += 400
+      }
+      height += (this.state.numComments * 41)
+    }
+    return height
   }
 
   componentWillUnmount() {
@@ -129,7 +163,8 @@ export default class Post extends Component {
             }).then (function(response) {
               self.setState({
                 ...self.state,
-                comment: ""
+                comment: "",
+                height: this.state.height + 35
               })
 
               //update everyone else's comments
@@ -334,6 +369,18 @@ export default class Post extends Component {
     )
   }
 
+  showPostInfo = () => {
+    if (this.props.post.content.length == 0 || this.props.post.content == " ") {
+      return
+    } else {
+      return (
+        <div className="post-info">
+            <p>{this.props.post.content}</p>
+        </div>
+      )
+    }
+  }
+
   render () {
 
     if (this.props.post == undefined || this.props.curuser == undefined) {
@@ -346,8 +393,14 @@ export default class Post extends Component {
       // console.log("current user: " + this.props.curuser)
       // console.log("posted by " + this.props.user.id)
         return (
-          <LazyLoad height={this.props.post.type == 'text' ? 200 : 600} offset={200} once overflow scrollContainer='.content-area'>
-            <div className="post">
+          <LazyLoad 
+          height={this.getHeight()} 
+          offset={200} 
+          once 
+          overflow 
+          scrollContainer='.content-area'
+          >
+            <div className="post" >
                 <div className="post-header">
                     <a href={`/profile/${this.state.user.id}`} className="author">
                         <div className="user-img" style={{
@@ -371,9 +424,8 @@ export default class Post extends Component {
                   <img src={this.props.post.image_url} />
                 </Modal>
 
-                <div className="post-info">
-                    <p>{this.props.post.content}</p>
-                </div>
+                {this.showPostInfo()}
+                
                 <div className="post-stats">
                     <div className="icons">
                         <div className={`like-btn ${this.state.liked ? 'active' : ''}`}  onClick={this.like.bind(null, this.props.curuser.id, this.props.post.id)}>

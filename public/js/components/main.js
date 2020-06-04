@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 166:
+/***/ 168:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14,7 +14,7 @@ var _extends2 = __webpack_require__(69);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _defineProperty2 = __webpack_require__(136);
+var _defineProperty2 = __webpack_require__(135);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -46,7 +46,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Comments = __webpack_require__(274);
+var _Comments = __webpack_require__(275);
 
 var _Comments2 = _interopRequireDefault(_Comments);
 
@@ -54,7 +54,7 @@ var _axios = __webpack_require__(39);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Modal = __webpack_require__(276);
+var _Modal = __webpack_require__(277);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -73,6 +73,34 @@ var Post = function (_Component) {
     (0, _classCallCheck3.default)(this, Post);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this));
+
+    _this.getHeight = function () {
+      var height = 192;
+      if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+        if (_this.props.post.content != " ") {
+          height += 40;
+        }
+        if (_this.props.post.link_url != '') {
+          height += 100;
+        }
+        if (_this.props.post.type != "text") {
+          height += 250;
+        }
+        height += _this.state.numComments * 28;
+      } else {
+        if (_this.props.post.content != " ") {
+          height += 52;
+        }
+        if (_this.props.post.link_url != '') {
+          height += 100;
+        }
+        if (_this.props.post.type != "text") {
+          height += 400;
+        }
+        height += _this.state.numComments * 41;
+      }
+      return height;
+    };
 
     _this.getPoster = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
       var user;
@@ -173,7 +201,8 @@ var Post = function (_Component) {
                 content: self.state.comment
               }).then(function (response) {
                 self.setState((0, _extends3.default)({}, self.state, {
-                  comment: ""
+                  comment: "",
+                  height: this.state.height + 35
                 }));
 
                 //update everyone else's comments
@@ -474,6 +503,22 @@ var Post = function (_Component) {
       );
     };
 
+    _this.showPostInfo = function () {
+      if (_this.props.post.content.length == 0 || _this.props.post.content == " ") {
+        return;
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'post-info' },
+          _react2.default.createElement(
+            'p',
+            null,
+            _this.props.post.content
+          )
+        );
+      }
+    };
+
     _this.state = {
       post: {},
       user: {},
@@ -483,7 +528,8 @@ var Post = function (_Component) {
       likes: 0,
       lastLike: "",
       link: false,
-      showModal: false
+      showModal: false,
+      height: 0
     };
 
     _this.commentArea = _react2.default.createRef(); // ref for updating comments
@@ -507,6 +553,7 @@ var Post = function (_Component) {
         });
       }
 
+      // chat setup
       this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat');
       // update comments whenever someone comments
       this.chat.on('comments', function () {
@@ -519,6 +566,10 @@ var Post = function (_Component) {
         console.log('new likes');
         self.getLikes();
       });
+
+      // get height for lazy loading
+      var height = this.getHeight();
+      this._isMounted && this.setState({ height: height });
     }
   }, {
     key: 'componentWillUnmount',
@@ -575,7 +626,13 @@ var Post = function (_Component) {
         // console.log("posted by " + this.props.user.id)
         return _react2.default.createElement(
           _reactLazyload2.default,
-          { height: this.props.post.type == 'text' ? 200 : 600, offset: 200, once: true, overflow: true, scrollContainer: '.content-area' },
+          {
+            height: this.getHeight(),
+            offset: 200,
+            once: true,
+            overflow: true,
+            scrollContainer: '.content-area'
+          },
           _react2.default.createElement(
             'div',
             { className: 'post' },
@@ -626,15 +683,7 @@ var Post = function (_Component) {
                 } },
               _react2.default.createElement('img', { src: this.props.post.image_url })
             ),
-            _react2.default.createElement(
-              'div',
-              { className: 'post-info' },
-              _react2.default.createElement(
-                'p',
-                null,
-                this.props.post.content
-              )
-            ),
+            this.showPostInfo(),
             _react2.default.createElement(
               'div',
               { className: 'post-stats' },
@@ -681,7 +730,7 @@ exports.default = Post;
 
 /***/ }),
 
-/***/ 245:
+/***/ 247:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -723,15 +772,15 @@ var _axios = __webpack_require__(39);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _PostArea = __webpack_require__(277);
+var _PostArea = __webpack_require__(278);
 
 var _PostArea2 = _interopRequireDefault(_PostArea);
 
-var _Compose = __webpack_require__(275);
+var _Compose = __webpack_require__(276);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
-var _Post = __webpack_require__(166);
+var _Post = __webpack_require__(168);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -762,23 +811,19 @@ var Home = function (_Component) {
             case 3:
               postData = _context.sent;
 
-              console.log(postData);
+              // console.log(postData)
 
               _this.setState({
                 post: postData.data[0]
               });
 
-            case 6:
+            case 5:
             case 'end':
               return _context.stop();
           }
         }
       }, _callee, _this2);
     }));
-
-    _this.update = function () {
-      _this.postAreaRef.current.getNew();
-    };
 
     _this.state = {
       post: {}
@@ -791,19 +836,34 @@ var Home = function (_Component) {
   (0, _createClass3.default)(Home, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var self = this;
 
       if (this.props.single) {
         this.getPost();
       }
+
+      this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat');
+      this.chat.on('delete', function (message) {
+        console.log('someone deleted post ' + message);
+        self.postAreaRef.current && self.postAreaRef.current.removePost(message);
+      });
+      this.chat.on('update', function (message) {
+        console.log('new post');
+        self.postAreaRef.current && self.postAreaRef.current.getNew();
+      });
     }
 
     // if this is a single post page, get the data for the post and the poster
 
-
-    // pass down function to pass down to compose so it can update the whole area
-
   }, {
     key: 'render',
+
+
+    // pass down function to pass down to compose so it can update the whole area
+    // update = () => {
+    //   this.postAreaRef.current.getNew()
+    // }
+
     value: function render() {
       if (this.props.user == undefined) {
         return _react2.default.createElement(
@@ -831,7 +891,7 @@ var Home = function (_Component) {
           return _react2.default.createElement(
             'div',
             { className: 'content-area', id: 'scroll-this' },
-            _react2.default.createElement(_Compose2.default, { user: this.props.user, update: this.update, ws: this.props.ws }),
+            _react2.default.createElement(_Compose2.default, { user: this.props.user, ws: this.props.ws }),
             _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, user: this.props.user, ws: this.props.ws, ref: this.postAreaRef })
           );
         }
@@ -845,7 +905,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 246:
+/***/ 248:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1031,7 +1091,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 247:
+/***/ 249:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1092,7 +1152,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 248:
+/***/ 250:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1138,7 +1198,7 @@ var _axios = __webpack_require__(39);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _ChatWindow = __webpack_require__(273);
+var _ChatWindow = __webpack_require__(274);
 
 var _ChatWindow2 = _interopRequireDefault(_ChatWindow);
 
@@ -1686,7 +1746,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 249:
+/***/ 251:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1895,7 +1955,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 250:
+/***/ 252:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1965,7 +2025,7 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 273:
+/***/ 274:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1975,7 +2035,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(136);
+var _defineProperty2 = __webpack_require__(135);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2240,7 +2300,7 @@ exports.default = ChatWindow;
 
 /***/ }),
 
-/***/ 274:
+/***/ 275:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2464,7 +2524,7 @@ exports.default = Comments;
 
 /***/ }),
 
-/***/ 275:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2474,7 +2534,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(136);
+var _defineProperty2 = __webpack_require__(135);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2565,10 +2625,9 @@ var Compose = function (_Component) {
               text = _ref2.text;
               link = _ref2.link;
 
-              console.log(text);
-              console.log(link);
+              // console.log(text)
+              // console.log(link)
               if (text && link != '') {
-                console.log('ahjsdbasjhbd');
                 fData.append('link_url', _this.state.linkUrl);
                 fData.append('link_title', _this.state.linkTitle);
                 fData.append('link_image', _this.state.linkImage);
@@ -2576,43 +2635,43 @@ var Compose = function (_Component) {
               }
 
               if (!(text == '' && _this.state.linkUrl == '')) {
-                _context3.next = 21;
+                _context3.next = 19;
                 break;
               }
 
               if (!(_this.state.image == '')) {
-                _context3.next = 18;
+                _context3.next = 16;
                 break;
               }
 
               return _context3.abrupt('return');
 
-            case 18:
+            case 16:
               // if there is just an image append a space for the content
               fData.append('content', ' ');
 
-            case 19:
-              _context3.next = 22;
+            case 17:
+              _context3.next = 20;
               break;
 
-            case 21:
+            case 19:
               if (text == '' && _this.state.linkUrl != '') {
                 fData.append('content', ' ');
               } else {
                 fData.append('content', text);
               }
 
-            case 22:
+            case 20:
               fData.append('user_id', _this.props.user.id);
 
               if (!(_this.state.image == '')) {
-                _context3.next = 31;
+                _context3.next = 28;
                 break;
               }
 
               fData.append('img_name', '');
-              console.log('no image');
-              _context3.next = 28;
+              // console.log('no image')
+              _context3.next = 25;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -2627,7 +2686,7 @@ var Compose = function (_Component) {
                   linkImage: "",
                   linkDesc: ""
                 });
-                self.props.update();
+                // self.props.update()
                 //update everyone else's feed
                 var chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat');
                 chat.emit('message', {
@@ -2636,12 +2695,12 @@ var Compose = function (_Component) {
                 return 'item saved';
               });
 
-            case 28:
+            case 25:
               response = _context3.sent;
-              _context3.next = 46;
+              _context3.next = 42;
               break;
 
-            case 31:
+            case 28:
               // there is an image or video in the post
 
               // disable input while image uploads - maybe add loading symbol
@@ -2649,15 +2708,14 @@ var Compose = function (_Component) {
               document.getElementById("content").innerText = 'Loading...';
 
               // get signed url from the server
-              _context3.prev = 33;
+              _context3.prev = 30;
               file = self.state.image;
               filename = file.name;
               type = encodeURIComponent(file.type);
               // console.log(filename)
+              // console.log(type)
 
-              console.log(type);
-
-              _context3.next = 40;
+              _context3.next = 36;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
                 var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
                   var options;
@@ -2665,7 +2723,7 @@ var Compose = function (_Component) {
                     while (1) {
                       switch (_context2.prev = _context2.next) {
                         case 0:
-                          console.log('signed url: ' + response.data);
+                          // console.log('signed url: ' + response.data)
 
                           // upload file to s3
                           options = {
@@ -2702,13 +2760,16 @@ var Compose = function (_Component) {
                                           linkDesc: ""
                                         });
                                         document.getElementById("content").disabled = false; // enable input again
-                                        self.props.update();
+
+                                        // // update the feed
+                                        // self.props.update()
 
                                         //update everyone else's feed
                                         var chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat');
                                         chat.emit('message', {
                                           update: 'all'
                                         });
+
                                         return 'item saved';
                                       });
 
@@ -2730,7 +2791,7 @@ var Compose = function (_Component) {
                             console.log('upload failed: ' + err);
                           });
 
-                        case 3:
+                        case 2:
                         case 'end':
                           return _context2.stop();
                       }
@@ -2743,23 +2804,23 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 40:
+            case 36:
               _response = _context3.sent;
-              _context3.next = 46;
+              _context3.next = 42;
               break;
 
-            case 43:
-              _context3.prev = 43;
-              _context3.t0 = _context3['catch'](33);
+            case 39:
+              _context3.prev = 39;
+              _context3.t0 = _context3['catch'](30);
 
               console.log("axios didnt work: " + _context3.t0);
 
-            case 46:
+            case 42:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[33, 43]]);
+      }, _callee3, _this2, [[30, 39]]);
     }));
     _this.checkLink = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
       var self, text, link, expression, regex, data, i, secureUrl;
@@ -2774,37 +2835,36 @@ var Compose = function (_Component) {
               regex = new RegExp(expression);
 
               if (!(_this.state.postContent.length > 0)) {
-                _context5.next = 28;
+                _context5.next = 27;
                 break;
               }
 
               data = _this.state.postContent.split(' ');
-
-              console.log(data);
+              // console.log(data)
 
               if (!(data.length > 0)) {
-                _context5.next = 28;
+                _context5.next = 27;
                 break;
               }
 
               i = 0;
 
-            case 10:
+            case 9:
               if (!(i < data.length)) {
-                _context5.next = 28;
+                _context5.next = 27;
                 break;
               }
 
               if (!data[i].match(regex)) {
-                _context5.next = 23;
+                _context5.next = 22;
                 break;
               }
 
               // found a url
               secureUrl = data[i].replace(/^http:\/\//i, 'https://'); // http to https
 
-              _context5.prev = 13;
-              _context5.next = 16;
+              _context5.prev = 12;
+              _context5.next = 15;
               return _axios2.default.post( // get preview info from link metadata
               'https://api.linkpreview.net', {
                 q: encodeURIComponent(secureUrl),
@@ -2816,7 +2876,7 @@ var Compose = function (_Component) {
                     while (1) {
                       switch (_context4.prev = _context4.next) {
                         case 0:
-                          console.log(resp.data);
+                          // console.log(resp.data)
 
                           secureImg = resp.data.image.replace(/^http:\/\//i, 'https://'); // http to https
 
@@ -2828,7 +2888,7 @@ var Compose = function (_Component) {
                           });
                           link = resp.data.url;
 
-                        case 4:
+                        case 3:
                         case 'end':
                           return _context4.stop();
                       }
@@ -2841,39 +2901,38 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 16:
-              _context5.next = 21;
+            case 15:
+              _context5.next = 20;
               break;
 
-            case 18:
-              _context5.prev = 18;
-              _context5.t0 = _context5['catch'](13);
+            case 17:
+              _context5.prev = 17;
+              _context5.t0 = _context5['catch'](12);
 
               console.log(_context5.t0);
 
-            case 21:
-              _context5.next = 25;
+            case 20:
+              _context5.next = 24;
               break;
 
-            case 23:
+            case 22:
               text += data[i];
               text += ' ';
 
-            case 25:
+            case 24:
               i++;
-              _context5.next = 10;
+              _context5.next = 9;
               break;
 
-            case 28:
-              console.log('text: ' + text);
+            case 27:
               return _context5.abrupt('return', { text: text, link: link });
 
-            case 30:
+            case 28:
             case 'end':
               return _context5.stop();
           }
         }
-      }, _callee5, _this2, [[13, 18]]);
+      }, _callee5, _this2, [[12, 17]]);
     }));
 
     _this.handleChange = function (event) {
@@ -2978,7 +3037,7 @@ exports.default = Compose;
 
 /***/ }),
 
-/***/ 276:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3008,7 +3067,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(23);
+var _propTypes = __webpack_require__(24);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -3076,7 +3135,7 @@ exports.default = Modal;
 
 /***/ }),
 
-/***/ 277:
+/***/ 278:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3086,7 +3145,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(487);
+var _toConsumableArray2 = __webpack_require__(488);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -3110,7 +3169,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(166);
+var _Post = __webpack_require__(168);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -3134,7 +3193,7 @@ var PostArea = function (_Component) {
       }
       var y = entities[0].boundingClientRect.y;
       if (_this.state.prevY > y) {
-        // console.log('bottom')
+        console.log('bottom');
         _this.getNextPage();
       }
       _this._isMounted && _this.setState({ prevY: y });
@@ -3208,7 +3267,7 @@ var PostArea = function (_Component) {
 
     _this.scrollUp = function () {
       document.querySelector('#scroll-this').scrollTop = 0;
-      _this.setState({ showBtn: false });
+      // this.setState({showBtn: false})
     };
 
     _this.state = {
@@ -3263,12 +3322,6 @@ var PostArea = function (_Component) {
         this.observer.observe(this.loadingRef.current);
         console.log('observing');
       }
-
-      this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat');
-      this.chat.on('delete', function (message) {
-        console.log('someone deleted post ' + message);
-        self.removePost(message);
-      });
     }
 
     // observer code to fetch more stuff
@@ -3292,6 +3345,14 @@ var PostArea = function (_Component) {
 
   }, {
     key: 'render',
+
+
+    // make sure posts have sa
+    // uniqueId = () => {
+    //   return (Math.random().toString(36) + '00000000000000000').slice(2, 10);
+    // }
+
+
     value: function render() {
       var _this3 = this;
 
@@ -3338,7 +3399,7 @@ exports.default = PostArea;
 
 /***/ }),
 
-/***/ 278:
+/***/ 279:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3376,37 +3437,37 @@ var _reactDom = __webpack_require__(64);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(253);
+var _reactRouterDom = __webpack_require__(255);
 
 var _axios = __webpack_require__(39);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(245);
+var _Home = __webpack_require__(247);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(249);
+var _Profile = __webpack_require__(251);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(246);
+var _LeftMenu = __webpack_require__(248);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(248);
+var _Messenger = __webpack_require__(250);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(250);
+var _SearchHeader = __webpack_require__(252);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(247);
+var _Loading = __webpack_require__(249);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
-var _websocketClient = __webpack_require__(244);
+var _websocketClient = __webpack_require__(246);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
 
@@ -3425,10 +3486,6 @@ var Layout = function (_Component) {
 
       _this.ws.connect();
       _this.chat = _this.ws.getSubscription('chat') || _this.ws.subscribe('chat');
-      _this.chat.on('update', function (message) {
-        console.log('index got an update!');
-        self.homeRef.current.update();
-      });
       // reconnect function doesnt work
       // this.ws.on('close', function() {
       //   self.retry = setInterval(() => {
@@ -3462,6 +3519,9 @@ var Layout = function (_Component) {
     _this.ws = (0, _websocketClient2.default)();
     return _this;
   }
+
+  // hook up to the websockets
+
 
   (0, _createClass3.default)(Layout, [{
     key: 'componentDidMount',
@@ -3561,4 +3621,4 @@ _reactDom2.default.render(_react2.default.createElement(Layout, null), app);
 
 /***/ })
 
-},[278]);
+},[279]);

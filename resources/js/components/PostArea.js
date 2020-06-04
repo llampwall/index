@@ -56,13 +56,6 @@ export default class PostArea extends Component {
       this.observer.observe(this.loadingRef.current)
       console.log('observing')
     }
-
-
-    this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
-    this.chat.on('delete', function(message) {
-      console.log('someone deleted post ' + message) 
-      self.removePost(message)
-    })
   }
 
   // observer code to fetch more stuff
@@ -72,7 +65,7 @@ export default class PostArea extends Component {
     }
     const y = entities[0].boundingClientRect.y
     if (this.state.prevY > y) {
-      // console.log('bottom')
+      console.log('bottom')
       this.getNextPage()
     }
     this._isMounted && this.setState({ prevY: y })
@@ -154,8 +147,13 @@ export default class PostArea extends Component {
   // scroll to top
   scrollUp = () => {
     document.querySelector('#scroll-this').scrollTop = 0;
-    this.setState({showBtn: false})
+    // this.setState({showBtn: false})
   }
+
+  // make sure posts have sa
+  // uniqueId = () => {
+  //   return (Math.random().toString(36) + '00000000000000000').slice(2, 10);
+  // }
   
 
   render () {

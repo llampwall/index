@@ -35,10 +35,9 @@ export default class Compose extends Component {
 
     // check for link data and get it
     let {text, link} = await this.checkLink()
-    console.log(text)
-    console.log(link)
+    // console.log(text)
+    // console.log(link)
     if (text && link != '') {
-      console.log('ahjsdbasjhbd')
       fData.append('link_url', this.state.linkUrl)
       fData.append('link_title', this.state.linkTitle)
       fData.append('link_image', this.state.linkImage)
@@ -63,7 +62,7 @@ export default class Compose extends Component {
 
     if (this.state.image == '') {
       fData.append('img_name', '')
-      console.log('no image')
+      // console.log('no image')
       const response = await axios({
         method: 'post',
         url: '/posts',
@@ -78,7 +77,7 @@ export default class Compose extends Component {
           linkImage: "",
           linkDesc: ""
         })
-        self.props.update()
+        // self.props.update()
         //update everyone else's feed
         const chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat')
         chat.emit('message', {
@@ -99,11 +98,11 @@ export default class Compose extends Component {
           const filename = file.name
           const type = encodeURIComponent(file.type)
           // console.log(filename)
-          console.log(type)
+          // console.log(type)
 
           const response = await axios.get(`/posts/url/${filename}/${type}`)
           .then (async function(response) {   
-            console.log('signed url: ' + response.data)
+            // console.log('signed url: ' + response.data)
 
             // upload file to s3
             var options = {
@@ -133,13 +132,16 @@ export default class Compose extends Component {
                     linkDesc: ""
                   })
                   document.getElementById("content").disabled = false   // enable input again
-                  self.props.update()
+                  
+                  // // update the feed
+                  // self.props.update()
 
                   //update everyone else's feed
                   const chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat')
                   chat.emit('message', {
                     update: 'all'
                   })
+
                   return 'item saved'
                 })
               }).catch(function(err) {
@@ -163,7 +165,7 @@ export default class Compose extends Component {
       var regex = new RegExp(expression)
       if(this.state.postContent.length > 0) {
         var data = this.state.postContent.split(' ')
-        console.log(data)
+        // console.log(data)
         if (data.length > 0) {
           for (var i=0; i < data.length; i++) {
             if (data[i].match(regex)) {                 // found a url
@@ -175,7 +177,7 @@ export default class Compose extends Component {
                     q: encodeURIComponent(secureUrl),
                     key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
                   }).then(async function(resp) {
-                    console.log(resp.data)
+                    // console.log(resp.data)
 
                     var secureImg = resp.data.image.replace(/^http:\/\//i, 'https://')  // http to https
 
@@ -197,7 +199,7 @@ export default class Compose extends Component {
           }
         }
       }
-      console.log('text: ' + text)
+      // console.log('text: ' + text)
       return {text, link}
   }
 

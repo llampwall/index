@@ -17,17 +17,28 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+    const self = this
 
     if (this.props.single) {
       this.getPost()
     }
+
+    this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
+    this.chat.on('delete', function(message) {
+      console.log('someone deleted post ' + message) 
+      self.postAreaRef.current && self.postAreaRef.current.removePost(message)
+    })
+    this.chat.on('update', function(message) {
+      console.log('new post')
+      self.postAreaRef.current && self.postAreaRef.current.getNew()
+    })
   }
 
   // if this is a single post page, get the data for the post and the poster
   getPost = async () => {
     const p_id = this.props.routeProps.match.params.id
     const postData = await axios.get(`/posts/${p_id}`)
-    console.log(postData)
+    // console.log(postData)
 
     this.setState({
       post: postData.data[0]
@@ -37,9 +48,9 @@ export default class Home extends Component {
 
 
   // pass down function to pass down to compose so it can update the whole area
-  update = () => {
-    this.postAreaRef.current.getNew()
-  }
+  // update = () => {
+  //   this.postAreaRef.current.getNew()
+  // }
 
   render () {
     if (this.props.user == undefined) {
@@ -64,7 +75,7 @@ export default class Home extends Component {
         return (
           <div className="content-area" id="scroll-this">
             
-              <Compose user={this.props.user} update={this.update} ws={this.props.ws}/>
+              <Compose user={this.props.user} ws={this.props.ws}/>
               <PostArea routeProps={this.props.routeProps} user={this.props.user} ws={this.props.ws} ref={this.postAreaRef}/>
   
           </div>
