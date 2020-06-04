@@ -164,7 +164,7 @@ export default class Post extends Component {
               self.setState({
                 ...self.state,
                 comment: "",
-                height: this.state.height + 35
+                height: self.state.height + 35
               })
 
               //update everyone else's comments
@@ -183,9 +183,8 @@ export default class Post extends Component {
 
   // fix to avoid double submits on mobile
   touchSubmitComment = (event) => {
-    event.stopPropagation()
-    event.preventDefault()
     this.submitComment()
+    return false;
   }
 
   // this lets us get the comments from the child

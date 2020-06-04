@@ -202,7 +202,7 @@ var Post = function (_Component) {
               }).then(function (response) {
                 self.setState((0, _extends3.default)({}, self.state, {
                   comment: "",
-                  height: this.state.height + 35
+                  height: self.state.height + 35
                 }));
 
                 //update everyone else's comments
@@ -234,9 +234,8 @@ var Post = function (_Component) {
     }));
 
     _this.touchSubmitComment = function (event) {
-      event.stopPropagation();
-      event.preventDefault();
       _this.submitComment();
+      return false;
     };
 
     _this.sendUp = function (num) {
