@@ -1028,7 +1028,7 @@ var LeftMenu = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'title' },
-              '_usr'
+              'you'
             ),
             _react2.default.createElement(
               'ul',
@@ -1056,7 +1056,7 @@ var LeftMenu = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'title' },
-              '_groups'
+              'groups'
             ),
             _react2.default.createElement(
               'ul',

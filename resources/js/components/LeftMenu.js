@@ -60,7 +60,7 @@ export default class LeftMenu extends Component {
           </a>
   
           <div className="groups">
-            <div className="title">_usr</div>
+            <div className="title">you</div>
             <ul>
               <li>bio</li>
               <li>work</li>
@@ -68,7 +68,7 @@ export default class LeftMenu extends Component {
             </ul>
           </div>
           <div className="groups">
-            <div className="title">_groups</div>
+            <div className="title">groups</div>
             <ul>
               <li>software</li>
               <li>photography</li>
