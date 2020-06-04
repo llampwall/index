@@ -452,7 +452,7 @@ export default class Post extends Component {
 
                     <Comments ref={this.commentArea} post={this.props.post} sendUp={this.sendUp} deleteComment={this.deleteComment} curuser={this.props.curuser}/>
 
-                    <div className="send-btn" onTouchStart={this.touchSubmitComment} onMouseUp={this.submitComment}>
+                    <div className="send-btn" onClick={this.submitComment}>
                         <i className="ayn-right" />
                     </div>
                     
@@ -463,3 +463,6 @@ export default class Post extends Component {
     }
   }
 }
+
+
+{/* <div className="send-btn" onTouchStart={this.touchSubmitComment.bind(null, {passive: false})} onMouseUp={this.submitComment}></div> */}

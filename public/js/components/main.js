@@ -724,7 +724,7 @@ var Post = function (_Component) {
               _react2.default.createElement(_Comments2.default, { ref: this.commentArea, post: this.props.post, sendUp: this.sendUp, deleteComment: this.deleteComment, curuser: this.props.curuser }),
               _react2.default.createElement(
                 'div',
-                { className: 'send-btn', onTouchStart: this.touchSubmitComment, onMouseUp: this.submitComment },
+                { className: 'send-btn', onClick: this.submitComment },
                 _react2.default.createElement('i', { className: 'ayn-right' })
               )
             )
@@ -737,6 +737,9 @@ var Post = function (_Component) {
 }(_react.Component);
 
 exports.default = Post;
+
+
+{/* <div className="send-btn" onTouchStart={this.touchSubmitComment.bind(null, {passive: false})} onMouseUp={this.submitComment}></div> */}
 
 /***/ }),
 
