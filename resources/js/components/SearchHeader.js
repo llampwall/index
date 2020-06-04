@@ -15,6 +15,7 @@ export default class SearchHeader extends Component {
               <img src="/img/sun_small.JPG" alt="index - home"></img>
             </a>
             <div className="search">
+                <img src="/img/index_orange.png" />
                 <input type="text" name="search" placeholder="search..." />
             </div>
             {/* <div className="icons">

@@ -2022,6 +2022,7 @@ var SearchHeader = function (_Component) {
         _react2.default.createElement(
           "div",
           { className: "search" },
+          _react2.default.createElement("img", { src: "/img/index_orange.png" }),
           _react2.default.createElement("input", { type: "text", name: "search", placeholder: "search..." })
         )
       );

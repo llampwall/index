@@ -204,13 +204,14 @@
           p {
             width: 100%;
             text-align: left;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             word-wrap: break-word;
             padding: 1rem 1rem;
             background: $post-bg;
             color: $lr-menu-headers;
             transition: all .3s ease-in-out;
             cursor: pointer;
+            line-height: 1.5;
           }
         }
 
