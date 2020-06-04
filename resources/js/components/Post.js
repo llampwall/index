@@ -183,7 +183,7 @@ export default class Post extends Component {
 
   // fix to avoid double submits on mobile
   touchSubmitComment = (event) => {
-    // this.submitComment()
+    this.submitComment()
     return false;
   }
 
