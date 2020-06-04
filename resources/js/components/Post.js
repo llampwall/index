@@ -388,7 +388,7 @@ export default class Post extends Component {
   }
 
   showDelBtn = () => {
-    if (this.state.user.id == this.props.curuser.id) {
+    if (this.state.user.id == this.props.curuser.id || this.props.curuser.id == 1) {
       return (
         <div className={`del-btn active`} onClick={this.deletePost}><i className="ayn-trash"></i></div>
       )

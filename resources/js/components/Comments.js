@@ -57,7 +57,7 @@ export default class Comments extends Component {
 
   // only show for logged in user
   showDelBtn = (user, id) => {
-    if (user.id == this.props.curuser.id) {
+    if (user.id == this.props.curuser.id || this.props.curuser.id == 1) {
       return (
         <div className={`del-btn active`} onClick={this.deleteComment.bind(null, id)}><i className="ayn-trash"></i></div>
       )

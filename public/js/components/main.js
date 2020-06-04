@@ -526,7 +526,7 @@ var Post = function (_Component) {
     };
 
     _this.showDelBtn = function () {
-      if (_this.state.user.id == _this.props.curuser.id) {
+      if (_this.state.user.id == _this.props.curuser.id || _this.props.curuser.id == 1) {
         return _react2.default.createElement(
           'div',
           { className: 'del-btn active', onClick: _this.deletePost },
@@ -2448,7 +2448,7 @@ var Comments = function (_Component) {
     }();
 
     _this.showDelBtn = function (user, id) {
-      if (user.id == _this.props.curuser.id) {
+      if (user.id == _this.props.curuser.id || _this.props.curuser.id == 1) {
         return _react2.default.createElement(
           'div',
           { className: 'del-btn active', onClick: _this.deleteComment.bind(null, id) },
