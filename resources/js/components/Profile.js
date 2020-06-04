@@ -11,11 +11,16 @@ export default class Profile extends Component {
       edit: false,
       image: ""
     }
+    this._isMounted = false
   }
 
   componentDidMount() {
+    this._isMounted = true
     this.getUser()
+  }
 
+  componentWillUnmount() {
+    this._isMounted = false
   }
 
   getUser = async function() {
@@ -34,7 +39,7 @@ export default class Profile extends Component {
       image = image.replace('normal', 'large')
     }
 
-    this.setState({
+    this._isMounted && this.setState({
       ...this.state,
       user: user.data[0],
       image: image

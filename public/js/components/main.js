@@ -1776,7 +1776,7 @@ var Profile = function (_Component) {
                 image = image.replace('normal', 'large');
               }
 
-              this.setState((0, _extends3.default)({}, this.state, {
+              this._isMounted && this.setState((0, _extends3.default)({}, this.state, {
                 user: user.data[0],
                 image: image
               }), function () {
@@ -1826,13 +1826,20 @@ var Profile = function (_Component) {
       edit: false,
       image: ""
     };
+    _this._isMounted = false;
     return _this;
   }
 
   (0, _createClass3.default)(Profile, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this._isMounted = true;
       this.getUser();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this._isMounted = false;
     }
 
     // value={this.state.comment} onChange={this.handleChange} onKeyUp={this.checkSubmit}
