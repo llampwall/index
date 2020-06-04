@@ -405,14 +405,20 @@ var Post = function (_Component) {
                   var like_d = response.data.likeData;
                   var numLikes = like_d.length;
                   var last = "";
+                  var newLiked = self.state.liked;
                   if (like_d.length > 0) {
+                    newLiked = like_d.filter(function (user) {
+                      return user.id == self.props.curuser.id;
+                    }).length > 0;
+
                     last = like_d[0].id == self.props.curuser.id ? "You" : like_d[0].users.fname + ' ' + like_d[0].users.lname;
                   }
 
                   if (self._isMounted) {
                     self.setState({
                       likes: numLikes,
-                      lastLike: last
+                      lastLike: last,
+                      liked: newLiked
                     });
                   }
                 });
