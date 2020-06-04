@@ -43,7 +43,7 @@ export default class PostArea extends Component {
     // intersection observer setup
     var options = {
       root: document.querySelector("#scroll-this"),
-      rootMargin: '0px',
+      rootMargin: '0px 0px 200px 0px',
       threshold: 1.0
     }
     // make observer
