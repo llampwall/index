@@ -7,7 +7,7 @@ export default class PostArea extends Component {
     super()
     this.state = { 
       start: 0,
-      total: 0,
+      last: false,
       posts: [],
       prevY: 0,
       showBtn: false
@@ -28,9 +28,8 @@ export default class PostArea extends Component {
         if (self._isMounted) {
           self.setState({
             posts: res.data
-            // total: res.data.total
           })
-          this._isFetching = false
+          self._isFetching = false
         }
       })
     } catch (error) {
@@ -57,9 +56,8 @@ export default class PostArea extends Component {
 
   // observer code to fetch more stuff
   handleObserver = (entities, observer) => {
-    // if (this.state.page == this.state.lastPage) {
-    //   return
-    // }
+    if (this.state.last) {return}
+    
     const y = entities[0].boundingClientRect.y
     if (this.state.prevY > y) {
       console.log('bottom')
@@ -79,16 +77,17 @@ export default class PostArea extends Component {
 
     this._isFetching = true
     try {
-      axios.get(`/posts/from/${this.state.start + 20}`)
+      axios.get(`/posts/from/${this.state.posts.length}`)
       .then((res) => {
+        var isLast = (res.data.length == 0)
         if (self._isMounted) {
           self.setState({
-            start: this.state.start + 20,
-            // total: res.data.total,
-            posts: [...this.state.posts, ...res.data],
+            start: self.state.posts.length,
+            last: isLast,
+            posts: [...self.state.posts, ...res.data],
             showBtn: true
           })
-          this._isFetching = false
+          self._isFetching = false
         }
       })
     } catch (error) {

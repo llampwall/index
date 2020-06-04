@@ -376,7 +376,7 @@ export default class Post extends Component {
   }
 
   showPostInfo = () => {
-    if (this.props.post.content.length == 0 || this.props.post.content == " ") {
+    if (this.props.post && (this.props.post.content.length == 0 || this.props.post.content == " ")) {
       return
     } else {
       return (

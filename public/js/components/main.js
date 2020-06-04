@@ -510,7 +510,7 @@ var Post = function (_Component) {
     };
 
     _this.showPostInfo = function () {
-      if (_this.props.post.content.length == 0 || _this.props.post.content == " ") {
+      if (_this.props.post && (_this.props.post.content.length == 0 || _this.props.post.content == " ")) {
         return;
       } else {
         return _react2.default.createElement(
@@ -812,7 +812,7 @@ var Home = function (_Component) {
 
               // console.log(postData)
 
-              _this.setState({
+              _this._isMounted && _this.setState({
                 post: postData.data[0]
               });
 
@@ -824,11 +824,10 @@ var Home = function (_Component) {
       }, _callee, _this2);
     }));
 
-    _this.state = {
-      post: {}
-    };
+    _this.state = {};
 
     _this.postAreaRef = _react2.default.createRef();
+    _this._isMounted = false;
     return _this;
   }
 
@@ -836,6 +835,7 @@ var Home = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var self = this;
+      this._isMounted = true;
 
       if (this.props.single) {
         this.getPost();
@@ -855,14 +855,18 @@ var Home = function (_Component) {
     // if this is a single post page, get the data for the post and the poster
 
   }, {
-    key: 'render',
-
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this._isMounted = false;
+    }
 
     // pass down function to pass down to compose so it can update the whole area
     // update = () => {
     //   this.postAreaRef.current.getNew()
     // }
 
+  }, {
+    key: 'render',
     value: function render() {
       if (this.props.user == undefined) {
         return _react2.default.createElement(
@@ -3187,9 +3191,10 @@ var PostArea = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (PostArea.__proto__ || Object.getPrototypeOf(PostArea)).call(this));
 
     _this.handleObserver = function (entities, observer) {
-      // if (this.state.page == this.state.lastPage) {
-      //   return
-      // }
+      if (_this.state.last) {
+        return;
+      }
+
       var y = entities[0].boundingClientRect.y;
       if (_this.state.prevY > y) {
         console.log('bottom');
@@ -3203,15 +3208,16 @@ var PostArea = function (_Component) {
 
       _this._isFetching = true;
       try {
-        _axios2.default.get('/posts/from/' + (_this.state.start + 20)).then(function (res) {
+        _axios2.default.get('/posts/from/' + _this.state.posts.length).then(function (res) {
+          var isLast = res.data.length == 0;
           if (self._isMounted) {
             self.setState({
-              start: _this.state.start + 20,
-              // total: res.data.total,
-              posts: [].concat((0, _toConsumableArray3.default)(_this.state.posts), (0, _toConsumableArray3.default)(res.data)),
+              start: self.state.posts.length,
+              last: isLast,
+              posts: [].concat((0, _toConsumableArray3.default)(self.state.posts), (0, _toConsumableArray3.default)(res.data)),
               showBtn: true
             });
-            _this._isFetching = false;
+            self._isFetching = false;
           }
         });
       } catch (error) {
@@ -3267,7 +3273,7 @@ var PostArea = function (_Component) {
 
     _this.state = {
       start: 0,
-      total: 0,
+      last: false,
       posts: [],
       prevY: 0,
       showBtn: false
@@ -3281,8 +3287,6 @@ var PostArea = function (_Component) {
   (0, _createClass3.default)(PostArea, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
       var self = this;
       this._isMounted = true;
       this._isFetching = true;
@@ -3292,9 +3296,8 @@ var PostArea = function (_Component) {
           if (self._isMounted) {
             self.setState({
               posts: res.data
-              // total: res.data.total
             });
-            _this2._isFetching = false;
+            self._isFetching = false;
           }
         });
       } catch (error) {
@@ -3346,7 +3349,7 @@ var PostArea = function (_Component) {
 
 
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       if (this.state.posts == undefined) {
         return _react2.default.createElement(
@@ -3368,7 +3371,7 @@ var PostArea = function (_Component) {
             ),
             this.state.posts.map(function (post) {
 
-              return _react2.default.createElement(_Post2.default, { post: post, ws: _this3.props.ws, curuser: _this3.props.user, update: _this3.getNew, removePost: _this3.removePost, key: post.id });
+              return _react2.default.createElement(_Post2.default, { post: post, ws: _this2.props.ws, curuser: _this2.props.user, update: _this2.getNew, removePost: _this2.removePost, key: post.id });
             }),
             _react2.default.createElement(
               'div',

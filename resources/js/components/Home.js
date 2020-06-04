@@ -10,14 +10,15 @@ export default class Home extends Component {
   constructor () {
     super()
     this.state = {
-      post: {}
     }
 
     this.postAreaRef = React.createRef()
+    this._isMounted = false
   }
 
   componentDidMount() {
     const self = this
+    this._isMounted = true
 
     if (this.props.single) {
       this.getPost()
@@ -40,11 +41,14 @@ export default class Home extends Component {
     const postData = await axios.get(`/posts/${p_id}`)
     // console.log(postData)
 
-    this.setState({
+    this._isMounted && this.setState({
       post: postData.data[0]
     })
   }
 
+  componentWillUnmount() {
+    this._isMounted = false
+  }
 
 
   // pass down function to pass down to compose so it can update the whole area
@@ -61,7 +65,7 @@ export default class Home extends Component {
       )
     } else {
       
-      if (this.props.single && this.state.post != undefined) {
+      if (this.props.single && (this.state.post != undefined)) {
         return (
           <div className="content-area">
             <section id="all-posts">

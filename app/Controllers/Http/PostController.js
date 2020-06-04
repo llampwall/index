@@ -44,7 +44,7 @@ class PostController {
                 .orderBy('posts.created_at', 'desc')
                 .offset(start)
                 .limit(20)
-            console.log(results)
+            // console.log(results)
             return results
         } catch (error) {
             console.log(error)
@@ -162,14 +162,14 @@ class PostController {
         console.log("deleting: " + id)
         try {
             const affectedRows = await Database.table('posts').where('id', id).delete()
+            if (affectedRows < 1) {
+                console.log('delete failed')
+            } else {
+                console.log("done") 
+                return affectedRows
+            }
         } catch {
             console.log("error destroying post: " + error)
-        }
-        if (affectedRows < 1) {
-            console.log('delete failed')
-        } else {
-            console.log("done") 
-            return affectedRows
         }
     }
 
