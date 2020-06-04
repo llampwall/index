@@ -411,7 +411,7 @@ var Post = function (_Component) {
                     newLiked = like_d.filter(function (item) {
                       return item.users.id == self.props.curuser.id;
                     }).length > 0;
-                    console.log(like_d[0].users);
+                    // console.log(like_d[0].users)
                     last = like_d[0].users.id == self.props.curuser.id ? "You" : like_d[0].users.fname + ' ' + like_d[0].users.lname;
                   }
 
