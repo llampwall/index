@@ -3187,9 +3187,9 @@ var PostArea = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (PostArea.__proto__ || Object.getPrototypeOf(PostArea)).call(this));
 
     _this.handleObserver = function (entities, observer) {
-      if (_this.state.page == _this.state.lastPage) {
-        return;
-      }
+      // if (this.state.page == this.state.lastPage) {
+      //   return
+      // }
       var y = entities[0].boundingClientRect.y;
       if (_this.state.prevY > y) {
         console.log('bottom');
@@ -3203,14 +3203,12 @@ var PostArea = function (_Component) {
 
       _this._isFetching = true;
       try {
-        _axios2.default.get('/posts/page/' + (_this.state.page + 1)).then(function (res) {
+        _axios2.default.get('/posts/from/' + (_this.state.start + 20)).then(function (res) {
           if (self._isMounted) {
             self.setState({
-              total: res.data.total,
-              perPage: res.data.perPage,
-              lastPage: res.data.lastPage,
-              posts: [].concat((0, _toConsumableArray3.default)(_this.state.posts), (0, _toConsumableArray3.default)(res.data.data)),
-              page: _this.state.page + 1,
+              start: _this.state.start + 20,
+              // total: res.data.total,
+              posts: [].concat((0, _toConsumableArray3.default)(_this.state.posts), (0, _toConsumableArray3.default)(res.data)),
               showBtn: true
             });
             _this._isFetching = false;
@@ -3234,15 +3232,11 @@ var PostArea = function (_Component) {
         _axios2.default.get('/posts/new/' + _this.state.posts[0].id).then(function (res) {
           console.log(res);
           var diff = res.data.length;
-          var newTotal = _this.state.total + diff;
-          var newLast = Math.ceil(newTotal / _this.state.perPage);
-          var newPage = Math.round(diff / _this.state.perPage) + _this.state.page;
 
           _this._isMounted && self.setState({
-            total: newTotal,
-            lastPage: newLast,
-            posts: [].concat((0, _toConsumableArray3.default)(res.data), (0, _toConsumableArray3.default)(_this.state.posts)),
-            page: newPage
+            start: _this.state.start + diff,
+            posts: [].concat((0, _toConsumableArray3.default)(res.data), (0, _toConsumableArray3.default)(_this.state.posts))
+            // page: newPage
           });
           _this._isFetching = false;
         });
@@ -3255,11 +3249,13 @@ var PostArea = function (_Component) {
       var newPosts = _this.state.posts.filter(function (post) {
         return post.id != id;
       });
-      var newTotal = _this.state.total - 1;
-      var newLast = Math.ceil(newTotal / _this.state.perPage);
+      var diff = newPosts.length - _this.state.posts.length;
+      // let newTotal = this.state.total - 1
+      // let newLast = Math.ceil(newTotal / this.state.perPage)
       _this._isMounted && _this.setState({
-        total: _this.state.total - 1,
-        lastPage: newLast,
+        // total: this.state.total - 1,
+        // lastPage: newLast,
+        start: _this.state.start + diff,
         posts: newPosts
       });
     };
@@ -3270,10 +3266,8 @@ var PostArea = function (_Component) {
     };
 
     _this.state = {
+      start: 0,
       total: 0,
-      perPage: 20,
-      lastPage: 100,
-      page: 1,
       posts: [],
       prevY: 0,
       showBtn: false
@@ -3293,13 +3287,12 @@ var PostArea = function (_Component) {
       this._isMounted = true;
       this._isFetching = true;
       try {
-        _axios2.default.get('/posts/page/1').then(function (res) {
+        _axios2.default.get('/posts/from/' + this.state.start).then(function (res) {
+          // console.log(res)
           if (self._isMounted) {
             self.setState({
-              total: res.data.total,
-              perPage: res.data.perPage,
-              lastPage: res.data.lastPage,
-              posts: res.data.data
+              posts: res.data
+              // total: res.data.total
             });
             _this2._isFetching = false;
           }
@@ -3317,7 +3310,7 @@ var PostArea = function (_Component) {
       };this.observer = new IntersectionObserver(this.handleObserver, //callback
       options);
       // observe the `loadingRef`
-      if (this.loadingRef.current) {
+      if (this._isMounted && this.loadingRef.current) {
         this.observer.observe(this.loadingRef.current);
         console.log('observing');
       }
@@ -3383,7 +3376,7 @@ var PostArea = function (_Component) {
               _react2.default.createElement(
                 'span',
                 { style: { display: this._isFetching ? 'block' : 'none' } },
-                this.state.page != this.state.lastPage ? 'Loading...' : 'No more posts!'
+                'Loading...'
               )
             )
           )

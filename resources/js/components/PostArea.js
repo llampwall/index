@@ -6,10 +6,8 @@ export default class PostArea extends Component {
   constructor () {
     super()
     this.state = { 
+      start: 0,
       total: 0,
-      perPage: 20,
-      lastPage: 100,
-      page: 1,
       posts: [],
       prevY: 0,
       showBtn: false
@@ -24,14 +22,13 @@ export default class PostArea extends Component {
     this._isMounted = true
     this._isFetching = true
     try {
-      axios.get(`/posts/page/1`)
+      axios.get(`/posts/from/${this.state.start}`)
       .then((res) => {
+        // console.log(res)
         if (self._isMounted) {
           self.setState({
-            total: res.data.total,
-            perPage: res.data.perPage,
-            lastPage: res.data.lastPage,
-            posts: res.data.data
+            posts: res.data
+            // total: res.data.total
           })
           this._isFetching = false
         }
@@ -52,7 +49,7 @@ export default class PostArea extends Component {
       options
     )
     // observe the `loadingRef`
-    if (this.loadingRef.current) {
+    if (this._isMounted && this.loadingRef.current) {
       this.observer.observe(this.loadingRef.current)
       console.log('observing')
     }
@@ -60,9 +57,9 @@ export default class PostArea extends Component {
 
   // observer code to fetch more stuff
   handleObserver = (entities, observer) => {
-    if (this.state.page == this.state.lastPage) {
-      return
-    }
+    // if (this.state.page == this.state.lastPage) {
+    //   return
+    // }
     const y = entities[0].boundingClientRect.y
     if (this.state.prevY > y) {
       console.log('bottom')
@@ -82,15 +79,13 @@ export default class PostArea extends Component {
 
     this._isFetching = true
     try {
-      axios.get(`/posts/page/${this.state.page + 1}`)
+      axios.get(`/posts/from/${this.state.start + 20}`)
       .then((res) => {
         if (self._isMounted) {
           self.setState({
-            total: res.data.total,
-            perPage: res.data.perPage,
-            lastPage: res.data.lastPage,
-            posts: [...this.state.posts, ...res.data.data],
-            page: this.state.page + 1,
+            start: this.state.start + 20,
+            // total: res.data.total,
+            posts: [...this.state.posts, ...res.data],
             showBtn: true
           })
           this._isFetching = false
@@ -115,15 +110,11 @@ export default class PostArea extends Component {
       .then((res) => {
         console.log(res)
         let diff = res.data.length
-        let newTotal = this.state.total + diff
-        let newLast = Math.ceil(newTotal / this.state.perPage)
-        let newPage = Math.round(diff / this.state.perPage) + this.state.page
 
         this._isMounted && self.setState({
-          total: newTotal,
-          lastPage: newLast,
+          start: this.state.start + diff,
           posts: [...res.data, ...this.state.posts],
-          page: newPage
+          // page: newPage
         })
         this._isFetching = false
       })
@@ -135,11 +126,13 @@ export default class PostArea extends Component {
   // for when a post is deleted
   removePost = (id) => {
     let newPosts = this.state.posts.filter(post => {return post.id != id})
-    let newTotal = this.state.total - 1
-    let newLast = Math.ceil(newTotal / this.state.perPage)
+    let diff = newPosts.length - this.state.posts.length
+    // let newTotal = this.state.total - 1
+    // let newLast = Math.ceil(newTotal / this.state.perPage)
     this._isMounted && this.setState({
-      total: this.state.total - 1,
-      lastPage: newLast,
+      // total: this.state.total - 1,
+      // lastPage: newLast,
+      start: this.state.start + diff,
       posts: newPosts
     })
   }
@@ -174,8 +167,7 @@ export default class PostArea extends Component {
 
                 })}
                 <div ref={this.loadingRef} style={{ height: '100px', margin: '30px', color: '#94c4d4'}} >
-                  <span style={{ display: this._isFetching ? 'block' : 'none' }}>
-                    {this.state.page != this.state.lastPage ? 'Loading...' : 'No more posts!' }</span>
+                  <span style={{ display: this._isFetching ? 'block' : 'none' }}>Loading...</span>
                 </div>
               </div>
           </section>

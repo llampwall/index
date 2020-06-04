@@ -23,15 +23,32 @@ class PostController {
         return post
     }
 
-    // get 30 posts paginated
+    // get 20 posts paginated
     async postPage({request, response}) {
         const { num } = request.params
+        // console.log(request.params)
         const results = await Database
             .from('posts')
             .orderBy('posts.created_at', 'desc')
             .paginate(num, 20)
         // console.log(results)
         return results
+    }
+
+    // get next 20 posts
+    async nextPage({request, response}) {
+        const start = parseInt(request.params.start)
+        try {
+            const results = await Database
+                .from('posts')
+                .orderBy('posts.created_at', 'desc')
+                .offset(start)
+                .limit(20)
+            console.log(results)
+            return results
+        } catch (error) {
+            console.log(error)
+        }        
     }
 
     // get all new posts 
