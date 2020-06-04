@@ -55,6 +55,15 @@ export default class Comments extends Component {
     }
   }
 
+  // only show for logged in user
+  showDelBtn = (user, id) => {
+    if (user.id == this.props.curuser.id) {
+      return (
+        <div className={`del-btn active`} onClick={this.deleteComment.bind(null, id)}><i className="ayn-trash"></i></div>
+      )
+    }
+  }
+
 
   showComments = () => {
     return (
@@ -74,7 +83,7 @@ export default class Comments extends Component {
                     <h2>{`${user.fname}${(user.lname == null) ? "" : " "}${(user.lname == null) ? "" : user.lname}: `}</h2>
                   </a>
                   <p>{comment.content}</p>
-                  <div className={`del-btn ${user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deleteComment.bind(null, id)}><i className="ayn-trash"></i></div>
+                  {this.showDelBtn(user, id)}
                 </div>
             )}
         )

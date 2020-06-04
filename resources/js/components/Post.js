@@ -387,6 +387,14 @@ export default class Post extends Component {
     }
   }
 
+  showDelBtn = () => {
+    if (this.state.user.id == this.props.curuser.id) {
+      return (
+        <div className={`del-btn active`} onClick={this.deletePost}><i className="ayn-trash"></i></div>
+      )
+    }
+  }
+
   render () {
 
     if (this.props.post == undefined || this.props.curuser == undefined) {
@@ -413,7 +421,7 @@ export default class Post extends Component {
                     <a href={`/post/${this.props.post.id}`} className="text">shared {this.getType()} <i className="ayn-link"></i></a>
                       
                     <div className="time">{new Date(this.props.post.created_at).toLocaleString()}</div>
-                    <div className={`del-btn ${this.state.user.id == this.props.curuser.id ? 'active' : ''}`} onClick={this.deletePost}><i className="ayn-trash"></i></div>
+                    {this.showDelBtn()}
                 </div>
 
                 {this.displayMedia()}

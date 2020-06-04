@@ -525,6 +525,16 @@ var Post = function (_Component) {
       }
     };
 
+    _this.showDelBtn = function () {
+      if (_this.state.user.id == _this.props.curuser.id) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'del-btn active', onClick: _this.deletePost },
+          _react2.default.createElement('i', { className: 'ayn-trash' })
+        );
+      }
+    };
+
     _this.state = {
       post: {},
       user: {},
@@ -665,11 +675,7 @@ var Post = function (_Component) {
               { className: 'time' },
               new Date(this.props.post.created_at).toLocaleString()
             ),
-            _react2.default.createElement(
-              'div',
-              { className: 'del-btn ' + (this.state.user.id == this.props.curuser.id ? 'active' : ''), onClick: this.deletePost },
-              _react2.default.createElement('i', { className: 'ayn-trash' })
-            )
+            this.showDelBtn()
           ),
           this.displayMedia(),
           this.displayLink(),
@@ -2441,6 +2447,16 @@ var Comments = function (_Component) {
       };
     }();
 
+    _this.showDelBtn = function (user, id) {
+      if (user.id == _this.props.curuser.id) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'del-btn active', onClick: _this.deleteComment.bind(null, id) },
+          _react2.default.createElement('i', { className: 'ayn-trash' })
+        );
+      }
+    };
+
     _this.showComments = function () {
       return _this.state.comments.map(function (item) {
         var comment = item.comments;
@@ -2468,11 +2484,7 @@ var Comments = function (_Component) {
             null,
             comment.content
           ),
-          _react2.default.createElement(
-            'div',
-            { className: 'del-btn ' + (user.id == _this.props.curuser.id ? 'active' : ''), onClick: _this.deleteComment.bind(null, id) },
-            _react2.default.createElement('i', { className: 'ayn-trash' })
-          )
+          _this.showDelBtn(user, id)
         );
       });
     };
@@ -2497,6 +2509,9 @@ var Comments = function (_Component) {
     }
 
     // delete the comment only if you posted it
+
+
+    // only show for logged in user
 
   }, {
     key: 'render',
