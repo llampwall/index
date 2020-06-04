@@ -183,8 +183,9 @@ export default class Post extends Component {
 
   // fix to avoid double submits on mobile
   touchSubmitComment = (event) => {
+    // event.preventDefault()
+    event.stopPropagation()
     this.submitComment()
-    return false;
   }
 
   // this lets us get the comments from the child
@@ -451,7 +452,7 @@ export default class Post extends Component {
 
                     <Comments ref={this.commentArea} post={this.props.post} sendUp={this.sendUp} deleteComment={this.deleteComment} curuser={this.props.curuser}/>
 
-                    <div className="send-btn" onTouchStart={this.touchSubmitComment.bind(null, {passive: false})} onMouseUp={this.submitComment}>
+                    <div className="send-btn" onTouchStart={this.touchSubmitComment} onMouseUp={this.submitComment}>
                         <i className="ayn-right" />
                     </div>
                     
