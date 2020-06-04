@@ -404,7 +404,10 @@ var Post = function (_Component) {
                   // console.log(response.data.likeData)
                   var like_d = response.data.likeData;
                   var numLikes = like_d.length;
-                  var last = like_d.length > 0 ? like_d[0].users.fname + ' ' + like_d[0].users.lname : "";
+                  var last = "";
+                  if (like_d.length > 0) {
+                    last = like_d[0].id == this.props.curuser.id ? "You" : like_d[0].users.fname + ' ' + like_d[0].users.lname;
+                  }
 
                   if (self._isMounted) {
                     self.setState({
