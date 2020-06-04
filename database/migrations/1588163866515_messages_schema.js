@@ -7,8 +7,8 @@ class MessagesSchema extends Schema {
   up () {
     this.create('messages', (table) => {
       table.increments()
-      table.integer('sender_id').unsigned().references('id').inTable('users').notNullable()
-      table.integer('receiver_id').unsigned().references('id').inTable('users').notNullable()
+      table.integer('sender_id').unsigned().references('id').inTable('users').notNullable().onDelete('cascade')
+      table.integer('receiver_id').unsigned().references('id').inTable('users').notNullable().onDelete('cascade')
       table.text('content').notNullable()
       table.timestamp('read_at')
       table.timestamps()

@@ -57,7 +57,7 @@ export default class PostArea extends Component {
   // observer code to fetch more stuff
   handleObserver = (entities, observer) => {
     if (this.state.last) {return}
-    
+
     const y = entities[0].boundingClientRect.y
     if (this.state.prevY > y) {
       console.log('bottom')
@@ -103,11 +103,15 @@ export default class PostArea extends Component {
       return
     }
     
+    if (this.state.posts.length == 0) {
+      return
+    }
+    
     this._isFetching = true
     try {
       axios.get(`/posts/new/${this.state.posts[0].id}`)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         let diff = res.data.length
 
         this._isMounted && self.setState({

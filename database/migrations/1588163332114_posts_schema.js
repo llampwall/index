@@ -14,7 +14,7 @@ class PostsSchema extends Schema {
       table.text('link_title')
       table.text('link_img', 600)
       table.text('link_desc', 600)
-      table.integer('user_id').unsigned().references('id').inTable('users').notNullable()
+      table.integer('user_id').unsigned().references('id').inTable('users').notNullable().onDelete('cascade')
       table.timestamps()
     })
   }

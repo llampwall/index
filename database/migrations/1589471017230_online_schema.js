@@ -7,7 +7,7 @@ class OnlineSchema extends Schema {
   up () {
     this.create('onlines', (table) => {
       table.increments()
-      table.integer('user_id').unsigned().references('id').inTable('users').notNullable()
+      table.integer('user_id').unsigned().references('id').inTable('users').notNullable().onDelete('cascade')
       table.text('socket_id').notNullable()
       table.timestamps()
     })

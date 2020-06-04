@@ -3233,10 +3233,14 @@ var PostArea = function (_Component) {
         return;
       }
 
+      if (_this.state.posts.length == 0) {
+        return;
+      }
+
       _this._isFetching = true;
       try {
         _axios2.default.get('/posts/new/' + _this.state.posts[0].id).then(function (res) {
-          console.log(res);
+          // console.log(res)
           var diff = res.data.length;
 
           _this._isMounted && self.setState({
