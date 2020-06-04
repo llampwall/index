@@ -267,10 +267,10 @@ export default class Post extends Component {
         console.log("error liking post: " + error)
       }
     }
-    this.setState({
-      ...this.state,
-      liked: !this.state.liked
-    })
+    // this.setState({
+    //   ...this.state,
+    //   liked: !this.state.liked
+    // })
     this.getLikes()
     //update everyone elses feed
     self.chat.emit('message', {
@@ -289,11 +289,11 @@ export default class Post extends Component {
         const like_d = response.data.likeData
         const numLikes = like_d.length
         let last = ""
-        let newLiked = self.state.liked
+        let newLiked
         if (like_d.length > 0) {
-          newLiked = (like_d.filter(user => user.id == self.props.curuser.id)).length > 0
-          
-          last = (like_d[0].id == self.props.curuser.id) ? "You" : `${like_d[0].users.fname} ${like_d[0].users.lname}`
+          newLiked = (like_d.filter(item => item.users.id == self.props.curuser.id)).length > 0
+          console.log(like_d[0].users)
+          last = (like_d[0].users.id == self.props.curuser.id) ? "You" : `${like_d[0].users.fname} ${like_d[0].users.lname}`
         }
 
         if (self._isMounted) {

@@ -369,16 +369,17 @@ var Post = function (_Component) {
                 console.log("error liking post: " + _context4.t1);
 
               case 20:
-                _this.setState((0, _extends3.default)({}, _this.state, {
-                  liked: !_this.state.liked
-                }));
+                // this.setState({
+                //   ...this.state,
+                //   liked: !this.state.liked
+                // })
                 _this.getLikes();
                 //update everyone elses feed
                 self.chat.emit('message', {
                   likes: 'all'
                 });
 
-              case 23:
+              case 22:
               case 'end':
                 return _context4.stop();
             }
@@ -405,13 +406,13 @@ var Post = function (_Component) {
                   var like_d = response.data.likeData;
                   var numLikes = like_d.length;
                   var last = "";
-                  var newLiked = self.state.liked;
+                  var newLiked = void 0;
                   if (like_d.length > 0) {
-                    newLiked = like_d.filter(function (user) {
-                      return user.id == self.props.curuser.id;
+                    newLiked = like_d.filter(function (item) {
+                      return item.users.id == self.props.curuser.id;
                     }).length > 0;
-
-                    last = like_d[0].id == self.props.curuser.id ? "You" : like_d[0].users.fname + ' ' + like_d[0].users.lname;
+                    console.log(like_d[0].users);
+                    last = like_d[0].users.id == self.props.curuser.id ? "You" : like_d[0].users.fname + ' ' + like_d[0].users.lname;
                   }
 
                   if (self._isMounted) {
