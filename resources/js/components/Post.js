@@ -290,7 +290,7 @@ export default class Post extends Component {
         const numLikes = like_d.length
         let last = ""
         if (like_d.length > 0) {
-          last = (like_d[0].id == this.props.curuser.id) ? "You" : `${like_d[0].users.fname} ${like_d[0].users.lname}`
+          last = (like_d[0].id == self.props.curuser.id) ? "You" : `${like_d[0].users.fname} ${like_d[0].users.lname}`
         }
 
         if (self._isMounted) {
