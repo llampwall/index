@@ -234,7 +234,7 @@ var Post = function (_Component) {
     }));
 
     _this.touchSubmitComment = function (event) {
-      _this.submitComment();
+      // this.submitComment()
       return false;
     };
 
