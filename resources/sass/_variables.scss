@@ -174,7 +174,7 @@ $bright: 90%;
   }
 }
 #left-menu {
-  backdrop-filter: blur($blur) brightness($bright) saturate($desat) !important;
+  backdrop-filter: blur($blur) brightness(60%) saturate($desat) !important;
   .groups {
     .title {
       font-size: 1.5rem !important;
@@ -188,7 +188,7 @@ $bright: 90%;
   border-left: none !important;
 }
 #messenger {
-  backdrop-filter: blur($blur) brightness($bright) saturate($desat) !important;
+  backdrop-filter: blur($blur) brightness(60%) saturate($desat) !important;
   .users .user .username {
     font-size: 1.2rem !important;
     font-weight: 700;
@@ -204,6 +204,13 @@ $bright: 90%;
   backdrop-filter: blur($blur) brightness($bright) saturate($desat) !important;
   box-shadow:  13px 13px 26px rgba(188, 101, 22, 0.6), 
              -13px -13px 26px rgba(255, 161, 34, 0.6) !important;
+}
+
+@media only screen and (max-width: 767px) {
+  #left-menu .open-btn,
+  #messenger .open-btn {
+    background: rgba(255,255,255,.8) !important
+  }
 }
 
 
