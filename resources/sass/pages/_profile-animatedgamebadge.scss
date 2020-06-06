@@ -54,10 +54,12 @@
       top: 0;
       left: 0;
 
-      &:hover, &.active {
-          color: $button-color;
-          background: $button-bg;
-      }
+	  @media (hover: hover) {
+			&:hover, &.active {
+				color: $button-color;
+				background: $button-bg;
+			}
+		}
     }
 
     .lower-5th {
@@ -117,12 +119,14 @@
         padding: .3rem .7rem;
         border: $border-thickness solid $border-color;
         margin: 0 auto;
-        cursor: pointer;
-        &:hover {
-          background-color: $primary-font-color;
-          color: $secondary;
-          font-weight: 500;
-        }
+		cursor: pointer;
+		@media (hover: hover) {
+			&:hover {
+				background-color: $primary-font-color;
+				color: $secondary;
+				font-weight: 500;
+			}
+		}
       }
     }
   }

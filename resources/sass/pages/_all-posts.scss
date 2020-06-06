@@ -24,8 +24,10 @@
           font-size: 1rem;
           color: #16161D;
         }
-        &:hover {
-          background-color: $primary-font-color;
+        @media (hover: hover) {
+          &:hover {
+            background-color: $primary-font-color;
+          }
         }
         &.active {
           opacity: .8;
@@ -113,8 +115,10 @@
           min-height: 400px;
           z-index: -5;
           cursor: pointer;
-          &:hover {
-            width: 100%;
+          @media (hover: hover) {
+            &:hover {
+              width: 100%;
+            }
           }
         }
 
@@ -244,9 +248,11 @@
                 color: $button-bg
               }
 
-              &:hover {
-                background: $button-color;
-                color: $button-bg;
+              @media (hover: hover) {
+                &:hover {
+                  background: $button-color;
+                  color: $button-bg;
+                }
               }
             }
           }
@@ -331,9 +337,11 @@
                 border-bottom: $border-thickness solid $border-color;
               }
 
-              &:hover {
-                & > .del-btn {
-                  opacity: 1;
+              @media (hover: hover) {
+                &:hover {
+                  & > .del-btn {
+                    opacity: 1;
+                  }
                 }
               }
               

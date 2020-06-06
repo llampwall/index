@@ -69,10 +69,12 @@
           &::before{
             content: ": ";
           }
-          &:hover {
-            // background: $primary-font-color;
-            color: $accents;
-            transform: scale(1.05);
+          @media (hover: hover) {
+            &:hover {
+              // background: $primary-font-color;
+              color: $accents;
+              transform: scale(1.05);
+            }
           }
         }
       }
@@ -102,8 +104,10 @@
         transform: scale(1);
         transform: rotateZ(0deg);
         transition: all .5s ease-in-out;
-        &:hover {
-          transform: scale(1.2);
+        @media (hover: hover) {
+          &:hover {
+            transform: scale(1.2);
+          }
         }
   
         &.closed {
@@ -132,10 +136,11 @@
       i {
         margin-left: .3rem;
       }
-
-      &:hover {
-        background: $primary-font-color;
-        color: $secondary;
+      @media (hover: hover) {
+        &:hover {
+          background: $primary-font-color;
+          color: $secondary;
+        }
       }
     }
   }

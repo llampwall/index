@@ -35,10 +35,12 @@
   border-radius: 20%;
   color: $button-color;
   transition: all .3s ease;
-  &:hover {
-    color: #AEEE98;
-    transform: scale(1.1);
-    // background: $button-color;
+  @media (hover: hover) {
+    &:hover {
+      color: #AEEE98;
+      transform: scale(1.1);
+      // background: $button-color;
+    }
   }
 }
 
@@ -159,7 +161,7 @@ input[type="password"] {
 // disable hover on touchscreens 
 @media (hover: none) {
   *:hover {
-     color: inherit;
+    color: inherit;
   }
 }
 
