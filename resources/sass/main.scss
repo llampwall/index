@@ -159,11 +159,11 @@ input[type="password"] {
 
 
 // disable hover on touchscreens 
-@media (hover: none) {
-  *:hover {
-    color: inherit;
-  }
-}
+// @media (hover: none) {
+//   *:hover {
+//     color: inherit;
+//   }
+// }
 
 
 @media only screen and (max-width: 767px) {

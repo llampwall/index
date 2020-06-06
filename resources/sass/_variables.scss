@@ -205,6 +205,9 @@ $bright: 90%;
   box-shadow:  13px 13px 26px rgba(188, 101, 22, 0.6), 
              -13px -13px 26px rgba(255, 161, 34, 0.6) !important;
 }
+#messenger .chat {
+  background-color: rgba(0,0,0,0.8) !important;
+}
 
 @media only screen and (max-width: 767px) {
   #left-menu, 
@@ -217,7 +220,7 @@ $bright: 90%;
   }
   #left-menu .open-btn,
   #messenger .open-btn {
-    background: rgba(255,255,255,.8) !important
+    background: rgba(255,255,255,.8) !important;
   }
   
 }
