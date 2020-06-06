@@ -39,6 +39,7 @@
         margin-bottom: 3rem;
         border: $border-thickness solid $border-color;
         font-family: $main-font;
+        z-index: 3;
 
         .post-header {
           background: $post-header-bg;
@@ -108,7 +109,8 @@
           border-bottom: $border-thickness solid $border-color;
           margin: 0 auto;
           transition: all .3s ease;
-          height: 400px;
+          background-size: cover;
+          min-height: 400px;
           z-index: -5;
           cursor: pointer;
           &:hover {
@@ -123,11 +125,11 @@
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(0,0,0,.5);
+          background: rgba(0,0,0,.5) !important;
           display: flex;
           align-items: center;
           justify-content: center;
-          z-index: 100;
+          z-index: 1000 !important;
 
           .modal {
             padding: 50px;

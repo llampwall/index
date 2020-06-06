@@ -147,16 +147,16 @@ $shadow-light: rgb(47, 41, 39);
 $shadow-color: #1f1212;
 // area specific color vars
 // $content-area-bg: $third;
-$content-area-bg: url("/img/br6.jpg");
+$content-area-bg: url("/img/br6.jpg") 60% center;
 // $content-area-bg: url("/img/welcome6.jpg");
 $menus: transparent;
 $search-header-bg: transparent;
 $left-menu-bg: transparent;
-$left-menu-primary: $silouette;
+$left-menu-primary: #d95788;
 $left-menu-secondary: white;
 $right-menu-bg: transparent;
-$right-menu-names: brown;
-$right-menu-icons: $accents;
+$right-menu-names: white;
+$right-menu-icons: #d95788;
 $compose-bg: transparent;
 $post-header-bg: transparent;
 $post-bg: transparent;
@@ -207,10 +207,19 @@ $bright: 90%;
 }
 
 @media only screen and (max-width: 767px) {
+  #left-menu, 
+  #messenger {
+    backdrop-filter: blur($blur) brightness(30%) saturate($desat) !important;
+    .users .user .username {
+      font-size: 1rem !important;
+      font-weight: 500;
+    }
+  }
   #left-menu .open-btn,
   #messenger .open-btn {
     background: rgba(255,255,255,.8) !important
   }
+  
 }
 
 

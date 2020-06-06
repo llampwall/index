@@ -143,8 +143,7 @@ var Post = function (_Component) {
           }, style: {
             backgroundImage: 'url("' + _this.props.post.image_url + '")',
             backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover' } });
+            backgroundRepeat: 'no-repeat' } });
       } else if (_this.props.post.type == 'video') {
         return _react2.default.createElement(
           'video',

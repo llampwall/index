@@ -112,8 +112,7 @@ export default class Post extends Component {
             <div className="post-media" onClick={() => {this.setState({showModal: true})}} style={{
                 backgroundImage: `url("${this.props.post.image_url}")`, 
                 backgroundPosition: 'center center', 
-                backgroundRepeat: 'no-repeat', 
-                backgroundSize: 'cover'}}>
+                backgroundRepeat: 'no-repeat' }}>
             </div>
         )
     } else if (this.props.post.type == 'video') {
