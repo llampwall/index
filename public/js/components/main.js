@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(68);
+var _extends2 = __webpack_require__(78);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -923,10 +923,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(68);
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _classCallCheck2 = __webpack_require__(15);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -958,15 +954,14 @@ var LeftMenu = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (LeftMenu.__proto__ || Object.getPrototypeOf(LeftMenu)).call(this));
 
     _this.clickedOpen = function () {
-      _this.setState((0, _extends3.default)({}, _this.state, {
-        open: !_this.state.open
-      }));
+      _this.setState({ open: !_this.state.open });
+      if (window.innerWidth <= 800) {
+        _this.props.open();
+      }
     };
 
-    _this.clickedDropDown = function () {
-      _this.setState((0, _extends3.default)({}, _this.state, {
-        dropdown: !_this.state.dropdown
-      }));
+    _this.close = function () {
+      _this.setState({ open: false });
     };
 
     _this.logout = function () {
@@ -980,7 +975,6 @@ var LeftMenu = function (_Component) {
     };
 
     _this.state = {
-      dropdown: false,
       open: false
     };
     return _this;
@@ -989,10 +983,8 @@ var LeftMenu = function (_Component) {
   (0, _createClass3.default)(LeftMenu, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      if (window.innerWidth > 1200) {
-        this.setState((0, _extends3.default)({}, this.state, {
-          open: true
-        }));
+      if (window.innerWidth > 800) {
+        this.setState({ open: true });
       }
     }
   }, {
@@ -1178,7 +1170,7 @@ var _asyncToGenerator2 = __webpack_require__(45);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _extends2 = __webpack_require__(68);
+var _extends2 = __webpack_require__(78);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1230,9 +1222,14 @@ var Messenger = function (_Component) {
     };
 
     _this.clickedOpen = function () {
-      _this.setState((0, _extends3.default)({}, _this.state, {
-        open: !_this.state.open
-      }));
+      _this.setState({ open: !_this.state.open });
+      if (window.innerWidth <= 800) {
+        _this.props.open();
+      }
+    };
+
+    _this.close = function () {
+      _this.setState({ open: false });
     };
 
     _this.startChat = function () {
@@ -1453,6 +1450,10 @@ var Messenger = function (_Component) {
                   });
                 }
 
+                if (isDesktop) {
+                  _this.props.open();
+                }
+
                 if (_this.chatRef.current != null && clicked == true) {
                   _this.chatRef.current.switchUser(user);
                 }
@@ -1461,7 +1462,7 @@ var Messenger = function (_Component) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-              case 11:
+              case 12:
               case 'end':
                 return _context2.stop();
             }
@@ -1629,10 +1630,8 @@ var Messenger = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.startChat();
-      if (window.innerWidth > 1200) {
-        this.setState((0, _extends3.default)({}, this.state, {
-          open: true
-        }));
+      if (window.innerWidth > 800) {
+        this.setState({ open: true });
       }
 
       // var pageVisibility = document.visibilityState
@@ -1768,7 +1767,7 @@ var _regenerator = __webpack_require__(46);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(68);
+var _extends2 = __webpack_require__(78);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -2052,7 +2051,7 @@ var _regenerator = __webpack_require__(46);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(68);
+var _extends2 = __webpack_require__(78);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -2560,7 +2559,7 @@ var _regenerator = __webpack_require__(46);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(68);
+var _extends2 = __webpack_require__(78);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -3447,7 +3446,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(72);
+var _reactDom = __webpack_require__(71);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -3522,6 +3521,18 @@ var Layout = function (_Component) {
       document.getElementsByClassName('notify')[0].classList.remove('active');
     };
 
+    _this.openLeft = function () {
+      if (_this.msgRef.current.state.open && window.innerWidth <= 800) {
+        _this.msgRef.current.close();
+      }
+    };
+
+    _this.openRight = function () {
+      if (_this.leftRef.current.state.open && window.innerWidth <= 800) {
+        _this.leftRef.current.close();
+      }
+    };
+
     _this.state = {
       user: {}
     };
@@ -3529,6 +3540,8 @@ var Layout = function (_Component) {
     _this.retry = null;
 
     _this.homeRef = _react2.default.createRef();
+    _this.leftRef = _react2.default.createRef();
+    _this.msgRef = _react2.default.createRef();
 
     _this.ws = (0, _websocketClient2.default)();
     return _this;
@@ -3581,6 +3594,13 @@ var Layout = function (_Component) {
         };
       }();
 
+      if (window.innerWidth > 800) {
+        this.setState({
+          leftOpen: true,
+          rightOpen: true
+        });
+      }
+
       this.startChat();
       getUser();
 
@@ -3606,7 +3626,7 @@ var Layout = function (_Component) {
           'div',
           { className: 'app-container home-page' },
           _react2.default.createElement(_Loading2.default, { active: this.state.user != undefined ? "" : 'active' }),
-          _react2.default.createElement(_LeftMenu2.default, { user: this.state.user, ws: this.ws }),
+          _react2.default.createElement(_LeftMenu2.default, { user: this.state.user, ws: this.ws, open: this.openLeft, ref: this.leftRef }),
           _react2.default.createElement(
             'section',
             { id: 'content-container' },
@@ -3621,7 +3641,7 @@ var Layout = function (_Component) {
                 return _react2.default.createElement(_Profile2.default, { routeProps: props, user: _this2.state.user });
               } })
           ),
-          _react2.default.createElement(_Messenger2.default, { user: this.state.user, ws: this.ws })
+          _react2.default.createElement(_Messenger2.default, { user: this.state.user, ws: this.ws, open: this.openRight, ref: this.msgRef })
         )
       );
     }

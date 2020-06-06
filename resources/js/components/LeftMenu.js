@@ -3,33 +3,26 @@ import React, { Component} from 'react'
 export default class LeftMenu extends Component {
   constructor () {
     super()
-    this.state = { 
-      dropdown: false,
+    this.state = {
       open: false
     }
   }
 
   componentDidMount() {
-    if (window.innerWidth > 1200) {
-      this.setState({
-        ...this.state,
-        open: true
-      })
+    if (window.innerWidth > 800) {
+      this.setState({open: true})
+    }
+  }
+  
+  clickedOpen = () => {
+    this.setState({open: !this.state.open})
+    if (window.innerWidth <= 800) {
+      this.props.open()
     }
   }
 
-  clickedOpen = () => {
-    this.setState({
-      ...this.state,
-      open: !this.state.open
-    })
-  }
-
-  clickedDropDown = () => {
-    this.setState({
-      ...this.state,
-      dropdown: !this.state.dropdown
-    })
+  close = () => {
+    this.setState({open: false})
   }
 
   logout = () => {

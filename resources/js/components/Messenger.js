@@ -31,11 +31,8 @@ export default class Messenger extends Component {
 
   componentDidMount() {
     this.startChat()
-    if (window.innerWidth > 1200) {
-      this.setState({
-        ...this.state,
-        open: true,
-      })
+    if (window.innerWidth > 800) {
+      this.setState({open: true})
     }
 
     // var pageVisibility = document.visibilityState
@@ -70,10 +67,14 @@ export default class Messenger extends Component {
 
   //open messenger sidebar
   clickedOpen = () => {
-    this.setState({
-      ...this.state,
-      open: !this.state.open
-    })
+    this.setState({open: !this.state.open})
+    if (window.innerWidth <= 800) {
+      this.props.open()
+    }
+  }
+
+  close = () => {
+    this.setState({open: false})
   }
 
   // connect messenger
@@ -257,6 +258,10 @@ export default class Messenger extends Component {
         open: isDesktop, 
         chatUser: user
       })
+    }
+
+    if (isDesktop) {
+      this.props.open()
     }
 
     if (this.chatRef.current != null && clicked == true) {

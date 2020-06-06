@@ -25,6 +25,8 @@ class Layout extends Component {
     this.retry = null
 
     this.homeRef = React.createRef()
+    this.leftRef = React.createRef()
+    this.msgRef = React.createRef()
 
     this.ws = Ws()
   }
@@ -67,6 +69,13 @@ class Layout extends Component {
       }
     }
 
+    if (window.innerWidth > 800) {
+      this.setState({
+        leftOpen: true,
+        rightOpen: true
+      })
+    }
+
     this.startChat()
     getUser()
 
@@ -84,6 +93,18 @@ class Layout extends Component {
     this.ws.close()
   }
 
+  openLeft = () => {
+    if (this.msgRef.current.state.open && window.innerWidth <= 800) {
+      this.msgRef.current.close()
+    }
+  }
+
+  openRight = () => {
+    if (this.leftRef.current.state.open && window.innerWidth <= 800) {
+      this.leftRef.current.close()
+    }
+  }
+
 
   render () {
     return (
@@ -92,7 +113,7 @@ class Layout extends Component {
 
           <Loading active={(this.state.user != undefined) ? "" : 'active'}/>
 
-          <LeftMenu user={this.state.user} ws={this.ws} />
+          <LeftMenu user={this.state.user} ws={this.ws} open={this.openLeft} ref={this.leftRef} />
 
           <section id="content-container">
 
@@ -103,7 +124,7 @@ class Layout extends Component {
           
           </section>
 
-          <Messenger user={this.state.user} ws={this.ws}/>
+          <Messenger user={this.state.user} ws={this.ws} open={this.openRight} ref={this.msgRef} />
         </div>
       </Router>
     )
