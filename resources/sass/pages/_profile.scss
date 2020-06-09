@@ -31,7 +31,7 @@
     height: 300px;
     background-color: white;
     padding: 10px;
-    border-radius: 3px;
+    border-radius: $border-r;
     
     img {
       height: 100%;
@@ -50,7 +50,7 @@
       background: $title-font-color;
       color: white;
       transition: all .2s ease;
-      // position: absolute;
+      border-radius: $border-r;
       top: 0;
       left: 0;
 
@@ -120,6 +120,7 @@
         border: $border-thickness solid $border-color;
         margin: 0 auto;
         cursor: pointer;
+        border-radius: $border-r;
         @media (hover: hover) {
           &:hover {
             background-color: $primary-font-color;

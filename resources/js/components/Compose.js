@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import imageCompression from 'browser-image-compression';
-
-// should really generalize and save this component as an axios image uploader
-// even has a preview window for the selected image file
+import imageCompression from 'browser-image-compression'
 
 
 export default class Compose extends Component {

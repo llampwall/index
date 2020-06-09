@@ -40,6 +40,7 @@
         justify-content: center;
         padding-left: 1.5rem;
         cursor: pointer;
+        border-radius: $border-r;
       }
       .title {
         display: flex;
@@ -54,6 +55,7 @@
         justify-content: center;
         padding-right: 1.5rem;
         cursor: pointer;
+        border-radius: $border-r;
       }
     }
 
@@ -128,6 +130,7 @@
           background-size: cover;
           border: $border-thickness solid $border-color;
           margin-right: .6rem;
+          border-radius: $border-r;
         }
         
         .username {
@@ -137,6 +140,7 @@
         .message-icon {
           margin-left: auto;
           margin-right: 1.8rem;
+          border-radius: $border-r;
           
           i {
             color: $right-menu-icons;
@@ -163,7 +167,8 @@
       left: -15px;
       transform-style: preserve-3d;
       transition: all .3s ease-in-out;
-      border-radius: 20%;
+      // border-radius: 20%;
+      border-radius: $border-r;
 
       i {
         font-size: 1.2rem;
@@ -240,6 +245,7 @@
           cursor: pointer;
           font-size: 1.3rem;
           z-index: inherit;
+          border-radius: $border-r;
 
           i {
             transform: rotateZ(0deg);
@@ -258,6 +264,7 @@
           cursor: pointer;
           font-size: 1.3rem;
           z-index: inherit;
+          border-radius: $border-r;
           @media (hover: hover) {
             &:hover {
               color: red;
@@ -335,6 +342,7 @@
           width: 30px;
           height: 30px;
           padding: 20px;
+          border-radius: $border-r;
           // background: $secondary;
           cursor: pointer;
         }

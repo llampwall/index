@@ -18,7 +18,7 @@
         cursor: pointer;
         align-items: center;
         justify-content: center;
-        border-radius: 2px;
+        border-radius: $border-r;
         transition: all .3s ease-in-out;
         i {
           font-size: 1rem;
@@ -42,6 +42,7 @@
         border: $border-thickness solid $border-color;
         font-family: $main-font;
         z-index: 3;
+        border-radius: $border-r;
 
         .post-header {
           background: $post-header-bg;
@@ -59,7 +60,8 @@
             .user-img {
               height: 40px;
               width: 40px;
-              border-right: $border-thickness solid $border-color
+              border-right: $border-thickness solid $border-color;
+              border-radius: $border-r;
             }
             .username {
               color: $third-font-color;
@@ -97,6 +99,7 @@
             justify-content: center;
             border: $border-thickness solid $button-color;
             margin-right: 0;
+            border-radius: $border-r;
             
             cursor: pointer;
             &.active {
@@ -112,7 +115,6 @@
           border-bottom: $border-thickness solid $border-color;
           margin: 0 auto;
           transition: all .3s ease;
-          background-size: cover;
           min-height: 400px;
           z-index: -5;
           cursor: pointer;
@@ -138,11 +140,13 @@
           .modal {
             padding: 50px;
             background-color: white;
+            border-radius: $border-r;
 
             img {
               max-height: 70vh;
               max-width: 70vw;
               cursor: pointer;
+              border-radius: $border-r;
             }
           }
         }
@@ -161,6 +165,7 @@
             padding-top: 3px;
             img {
               width: 100%;
+              border-radius: $border-r;
             }
           }
 
@@ -243,6 +248,7 @@
               margin-right: 0;
               cursor: pointer;
               z-index: 10000;
+              border-radius: $border-r;
               
               &.active {
                 background: $button-color;
@@ -356,6 +362,7 @@
                 height: 25px;
                 width: 25px;
                 margin-right: .5rem;
+                border-radius: $border-r;
               }
               
               h2 {
@@ -391,6 +398,7 @@
                 border: $border-thickness solid $button-color;
                 margin-right: .7rem;
                 cursor: pointer;
+                border-radius: $border-r;
 
                 &.active {
                   display: flex;
@@ -414,6 +422,7 @@
             top: -2.1rem;
             right: 0px;
             z-index: 10000;
+            border-radius: $border-r;
 
             i {
               font-size: 1.2rem;

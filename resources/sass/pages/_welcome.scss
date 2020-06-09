@@ -42,6 +42,7 @@
             align-items: center;
             margin-top: 3rem;
             width: 100%;
+            border-radius: $border-r;
             
             .button {
                 color: white;
@@ -54,6 +55,7 @@
                 font-weight: 700;
                 cursor: pointer;
                 transition: all .2s ease;
+                border-radius: $border-r;
                 ::selection {
                     display: none;
                 }
@@ -92,6 +94,7 @@
             .register {
                 color: $welcome-color;
                 transition: all .2s ease;
+                border-radius: $border-r;
                 @media (hover: hover) {
                     &:hover {
                         color: $primary-font-color;

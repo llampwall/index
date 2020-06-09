@@ -99,6 +99,7 @@ class PostController {
             file = request.input('img_name')
             url = `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${file}`
         }
+
         if (request.input('link_url') != null) {
             link_u = request.input('link_url')
             link_t = request.input('link_title')

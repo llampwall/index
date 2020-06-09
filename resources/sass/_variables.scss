@@ -117,9 +117,8 @@ $right-menu-icons: $accents;
 $compose-bg: $third;
 $post-header-bg: $secondary;
 $post-bg: $secondary;
-*{
-  border-radius: 3px !important;
-}
+$border-r: 3px;
+
 #left-menu {
   background: linear-gradient(145deg, #1b1b22, #0c0c13) !important;
   .groups {
@@ -140,7 +139,7 @@ $post-bg: $secondary;
     background: transparent !important;
   }
 }
-#all-posts .post-container .post,
+// #all-posts .post-container .post,
 #compose textarea#content {
   border-radius: 11px !important;
   background: linear-gradient(145deg, #171720, #1b1c27) !important;
