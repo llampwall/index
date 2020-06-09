@@ -3,8 +3,19 @@ import React, { Component} from 'react'
 export default class SearchHeader extends Component {
   constructor () {
     super()
-    this.state = { 
+    this.state = {
     }
+  }
+
+  updateSearch = (event) => {
+    const name = event.target.name
+    const value = event.target.value
+
+    this.setState({
+      [name]: value
+    }, () => {
+      this.props.searchQuery(value)
+    })
   }
 
   render () {
@@ -18,7 +29,7 @@ export default class SearchHeader extends Component {
                 <a href="/">
                   <img src="/img/index_orange.png" />
                 </a>
-                <input type="text" name="search" placeholder="search..." />
+                <input type="text" name="search" placeholder="search..." onChange={this.updateSearch} />
             </div>
             {/* <div className="icons">
                 <i className="ayn-bell-alt" />

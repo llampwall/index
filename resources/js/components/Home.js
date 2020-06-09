@@ -56,6 +56,10 @@ export default class Home extends Component {
   //   this.postAreaRef.current.getNew()
   // }
 
+  search = (query) => {
+    this.postAreaRef.current && this.postAreaRef.current.updateQuery(query)
+  }
+
   render () {
     if (this.props.user == undefined) {
       return (

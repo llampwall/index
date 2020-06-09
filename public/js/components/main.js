@@ -14,7 +14,7 @@ var _extends2 = __webpack_require__(83);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _defineProperty2 = __webpack_require__(156);
+var _defineProperty2 = __webpack_require__(110);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -878,6 +878,10 @@ var Home = function (_Component) {
         }
       }, _callee, _this2);
     }));
+
+    _this.search = function (query) {
+      _this.postAreaRef.current && _this.postAreaRef.current.updateQuery(query);
+    };
 
     _this.state = {};
 
@@ -2022,6 +2026,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = __webpack_require__(110);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _classCallCheck2 = __webpack_require__(16);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -2052,6 +2060,15 @@ var SearchHeader = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (SearchHeader.__proto__ || Object.getPrototypeOf(SearchHeader)).call(this));
 
+    _this.updateSearch = function (event) {
+      var name = event.target.name;
+      var value = event.target.value;
+
+      _this.setState((0, _defineProperty3.default)({}, name, value), function () {
+        _this.props.searchQuery(value);
+      });
+    };
+
     _this.state = {};
     return _this;
   }
@@ -2075,7 +2092,7 @@ var SearchHeader = function (_Component) {
             { href: "/" },
             _react2.default.createElement("img", { src: "/img/index_orange.png" })
           ),
-          _react2.default.createElement("input", { type: "text", name: "search", placeholder: "search..." })
+          _react2.default.createElement("input", { type: "text", name: "search", placeholder: "search...", onChange: this.updateSearch })
         )
       );
     }
@@ -2097,7 +2114,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(156);
+var _defineProperty2 = __webpack_require__(110);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2609,7 +2626,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(156);
+var _defineProperty2 = __webpack_require__(110);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -3436,6 +3453,10 @@ var PostArea = function (_Component) {
       }
     };
 
+    _this.updateQuery = function (query) {
+      _this._isMounted && _this.setState({ query: query });
+    };
+
     _this.removePost = function (id) {
       var newPosts = _this.state.posts.filter(function (post) {
         return post.id != id;
@@ -3461,7 +3482,8 @@ var PostArea = function (_Component) {
       last: false,
       posts: [],
       prevY: 0,
-      showBtn: false
+      showBtn: false,
+      query: ""
     };
     _this._isMounted = false;
     _this._isFetching = false;
@@ -3700,6 +3722,10 @@ var Layout = function (_Component) {
       }
     };
 
+    _this.search = function (query) {
+      _this.homeRef.current && _this.homeRef.current.search(query);
+    };
+
     _this.state = {
       user: {}
     };
@@ -3778,9 +3804,18 @@ var Layout = function (_Component) {
 
   }, {
     key: 'componentWillUnmount',
+
+
+    // clean up chat
     value: function componentWillUnmount() {
       this.ws.close();
     }
+
+    // open left menu
+
+
+    // open right menu
+
   }, {
     key: 'render',
     value: function render() {
@@ -3797,7 +3832,7 @@ var Layout = function (_Component) {
           _react2.default.createElement(
             'section',
             { id: 'content-container' },
-            _react2.default.createElement(_SearchHeader2.default, null),
+            _react2.default.createElement(_SearchHeader2.default, { searchQuery: this.search }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: function component(props) {
                 return _react2.default.createElement(_Home2.default, { routeProps: props, user: _this2.state.user, ws: _this2.ws, ref: _this2.homeRef, single: false });
               } }),

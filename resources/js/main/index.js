@@ -88,21 +88,27 @@ class Layout extends Component {
     document.getElementsByClassName('notify')[0].classList.remove('active')
   }
 
-
+  // clean up chat
   componentWillUnmount() {
     this.ws.close()
   }
 
+  // open left menu
   openLeft = () => {
     if (this.msgRef.current.state.open && window.innerWidth <= 800) {
       this.msgRef.current.close()
     }
   }
 
+  // open right menu
   openRight = () => {
     if (this.leftRef.current.state.open && window.innerWidth <= 800) {
       this.leftRef.current.close()
     }
+  }
+
+  search = (query) => {
+    this.homeRef.current && this.homeRef.current.search(query)
   }
 
 
@@ -117,7 +123,7 @@ class Layout extends Component {
 
           <section id="content-container">
 
-            <SearchHeader />
+            <SearchHeader searchQuery={this.search}/>
             <Route exact path="/" component={ (props) => <Home routeProps={props} user={this.state.user} ws={this.ws} ref={this.homeRef} single={false}/> }/>
             <Route exact path="/post/:id" component={ (props) => <Home routeProps={props} user={this.state.user} ws={this.ws} ref={this.homeRef} single={true}/> }/>
             <Route exact path="/profile/:id" component={ (props) => <Profile routeProps={props} user={this.state.user}/> }/>

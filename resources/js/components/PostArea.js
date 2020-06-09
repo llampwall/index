@@ -10,7 +10,8 @@ export default class PostArea extends Component {
       last: false,
       posts: [],
       prevY: 0,
-      showBtn: false
+      showBtn: false,
+      query: ""
     }
     this._isMounted = false
     this._isFetching = false
@@ -124,6 +125,10 @@ export default class PostArea extends Component {
     } catch (error) {
       console.log("error fetching next page: " + error)
     }
+  }
+
+  updateQuery = (query) => {
+    this._isMounted && this.setState({query})
   }
 
   // for when a post is deleted
