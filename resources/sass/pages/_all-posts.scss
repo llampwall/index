@@ -43,6 +43,7 @@
         font-family: $main-font;
         z-index: 3;
         border-radius: $border-r;
+        background: $post-bg;
 
         .post-header {
           background: $post-header-bg;
@@ -193,7 +194,6 @@
         
         .post-info {
           border-bottom: none;
-          background: $post-bg;
           width: 100%;
           margin: 0 auto 0;
           z-index: -10;
@@ -218,7 +218,6 @@
             font-size: 1.2rem;
             word-wrap: break-word;
             padding: 1rem 1rem;
-            background: $post-bg;
             color: $lr-menu-headers;
             transition: all .3s ease-in-out;
             cursor: pointer;
@@ -227,7 +226,6 @@
         }
 
         .post-stats {
-          background: $post-bg;
           width: 100%;
           margin: 0 auto;
           display: flex;
@@ -279,7 +277,6 @@
 
         .c-section {
           width: 100%;
-          background: $post-bg;
           border-top: $border-thickness solid $border-color;
           padding: 0;
           z-index: 1;
@@ -292,7 +289,8 @@
             border: none;
             padding: .5rem 2.5rem .5rem 1rem;
             border-bottom: $border-thickness solid $border-color;
-            background: $write-comment-bg;
+            // background: $write-comment-bg;
+            background: transparent;
             color: $primary-font-color;
             transition: all .3s ease;
             font-size: 14px;
@@ -318,7 +316,7 @@
           display: flex;
           justify-content: space-between;
           padding: .5rem;
-          background: $post-bg;
+          // background: $post-bg;
           position: relative;
           border-top: none;
 
@@ -329,7 +327,7 @@
             flex-direction: column;
             
             .single-comment {
-              background: $comment-bg;
+              // background: $comment-bg;
               display: flex;
               width: 100%;
               min-height: 25px;
@@ -337,7 +335,7 @@
               position: relative;
 
               &:nth-of-type(2n){
-                background: $comment-bg;
+                // background: $comment-bg;
               }
 
               &:not(:last-of-type) {
