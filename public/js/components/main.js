@@ -570,7 +570,7 @@ var Post = function (_Component) {
       if (_this.state.user.id == _this.props.curuser.id || _this.props.curuser.id == 1) {
         return _react2.default.createElement(
           'div',
-          { style: { display: "flex", marginLeft: "auto" } },
+          { className: 'right-header', style: { display: "flex" } },
           _react2.default.createElement(
             'div',
             { className: 'del-btn active', onClick: _this.deletePost },
