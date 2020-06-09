@@ -1799,7 +1799,7 @@ var _axios = __webpack_require__(39);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactTransitionGroup = __webpack_require__(570);
+var _reactTransitionGroup = __webpack_require__(571);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2591,6 +2591,10 @@ var _axios = __webpack_require__(39);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _browserImageCompression = __webpack_require__(533);
+
+var _browserImageCompression2 = _interopRequireDefault(_browserImageCompression);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // should really generalize and save this component as an axios image uploader
@@ -2973,23 +2977,87 @@ var Compose = function (_Component) {
       fileElem.click();
     };
 
-    _this.getImage = function (event) {
+    _this.getImage = function () {
+      var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6(event) {
+        var userFile, options, compressedFile;
+        return _regenerator2.default.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                if (!event.target.files[0]) {
+                  _context6.next = 23;
+                  break;
+                }
 
-      if (event.target.files[0]) {
+                userFile = event.target.files[0];
 
-        // reject files over 5mb
-        if (event.target.files[0].size / 1024 / 1024 > 3) {
-          alert('Sorry, media files are limited to 3mb in size.');
-          return false;
-        } else {
-          _this.setState((0, _extends3.default)({}, _this.state, {
-            image: event.target.files[0]
-          }), function () {
-            // console.log(this.state)
-          });
-        }
-      }
-    };
+                // reject files over 5mb
+
+                if (!(userFile.size / 1024 / 1024 > 10)) {
+                  _context6.next = 7;
+                  break;
+                }
+
+                alert('Sorry, media files are limited to 10MB.');
+                return _context6.abrupt('return', false);
+
+              case 7:
+                if (!(userFile.type.substring(0, 5) == "image")) {
+                  _context6.next = 22;
+                  break;
+                }
+
+                _context6.prev = 8;
+                options = {
+                  maxSizeMB: 1,
+                  maxWidthOrHeight: 1920,
+                  useWebWorker: true
+                };
+                _context6.next = 12;
+                return (0, _browserImageCompression2.default)(userFile, options);
+
+              case 12:
+                compressedFile = _context6.sent;
+
+                // console.log('compressedFile instanceof Blob', compressedFile instanceof Blob) // true
+                console.log('compressedFile size ' + compressedFile.size / 1024 / 1024 + ' MB'); // smaller than maxSizeMB
+
+                _this.setState({
+                  image: compressedFile
+                });
+
+                _context6.next = 20;
+                break;
+
+              case 17:
+                _context6.prev = 17;
+                _context6.t0 = _context6['catch'](8);
+
+                console.log("Error compressing image: " + _context6.t0);
+
+              case 20:
+                _context6.next = 23;
+                break;
+
+              case 22:
+                // video file
+
+                _this.setState({
+                  image: userFile
+                });
+
+              case 23:
+              case 'end':
+                return _context6.stop();
+            }
+          }
+        }, _callee6, _this2, [[8, 17]]);
+      }));
+
+      return function (_x4) {
+        return _ref7.apply(this, arguments);
+      };
+    }();
 
     _this.removeImage = function () {
       _this.setState((0, _extends3.default)({}, _this.state, {

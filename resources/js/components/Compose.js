@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import imageCompression from 'browser-image-compression';
 
 // should really generalize and save this component as an axios image uploader
 // even has a preview window for the selected image file
@@ -227,23 +228,47 @@ export default class Compose extends Component {
     fileElem.click()
   }
 
-  getImage = (event) => {
+  getImage = async (event) => {
 
     if (event.target.files[0]) {
 
-      // reject files over 5mb
-      if (event.target.files[0].size/1024/1024 > 3) {
-        alert('Sorry, media files are limited to 3mb in size.')
-        return false
-      }
+      let userFile = event.target.files[0]
 
-      else  {
-        this.setState({
-          ...this.state,
-          image: event.target.files[0]
-        }, () => {
-          // console.log(this.state)
-        })
+      // reject files over 5mb
+      if (userFile.size/1024/1024 > 10) {
+        alert('Sorry, media files are limited to 10MB.')
+        return false
+      
+      } else  {
+
+        if (userFile.type.substring(0,5) == "image") {
+
+          // compress the image
+          try {
+            const options = {
+              maxSizeMB: 1,
+              maxWidthOrHeight: 1920,
+              useWebWorker: true
+            }
+            const compressedFile = await imageCompression(userFile, options)
+            // console.log('compressedFile instanceof Blob', compressedFile instanceof Blob) // true
+            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`) // smaller than maxSizeMB
+
+            this.setState({
+              image: compressedFile
+            })
+            
+          } catch (error) {
+            console.log("Error compressing image: " + error)
+          }
+
+        } else {    // video file
+
+          this.setState({
+            image: userFile
+          })
+
+        }
       }
     }
     
