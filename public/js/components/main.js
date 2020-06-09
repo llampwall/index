@@ -146,8 +146,8 @@ var Post = function (_Component) {
       v.getPalette().then(function (palette) {
         var post = document.getElementById('post' + _this.props.post.id);
         // console.log(palette.Vibrant.hex)
-        var dark = _this.pSBC(-.2, palette.DarkVibrant.hex); // get 20% darker/lighter version of swatch
-        var light = _this.pSBC(.2, palette.DarkVibrant.hex);
+        var dark = _this.pSBC(-.6, palette.DarkMuted.hex); // get 20% darker/lighter version of swatch
+        var light = _this.pSBC(-.5, palette.Vibrant.hex);
         dark = _this.pSBC(0, dark, "c", true); // convert to rgb
         light = _this.pSBC(0, light, "c", true);
         // var darka = "rgba" + dark.substr(3, dark.length-4) + ",.4)"      // convert to rgba with 50% opacity
@@ -155,7 +155,7 @@ var Post = function (_Component) {
         // var bs = `8px 8px 10px ${darka}, -8px -8px 10px ${lighta}`
         // post.style.boxShadow = bs
 
-        var bc = 'linear-gradient(145deg, ' + light + ', ' + dark + ')';
+        var bc = 'linear-gradient(145deg, ' + dark + ', ' + light + ')';
         post.style.background = bc;
       });
     };

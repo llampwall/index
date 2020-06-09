@@ -139,7 +139,10 @@ $border-r: 3px;
     background: transparent !important;
   }
 }
-// #all-posts .post-container .post,
+#all-posts .post-container .post {
+  box-shadow:  12px 12px 20px #12121a, 
+              -12px -12px 20px #20222e !important;
+}
 #compose textarea#content {
   border-radius: 11px !important;
   background: linear-gradient(145deg, #171720, #1b1c27) !important;
