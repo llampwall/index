@@ -22,8 +22,13 @@ export default class PostArea extends Component {
     const self = this
     this._isMounted = true
     this._isFetching = true
+
     try {
-      axios.get(`/posts/from/${this.state.start}`)
+      axios.get(`/posts/from/${self.state.start}`, {
+        params: {
+          q: self.state.query
+        }
+      })
       .then((res) => {
         // console.log(res)
         if (self._isMounted) {
@@ -78,7 +83,11 @@ export default class PostArea extends Component {
 
     this._isFetching = true
     try {
-      axios.get(`/posts/from/${this.state.posts.length}`)
+      axios.get(`/posts/from/${self.state.posts.length}`, {
+        params: {
+          q: self.state.query
+        }
+      })
       .then((res) => {
         var isLast = (res.data.length == 0)
         if (self._isMounted) {
@@ -110,25 +119,52 @@ export default class PostArea extends Component {
     
     this._isFetching = true
     try {
-      axios.get(`/posts/new/${this.state.posts[0].id}`)
+      axios.get(`/posts/new/${self.state.posts[0].id}`)
       .then((res) => {
         // console.log(res)
         let diff = res.data.length
 
-        this._isMounted && self.setState({
-          start: this.state.start + diff,
-          posts: [...res.data, ...this.state.posts],
+        self._isMounted && self.setState({
+          start: self.state.start + diff,
+          posts: [...res.data, ...self.state.posts],
           // page: newPage
         })
-        this._isFetching = false
+        self._isFetching = false
       })
     } catch (error) {
       console.log("error fetching next page: " + error)
     }
   }
 
+  // search for a query as user types
   updateQuery = (query) => {
-    this._isMounted && this.setState({query})
+    const self = this
+
+    if (this._isFetching && query != "") {              // rate limiting requests, but not if query is empty
+      return
+    }
+    this._isMounted && this.setState({query}, () => {
+      self._isFetching = true
+      try {
+        axios.get(`/posts/from/0`, {
+          params: {
+            q: self.state.query
+          }
+        })
+        .then((res) => {
+          console.log(res)
+          if (self._isMounted) {
+            self.setState({
+              posts: res.data
+            })
+            setTimeout(() => {self._isFetching = false}, 500)   // rate limiting fetch requests to every half second
+          }
+        })
+      } catch (error) {
+        console.log("error fetching next page: " + error)
+      }
+    })
+    self._isFetching = false
   }
 
   // for when a post is deleted

@@ -38,17 +38,36 @@ class PostController {
     // get next 20 posts
     async nextPage({request, response}) {
         const start = parseInt(request.params.start)
-        try {
-            const results = await Database
-                .from('posts')
-                .orderBy('posts.created_at', 'desc')
-                .offset(start)
-                .limit(20)
-            // console.log(results)
-            return results
-        } catch (error) {
-            console.log(error)
-        }        
+        const q = request.qs.q
+
+        if (q && q != "") {     // keyword search
+            console.log(q)
+            try {
+                const results = await Database
+                    .from('posts')
+                    .where('posts.content', 'like', ` %${q}% `)            // only 2 letters is working
+                    .orderBy('posts.created_at', 'desc')
+                    .offset(start)
+                    .limit(20)
+                // console.log(results)
+                return results
+            } catch (error) {
+                console.log(error)
+            }   
+
+        } else {                // no search term
+            try {
+                const results = await Database
+                    .from('posts')
+                    .orderBy('posts.created_at', 'desc')
+                    .offset(start)
+                    .limit(20)
+                // console.log(results)
+                return results
+            } catch (error) {
+                console.log(error)
+            }        
+        }
     }
 
     // get all new posts 
@@ -126,10 +145,15 @@ class PostController {
         // console.log(pType)
         // console.log(url)
         
+        // remove extra spaces and newlines
+        let content = request.input('content').trim()
+        content = content.replace(/(\r\n|\n|\r)/gm,"")
+        console.log(content)
+
         // save post to db
         try {
             const newPost = await Post.create({
-                content: request.input('content'),
+                content: content,
                 user_id: request.input('user_id'),
                 image_url: url,
                 type: pType,

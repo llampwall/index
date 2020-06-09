@@ -3406,7 +3406,11 @@ var PostArea = function (_Component) {
 
       _this._isFetching = true;
       try {
-        _axios2.default.get('/posts/from/' + _this.state.posts.length).then(function (res) {
+        _axios2.default.get('/posts/from/' + self.state.posts.length, {
+          params: {
+            q: self.state.query
+          }
+        }).then(function (res) {
           var isLast = res.data.length == 0;
           if (self._isMounted) {
             self.setState({
@@ -3437,16 +3441,16 @@ var PostArea = function (_Component) {
 
       _this._isFetching = true;
       try {
-        _axios2.default.get('/posts/new/' + _this.state.posts[0].id).then(function (res) {
+        _axios2.default.get('/posts/new/' + self.state.posts[0].id).then(function (res) {
           // console.log(res)
           var diff = res.data.length;
 
-          _this._isMounted && self.setState({
-            start: _this.state.start + diff,
-            posts: [].concat((0, _toConsumableArray3.default)(res.data), (0, _toConsumableArray3.default)(_this.state.posts))
+          self._isMounted && self.setState({
+            start: self.state.start + diff,
+            posts: [].concat((0, _toConsumableArray3.default)(res.data), (0, _toConsumableArray3.default)(self.state.posts))
             // page: newPage
           });
-          _this._isFetching = false;
+          self._isFetching = false;
         });
       } catch (error) {
         console.log("error fetching next page: " + error);
@@ -3454,7 +3458,35 @@ var PostArea = function (_Component) {
     };
 
     _this.updateQuery = function (query) {
-      _this._isMounted && _this.setState({ query: query });
+      var self = _this;
+
+      if (_this._isFetching && query != "") {
+        // rate limiting requests, but not if query is empty
+        return;
+      }
+      _this._isMounted && _this.setState({ query: query }, function () {
+        self._isFetching = true;
+        try {
+          _axios2.default.get('/posts/from/0', {
+            params: {
+              q: self.state.query
+            }
+          }).then(function (res) {
+            console.log(res);
+            if (self._isMounted) {
+              self.setState({
+                posts: res.data
+              });
+              setTimeout(function () {
+                self._isFetching = false;
+              }, 500); // rate limiting fetch requests to every half second
+            }
+          });
+        } catch (error) {
+          console.log("error fetching next page: " + error);
+        }
+      });
+      self._isFetching = false;
     };
 
     _this.removePost = function (id) {
@@ -3497,8 +3529,13 @@ var PostArea = function (_Component) {
       var self = this;
       this._isMounted = true;
       this._isFetching = true;
+
       try {
-        _axios2.default.get('/posts/from/' + this.state.start).then(function (res) {
+        _axios2.default.get('/posts/from/' + self.state.start, {
+          params: {
+            q: self.state.query
+          }
+        }).then(function (res) {
           // console.log(res)
           if (self._isMounted) {
             self.setState({
@@ -3538,6 +3575,9 @@ var PostArea = function (_Component) {
 
 
     // gets all new posts when someone else posts
+
+
+    // search for a query as user types
 
 
     // for when a post is deleted
