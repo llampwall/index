@@ -113,6 +113,7 @@
           width: 100%;
           padding-top: 1px;
           image-orientation: from-image;
+          object-fit: cover;
           border-bottom: $border-thickness solid $border-color;
           margin: 0 auto;
           transition: all .3s ease;
