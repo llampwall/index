@@ -2977,11 +2977,17 @@ var Compose = function (_Component) {
 
       if (event.target.files[0]) {
 
-        _this.setState((0, _extends3.default)({}, _this.state, {
-          image: event.target.files[0]
-        }), function () {
-          // console.log(this.state)
-        });
+        // reject files over 5mb
+        if (event.target.files[0].size / 1024 / 1024 > 3) {
+          alert('Sorry, media files are limited to 3mb in size.');
+          return false;
+        } else {
+          _this.setState((0, _extends3.default)({}, _this.state, {
+            image: event.target.files[0]
+          }), function () {
+            // console.log(this.state)
+          });
+        }
       }
     };
 

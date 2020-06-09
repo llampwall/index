@@ -231,12 +231,20 @@ export default class Compose extends Component {
 
     if (event.target.files[0]) {
 
-      this.setState({
-        ...this.state,
-        image: event.target.files[0]
-      }, () => {
-        // console.log(this.state)
-      })
+      // reject files over 5mb
+      if (event.target.files[0].size/1024/1024 > 3) {
+        alert('Sorry, media files are limited to 3mb in size.')
+        return false
+      }
+
+      else  {
+        this.setState({
+          ...this.state,
+          image: event.target.files[0]
+        }, () => {
+          // console.log(this.state)
+        })
+      }
     }
     
   }
