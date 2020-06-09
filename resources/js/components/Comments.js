@@ -64,6 +64,8 @@ export default class Comments extends Component {
     }
   }
 
+  /// this is from when it showed the user's last name
+  // <h2>{`${user.fname}${(user.lname == null) ? "" : " "}${(user.lname == null) ? "" : user.lname}: `}</h2>
 
   showComments = () => {
     return (
@@ -80,7 +82,7 @@ export default class Comments extends Component {
                           backgroundRepeat: 'no-repeat', 
                           backgroundSize: 'cover'}}>
                     </div>
-                    <h2>{`${user.fname}${(user.lname == null) ? "" : " "}${(user.lname == null) ? "" : user.lname}: `}</h2>
+                    <h2>{`${user.fname}: `}</h2>
                   </a>
                   <p>{comment.content}</p>
                   {this.showDelBtn(user, id)}

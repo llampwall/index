@@ -150,13 +150,16 @@ var Post = function (_Component) {
         var light = _this.pSBC(-.5, palette.Vibrant.hex);
         dark = _this.pSBC(0, dark, "c", true); // convert to rgb
         light = _this.pSBC(0, light, "c", true);
+
         // var darka = "rgba" + dark.substr(3, dark.length-4) + ",.4)"      // convert to rgba with 50% opacity
         // var lighta = "rgba" + light.substr(3, light.length-4) + ",.4)"
-        // var bs = `8px 8px 10px ${darka}, -8px -8px 10px ${lighta}`
+        // var bs = `0px 0px 5px 10px ${lighta}`
         // post.style.boxShadow = bs
 
         var bc = 'linear-gradient(145deg, ' + dark + ', ' + light + ')';
         post.style.background = bc;
+
+        post.style.border = '2px solid ' + light;
       });
     };
 
@@ -567,8 +570,13 @@ var Post = function (_Component) {
       if (_this.state.user.id == _this.props.curuser.id || _this.props.curuser.id == 1) {
         return _react2.default.createElement(
           'div',
-          { className: 'del-btn active', onClick: _this.deletePost },
-          _react2.default.createElement('i', { className: 'ayn-trash' })
+          { style: { display: "flex", marginLeft: "auto" } },
+          _react2.default.createElement(
+            'div',
+            { className: 'del-btn active', onClick: _this.deletePost },
+            _react2.default.createElement('i', { className: 'ayn-trash' })
+          ),
+          _react2.default.createElement('div', { style: { width: "5px" } })
         );
       }
     };
@@ -632,6 +640,9 @@ var Post = function (_Component) {
 
 
     // pulls color data from the image in the post and sets box shadow
+
+
+    // color utility function for lightening/darkening/converting
 
 
     // dont really need this because we are just lying and saying its mp4 anyway
@@ -2059,7 +2070,11 @@ var SearchHeader = function (_Component) {
         _react2.default.createElement(
           "div",
           { className: "search" },
-          _react2.default.createElement("img", { src: "/img/index_orange.png" }),
+          _react2.default.createElement(
+            "a",
+            { href: "/" },
+            _react2.default.createElement("img", { src: "/img/index_orange.png" })
+          ),
           _react2.default.createElement("input", { type: "text", name: "search", placeholder: "search..." })
         )
       );
@@ -2514,7 +2529,7 @@ var Comments = function (_Component) {
             _react2.default.createElement(
               'h2',
               null,
-              '' + user.fname + (user.lname == null ? "" : " ") + (user.lname == null ? "" : user.lname) + ': '
+              user.fname + ': '
             )
           ),
           _react2.default.createElement(
@@ -2550,6 +2565,10 @@ var Comments = function (_Component) {
 
 
     // only show for logged in user
+
+
+    /// this is from when it showed the user's last name
+    // <h2>{`${user.fname}${(user.lname == null) ? "" : " "}${(user.lname == null) ? "" : user.lname}: `}</h2>
 
   }, {
     key: 'render',

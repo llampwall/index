@@ -111,16 +111,20 @@ export default class Post extends Component {
       var light = this.pSBC( -.5, palette.Vibrant.hex)
       dark = this.pSBC( 0, dark, "c", true )                              // convert to rgb
       light = this.pSBC( 0, light, "c", true )
+
       // var darka = "rgba" + dark.substr(3, dark.length-4) + ",.4)"      // convert to rgba with 50% opacity
       // var lighta = "rgba" + light.substr(3, light.length-4) + ",.4)"
-      // var bs = `8px 8px 10px ${darka}, -8px -8px 10px ${lighta}`
+      // var bs = `0px 0px 5px 10px ${lighta}`
       // post.style.boxShadow = bs
 
       var bc = `linear-gradient(145deg, ${dark}, ${light})`
       post.style.background = bc
+
+      post.style.border = `2px solid ${light}`
     })
   }
 
+  // color utility function for lightening/darkening/converting
   pSBC = (p,c0,c1,l) => {
     let r,g,b,P,f,t,h,i=parseInt,m=Math.round,a=typeof(c1)=="string";
     if(typeof(p)!="number"||p<-1||p>1||typeof(c0)!="string"||(c0[0]!='r'&&c0[0]!='#')||(c1&&!a))return null;
@@ -408,7 +412,10 @@ export default class Post extends Component {
   showDelBtn = () => {
     if (this.state.user.id == this.props.curuser.id || this.props.curuser.id == 1) {
       return (
-        <div className={`del-btn active`} onClick={this.deletePost}><i className="ayn-trash"></i></div>
+        <div style={{display: "flex", marginLeft: "auto"}}>
+          <div className={`del-btn active`} onClick={this.deletePost}><i className="ayn-trash"></i></div>
+          <div style={{width: "5px"}}></div>
+        </div>
       )
     }
   }

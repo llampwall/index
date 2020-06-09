@@ -21,7 +21,8 @@
       color: $primary-font-color;
       overflow: visible;
       transition: all .3s ease;
-      // border-radius: 7px;
+      border-radius: $border-r;
+
       &:focus {
         height: 80px;
       }
@@ -81,7 +82,7 @@
       right: -10px;
     }
     .send-btn {
-      bottom: 3px;
+      bottom: 0px;
       right: 0px;
     }
 
