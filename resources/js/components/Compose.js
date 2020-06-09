@@ -17,6 +17,8 @@ export default class Compose extends Component {
       linkImage: '',
       linkDesc: ''
     }
+
+    this._isUploading = false
   }
 
 
@@ -95,67 +97,79 @@ export default class Compose extends Component {
 
       // get signed url from the server
       try {
-          const file = self.state.image
-          const filename = file.name
-          const type = encodeURIComponent(file.type)
-          // console.log(filename)
-          // console.log(type)
+          // store the url in database
+          fData.append('img_name', self.state.image.name)
+          
+          const res = await axios({
+            method: 'post',
+            url: '/posts',
+            data: fData, 
+            headers: {'Content-Type': `multipart/form-data boundary=${fData._boundary}` }
+          }).then (function() {
+              self.setState({
+                postContent: "",
+                image: "", 
+                linkUrl: "",
+                linkTitle: "",
+                linkImage: "",
+                linkDesc: ""
+              })
+              document.getElementById("content").disabled = false   // enable input again
+              
+              // // update the feed
+              // self.props.update()
 
-          const response = await axios.get(`/posts/url/${filename}/${type}`)
-          .then (async function(response) {   
-            // console.log('signed url: ' + response.data)
+              //update everyone else's feed
+              const chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat')
+              chat.emit('message', {
+                update: 'all'
+              })
 
-            // upload file to s3
-            var options = {
-              headers: {
-                'Content-Type': file.type
-              }
-            }
-            axios.put(response.data, file, options)
-            .then(async function(response) {
-                console.log(response)
-                
-                // store the url in database
-                fData.append('img_name', self.state.image.name)
-                
-                const res = await axios({
-                  method: 'post',
-                  url: '/posts',
-                  data: fData, 
-                  headers: {'Content-Type': `multipart/form-data boundary=${fData._boundary}` }
-                }).then (function() {
-                  self.setState({
-                    postContent: "",
-                    image: "", 
-                    linkUrl: "",
-                    linkTitle: "",
-                    linkImage: "",
-                    linkDesc: ""
-                  })
-                  document.getElementById("content").disabled = false   // enable input again
-                  
-                  // // update the feed
-                  // self.props.update()
+              return 'item saved'
 
-                  //update everyone else's feed
-                  const chat = self.props.ws.getSubscription('chat') || self.props.ws.subscribe('chat')
-                  chat.emit('message', {
-                    update: 'all'
-                  })
-
-                  return 'item saved'
-                })
-              }).catch(function(err) {
+          }).catch(function(err) {
                 console.log('upload failed: ' + err)
-            })
-
-        })
+          })
       } catch (error) {
         console.log("axios didnt work: " + error)
       }
     }
   }
 
+  // upload the file to the server
+  uploadFile = async () => {
+    const self = this
+
+    this._isUploading = true
+    // get signed url from the server
+    try {
+      const file = self.state.image
+      const filename = file.name
+      const type = encodeURIComponent(file.type)
+      // console.log(filename)
+      // console.log(type)
+
+      const response = await axios.get(`/posts/url/${filename}/${type}`)
+      .then (async function(response) {   
+        // console.log('signed url: ' + response.data)
+
+        // upload file to s3
+        var options = {
+          headers: {
+            'Content-Type': file.type
+          }
+        }
+        axios.put(response.data, file, options)
+        .then(async function(response) {
+            console.log(response)
+            self._isUploading = false
+        })
+      })
+    } catch (error) {
+      console.log("failed to upload file: " + error)
+    }
+    this._isUploading = false
+  }
 
   // check if a link is in the post and update it accordingly
   checkLink = async () => {
@@ -256,6 +270,10 @@ export default class Compose extends Component {
 
             this.setState({
               image: compressedFile
+            }, () => {
+
+              this.uploadFile()
+
             })
             
           } catch (error) {
