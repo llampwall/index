@@ -56,7 +56,7 @@ export default class PostArea extends Component {
     // observe the `loadingRef`
     if (this._isMounted && this.loadingRef.current) {
       this.observer.observe(this.loadingRef.current)
-      console.log('observing')
+      // console.log('observing')
     }
   }
 
@@ -66,7 +66,7 @@ export default class PostArea extends Component {
 
     const y = entities[0].boundingClientRect.y
     if (this.state.prevY > y) {
-      console.log('bottom')
+      // console.log('bottom')
       this.getNextPage()
     }
     this._isMounted && this.setState({ prevY: y })
@@ -157,7 +157,7 @@ export default class PostArea extends Component {
           }
         })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           if (self._isMounted) {
             self.setState({
               posts: res.data

@@ -41,7 +41,7 @@ class PostController {
         const q = request.qs.q
 
         if (q && q != "") {     // keyword search
-            console.log(q)
+            // console.log(q)
             try {
                 const results = await Database
                     .from('posts')

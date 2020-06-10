@@ -3395,7 +3395,7 @@ var PostArea = function (_Component) {
 
       var y = entities[0].boundingClientRect.y;
       if (_this.state.prevY > y) {
-        console.log('bottom');
+        // console.log('bottom')
         _this.getNextPage();
       }
       _this._isMounted && _this.setState({ prevY: y });
@@ -3476,7 +3476,7 @@ var PostArea = function (_Component) {
               q: self.state.query
             }
           }).then(function (res) {
-            console.log(res);
+            // console.log(res)
             if (self._isMounted) {
               self.setState({
                 posts: res.data
@@ -3561,7 +3561,7 @@ var PostArea = function (_Component) {
       // observe the `loadingRef`
       if (this._isMounted && this.loadingRef.current) {
         this.observer.observe(this.loadingRef.current);
-        console.log('observing');
+        // console.log('observing')
       }
     }
 
