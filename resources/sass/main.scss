@@ -246,7 +246,17 @@ input[type="password"] {
       height: 85vh;
 
       .header {
+        
+        a {
+          height: 50%;
+        }
+        
         .search {
+          width: 90%;
+          
+          img {
+            width: 100px;
+          }
           input[type="text"] {
             width: 75%;
             font-size: .9rem;
