@@ -3589,14 +3589,6 @@ var PostArea = function (_Component) {
 
   }, {
     key: 'render',
-
-
-    // make sure posts have sa
-    // uniqueId = () => {
-    //   return (Math.random().toString(36) + '00000000000000000').slice(2, 10);
-    // }
-
-
     value: function render() {
       var _this2 = this;
 

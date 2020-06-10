@@ -192,12 +192,6 @@ export default class PostArea extends Component {
     // this.setState({showBtn: false})
   }
 
-  // make sure posts have sa
-  // uniqueId = () => {
-  //   return (Math.random().toString(36) + '00000000000000000').slice(2, 10);
-  // }
-  
-
   render () {
     if (this.state.posts == undefined) {
       return (
