@@ -253,7 +253,7 @@ input[type="password"] {
         
         .search {
           width: 90%;
-          
+
           img {
             width: 100px;
           }
@@ -310,6 +310,17 @@ input[type="password"] {
 
       .post {
         margin-bottom: 1rem;
+      }
+
+      .post .backdrop {
+        padding: 10px;
+        .modal {
+          padding: 10px;
+          img {
+            max-height: 85vh;
+            max-width: 90vw;
+          }
+        }
       }
 
       .post-header {
