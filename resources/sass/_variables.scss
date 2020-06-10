@@ -121,9 +121,15 @@ $post-header-bg: transparent;
 $post-bg: $secondary;
 $border-r: 3px;
 
+$tron: true;      // SET TRUE FOR TRON MODE
+
 #left-menu {
   background: linear-gradient(145deg, #1b1b22, #0c0c13) !important;
-  opacity: .8;  //tron mode
+
+  @if $tron {
+    opacity: .8;
+  }
+
   .groups {
     .title {
       font-size: 1.2rem !important;
@@ -138,7 +144,11 @@ $border-r: 3px;
 }
 #messenger {
   background: linear-gradient(225deg, #18181f, #15151f) !important;
-  opacity: .8;  //tron mode
+  
+  @if $tron {
+    opacity: .8;
+  }
+
   .users {
     background: transparent !important;
   }
@@ -152,6 +162,9 @@ $border-r: 3px;
   background: linear-gradient(145deg, #171720, #1b1c27) !important;
   box-shadow:  12px 12px 20px #12121a, 
               -12px -12px 20px #20222e !important;
+  @if $tron {
+    opacity: .8 !important;
+  }
 }
 #left-menu .open-btn,
 #messenger .open-btn {
@@ -163,17 +176,26 @@ $border-r: 3px;
   }
 }
 #scroll-this.content-area {
-  // background: linear-gradient(225deg, #1b1c27, #171720) !important;
-  background: url(/img/sun_background.jpg) no-repeat center !important; //tron mode
-  background-size: cover !important;
+  @if $tron {
+    background: url(/img/sun_background.jpg) no-repeat center !important;
+    background-size: cover !important;
+  } @else {
+    background: linear-gradient(225deg, #1b1c27, #171720) !important;
+  }
 }
 #all-posts .post-container .post {
-  opacity: .8;
+  @if $tron {
+    opacity: .8;
+  }
 }
 
 // border stuff
 * {
-  // border: none !important;   //tron mode
+  @if $tron {
+    //borders for tron mode
+  } @else {
+    border: none !important;
+  }
 
   .app-container{
     border-top: 1px solid #2d2d2d !important;
