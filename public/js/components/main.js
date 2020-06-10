@@ -3460,10 +3460,14 @@ var PostArea = function (_Component) {
     _this.updateQuery = function (query) {
       var self = _this;
 
-      if (_this._isFetching && query != "") {
-        // rate limiting requests, but not if query is empty
-        return;
-      }
+      // if (this._isFetching && query != "") {              // rate limiting requests, but not if query is empty
+      //   if (self.fetchDelay) {
+      //     clearTimeout(self.fetchDelay)
+      //     self.fetchDelay = null
+      //     self.fetchDelay = setTimeout(() => {self.updateQuery(query)}, 500)
+      //   }
+      //   return
+      // }
       _this._isMounted && _this.setState({ query: query }, function () {
         self._isFetching = true;
         try {
@@ -3477,9 +3481,7 @@ var PostArea = function (_Component) {
               self.setState({
                 posts: res.data
               });
-              setTimeout(function () {
-                self._isFetching = false;
-              }, 500); // rate limiting fetch requests to every half second
+              // setTimeout(() => {self._isFetching = false}, 500)   // rate limiting fetch requests to every half second
             }
           });
         } catch (error) {

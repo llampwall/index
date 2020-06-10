@@ -140,9 +140,14 @@ export default class PostArea extends Component {
   updateQuery = (query) => {
     const self = this
 
-    if (this._isFetching && query != "") {              // rate limiting requests, but not if query is empty
-      return
-    }
+    // if (this._isFetching && query != "") {              // rate limiting requests, but not if query is empty
+    //   if (self.fetchDelay) {
+    //     clearTimeout(self.fetchDelay)
+    //     self.fetchDelay = null
+    //     self.fetchDelay = setTimeout(() => {self.updateQuery(query)}, 500)
+    //   }
+    //   return
+    // }
     this._isMounted && this.setState({query}, () => {
       self._isFetching = true
       try {
@@ -157,7 +162,7 @@ export default class PostArea extends Component {
             self.setState({
               posts: res.data
             })
-            setTimeout(() => {self._isFetching = false}, 500)   // rate limiting fetch requests to every half second
+            // setTimeout(() => {self._isFetching = false}, 500)   // rate limiting fetch requests to every half second
           }
         })
       } catch (error) {
