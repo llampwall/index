@@ -165,6 +165,7 @@ $border-r: 3px;
 #scroll-this.content-area {
   // background: linear-gradient(225deg, #1b1c27, #171720) !important;
   background: url(/img/sun_background.jpg) no-repeat center !important; //tron mode
+  background-size: cover !important;
 }
 #all-posts .post-container .post {
   opacity: .8;
