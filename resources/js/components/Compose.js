@@ -281,6 +281,10 @@ export default class Compose extends Component {
 
           this.setState({
             image: userFile
+          }, () => {
+
+            this.uploadFile()
+
           })
 
         }

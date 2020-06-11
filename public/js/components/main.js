@@ -131,7 +131,7 @@ var Post = function (_Component) {
       } else if (_this.props.post.type == 'video') {
         return _react2.default.createElement(
           'video',
-          { className: 'post-media', controls: true, muted: true, autoPlay: true, playsInline: true },
+          { className: 'post-media', controls: true, loop: true, muted: true, autoPlay: true, playsInline: true },
           _react2.default.createElement('source', { src: _this.props.post.image_url, type: 'video/mp4' }),
           'Your browser does not support html5 videos.'
         );
@@ -3209,6 +3209,9 @@ var Compose = function (_Component) {
 
                 _this.setState({
                   image: userFile
+                }, function () {
+
+                  _this.uploadFile();
                 });
 
               case 23:
