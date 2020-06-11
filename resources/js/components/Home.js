@@ -72,6 +72,10 @@ export default class Home extends Component {
       if (this.props.single && (this.state.post != undefined)) {
         return (
           <div className="content-area">
+            <video className="bg-video" loop muted autoPlay playsInline>
+              <source src="/img/tronloop.mp4" type='video/mp4'/>
+              Your browser does not support html5 videos.
+            </video>
             <section id="all-posts">
                 <div className="post-container">
                   <Post post={this.state.post} ws={this.props.ws} curuser={this.props.user} update={this.update}/>
@@ -82,6 +86,11 @@ export default class Home extends Component {
       } else {
         return (
           <div className="content-area" id="scroll-this">
+            
+              <video className="bg-video" loop muted autoPlay playsInline>
+                <source src="/img/tronloop.mp4" type='video/mp4'/>
+                Your browser does not support html5 videos.
+              </video>
             
               <Compose user={this.props.user} ws={this.props.ws}/>
               <PostArea routeProps={this.props.routeProps} user={this.props.user} ws={this.props.ws} ref={this.postAreaRef}/>

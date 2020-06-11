@@ -87,12 +87,28 @@
       height: calc(100vh - 57px);
       overflow: auto;
       scroll-behavior: smooth;
+      // display: flex;
+      // flex-direction: column;
       // position: fixed;
       // background: linear-gradient(-180deg, #1c252e, #212c37);
       // @include forest-gradient;
       // @include cotton-candy-gradient;
       // box-shadow: 5px 5px 5px 5px $shadow-color inset;
       &::-webkit-scrollbar {
+        display: none;
+      }
+
+      &.tron {
+        .bg-video {
+          display: block;
+        }
+      }
+
+      .bg-video {
+        align-self: center;
+        position: fixed;
+        // height: 100%;
+        width: 100%;
         display: none;
       }
     }
