@@ -156,6 +156,12 @@ $border-r: 3px;
     > * {
       background: transparent !important;
     }
+
+    .chat {
+      * {
+        background: transparent !important;
+      }
+    }
   }
 
   .users {
@@ -176,7 +182,8 @@ $border-r: 3px;
               -12px -12px 20px #20222e !important;
 
   &.tron {
-    opacity: .8 !important;
+    background: transparent !important;
+    backdrop-filter: brightness(40%);
   }
 }
 #left-menu .open-btn,
@@ -188,7 +195,7 @@ $border-r: 3px;
     color: #171720 !important;
   }
 }
-#scroll-this.content-area {
+.content-area {
   background: linear-gradient(225deg, #1b1c27, #171720) !important;
 
   &.tron {
@@ -196,9 +203,11 @@ $border-r: 3px;
     background-size: cover !important;
   }
 }
+
 #all-posts .post-container .post {
   &.tron  {
-    opacity: .9;
+    background: transparent !important;
+    backdrop-filter: brightness(40%);
   }
 }
 

@@ -1019,26 +1019,29 @@ var LeftMenu = function (_Component) {
       _this.setState({
         tron: event.target.checked
       }, function () {
+        var left = document.getElementById("left-menu");
+        var msg = document.getElementById("messenger");
+        var compose = document.getElementById("content");
+        var content = document.querySelector(".content-area");
+        var posts = document.querySelectorAll(".post");
         if (_this.state.tron) {
           // document.documentElement.style.setProperty('--tron', 1)
           document.body.classList.add("tron");
-          document.getElementById("left-menu").classList.add("tron");
-          document.getElementById("messenger").classList.add("tron");
-          document.getElementById("content").classList.add("tron");
-          document.getElementById("scroll-this").classList.add("tron");
-          var posts = document.querySelectorAll(".post");
-          posts.forEach(function (p) {
+          left && left.classList.add("tron");
+          msg && msg.classList.add("tron");
+          compose && compose.classList.add("tron");
+          content && content.classList.add("tron");
+          posts && posts.forEach(function (p) {
             return p.classList.add("tron");
           });
         } else {
           // document.documentElement.style.setProperty('--tron', 0)
           document.body.classList.remove("tron");
-          document.getElementById("left-menu").classList.remove("tron");
-          document.getElementById("messenger").classList.remove("tron");
-          document.getElementById("content").classList.remove("tron");
-          document.getElementById("scroll-this").classList.remove("tron");
-          var posts = document.querySelectorAll(".post");
-          posts.forEach(function (p) {
+          left && left.classList.remove("tron");
+          msg && msg.classList.remove("tron");
+          compose && compose.classList.remove("tron");
+          content && content.classList.remove("tron");
+          posts && posts.forEach(function (p) {
             return p.classList.remove("tron");
           });
         }
