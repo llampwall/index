@@ -73,8 +73,7 @@ export default class Home extends Component {
         return (
           <div className="content-area">
             <video className="bg-video" loop muted autoPlay playsInline>
-              <source src="/img/tronloop.mp4" type='video/mp4'/>
-              Your browser does not support html5 videos.
+              <source src="/img/tronloop1080.mp4" type='video/mp4'/>
             </video>
             <section id="all-posts">
                 <div className="post-container">
@@ -86,10 +85,9 @@ export default class Home extends Component {
       } else {
         return (
           <div className="content-area" id="scroll-this">
-            
+
               <video className="bg-video" loop muted autoPlay playsInline>
-                <source src="/img/tronloop.mp4" type='video/mp4'/>
-                Your browser does not support html5 videos.
+                <source src="/img/tronloop1080.mp4" type='video/mp4'/>
               </video>
             
               <Compose user={this.props.user} ws={this.props.ws}/>

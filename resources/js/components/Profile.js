@@ -101,6 +101,9 @@ export default class Profile extends Component {
       
       return (
         <div className="content-area profile-page">
+          <video className="bg-video" loop muted autoPlay playsInline>
+            <source src="/img/tronloop1080.mp4" type='video/mp4'/>
+          </video>
           <div className='cover'></div>
           <div className="user-img">
             <img src={this.state.image} />

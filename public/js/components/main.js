@@ -942,8 +942,7 @@ var Home = function (_Component) {
             _react2.default.createElement(
               'video',
               { className: 'bg-video', loop: true, muted: true, autoPlay: true, playsInline: true },
-              _react2.default.createElement('source', { src: '/img/tronloop.mp4', type: 'video/mp4' }),
-              'Your browser does not support html5 videos.'
+              _react2.default.createElement('source', { src: '/img/tronloop1080.mp4', type: 'video/mp4' })
             ),
             _react2.default.createElement(
               'section',
@@ -962,8 +961,7 @@ var Home = function (_Component) {
             _react2.default.createElement(
               'video',
               { className: 'bg-video', loop: true, muted: true, autoPlay: true, playsInline: true },
-              _react2.default.createElement('source', { src: '/img/tronloop.mp4', type: 'video/mp4' }),
-              'Your browser does not support html5 videos.'
+              _react2.default.createElement('source', { src: '/img/tronloop1080.mp4', type: 'video/mp4' })
             ),
             _react2.default.createElement(_Compose2.default, { user: this.props.user, ws: this.props.ws }),
             _react2.default.createElement(_PostArea2.default, { routeProps: this.props.routeProps, user: this.props.user, ws: this.props.ws, ref: this.postAreaRef })
@@ -2060,6 +2058,11 @@ var Profile = function (_Component) {
         return _react2.default.createElement(
           'div',
           { className: 'content-area profile-page' },
+          _react2.default.createElement(
+            'video',
+            { className: 'bg-video', loop: true, muted: true, autoPlay: true, playsInline: true },
+            _react2.default.createElement('source', { src: '/img/tronloop1080.mp4', type: 'video/mp4' })
+          ),
           _react2.default.createElement('div', { className: 'cover' }),
           _react2.default.createElement(
             'div',
