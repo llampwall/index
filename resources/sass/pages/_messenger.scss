@@ -157,7 +157,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: $border-thickness solid $button-color;
+      border: $border-thickness solid $border-color;
       @include hard-shadow;
       // background: transparent;
       background: $secondary;
@@ -203,6 +203,7 @@
       padding: 1px;
       z-index: 1000;
       transition: all .3s ease-in-out;
+      border: $border-thickness solid $border-color;
 
       &.min {
         height: 40px;
@@ -246,6 +247,7 @@
           font-size: 1.3rem;
           z-index: inherit;
           border-radius: $border-r;
+          border: $border-thickness solid $border-color;
 
           i {
             transform: rotateZ(0deg);
@@ -265,6 +267,7 @@
           font-size: 1.3rem;
           z-index: inherit;
           border-radius: $border-r;
+          border: $border-thickness solid $border-color;
           @media (hover: hover) {
             &:hover {
               color: red;
@@ -281,6 +284,8 @@
         padding: .5rem 1rem;
         z-index: inherit;
         transition: all .3s ease-in-out;
+        border-top: $border-thickness solid $border-color;
+        border-bottom: $border-thickness solid $border-color;
         // @include hard-shadow;
         &::-webkit-scrollbar {
           display: none;
@@ -343,6 +348,7 @@
           height: 30px;
           padding: 20px;
           border-radius: $border-r;
+          border: $border-thickness solid $border-color;
           // background: $secondary;
           cursor: pointer;
         }

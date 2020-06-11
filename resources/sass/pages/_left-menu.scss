@@ -87,7 +87,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: $border-thickness solid $button-color;
+      border: $border-thickness solid $border-color;
       @include hard-shadow;
       // background: transparent;
       background: $secondary;
@@ -122,17 +122,18 @@
       display: flex;
       width: 100%;
       margin-top: auto;
-      justify-items: right;
       align-items: center;
-
+      
       label {
-        margin-left: auto;
+        margin-right: auto;
         font-size: 10px;
         color: $accents;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 1rem;
       }
-      input[type="checkbox"] {
-        justify-self: flex-end;
-      }
+      
     }
 
     .logout {

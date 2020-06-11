@@ -131,7 +131,8 @@ $border-r: 3px;
   background: linear-gradient(145deg, #1b1b22, #0c0c13) !important;
 
   &.tron {
-    opacity: .8;
+    background: transparent !important;
+    backdrop-filter: brightness(40%);
   }
 
   .groups {
@@ -150,11 +151,18 @@ $border-r: 3px;
   background: linear-gradient(225deg, #18181f, #15151f) !important;
   
   &.tron {
-    opacity: .8;
+    background: transparent !important;
+    backdrop-filter: brightness(40%);
+    > * {
+      background: transparent !important;
+    }
   }
 
   .users {
     background: transparent !important;
+    .user {
+      background: transparent !important;
+    }
   }
 }
 // #all-posts .post-container .post {
@@ -190,7 +198,7 @@ $border-r: 3px;
 }
 #all-posts .post-container .post {
   &.tron  {
-    opacity: .8;
+    opacity: .9;
   }
 }
 

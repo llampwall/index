@@ -12,6 +12,7 @@ export default class Messenger extends Component {
       users_on: [],
       users_off: [],
       open: false, 
+      tron: false,
       connected: false,
       chatUser: null, 
       blinkIds: new Set(),
@@ -71,6 +72,10 @@ export default class Messenger extends Component {
     if (window.innerWidth <= 800) {
       this.props.open()
     }
+  }
+
+  tron = (on) => {
+    this.setState({tron: on})
   }
 
   close = () => {
@@ -378,7 +383,9 @@ export default class Messenger extends Component {
       )
     }
     return (
-      <section id="messenger" className={this.state.open ? "open" : "closed"}>
+      <section id="messenger" className={
+        `${this.state.open ? "open" : "closed"} ${this.state.tron ? "tron" : ""}`
+      }>
         <div className="messenger-header">
           <div className="messenger-icon">
             {/* <i className="ayn-paper-plane" /> */}

@@ -93,6 +93,10 @@ class Layout extends Component {
     this.ws.close()
   }
 
+  tron = (on) => {
+    this.msgRef.current && this.msgRef.current.tron(on)
+  }
+
   // open left menu
   openLeft = () => {
     if (this.msgRef.current.state.open && window.innerWidth <= 800) {
@@ -119,7 +123,7 @@ class Layout extends Component {
 
           <Loading active={(this.state.user != undefined) ? "" : 'active'}/>
 
-          <LeftMenu user={this.state.user} ws={this.ws} open={this.openLeft} ref={this.leftRef} />
+          <LeftMenu user={this.state.user} ws={this.ws} open={this.openLeft} tron={this.tron} ref={this.leftRef} />
 
           <section id="content-container">
 

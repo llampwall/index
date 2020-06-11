@@ -26,12 +26,13 @@
       .nothing {
         width: 116px;
       }
-      a {
+      > a {
         height: 70%;
         // margin-right: 1rem;
         img {
           height: 100%;
           border-radius: $border-r;
+          border: $border-thickness solid $border-color;
         }
       }
       .search {

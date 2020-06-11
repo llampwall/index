@@ -24,6 +24,7 @@ export default class LeftMenu extends Component {
 
   // tron mode enable/disable
   handleChange = (event) => {
+    const self = this;
     this.setState({
       tron: event.target.checked
     }, () => {
@@ -46,12 +47,14 @@ export default class LeftMenu extends Component {
         var posts = document.querySelectorAll(".post");
         posts.forEach((p) => p.classList.remove("tron"));
       }
-      
+      self.props.tron(self.state.tron)
     })
   }
 
   close = () => {
     this.setState({open: false})
+    document.getElementById("left-menu").classList.remove("open");
+    document.getElementById("left-menu").classList.add("closed");
   }
 
   logout = () => {
@@ -74,7 +77,9 @@ export default class LeftMenu extends Component {
     } else {
       const {fname, lname} = this.props.user
       return (
-        <section id="left-menu" className={this.state.open ? "open" : "closed"}>
+        <section id="left-menu" className={
+          `${this.state.open ? "open" : "closed"} ${this.state.tron ? "tron" : ""}`
+        }>
           <a className="account-dropdown" href={`/profile/${this.props.user.id}`}>
             <div className="username">
               {`${fname} ${lname}`}
@@ -101,13 +106,14 @@ export default class LeftMenu extends Component {
           <div className="open-btn" onClick={this.clickedOpen}><i className={`ayn-left-open ${this.state.open ? '' : 'closed'}`}></i></div>
 
           <div className="troncheck">
-              <label htmlFor="tron">[Tron Mode]
+              <label htmlFor="tron">
                 <input type="checkbox" 
                   name="tron" 
                   id="tron" 
                   value={this.state.tron} 
                   onChange={this.handleChange}>
                 </input>
+                [Tron Mode]
               </label>
           </div>
 

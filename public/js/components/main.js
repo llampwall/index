@@ -1015,6 +1015,7 @@ var LeftMenu = function (_Component) {
     };
 
     _this.handleChange = function (event) {
+      var self = _this;
       _this.setState({
         tron: event.target.checked
       }, function () {
@@ -1041,11 +1042,14 @@ var LeftMenu = function (_Component) {
             return p.classList.remove("tron");
           });
         }
+        self.props.tron(self.state.tron);
       });
     };
 
     _this.close = function () {
       _this.setState({ open: false });
+      document.getElementById("left-menu").classList.remove("open");
+      document.getElementById("left-menu").classList.add("closed");
     };
 
     _this.logout = function () {
@@ -1091,7 +1095,7 @@ var LeftMenu = function (_Component) {
 
         return _react2.default.createElement(
           "section",
-          { id: "left-menu", className: this.state.open ? "open" : "closed" },
+          { id: "left-menu", className: (this.state.open ? "open" : "closed") + " " + (this.state.tron ? "tron" : "") },
           _react2.default.createElement(
             "a",
             { className: "account-dropdown", href: "/profile/" + this.props.user.id },
@@ -1168,12 +1172,12 @@ var LeftMenu = function (_Component) {
             _react2.default.createElement(
               "label",
               { htmlFor: "tron" },
-              "[Tron Mode]",
               _react2.default.createElement("input", { type: "checkbox",
                 name: "tron",
                 id: "tron",
                 value: this.state.tron,
-                onChange: this.handleChange })
+                onChange: this.handleChange }),
+              "[Tron Mode]"
             )
           ),
           _react2.default.createElement(
@@ -1328,6 +1332,10 @@ var Messenger = function (_Component) {
       if (window.innerWidth <= 800) {
         _this.props.open();
       }
+    };
+
+    _this.tron = function (on) {
+      _this.setState({ tron: on });
     };
 
     _this.close = function () {
@@ -1710,6 +1718,7 @@ var Messenger = function (_Component) {
       users_on: [],
       users_off: [],
       open: false,
+      tron: false,
       connected: false,
       chatUser: null,
       blinkIds: new Set(),
@@ -1800,7 +1809,7 @@ var Messenger = function (_Component) {
       }
       return _react2.default.createElement(
         'section',
-        { id: 'messenger', className: this.state.open ? "open" : "closed" },
+        { id: 'messenger', className: (this.state.open ? "open" : "closed") + ' ' + (this.state.tron ? "tron" : "") },
         _react2.default.createElement(
           'div',
           { className: 'messenger-header' },
@@ -3792,6 +3801,10 @@ var Layout = function (_Component) {
       document.getElementsByClassName('notify')[0].classList.remove('active');
     };
 
+    _this.tron = function (on) {
+      _this.msgRef.current && _this.msgRef.current.tron(on);
+    };
+
     _this.openLeft = function () {
       if (_this.msgRef.current.state.open && window.innerWidth <= 800) {
         _this.msgRef.current.close();
@@ -3910,7 +3923,7 @@ var Layout = function (_Component) {
           'div',
           { className: 'app-container home-page' },
           _react2.default.createElement(_Loading2.default, { active: this.state.user != undefined ? "" : 'active' }),
-          _react2.default.createElement(_LeftMenu2.default, { user: this.state.user, ws: this.ws, open: this.openLeft, ref: this.leftRef }),
+          _react2.default.createElement(_LeftMenu2.default, { user: this.state.user, ws: this.ws, open: this.openLeft, tron: this.tron, ref: this.leftRef }),
           _react2.default.createElement(
             'section',
             { id: 'content-container' },
