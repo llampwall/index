@@ -113,7 +113,7 @@ export default class LeftMenu extends Component {
                   value={this.state.tron} 
                   onChange={this.handleChange}>
                 </input>
-                [Tron Mode]
+                tron mode
               </label>
           </div>
 
