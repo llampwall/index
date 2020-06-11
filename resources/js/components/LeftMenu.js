@@ -4,7 +4,8 @@ export default class LeftMenu extends Component {
   constructor () {
     super()
     this.state = {
-      open: false
+      open: false,
+      tron: false
     }
   }
 
@@ -19,6 +20,34 @@ export default class LeftMenu extends Component {
     if (window.innerWidth <= 800) {
       this.props.open()
     }
+  }
+
+  // tron mode enable/disable
+  handleChange = (event) => {
+    this.setState({
+      tron: event.target.checked
+    }, () => {
+      if (this.state.tron) {
+        // document.documentElement.style.setProperty('--tron', 1)
+        document.body.classList.add("tron");
+        document.getElementById("left-menu").classList.add("tron");
+        document.getElementById("messenger").classList.add("tron");
+        document.getElementById("content").classList.add("tron");
+        document.getElementById("scroll-this").classList.add("tron");
+        var posts = document.querySelectorAll(".post");
+        posts.forEach((p) => p.classList.add("tron"));
+      } else {
+        // document.documentElement.style.setProperty('--tron', 0)
+        document.body.classList.remove("tron");
+        document.getElementById("left-menu").classList.remove("tron");
+        document.getElementById("messenger").classList.remove("tron");
+        document.getElementById("content").classList.remove("tron");
+        document.getElementById("scroll-this").classList.remove("tron");
+        var posts = document.querySelectorAll(".post");
+        posts.forEach((p) => p.classList.remove("tron"));
+      }
+      
+    })
   }
 
   close = () => {
@@ -70,6 +99,17 @@ export default class LeftMenu extends Component {
           </div>
 
           <div className="open-btn" onClick={this.clickedOpen}><i className={`ayn-left-open ${this.state.open ? '' : 'closed'}`}></i></div>
+
+          <div className="troncheck">
+              <label htmlFor="tron">[Tron Mode]
+                <input type="checkbox" 
+                  name="tron" 
+                  id="tron" 
+                  value={this.state.tron} 
+                  onChange={this.handleChange}>
+                </input>
+              </label>
+          </div>
 
           <div className="logout" onClick={this.logout}>
             logout <i className="ayn-trash" />

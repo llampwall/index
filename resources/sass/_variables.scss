@@ -121,12 +121,16 @@ $post-header-bg: transparent;
 $post-bg: $secondary;
 $border-r: 3px;
 
-$tron: true;      // SET TRUE FOR TRON MODE
+:root {
+  --tron: 1;
+}
+
+
 
 #left-menu {
   background: linear-gradient(145deg, #1b1b22, #0c0c13) !important;
 
-  @if $tron {
+  &.tron {
     opacity: .8;
   }
 
@@ -145,7 +149,7 @@ $tron: true;      // SET TRUE FOR TRON MODE
 #messenger {
   background: linear-gradient(225deg, #18181f, #15151f) !important;
   
-  @if $tron {
+  &.tron {
     opacity: .8;
   }
 
@@ -162,7 +166,8 @@ $tron: true;      // SET TRUE FOR TRON MODE
   background: linear-gradient(145deg, #171720, #1b1c27) !important;
   box-shadow:  12px 12px 20px #12121a, 
               -12px -12px 20px #20222e !important;
-  @if $tron {
+
+  &.tron {
     opacity: .8 !important;
   }
 }
@@ -176,40 +181,37 @@ $tron: true;      // SET TRUE FOR TRON MODE
   }
 }
 #scroll-this.content-area {
-  @if $tron {
+  background: linear-gradient(225deg, #1b1c27, #171720) !important;
+
+  &.tron {
     background: url(/img/sun_background.jpg) no-repeat center !important;
     background-size: cover !important;
-  } @else {
-    background: linear-gradient(225deg, #1b1c27, #171720) !important;
   }
 }
 #all-posts .post-container .post {
-  @if $tron {
+  &.tron  {
     opacity: .8;
   }
 }
 
 // border stuff
-* {
-  @if $tron {
-    //borders for tron mode
-  } @else {
+body:not(.tron) {
+  * {
     border: none !important;
-  }
-
-  .app-container{
-    border-top: 1px solid #2d2d2d !important;
-    border-bottom: 1px solid #2d2d2d !important;
-  }
-
-  .users>.user {
-    border-bottom: 1px solid #2D2D2D !important;
-    &:hover {
-      color: $accents !important;
-    }
   }
 }
 
+.app-container{
+  border-top: 1px solid #2d2d2d !important;
+  border-bottom: 1px solid #2d2d2d !important;
+}
+
+.users>.user {
+  border-bottom: 1px solid #2D2D2D !important;
+  &:hover {
+    color: $accents !important;
+  }
+}
 
 // desert mirage
 // $outer-bg: transparent;

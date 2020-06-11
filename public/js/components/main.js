@@ -1014,6 +1014,36 @@ var LeftMenu = function (_Component) {
       }
     };
 
+    _this.handleChange = function (event) {
+      _this.setState({
+        tron: event.target.checked
+      }, function () {
+        if (_this.state.tron) {
+          // document.documentElement.style.setProperty('--tron', 1)
+          document.body.classList.add("tron");
+          document.getElementById("left-menu").classList.add("tron");
+          document.getElementById("messenger").classList.add("tron");
+          document.getElementById("content").classList.add("tron");
+          document.getElementById("scroll-this").classList.add("tron");
+          var posts = document.querySelectorAll(".post");
+          posts.forEach(function (p) {
+            return p.classList.add("tron");
+          });
+        } else {
+          // document.documentElement.style.setProperty('--tron', 0)
+          document.body.classList.remove("tron");
+          document.getElementById("left-menu").classList.remove("tron");
+          document.getElementById("messenger").classList.remove("tron");
+          document.getElementById("content").classList.remove("tron");
+          document.getElementById("scroll-this").classList.remove("tron");
+          var posts = document.querySelectorAll(".post");
+          posts.forEach(function (p) {
+            return p.classList.remove("tron");
+          });
+        }
+      });
+    };
+
     _this.close = function () {
       _this.setState({ open: false });
     };
@@ -1029,26 +1059,30 @@ var LeftMenu = function (_Component) {
     };
 
     _this.state = {
-      open: false
+      open: false,
+      tron: false
     };
     return _this;
   }
 
   (0, _createClass3.default)(LeftMenu, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       if (window.innerWidth > 800) {
         this.setState({ open: true });
       }
     }
+
+    // tron mode enable/disable
+
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       if (this.props.user == undefined) {
         return _react2.default.createElement(
-          'div',
-          { className: 'load' },
-          _react2.default.createElement('i', { className: 'ayn-spin3' })
+          "div",
+          { className: "load" },
+          _react2.default.createElement("i", { className: "ayn-spin3" })
         );
       } else {
         var _props$user = this.props.user,
@@ -1056,83 +1090,97 @@ var LeftMenu = function (_Component) {
             lname = _props$user.lname;
 
         return _react2.default.createElement(
-          'section',
-          { id: 'left-menu', className: this.state.open ? "open" : "closed" },
+          "section",
+          { id: "left-menu", className: this.state.open ? "open" : "closed" },
           _react2.default.createElement(
-            'a',
-            { className: 'account-dropdown', href: '/profile/' + this.props.user.id },
+            "a",
+            { className: "account-dropdown", href: "/profile/" + this.props.user.id },
             _react2.default.createElement(
-              'div',
-              { className: 'username' },
-              fname + ' ' + lname
+              "div",
+              { className: "username" },
+              fname + " " + lname
             )
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'groups' },
+            "div",
+            { className: "groups" },
             _react2.default.createElement(
-              'div',
-              { className: 'title' },
-              'you'
+              "div",
+              { className: "title" },
+              "you"
             ),
             _react2.default.createElement(
-              'ul',
+              "ul",
               null,
               _react2.default.createElement(
-                'li',
+                "li",
                 null,
-                'bio'
+                "bio"
               ),
               _react2.default.createElement(
-                'li',
+                "li",
                 null,
-                'work'
+                "work"
               ),
               _react2.default.createElement(
-                'li',
+                "li",
                 null,
-                'media'
+                "media"
               )
             )
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'groups' },
+            "div",
+            { className: "groups" },
             _react2.default.createElement(
-              'div',
-              { className: 'title' },
-              'groups'
+              "div",
+              { className: "title" },
+              "groups"
             ),
             _react2.default.createElement(
-              'ul',
+              "ul",
               null,
               _react2.default.createElement(
-                'li',
+                "li",
                 null,
-                'software'
+                "software"
               ),
               _react2.default.createElement(
-                'li',
+                "li",
                 null,
-                'photography'
+                "photography"
               ),
               _react2.default.createElement(
-                'li',
+                "li",
                 null,
-                'design'
+                "design"
               )
             )
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'open-btn', onClick: this.clickedOpen },
-            _react2.default.createElement('i', { className: 'ayn-left-open ' + (this.state.open ? '' : 'closed') })
+            "div",
+            { className: "open-btn", onClick: this.clickedOpen },
+            _react2.default.createElement("i", { className: "ayn-left-open " + (this.state.open ? '' : 'closed') })
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'logout', onClick: this.logout },
-            'logout ',
-            _react2.default.createElement('i', { className: 'ayn-trash' })
+            "div",
+            { className: "troncheck" },
+            _react2.default.createElement(
+              "label",
+              { htmlFor: "tron" },
+              "[Tron Mode]",
+              _react2.default.createElement("input", { type: "checkbox",
+                name: "tron",
+                id: "tron",
+                value: this.state.tron,
+                onChange: this.handleChange })
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "logout", onClick: this.logout },
+            "logout ",
+            _react2.default.createElement("i", { className: "ayn-trash" })
           )
         );
       }

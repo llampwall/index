@@ -118,13 +118,30 @@
       }
     }
 
+    .troncheck {
+      display: flex;
+      width: 100%;
+      margin-top: auto;
+      justify-items: right;
+      align-items: center;
+
+      label {
+        margin-left: auto;
+        font-size: 10px;
+        color: $accents;
+      }
+      input[type="checkbox"] {
+        justify-self: flex-end;
+      }
+    }
+
     .logout {
       width: 100%;
       align-self: center;
       padding: .5rem;
       height: 50px;
       border-top: $border-thickness solid $border-color;
-      margin-top: auto;
+      // margin-top: auto;
       display: flex;
       align-items: center;
       justify-content: center;

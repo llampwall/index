@@ -141,22 +141,22 @@
 	box-sizing: border-box;
 }
 
-:root {
-	--light-col: #D9C4B1;
-	--dark-col: #B59B80;
-	--second-col: #b76eb8;
-}
+// :root {
+// 	--light-col: #D9C4B1;
+// 	--dark-col: #B59B80;
+// 	--second-col: #b76eb8;
+// }
 
-body {
-	background-color: #D9C4B1;
-  	background-image: radial-gradient(circle, var(--light-col), var(--dark-col));
-	font-family: 'Roboto';
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
-}
+// body {
+// 	background-color: #D9C4B1;
+//   	background-image: radial-gradient(circle, var(--light-col), var(--dark-col));
+// 	font-family: 'Roboto';
+// 	position: relative;
+// 	display: flex;
+// 	align-items: center;
+// 	justify-content: center;
+// 	min-height: 100vh;
+// }
 
 .user-profile-container {
 	display: flex;
