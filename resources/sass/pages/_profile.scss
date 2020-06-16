@@ -80,11 +80,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: rgba(251, 247, 243, 0.493);
+        background-color: white;
   
         h1 {
           font-family: $main-font;
-          font-size: 2rem;
+          font-size: 1.5rem;
           color: $primary;
         }
       }
@@ -107,6 +107,7 @@
       width: 100%;
       // font-family: "Helvetica Neue", Helvetica, sans-serif;
       font-size: 20px;
+      background-color: $primary;
 
       a {
         color: #fff;
@@ -162,7 +163,7 @@
         font-size: 20px;
         text-align: center;
         color: $accents;
-        margin-bottom: 2rem;
+        margin: 2rem;
       }
     }
   }
