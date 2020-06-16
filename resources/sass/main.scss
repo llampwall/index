@@ -547,8 +547,29 @@ input[type="password"] {
   }
 
   .profile-page {
-    .user-img {
-      width: 95%;
+    .cover {
+      .user-img {
+        width: 95%;
+
+        .follow-btn {
+          margin-top: 1rem;
+        }
+      }
+    }
+
+
+    .lower-half .info {
+      padding: .5rem;
+      font-size: 1rem;
+
+      ul {
+        margin: 1rem 0;
+
+        li {
+          display: block;
+          margin: .3rem;
+        }
+      }
     }
   }
 
