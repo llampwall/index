@@ -130,7 +130,7 @@ class Layout extends Component {
             <SearchHeader searchQuery={this.search}/>
             <Route exact path="/" component={ (props) => <Home routeProps={props} user={this.state.user} ws={this.ws} ref={this.homeRef} single={false}/> }/>
             <Route exact path="/post/:id" component={ (props) => <Home routeProps={props} user={this.state.user} ws={this.ws} ref={this.homeRef} single={true}/> }/>
-            <Route exact path="/profile/:id" component={ (props) => <Profile routeProps={props} user={this.state.user}/> }/>
+            <Route exact path="/profile/:id" component={ (props) => <Profile routeProps={props} user={this.state.user} ws={this.ws}/> }/>
           
           </section>
 

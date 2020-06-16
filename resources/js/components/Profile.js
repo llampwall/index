@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Transition } from 'react-transition-group';
+import Post from '../components/Post'
 
 
 export default class Profile extends Component {
@@ -81,25 +82,26 @@ export default class Profile extends Component {
   // value={this.state.comment} onChange={this.handleChange} onKeyUp={this.checkSubmit}
 
   displayBio = () => {
-    // if (this.state.user == undefined) {
-    //   return <div>bio loading...</div>
-    // } else {
+    if (this.state.user == undefined) {
+      return <div>bio loading...</div>
+    } else {
 
-    //   // console.log(this.state.user)
-    //   if (this.state.user.info == "") {
-    //     return (
-    //       <div className="bio">
-    //         <textarea className={`bio-text ${this.state.edit ? 'active' : ''} `} ></textarea>
-    //         <div className='bio-btn' onClick={this.editBio}> Add a bio </div>
-    //       </div>
-    //     )
-    //   } else {
-    //     return (
-    //       <p>{this.state.user.info}</p>
-    //     )
-    //   }
-    // }
-    return
+      //   // console.log(this.state.user)
+      //   if (this.state.user.info == "") {
+      //     return (
+      //       <div className="bio">
+      //         <textarea className={`bio-text ${this.state.edit ? 'active' : ''} `} ></textarea>
+      //         <div className='bio-btn' onClick={this.editBio}> Add a bio </div>
+      //       </div>
+      //     )
+      //   } else {
+      //     return (
+      //       <p>{this.state.user.info}</p>
+      //     )
+      //   }
+      // }
+      return
+    }
   }
 
   render () {
@@ -125,16 +127,40 @@ export default class Profile extends Component {
           <video className="bg-video" loop muted autoPlay playsInline>
             <source src="/img/tronloop1080.mp4" type='video/mp4'/>
           </video>
-          <div className='cover'></div>
-          <div className="user-img">
-            <img src={this.state.image} />
-            <div className="follow-btn">follow <i className='ayn-bell'></i></div>
-            {/* <div className='lower-5th'>
-              <h1>{this.state.user.fname} {this.state.user.lname}</h1>
-            </div> */}
+          <div className='cover'>
+            <div className="user-img">
+              <img src={this.state.image} />
+              <div className="follow-btn">follow <i className='ayn-bell'></i></div>
+              <div className='lower-5th'>
+                <h1>{this.state.user.fname} {this.state.user.lname}</h1>
+              </div>
+            </div>
           </div>
-          <div className="user-info" style={{display: 'none'}}>
-            {this.displayBio()}
+          <div className="lower-half">
+            <div className="info">
+              <ul>
+                <li><span>30</span></li>
+                <li><span>Web Developer</span></li>
+                <li><span>Los Angeles</span></li>
+              </ul>
+              <ul>
+                <li><a href="#"><i className='ayn-mail-1'></i> email</a></li>
+                <li><a href="#"><i className='ayn-globe'></i> website</a></li>
+                <li><a href="#"><i className='ayn-facebook-official'></i> facebook</a></li>
+                <li><a href="#"><i className='ayn-instagram'></i> instagram</a></li>
+                <li><a href="#"><i className='ayn-linkedin'></i> linkedin</a></li>
+              </ul>
+            </div>
+            <section id="all-posts">
+              <h2 className="posts-title">[ recent posts ]</h2>
+              <div className="post-container">
+                {this.state.posts.map((post) => {
+      
+                    return <Post post={post} ws={this.props.ws} curuser={this.props.user} update={this.getNew} removePost={this.removePost} key={post.id}/>
+
+                })}
+              </div>
+          </section>
           </div>
         </div>
       )

@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 205:
+/***/ 130:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -834,7 +834,7 @@ var _Compose = __webpack_require__(335);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
-var _Post = __webpack_require__(205);
+var _Post = __webpack_require__(130);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -1925,6 +1925,10 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactTransitionGroup = __webpack_require__(759);
 
+var _Post = __webpack_require__(130);
+
+var _Post2 = _interopRequireDefault(_Post);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Profile = function (_Component) {
@@ -2010,25 +2014,30 @@ var Profile = function (_Component) {
     };
 
     _this.displayBio = function () {
-      // if (this.state.user == undefined) {
-      //   return <div>bio loading...</div>
-      // } else {
+      if (_this.state.user == undefined) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'bio loading...'
+        );
+      } else {
 
-      //   // console.log(this.state.user)
-      //   if (this.state.user.info == "") {
-      //     return (
-      //       <div className="bio">
-      //         <textarea className={`bio-text ${this.state.edit ? 'active' : ''} `} ></textarea>
-      //         <div className='bio-btn' onClick={this.editBio}> Add a bio </div>
-      //       </div>
-      //     )
-      //   } else {
-      //     return (
-      //       <p>{this.state.user.info}</p>
-      //     )
-      //   }
-      // }
-      return;
+        //   // console.log(this.state.user)
+        //   if (this.state.user.info == "") {
+        //     return (
+        //       <div className="bio">
+        //         <textarea className={`bio-text ${this.state.edit ? 'active' : ''} `} ></textarea>
+        //         <div className='bio-btn' onClick={this.editBio}> Add a bio </div>
+        //       </div>
+        //     )
+        //   } else {
+        //     return (
+        //       <p>{this.state.user.info}</p>
+        //     )
+        //   }
+        // }
+        return;
+      }
     };
 
     _this.state = {
@@ -2065,6 +2074,8 @@ var Profile = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this4 = this;
+
       if (this.state.user == undefined) {
         return _react2.default.createElement(
           'div',
@@ -2090,22 +2101,141 @@ var Profile = function (_Component) {
             { className: 'bg-video', loop: true, muted: true, autoPlay: true, playsInline: true },
             _react2.default.createElement('source', { src: '/img/tronloop1080.mp4', type: 'video/mp4' })
           ),
-          _react2.default.createElement('div', { className: 'cover' }),
           _react2.default.createElement(
             'div',
-            { className: 'user-img' },
-            _react2.default.createElement('img', { src: this.state.image }),
+            { className: 'cover' },
             _react2.default.createElement(
               'div',
-              { className: 'follow-btn' },
-              'follow ',
-              _react2.default.createElement('i', { className: 'ayn-bell' })
+              { className: 'user-img' },
+              _react2.default.createElement('img', { src: this.state.image }),
+              _react2.default.createElement(
+                'div',
+                { className: 'follow-btn' },
+                'follow ',
+                _react2.default.createElement('i', { className: 'ayn-bell' })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'lower-5th' },
+                _react2.default.createElement(
+                  'h1',
+                  null,
+                  this.state.user.fname,
+                  ' ',
+                  this.state.user.lname
+                )
+              )
             )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'user-info', style: { display: 'none' } },
-            this.displayBio()
+            { className: 'lower-half' },
+            _react2.default.createElement(
+              'div',
+              { className: 'info' },
+              _react2.default.createElement(
+                'ul',
+                null,
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    '30'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    'Web Developer'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    'Los Angeles'
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'ul',
+                null,
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    _react2.default.createElement('i', { className: 'ayn-mail-1' }),
+                    ' email'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    _react2.default.createElement('i', { className: 'ayn-globe' }),
+                    ' website'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    _react2.default.createElement('i', { className: 'ayn-facebook-official' }),
+                    ' facebook'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    _react2.default.createElement('i', { className: 'ayn-instagram' }),
+                    ' instagram'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    _react2.default.createElement('i', { className: 'ayn-linkedin' }),
+                    ' linkedin'
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'section',
+              { id: 'all-posts' },
+              _react2.default.createElement(
+                'h2',
+                { className: 'posts-title' },
+                '[ recent posts ]'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'post-container' },
+                this.state.posts.map(function (post) {
+
+                  return _react2.default.createElement(_Post2.default, { post: post, ws: _this4.props.ws, curuser: _this4.props.user, update: _this4.getNew, removePost: _this4.removePost, key: post.id });
+                })
+              )
+            )
           )
         );
       }
@@ -3475,7 +3605,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(205);
+var _Post = __webpack_require__(130);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -3983,7 +4113,7 @@ var Layout = function (_Component) {
                 return _react2.default.createElement(_Home2.default, { routeProps: props, user: _this2.state.user, ws: _this2.ws, ref: _this2.homeRef, single: true });
               } }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile/:id', component: function component(props) {
-                return _react2.default.createElement(_Profile2.default, { routeProps: props, user: _this2.state.user });
+                return _react2.default.createElement(_Profile2.default, { routeProps: props, user: _this2.state.user, ws: _this2.ws });
               } })
           ),
           _react2.default.createElement(_Messenger2.default, { user: this.state.user, ws: this.ws, open: this.openRight, ref: this.msgRef })
