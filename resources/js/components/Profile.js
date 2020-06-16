@@ -9,21 +9,23 @@ export default class Profile extends Component {
     this.state = {
       user: "",
       edit: false,
-      image: ""
+      image: "",
+      posts: []
     }
     this._isMounted = false
   }
 
   componentDidMount() {
     this._isMounted = true
-    this.getUser()
+    this._isMounted && this.getUser()
+      .then(() => this.getPosts())
   }
 
   componentWillUnmount() {
     this._isMounted = false
   }
 
-  getUser = async function() {
+  getUser = async () => {
     const { match, history, location } = this.props.routeProps
     const self = this;
     let user = ''
@@ -49,12 +51,31 @@ export default class Profile extends Component {
   }
   
   editBio = () => {
-    this.setState({
+    this._isMounted && this.setState({
       ...this.state,
       edit: true
     }, () => {
       // console.log(this.state)
     })
+  }
+
+  // fetch latest posts
+  getPosts = () => {
+      const self = this
+      try {
+        axios.get(`/posts/user/${this.state.user.id}`)
+        .then((res) => {
+          // console.log(res)
+          if (self._isMounted) {
+            self.setState({
+              posts: res.data
+            })
+            // setTimeout(() => {self._isFetching = false}, 500)   // rate limiting fetch requests to every half second
+          }
+        })
+      } catch (error) {
+        console.log("error fetching next page: " + error)
+      }
   }
 
   // value={this.state.comment} onChange={this.handleChange} onKeyUp={this.checkSubmit}

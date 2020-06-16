@@ -45,7 +45,6 @@ Route.get('/api/offline', 'UserController.getAllOffline')
 Route.get('/api/convo', 'ApiController.getConvo')
 
 // posts
-// Route.resource('/posts', 'PostController').except(['delete'])
 Route.get('/posts', 'PostController.index')
 Route.get('/posts/:id', 'PostController.getPost')
 Route.get('/posts/url/:filename/:type', 'PostController.getUrl')
@@ -55,6 +54,7 @@ Route.get('/posts/:id/comments', 'PostController.comments')
 Route.get('/posts/:id/likes', 'PostController.likes')
 Route.get('/posts/from/:start', 'PostController.nextPage')
 Route.get('/posts/new/:id', 'PostController.getNewPosts')
+Route.get('/posts/user/:id', 'PostController.getPostsBy')
 
 
 Route.post('/comments', 'PostController.makeComment')

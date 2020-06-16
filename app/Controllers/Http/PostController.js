@@ -70,6 +70,19 @@ class PostController {
         }
     }
 
+    // get latest 5 posts by a user
+    async getPostsBy({request, response}) {
+        const { id } = request.params
+        const results = await Database
+            .from('posts')
+            .where('posts.user_id', id)
+            .orderBy('posts.created_at', 'desc')
+            .limit(5)
+        console.log(results)
+        return results
+    }
+
+
     // get all new posts 
     async getNewPosts({request, response}) {
         const { id } = request.params

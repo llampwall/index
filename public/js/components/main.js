@@ -1931,19 +1931,21 @@ var Profile = function (_Component) {
   (0, _inherits3.default)(Profile, _Component);
 
   function Profile() {
+    var _this2 = this;
+
     (0, _classCallCheck3.default)(this, Profile);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this));
 
     _this.getUser = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-      var _props$routeProps, match, history, location, self, user, image;
+      var _this$props$routeProp, match, history, location, self, user, image;
 
       return _regenerator2.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _props$routeProps = this.props.routeProps, match = _props$routeProps.match, history = _props$routeProps.history, location = _props$routeProps.location;
-              self = this;
+              _this$props$routeProp = _this.props.routeProps, match = _this$props$routeProp.match, history = _this$props$routeProp.history, location = _this$props$routeProp.location;
+              self = _this;
               user = '';
               _context.prev = 3;
               _context.next = 6;
@@ -1967,7 +1969,7 @@ var Profile = function (_Component) {
                 image = image.replace('normal', 'large');
               }
 
-              this._isMounted && this.setState((0, _extends3.default)({}, this.state, {
+              _this._isMounted && _this.setState((0, _extends3.default)({}, _this.state, {
                 user: user.data[0],
                 image: image
               }), function () {
@@ -1979,15 +1981,32 @@ var Profile = function (_Component) {
               return _context.stop();
           }
         }
-      }, _callee, this, [[3, 9]]);
+      }, _callee, _this2, [[3, 9]]);
     }));
 
     _this.editBio = function () {
-      _this.setState((0, _extends3.default)({}, _this.state, {
+      _this._isMounted && _this.setState((0, _extends3.default)({}, _this.state, {
         edit: true
       }), function () {
         // console.log(this.state)
       });
+    };
+
+    _this.getPosts = function () {
+      var self = _this;
+      try {
+        _axios2.default.get('/posts/user/' + _this.state.user.id).then(function (res) {
+          // console.log(res)
+          if (self._isMounted) {
+            self.setState({
+              posts: res.data
+            });
+            // setTimeout(() => {self._isFetching = false}, 500)   // rate limiting fetch requests to every half second
+          }
+        });
+      } catch (error) {
+        console.log("error fetching next page: " + error);
+      }
     };
 
     _this.displayBio = function () {
@@ -2015,7 +2034,8 @@ var Profile = function (_Component) {
     _this.state = {
       user: "",
       edit: false,
-      image: ""
+      image: "",
+      posts: []
     };
     _this._isMounted = false;
     return _this;
@@ -2024,14 +2044,21 @@ var Profile = function (_Component) {
   (0, _createClass3.default)(Profile, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this3 = this;
+
       this._isMounted = true;
-      this.getUser();
+      this._isMounted && this.getUser().then(function () {
+        return _this3.getPosts();
+      });
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       this._isMounted = false;
     }
+
+    // fetch latest posts
+
 
     // value={this.state.comment} onChange={this.handleChange} onKeyUp={this.checkSubmit}
 
