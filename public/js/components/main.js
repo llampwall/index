@@ -14,7 +14,7 @@ var _extends2 = __webpack_require__(83);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _defineProperty2 = __webpack_require__(110);
+var _defineProperty2 = __webpack_require__(111);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -22,11 +22,11 @@ var _slicedToArray2 = __webpack_require__(549);
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-var _regenerator = __webpack_require__(48);
+var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(47);
+var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -62,7 +62,7 @@ var _Modal = __webpack_require__(336);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
-var _nodeVibrant = __webpack_require__(723);
+var _nodeVibrant = __webpack_require__(724);
 
 var Vibrant = _interopRequireWildcard(_nodeVibrant);
 
@@ -794,11 +794,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(48);
+var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(47);
+var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1281,11 +1281,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(48);
+var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(47);
+var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1887,7 +1887,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(48);
+var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
@@ -1895,7 +1895,7 @@ var _extends2 = __webpack_require__(83);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(47);
+var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1923,7 +1923,7 @@ var _axios = __webpack_require__(42);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactTransitionGroup = __webpack_require__(759);
+var _reactTransitionGroup = __webpack_require__(760);
 
 var _Post = __webpack_require__(130);
 
@@ -2258,7 +2258,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(110);
+var _defineProperty2 = __webpack_require__(111);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2282,6 +2282,8 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _lodash = __webpack_require__(716);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SearchHeader = function (_Component) {
@@ -2293,38 +2295,49 @@ var SearchHeader = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (SearchHeader.__proto__ || Object.getPrototypeOf(SearchHeader)).call(this));
 
     _this.updateSearch = function (event) {
-      var name = event.target.name;
-      var value = event.target.value;
+      event.persist();
 
-      _this.setState((0, _defineProperty3.default)({}, name, value), function () {
-        _this.props.searchQuery(value);
-      });
+      if (!_this.debouncedFn) {
+        _this.debouncedFn = (0, _lodash.debounce)(function () {
+
+          var name = event.target.name;
+          var value = event.target.value;
+
+          _this.setState((0, _defineProperty3.default)({}, name, value), function () {
+            _this.props.searchQuery(value);
+          });
+        }, 500);
+      }
+      _this.debouncedFn();
     };
 
     _this.state = {};
     return _this;
   }
 
+  // debounced the search bar to limit the api requests 
+
+
   (0, _createClass3.default)(SearchHeader, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        { className: "header" },
+        'div',
+        { className: 'header' },
         _react2.default.createElement(
-          "a",
-          { href: "/" },
-          _react2.default.createElement("img", { src: "/img/sun_small.JPG", alt: "index - home" })
+          'a',
+          { href: '/' },
+          _react2.default.createElement('img', { src: '/img/sun_small.JPG', alt: 'index - home' })
         ),
         _react2.default.createElement(
-          "div",
-          { className: "search" },
+          'div',
+          { className: 'search' },
           _react2.default.createElement(
-            "a",
-            { href: "/" },
-            _react2.default.createElement("img", { src: "/img/index_orange.png" })
+            'a',
+            { href: '/' },
+            _react2.default.createElement('img', { src: '/img/index_orange.png' })
           ),
-          _react2.default.createElement("input", { type: "text", name: "search", placeholder: "search...", onChange: this.updateSearch })
+          _react2.default.createElement('input', { type: 'text', name: 'search', placeholder: 'search...', onChange: this.updateSearch })
         )
       );
     }
@@ -2346,11 +2359,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(110);
+var _defineProperty2 = __webpack_require__(111);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _regenerator = __webpack_require__(48);
+var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
@@ -2358,7 +2371,7 @@ var _extends2 = __webpack_require__(83);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(47);
+var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -2621,11 +2634,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = __webpack_require__(48);
+var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(47);
+var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -2858,11 +2871,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(110);
+var _defineProperty2 = __webpack_require__(111);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _regenerator = __webpack_require__(48);
+var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
@@ -2870,7 +2883,7 @@ var _extends2 = __webpack_require__(83);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _asyncToGenerator2 = __webpack_require__(47);
+var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -3703,6 +3716,7 @@ var PostArea = function (_Component) {
       //   }
       //   return
       // }
+
       _this._isMounted && _this.setState({ query: query }, function () {
         self._isFetching = true;
         try {
@@ -3876,11 +3890,11 @@ exports.default = PostArea;
 "use strict";
 
 
-var _regenerator = __webpack_require__(48);
+var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(47);
+var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 

@@ -148,6 +148,7 @@ export default class PostArea extends Component {
     //   }
     //   return
     // }
+
     this._isMounted && this.setState({query}, () => {
       self._isFetching = true
       try {

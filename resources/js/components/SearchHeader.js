@@ -1,4 +1,5 @@
 import React, { Component} from 'react'
+import { debounce } from 'lodash';
 
 export default class SearchHeader extends Component {
   constructor () {
@@ -7,15 +8,25 @@ export default class SearchHeader extends Component {
     }
   }
 
+  // debounced the search bar to limit the api requests 
   updateSearch = (event) => {
-    const name = event.target.name
-    const value = event.target.value
+    event.persist()
 
-    this.setState({
-      [name]: value
-    }, () => {
-      this.props.searchQuery(value)
-    })
+    if (!this.debouncedFn) {
+      this.debouncedFn =  debounce(() => {
+
+        const name = event.target.name
+        const value = event.target.value
+
+        this.setState({
+          [name]: value
+        }, () => {
+          this.props.searchQuery(value)
+        })
+
+      }, 500);
+    }
+    this.debouncedFn();
   }
 
   render () {
