@@ -332,6 +332,21 @@ export default class Messenger extends Component {
     } else {
       return (
         <div>
+
+          <div className="user self">
+            <div className="user-img" style={{
+              backgroundImage: `url("${this.props.user.profile_img}")`, 
+              backgroundPosition: 'center center', 
+              backgroundRepeat: 'no-repeat', 
+              backgroundSize: 'cover'}} />
+            <div className='username'>
+              {this.props.user.fname} {this.props.user.lname}
+            </div>
+            <div className="message-icon">
+              <i className="ayn-comment-1" />
+            </div>
+          </div>
+
           {this.state.users_on.map((user) => {
             return (
               <div className={`user ${(self.state.blinkIds.has(user.id) && self.state.chatUser != null && self.state.chatUser.id != user.id) ? 'blink' : ''}`} key={user.id} onClick={this.openChat.bind(null, user, true)}>
@@ -349,7 +364,9 @@ export default class Messenger extends Component {
               </div>
             )
           })}
+
           <div className="divider">- offline -</div>
+
           {this.state.users_off.map((user) => {
             return (
               <div className="user off" key={user.id}>
@@ -367,6 +384,7 @@ export default class Messenger extends Component {
               </div>
             )
           })}
+
         </div>
       )
     }

@@ -1675,6 +1675,27 @@ var Messenger = function (_Component) {
         return _react2.default.createElement(
           'div',
           null,
+          _react2.default.createElement(
+            'div',
+            { className: 'user self' },
+            _react2.default.createElement('div', { className: 'user-img', style: {
+                backgroundImage: 'url("' + _this.props.user.profile_img + '")',
+                backgroundPosition: 'center center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover' } }),
+            _react2.default.createElement(
+              'div',
+              { className: 'username' },
+              _this.props.user.fname,
+              ' ',
+              _this.props.user.lname
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'message-icon' },
+              _react2.default.createElement('i', { className: 'ayn-comment-1' })
+            )
+          ),
           _this.state.users_on.map(function (user) {
             return _react2.default.createElement(
               'div',

@@ -40,7 +40,7 @@ class UserController {
     async getAllOnline({auth, request}) {
         if (auth.user) {
             try {
-               const allOnline = await Database.raw('select * from users where exists (select * from onlines where users.id = onlines.user_id)')
+               const allOnline = await Database.raw(`select * from users where exists (select * from onlines where users.id = onlines.user_id and users.id != ${auth.user.id})`)
             //    console.log(allOnline[0])
                return allOnline[0]
             } catch (error) {

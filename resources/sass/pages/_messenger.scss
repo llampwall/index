@@ -26,13 +26,13 @@
 
     .messenger-header {
       background-color: $right-menu-bg;
-      color: $lr-menu-headers;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 4.25rem;
       // border-bottom: $border-thickness solid $border-color;
       min-width: 101%;
+      
 
       .messenger-icon {
         display: flex;
@@ -47,7 +47,9 @@
         align-items: center;
         justify-content: center;
         font-size: 1.2rem;
-        font-weight: 700;
+        color: $third-font-color;
+        // font-weight: 700;
+        // font-style: italic;
       }
       .options-icon {
         display: flex;
@@ -99,14 +101,25 @@
 
         @media (hover: hover) {
           &:hover {
-            color: $primary-font-color;
-            transform: scale(1.05);
+            color: $third-font-color;
+            transform: scale(1.02);
           }
         }
 
         // disable offline users for now
         &.off {
           pointer-events: none;
+        }
+
+        // your own name at the top
+        &.self {
+          pointer-events: none;
+          @media (hover: hover) {
+            &:hover {
+              
+            }
+          }
+          color: $primary-font-color;
         }
 
         // &:nth-of-type(2n){
@@ -383,9 +396,9 @@
         
         font-size: 1.2rem;
         &::placeholder {
-          color: $placeholder-font-color;
+          color: $third-font-color;
           opacity: .8;
-          font-weight: 700;
+          // font-weight: 700;
         }
         &:focus::placeholder {
           color: transparent;

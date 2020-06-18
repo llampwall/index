@@ -32,7 +32,6 @@
       height: 4.25rem;
       // border-bottom: $border-thickness solid $border-color;
       background-color: $left-menu-bg;
-      color: $lr-menu-headers;
       min-width: 200px;
       margin-right: 1rem;
       cursor: pointer;
@@ -40,8 +39,9 @@
       .username {
         text-transform: lowercase;
         font-size: 1.2rem;
-        font-weight: 700;
-        color:  $lr-menu-headers;
+        // font-weight: 700;
+        color: $third-font-color;
+        // font-style: italic;
       }
     }
 
@@ -155,7 +155,7 @@
       background: $left-menu-bg;
       color: $third-font-color;
       transition: all .3s ease-in-out;
-      font-weight: 700;
+      // font-weight: 700;
       cursor: pointer;
       i {
         margin-left: .3rem;
