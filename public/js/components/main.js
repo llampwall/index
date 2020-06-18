@@ -908,9 +908,10 @@ var Home = function (_Component) {
         self.postAreaRef.current && self.postAreaRef.current.removePost(message);
       });
       this.chat.on('update', (0, _lodash.throttle)(function (message) {
+        // throttled 3 seconds
         console.log('new post');
         self.postAreaRef.current && self.postAreaRef.current.getNew();
-      }, 3000));
+      }, 2000));
     }
 
     // if this is a single post page, get the data for the post and the poster
