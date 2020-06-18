@@ -56,6 +56,7 @@ Route.get('/posts/:id/likes', 'PostController.likes')
 Route.get('/posts/from/:start', 'PostController.nextPage')
 Route.get('/posts/new/:id', 'PostController.getNewPosts')
 Route.get('/posts/user/:id', 'PostController.getPostsBy')
+Route.get('/posts/userquery/:query', 'PostController.getPostsUserSearch')
 
 
 Route.post('/comments', 'PostController.makeComment')

@@ -49,7 +49,7 @@ class PostController {
                     .orderBy('posts.created_at', 'desc')
                     .offset(start)
                     .limit(20)
-                // console.log(results)
+                console.log(results)
                 return results
             } catch (error) {
                 console.log(error)
@@ -81,6 +81,20 @@ class PostController {
         console.log(results)
         return results
     }
+
+    // search posts by user name
+    // async getPostsUserSearch({request, response}) {
+    //     const query = request.params
+    //     const results = await Database
+    //         .from('posts')
+    //         .innerJoin('users', 'users.id', 'posts.user_id')
+    //         .options({nestTables:true})
+    //         .where('users.fname', 'like', ` %${q} `)
+    //         .orWhere('users.lname', 'like', ` %${q} `)
+    //         .orderBy('posts.created_at', 'desc')
+    //     console.log(results)
+    //     return results
+    // }
 
 
     // get all new posts 
