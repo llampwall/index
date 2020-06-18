@@ -89,15 +89,16 @@ $secondary: #16161D;
 $third: #1a191f;
 // $third: #110e0e;
 $fourth:#d3cfd2;
-// $accents: #dc568c;
-$accents: #d95788;
-// $title-font-color: #d95788;
-$title-font-color: #d95788;
+// $accents: #ffb8d3;                         // enable for lighter mode.
+$accents: #ff5c9a;
+// $title-font-color: #ffb8d3;
+$title-font-color: #ff5c9a;
 $lr-menu-headers: rgb(253, 253, 253);
-$primary-font-color: #7ab7ca;
+$primary-font-color: #aeecff;
 $secondary-font-color: white;
-$third-font-color: rgb(236, 138, 45);
-$placeholder-font-color: #7ab7ca;
+// $third-font-color: #ffb167;                // enable for lighter mode.
+$third-font-color: #ff8109;
+$placeholder-font-color: #aeecff;           // enable for lighter mode.
 $border-color: $fourth;
 $button-bg: $primary;
 $button-color: $accents;
