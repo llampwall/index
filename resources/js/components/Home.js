@@ -3,6 +3,7 @@ import axios from 'axios'
 import PostArea from './PostArea'
 import Compose from './Compose'
 import Post from './Post'
+import { throttle } from 'lodash';
 
 // Handles updating the postarea when its sibling compose adds a post to the database
 
@@ -29,10 +30,10 @@ export default class Home extends Component {
       console.log('someone deleted post ' + message) 
       self.postAreaRef.current && self.postAreaRef.current.removePost(message)
     })
-    this.chat.on('update', function(message) {
+    this.chat.on('update', throttle(function(message) {
       console.log('new post')
       self.postAreaRef.current && self.postAreaRef.current.getNew()
-    })
+    }, 3000))
   }
 
   // if this is a single post page, get the data for the post and the poster
