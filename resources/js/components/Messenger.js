@@ -2,8 +2,7 @@ import React, { Component} from 'react'
 import axois from 'axios'
 import ChatWindow from './ChatWindow'
 import Axios from 'axios'
-// import Ws from '@adonisjs/websocket-client'
-// import { SimpleDB } from 'aws-sdk'
+import { debounce } from 'lodash'
 
 export default class Messenger extends Component {
   constructor () {
@@ -16,7 +15,8 @@ export default class Messenger extends Component {
       connected: false,
       chatUser: null, 
       blinkIds: new Set(),
-      unread: new Set()
+      unread: new Set(),
+      search: ""
     }
 
     this.chat = null
@@ -307,10 +307,23 @@ export default class Messenger extends Component {
   populate = async () => {
     const self = this
     try {
-      const allOnline = await axois.get('/api/online')
-      const allOffline = await Axios.get('/api/offline')
+      
+      let allOffline = await Axios.get('/api/offline')
+      let allOnline = await Axios.get('/api/online')
       // console.log("users: ")
       // console.log(allUsers)
+
+      // let allOnline = ""
+      // if (this.state.search != "") {            // searching for users
+      //   allOnline = await axios.get(`/api/user/search`, {
+      //     params: {
+      //       q: self.state.query
+      //     }
+      //   })
+      // } else {
+      //   allOnline = await axois.get('/api/online')
+      // }
+
       self.setState({
         users_on: allOnline.data,
         users_off: allOffline.data
@@ -390,6 +403,26 @@ export default class Messenger extends Component {
     }
   }
 
+  // allow users to search by name in chat
+  search = (event) => {
+    event.persist()
+
+    if (!this.debouncedFn) {
+      this.debouncedFn = debounce(() => {
+
+        const value = event.target.value
+
+        this.setState({
+          search: value
+        }, () => {
+          this.forceUpdate()
+        })
+
+      }, 2000);
+    }
+    this.debouncedFn()
+  }
+
 
   render () {
     if (this.state.users_off == undefined) {
@@ -424,7 +457,7 @@ export default class Messenger extends Component {
 
         <div className="search">
           <i className="ayn-search" />
-          <input type="text" name="friendSearch" placeholder="search..." />
+          <input type="text" name="friendSearch" placeholder="search..." onChange={this.search}/>
         </div>
 
         {this.displayChat()}

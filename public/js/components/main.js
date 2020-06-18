@@ -838,7 +838,7 @@ var _Post = __webpack_require__(130);
 
 var _Post2 = _interopRequireDefault(_Post);
 
-var _lodash = __webpack_require__(288);
+var _lodash = __webpack_require__(188);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1324,10 +1324,9 @@ var _ChatWindow = __webpack_require__(334);
 
 var _ChatWindow2 = _interopRequireDefault(_ChatWindow);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _lodash = __webpack_require__(188);
 
-// import Ws from '@adonisjs/websocket-client'
-// import { SimpleDB } from 'aws-sdk'
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Messenger = function (_Component) {
   (0, _inherits3.default)(Messenger, _Component);
@@ -1622,7 +1621,7 @@ var Messenger = function (_Component) {
     };
 
     _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-      var self, allOnline, allOffline;
+      var self, allOffline, allOnline;
       return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -1630,18 +1629,30 @@ var Messenger = function (_Component) {
               self = _this;
               _context3.prev = 1;
               _context3.next = 4;
-              return _axios2.default.get('/api/online');
-
-            case 4:
-              allOnline = _context3.sent;
-              _context3.next = 7;
               return _axios2.default.get('/api/offline');
 
-            case 7:
+            case 4:
               allOffline = _context3.sent;
+              _context3.next = 7;
+              return _axios2.default.get('/api/online');
+
+            case 7:
+              allOnline = _context3.sent;
 
               // console.log("users: ")
               // console.log(allUsers)
+
+              // let allOnline = ""
+              // if (this.state.search != "") {            // searching for users
+              //   allOnline = await axios.get(`/api/user/search`, {
+              //     params: {
+              //       q: self.state.query
+              //     }
+              //   })
+              // } else {
+              //   allOnline = await axois.get('/api/online')
+              // }
+
               self.setState({
                 users_on: allOnline.data,
                 users_off: allOffline.data
@@ -1751,6 +1762,24 @@ var Messenger = function (_Component) {
       }
     };
 
+    _this.search = function (event) {
+      event.persist();
+
+      if (!_this.debouncedFn) {
+        _this.debouncedFn = (0, _lodash.debounce)(function () {
+
+          var value = event.target.value;
+
+          _this.setState({
+            search: value
+          }, function () {
+            _this.forceUpdate();
+          });
+        }, 2000);
+      }
+      _this.debouncedFn();
+    };
+
     _this.state = {
       users_on: [],
       users_off: [],
@@ -1759,7 +1788,8 @@ var Messenger = function (_Component) {
       connected: false,
       chatUser: null,
       blinkIds: new Set(),
-      unread: new Set()
+      unread: new Set(),
+      search: ""
     };
 
     _this.chat = null;
@@ -1833,6 +1863,9 @@ var Messenger = function (_Component) {
 
     // render online users
 
+
+    // allow users to search by name in chat
+
   }, {
     key: 'render',
     value: function render() {
@@ -1888,7 +1921,7 @@ var Messenger = function (_Component) {
           'div',
           { className: 'search' },
           _react2.default.createElement('i', { className: 'ayn-search' }),
-          _react2.default.createElement('input', { type: 'text', name: 'friendSearch', placeholder: 'search...' })
+          _react2.default.createElement('input', { type: 'text', name: 'friendSearch', placeholder: 'search...', onChange: this.search })
         ),
         this.displayChat()
       );
@@ -2306,7 +2339,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = __webpack_require__(288);
+var _lodash = __webpack_require__(188);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
