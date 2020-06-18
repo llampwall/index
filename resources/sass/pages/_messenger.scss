@@ -114,11 +114,6 @@
         // your own name at the top
         &.self {
           pointer-events: none;
-          @media (hover: hover) {
-            &:hover {
-              
-            }
-          }
           color: $primary-font-color;
         }
 

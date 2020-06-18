@@ -43,7 +43,8 @@
         font-family: $main-font;
         z-index: 3;
         border-radius: $border-r;
-        background: $post-bg;
+        // background: $post-bg;
+        background: $post-bg-gradient;
 
         .post-header {
           background: $post-header-bg;

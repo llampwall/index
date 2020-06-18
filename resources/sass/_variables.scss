@@ -119,6 +119,7 @@ $right-menu-icons: $accents;
 $compose-bg: $third;
 $post-header-bg: transparent;
 $post-bg: $secondary;
+$post-bg-gradient: linear-gradient(145deg, #232329, #14141a);
 $border-r: 3px;
 
 :root {
@@ -177,7 +178,7 @@ $border-r: 3px;
 // }
 #compose textarea#content {
   // border-radius: 11px !important;
-  background: linear-gradient(145deg, #171720, #1b1c27) !important;
+  background: linear-gradient(215deg, #212126, #1b1c27) !important;
   box-shadow:  12px 12px 20px #12121a, 
               -12px -12px 20px #20222e !important;
 
@@ -205,6 +206,10 @@ $border-r: 3px;
 }
 
 #all-posts .post-container .post {
+  // background: linear-gradient(145deg, #1d1d24, #14141a) !important;
+  background: linear-gradient(145deg, #232329, #14141a);
+  box-shadow:  13px 13px 25px #0e0e12, 
+  -13px -13px 25px #1e1e28 !important;
   &.tron  {
     background: transparent !important;
     backdrop-filter: brightness(40%);
