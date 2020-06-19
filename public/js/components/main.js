@@ -1284,6 +1284,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = __webpack_require__(83);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -1291,10 +1295,6 @@ var _regenerator2 = _interopRequireDefault(_regenerator);
 var _asyncToGenerator2 = __webpack_require__(48);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
-var _extends2 = __webpack_require__(83);
-
-var _extends3 = _interopRequireDefault(_extends2);
 
 var _classCallCheck2 = __webpack_require__(16);
 
@@ -1365,37 +1365,40 @@ var Messenger = function (_Component) {
 
       // send login
       _this.chat.on('ready', function () {
-        self.setState((0, _extends3.default)({}, self.state, {
+        self.setState({
           connected: true
-        }));
+        });
         // display online users
         _this.populate();
       });
 
       // update users online
       _this.chat.on('login', function (message) {
+        clearTimeout(self.pingTimeout);
         self.populate();
       });
 
       _this.chat.on('message', function (message) {
+        clearTimeout(self.pingTimeout);
         self.handleMsg(message);
       });
 
       _this.props.ws.on('error', function (error) {
         console.log(error);
+        clearTimeout(_this.pingTimeout);
         self.props.ws.close();
-        self.setState((0, _extends3.default)({}, self.state, {
+        self.setState({
           connected: false,
           chatUser: null
-        }));
+        });
       });
 
       _this.props.ws.on('close', function () {
         clearTimeout(_this.pingTimeout);
-        self.setState((0, _extends3.default)({}, self.state, {
+        self.setState({
           connected: false,
           chatUser: null
-        }));
+        });
       });
 
       _this.props.ws.on('open', function () {
@@ -1799,6 +1802,14 @@ var Messenger = function (_Component) {
       _this.props.ws.close();
     }, 32000);
 
+    _this.keepUp = setInterval(function () {
+      if (!_this.state.connected) {
+        _this.startChat();
+      } else {
+        _this.populate();
+      }
+    }, 30000);
+
     _this.blinkInt = null;
     _this.blinkTo = null;
     return _this;
@@ -1811,7 +1822,6 @@ var Messenger = function (_Component) {
       if (window.innerWidth > 800) {
         this.setState({ open: true });
       }
-
       // var pageVisibility = document.visibilityState
       // document.addEventListener('visibilitychange', this.wakeUp)
     }

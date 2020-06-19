@@ -157,16 +157,17 @@
 
         .post-link {
           display: flex;
-          align-items: flex-start;
-          overflow-y: hidden;
-          max-height: 100px;
+          flex-direction: column;
+          // align-items: flex-start;
+          // overflow-y: hidden;
+          // max-height: 100px;
           width: 100%;
 
           .link-image {
             display: flex;
             align-items: center;
-            width: 20%;
-            padding-top: 3px;
+            width: 100%;
+            padding: 3px;
             img {
               width: 100%;
               border-radius: $border-r;
@@ -176,21 +177,43 @@
           .link-info {
             display: flex;
             flex-direction: column;
-            padding: .5rem;
-            width: 80%;
+            padding: 1rem .5rem;
 
             .link-title {
               h2 {
                 font-weight: 700;
                 color: $accents;
                 margin-bottom: .6rem;
+                line-height: 1.2;
               }
             }
             .link-desc {
+              $h1: 1.2rem;
+              line-height: $h1;
               h5 {
                 color: $secondary-font-color;
-                font-size: .7rem;
+                font-size: .9rem;
               }
+              $max-lines: 3;
+              position: relative;
+              max-height: calc($h1 * $max-lines);
+              overflow: hidden;
+              padding-right: 1rem; /* space for ellipsis */
+            }
+            
+            .link-desc::before {
+              position: absolute;
+              content: "...";
+              inset-block-end: 0; /* "bottom" */
+              inset-inline-end: 0; /* "right" */
+            }
+            .link-desc::after {
+              content: "";
+              position: absolute;
+              inset-inline-end: 0; /* "right" */
+              width: 1rem;
+              height: 1rem;
+              background: white;
             }
           }
         }

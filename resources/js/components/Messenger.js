@@ -26,6 +26,14 @@ export default class Messenger extends Component {
       this.props.ws.close();
     }, 32000);
 
+    this.keepUp = setInterval(() => {
+      if (!this.state.connected) {
+        this.startChat()
+      } else {
+        this.populate()
+      }
+    }, 30000);
+
     this.blinkInt = null
     this.blinkTo = null
   }
@@ -35,7 +43,6 @@ export default class Messenger extends Component {
     if (window.innerWidth > 800) {
       this.setState({open: true})
     }
-
     // var pageVisibility = document.visibilityState
     // document.addEventListener('visibilitychange', this.wakeUp)
   }
@@ -92,7 +99,6 @@ export default class Messenger extends Component {
     // send login
     this.chat.on('ready', () => {
       self.setState({
-        ...self.state,
         connected: true
       })
       // display online users
@@ -101,18 +107,20 @@ export default class Messenger extends Component {
 
     // update users online
     this.chat.on('login', function(message) {
+      clearTimeout(self.pingTimeout)
       self.populate()
     })
 
     this.chat.on('message', function(message) {
+      clearTimeout(self.pingTimeout)
       self.handleMsg(message)
     })
 
     this.props.ws.on('error', (error) => {
       console.log(error)
+      clearTimeout(this.pingTimeout)
       self.props.ws.close()
       self.setState({
-        ...self.state,
         connected: false,
         chatUser: null
       })
@@ -121,7 +129,6 @@ export default class Messenger extends Component {
     this.props.ws.on('close', () => {
       clearTimeout(this.pingTimeout);
       self.setState({
-        ...self.state,
         connected: false,
         chatUser: null
       })
