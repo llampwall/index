@@ -194,9 +194,8 @@
                 color: $secondary-font-color;
                 font-size: .9rem;
               }
-              $max-lines: 3;
               position: relative;
-              max-height: calc($h1 * $max-lines);
+              max-height: 3.6rem;
               overflow: hidden;
               padding-right: 1rem; /* space for ellipsis */
             }
