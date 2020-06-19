@@ -458,8 +458,8 @@
 
 
       //======== glitch stuff
-      .post {
-        animation: glitch 3s linear infinite;
+      .post.tron {
+        animation: glitch 2s linear infinite;
       }
       @keyframes glitch{
         2%,64%{
@@ -472,13 +472,13 @@
           transform: translate(0,0) skew(5deg); 
         }
       }
-      .post:before,
-      .post:after{
+      .post.tron:before,
+      .post.tron:after{
         content: attr(title);
         position: absolute;
         left: 0;
       }
-      .post:before{
+      .post.tron:before{
         animation: glitchTop 1s linear infinite;
         clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
         -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
@@ -494,7 +494,7 @@
           transform: translate(13px,-1px) skew(-13deg); 
         }
       }
-      .post:after{
+      .post.tron:after{
         animation: glitchBotom 1.5s linear infinite;
         clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
         -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
