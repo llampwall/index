@@ -304,9 +304,16 @@
           background: transparent;
           margin-bottom: .5rem;
           z-index: inherit;
+          font-size: .8rem;
+          overflow-wrap: break-word;
+          line-height: 1rem;
+          margin-right: 10%;
+          margin-left: 0;
 
           &.self {
             text-align: right;
+            margin-right: 0;
+            margin-left: 10%;
             p {
               color: $lr-menu-headers;
             }
