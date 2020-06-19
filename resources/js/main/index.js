@@ -37,22 +37,26 @@ class Layout extends Component {
 
     this.ws.connect()
     this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
-    // reconnect function doesnt work
-    // this.ws.on('close', function() {
-    //   self.retry = setInterval(() => {
-    //     console.log('attempting to reconnect every 10 seconds')
-    //     self.ws = null
-    //     self.ws = Ws()
-    //     self.ws.on('open', () => {
-    //       self.ws.connect()
-    //       self.chat = self.ws.getSubscription('chat') || self.ws.subscribe('chat')
-    //       self.chat.on('ready', () => {
-    //         clearInterval(self.retry)
-    //         self.retry = null
-    //       })
-    //     })
-    //   }, 10000);
-    // })
+
+
+    // this.check = setInterval(() => {
+    //   // console.log(this.ws.ws.readyState);
+    //   // console.log(this.ws);
+    // }, 10000);
+
+    // reconnect on error
+    this.ws.on('error', () => {
+      self.retry = setInterval(() => {
+        console.log('attempting to reconnect every 10 seconds')
+        self.ws = Ws()
+        self.ws.connect()
+        self.chat = self.ws.getSubscription('chat') || self.ws.subscribe('chat')
+        self.chat.on('ready', () => {
+          clearInterval(self.retry)
+          self.retry = null
+        })
+      }, 10000);
+    })
   }
 
   componentDidMount() {

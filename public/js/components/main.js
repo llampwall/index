@@ -4028,22 +4028,25 @@ var Layout = function (_Component) {
 
       _this.ws.connect();
       _this.chat = _this.ws.getSubscription('chat') || _this.ws.subscribe('chat');
-      // reconnect function doesnt work
-      // this.ws.on('close', function() {
-      //   self.retry = setInterval(() => {
-      //     console.log('attempting to reconnect every 10 seconds')
-      //     self.ws = null
-      //     self.ws = Ws()
-      //     self.ws.on('open', () => {
-      //       self.ws.connect()
-      //       self.chat = self.ws.getSubscription('chat') || self.ws.subscribe('chat')
-      //       self.chat.on('ready', () => {
-      //         clearInterval(self.retry)
-      //         self.retry = null
-      //       })
-      //     })
-      //   }, 10000);
-      // })
+
+      // this.check = setInterval(() => {
+      //   // console.log(this.ws.ws.readyState);
+      //   // console.log(this.ws);
+      // }, 10000);
+
+      // reconnect on error
+      _this.ws.on('error', function () {
+        self.retry = setInterval(function () {
+          console.log('attempting to reconnect every 10 seconds');
+          self.ws = (0, _websocketClient2.default)();
+          self.ws.connect();
+          self.chat = self.ws.getSubscription('chat') || self.ws.subscribe('chat');
+          self.chat.on('ready', function () {
+            clearInterval(self.retry);
+            self.retry = null;
+          });
+        }, 10000);
+      });
     };
 
     _this.closeNotify = function () {
