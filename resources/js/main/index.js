@@ -35,7 +35,7 @@ class Layout extends Component {
   startChat = () => {
     const self = this
 
-    this.ws.connect()
+    this.ws.connect() 
     this.chat = this.ws.getSubscription('chat') || this.ws.subscribe('chat')
 
 
