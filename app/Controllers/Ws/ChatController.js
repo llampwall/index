@@ -27,7 +27,7 @@ class ChatController {
     //   }
     // }, 10000);
 
-    // kill connections after they expire (3 hours)
+    // kill connections after they expire (1 hour since last use)
     // update this to notify the user and reconnect them if necessary
     setInterval(async function() {
       var d = Date.now()
@@ -53,7 +53,7 @@ class ChatController {
       const newSocket = await Online.create({
           user_id: u_id,
           socket_id: s_id,
-          expires: Date.now() + 10800000    // 3 hours
+          expires: Date.now() + 3600000    // 1 hour
       })
     } catch (error) {
         console.log(error)
@@ -67,6 +67,18 @@ class ChatController {
   async onMessage (message) {
 
     // console.log(this.socket.channel.subscriptions)
+
+
+    // keep this socket connection alive for an hour since last use
+    try {
+      const keepAlive = await Online.query().where('socket_id', this.socket.id)
+          .update({expires: Date.now() + 3600000})
+      if (keepAlive > 0) {
+          console.log('expiration updated')
+      }
+    } catch (error) {
+      console.log('couldnt update database expiration: ' + error)
+    }
 
     // update everyone's feed
     if (message.offline != null) {
