@@ -43,31 +43,7 @@ class ChatController {
       }
     }, 3600000);          // check every hour
 
-    // UNCOMMENT THIS TO SET A 10 minute connection timeout.
-    // something is wrong with the logic - heartbeat doesn't work
-    // connection will close 10 minutes from the time it starts
-    // regardless of activity.
-
-    // this.isAlive = true;
-    // this.socket.on('ping', function() {
-    //   this.heartbeat()
-    // })
-
-    // const self = this
-    // const interval = setInterval(function ping() {
-    //   Ws._wsServer.clients.forEach(function each(ws) {
-    //     if (ws.isAlive === false) return ws.close();
-    
-    //     ws.isAlive = false;
-    //     ws.ping();
-    //   });
-    // }, 600000); 
-
   }
-
-  // heartbeat() {
-  //   this.isAlive = true;
-  // }
   
 
   // store socket in database
@@ -129,6 +105,7 @@ class ChatController {
     if (message.to != null) {
       console.log('new message from: ')
       console.log(this.auth.user.fname)
+      console.log(this.socket.id)
       console.log('to')
       console.log(message.to.fname)
       console.log(message.body)
