@@ -457,65 +457,65 @@
       }
 
 
-      //======== glitch twitch movement stuff
-      // .post.tron {
-      //   &:nth-last-of-type(2n) {
-      //     animation: glitch 2s linear infinite;
-      //   }
-      //   &:nth-last-of-type(3n) {
-      //     animation: glitch 3s linear infinite;
-      //   }
-      // }
-      // @keyframes glitch{
-      //   2%,64%{
-      //     transform: translate(2px,0) skew(0deg);
-      //   }
-      //   4%,60%{
-      //     transform: translate(-2px,0) skew(0deg);
-      //   }
-      //   62%{
-      //     transform: translate(0,0) skew(5deg); 
-      //   }
-      // }
-      // .post.tron:before,
-      // .post.tron:after{
-      //   content: attr(title);
-      //   position: absolute;
-      //   left: 0;
-      // }
-      // .post.tron:before{
-      //   animation: glitchTop 1s linear infinite;
-      //   clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-      //   -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-      // }
-      // @keyframes glitchTop{
-      //   2%,64%{
-      //     transform: translate(2px,-2px);
-      //   }
-      //   4%,60%{
-      //     transform: translate(-2px,2px);
-      //   }
-      //   62%{
-      //     transform: translate(13px,-1px) skew(-13deg); 
-      //   }
-      // }
-      // .post.tron:after{
-      //   animation: glitchBotom 1.5s linear infinite;
-      //   clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-      //   -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-      // }
-      // @keyframes glitchBotom{
-      //   2%,64%{
-      //     transform: translate(-2px,0);
-      //   }
-      //   4%,60%{
-      //     transform: translate(-2px,0);
-      //   }
-      //   62%{
-      //     transform: translate(-22px,5px) skew(21deg); 
-      //   }
-      // }
-      //======== end glitch stuff
+      // ======== glitch twitch movement stuff
+      .post.tron {
+        &:nth-of-type(2n) {
+          animation: glitch 2s linear infinite;
+        }
+        &:nth-of-type(3n) {
+          animation: glitch 3s linear infinite;
+        }
+      }
+      @keyframes glitch{
+        2%,64%{
+          transform: translate(2px,0) skew(0deg);
+        }
+        4%,60%{
+          transform: translate(-2px,0) skew(0deg);
+        }
+        62%{
+          transform: translate(0,0) skew(5deg); 
+        }
+      }
+      .post.tron:before,
+      .post.tron:after{
+        content: attr(title);
+        position: absolute;
+        left: 0;
+      }
+      .post.tron:before{
+        animation: glitchTop 1s linear infinite;
+        clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+      }
+      @keyframes glitchTop{
+        2%,64%{
+          transform: translate(2px,-2px);
+        }
+        4%,60%{
+          transform: translate(-2px,2px);
+        }
+        62%{
+          transform: translate(8px,-1px) skew(-8deg); 
+        }
+      }
+      .post.tron:after{
+        animation: glitchBotom 1.5s linear infinite;
+        clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+        -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+      }
+      @keyframes glitchBotom{
+        2%,64%{
+          transform: translate(-2px,0);
+        }
+        4%,60%{
+          transform: translate(-2px,0);
+        }
+        62%{
+          transform: translate(-12px,5px) skew(12deg); 
+        }
+      }
+      // ======== end glitch stuff
 
 
 

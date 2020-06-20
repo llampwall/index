@@ -15,6 +15,33 @@ class ChatController {
     this.store(auth.user.id, socket.id)
     this.updateChat()
 
+    // this.test = setInterval(function() {
+    //   // console.log('hi')
+    //   try {
+    //     const target = await Database
+    //                       .from('onlines')
+    //                       .where('created_at', '<', Date.now() - 3600000)
+    //     console.log(target)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }, 10000);
+
+    // kill connections after they expire (3 hours)
+    // update this to notify the user and reconnect them if necessary
+    setInterval(async function() {
+      var d = Date.now()
+      try {
+        const target = await Online.query()
+              .where('expires', '<', d)
+              .delete()
+        if(target > 0) {
+          console.log(target + ' expired connections removed')
+        }
+      } catch(error) {
+        console.log(error)
+      }
+    }, 3600000);          // check every hour
 
     // UNCOMMENT THIS TO SET A 10 minute connection timeout.
     // something is wrong with the logic - heartbeat doesn't work
@@ -49,7 +76,8 @@ class ChatController {
     try {
       const newSocket = await Online.create({
           user_id: u_id,
-          socket_id: s_id
+          socket_id: s_id,
+          expires: Date.now() + 10800000    // 3 hours
       })
     } catch (error) {
         console.log(error)
@@ -62,7 +90,7 @@ class ChatController {
   // get messages and send them to the right users
   async onMessage (message) {
 
-    // this.heartbeat()
+    // console.log(this.socket.channel.subscriptions)
 
     // update everyone's feed
     if (message.offline != null) {

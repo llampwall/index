@@ -9,6 +9,7 @@ class OnlineSchema extends Schema {
       table.increments()
       table.integer('user_id').unsigned().references('id').inTable('users').notNullable().onDelete('cascade')
       table.text('socket_id').notNullable()
+      table.bigInteger('expires').unsigned().notNullable()
       table.timestamps()
     })
   }

@@ -3775,7 +3775,7 @@ var PostArea = function (_Component) {
     _this.updateQuery = function (query) {
       var self = _this;
 
-      // if (this._isFetching && query != "") {              // rate limiting requests, but not if query is empty
+      // if (this._isFetching && query != "") {              // my attempt at debouncing. needs to happen in the search header file
       //   if (self.fetchDelay) {
       //     clearTimeout(self.fetchDelay)
       //     self.fetchDelay = null
