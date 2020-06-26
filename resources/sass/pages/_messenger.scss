@@ -96,7 +96,7 @@
 
         &.blink {
           background-color: $accents;
-          color: white;
+          color: red;
         }
 
         @media (hover: hover) {
@@ -244,7 +244,7 @@
           z-index: inherit;
 
           &.blink {
-            color: white;
+            color: red;
           }
         }
 

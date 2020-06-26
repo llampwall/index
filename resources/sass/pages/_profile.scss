@@ -62,7 +62,9 @@
         width: 60%;
         height: 20px;
         z-index: 1;
-        margin-top: 2rem;
+        // margin-top: 2rem;
+        position: relative;
+        bottom: -45px;
   
         @media (hover: hover) {
           &:hover, &.active {

@@ -78,7 +78,7 @@ class PostController {
             .where('posts.user_id', id)
             .orderBy('posts.created_at', 'desc')
             .limit(5)
-        console.log(results)
+        // console.log(results)
         return results
     }
 
