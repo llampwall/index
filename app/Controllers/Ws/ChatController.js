@@ -41,15 +41,15 @@ class ChatController {
 
 
     // keep this socket connection alive for an hour since last use
-    try {
-      const keepAlive = await Online.query().where('socket_id', this.socket.id)
-          .update({expires: Date.now() + 3600000})
-      if (keepAlive > 0) {
-          console.log('expiration updated')
-      }
-    } catch (error) {
-      console.log('couldnt update database expiration: ' + error)
-    }
+    // try {
+    //   const keepAlive = await Online.query().where('socket_id', this.socket.id)
+    //       .update({expires: Date.now() + 3600000})
+    //   if (keepAlive > 0) {
+    //       console.log('expiration updated')
+    //   }
+    // } catch (error) {
+    //   console.log('couldnt update database expiration: ' + error)
+    // }
 
     // update everyone's feed
     if (message.offline != null) {
