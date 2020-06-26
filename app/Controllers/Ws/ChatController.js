@@ -86,12 +86,13 @@ class ChatController {
     }
 
     if (message.to != null) {
-      console.log('new message from: ')
-      console.log(this.auth.user.fname)
-      console.log(this.socket.id)
-      console.log('to')
-      console.log(message.to.fname)
-      console.log(message.body)
+      console.log('new message')
+      // console.log('new message from: ')
+      // console.log(this.auth.user.fname)
+      // console.log(this.socket.id)
+      // console.log('to')
+      // console.log(message.to.fname)
+      // console.log(message.body)
 
       try {
         // get the sockets to send to
