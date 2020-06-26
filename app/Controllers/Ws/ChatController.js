@@ -14,35 +14,6 @@ class ChatController {
 
     this.store(auth.user.id, socket.id)
     this.updateChat()
-
-    // this.test = setInterval(function() {
-    //   // console.log('hi')
-    //   try {
-    //     const target = await Database
-    //                       .from('onlines')
-    //                       .where('created_at', '<', Date.now() - 3600000)
-    //     console.log(target)
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-    // }, 10000);
-
-    // kill connections after they expire (1 hour since last use)
-    // update this to notify the user and reconnect them if necessary
-    setInterval(async function() {
-      var d = Date.now()
-      try {
-        const target = await Online.query()
-              .where('expires', '<', d)
-              .delete()
-        if(target > 0) {
-          console.log(target + ' expired connections removed')
-        }
-      } catch(error) {
-        console.log(error)
-      }
-    }, 3600000);          // check every hour
-
   }
   
 
@@ -171,6 +142,7 @@ class ChatController {
       return ids
     } catch (error) {
       console.log(error)
+      console.log("suck my balls");
     }
   }
 
@@ -201,6 +173,7 @@ class ChatController {
     // this.updateChat()
     try {
         const target = await Online.query().where('socket_id', this.socket.id).delete()
+        this.socket.close()
     } catch {
         console.log("error disconnecting")
     }
