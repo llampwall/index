@@ -10,11 +10,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(83);
+var _extends2 = __webpack_require__(111);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _defineProperty2 = __webpack_require__(111);
+var _defineProperty2 = __webpack_require__(110);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -1284,7 +1284,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(83);
+var _extends2 = __webpack_require__(111);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1958,7 +1958,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(83);
+var _extends2 = __webpack_require__(111);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -2325,7 +2325,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(111);
+var _defineProperty2 = __webpack_require__(110);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2426,17 +2426,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(111);
+var _defineProperty2 = __webpack_require__(110);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
-
-var _extends2 = __webpack_require__(83);
-
-var _extends3 = _interopRequireDefault(_extends2);
 
 var _asyncToGenerator2 = __webpack_require__(48);
 
@@ -2502,9 +2498,9 @@ var ChatWindow = function (_Component) {
                 }
               }).then(function (response) {
                 // console.log(response.data.messages)
-                _this.setState((0, _extends3.default)({}, _this.state, {
+                _this.setState({
                   messages: response.data.messages
-                }));
+                });
                 _this.scrollToBottom();
               });
 
@@ -2555,13 +2551,7 @@ var ChatWindow = function (_Component) {
     };
 
     _this.sendMsg = function () {
-      if (_this.state.message == '\n') {
-        _this.setState((0, _extends3.default)({}, _this.state, {
-          postContent: ''
-        }));
-        return;
-      }
-      if (_this.state.message.length == 0) {
+      if (_this.state.message == '\n' || _this.state.message.length == 0) {
         return;
       }
 
@@ -2571,9 +2561,9 @@ var ChatWindow = function (_Component) {
         body: _this.state.message
       });
       // this.addMsg(this.state.message)
-      _this.setState((0, _extends3.default)({}, _this.state, {
+      _this.setState({
         message: ''
-      }));
+      });
 
       _this.getMessages();
     };
@@ -2585,10 +2575,10 @@ var ChatWindow = function (_Component) {
     };
 
     _this.closeChat = function () {
-      _this.setState((0, _extends3.default)({}, _this.state, {
+      _this.setState({
         to: undefined,
         min: false
-      }));
+      });
       _this.props.close();
     };
 
@@ -2938,7 +2928,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(111);
+var _defineProperty2 = __webpack_require__(110);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2946,7 +2936,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(83);
+var _extends2 = __webpack_require__(111);
 
 var _extends3 = _interopRequireDefault(_extends2);
 

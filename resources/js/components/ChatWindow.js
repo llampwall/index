@@ -50,7 +50,6 @@ export default class ChatWindow extends Component {
     }).then((response) => {
       // console.log(response.data.messages)
       this.setState({
-        ...this.state,
         messages: response.data.messages
       })
       this.scrollToBottom()
@@ -97,14 +96,7 @@ export default class ChatWindow extends Component {
 
   // sends message, adds message to window, and clears message box
   sendMsg = () => {
-    if (this.state.message == '\n') {
-      this.setState({
-        ...this.state, 
-        postContent: ''
-      })
-      return
-    }
-    if (this.state.message.length == 0) {
+    if (this.state.message == '\n' || this.state.message.length == 0) {
       return
     }
 
@@ -115,7 +107,6 @@ export default class ChatWindow extends Component {
     })
     // this.addMsg(this.state.message)
     this.setState({
-      ...this.state,
       message: ''
     })
 
@@ -131,7 +122,6 @@ export default class ChatWindow extends Component {
   // for now this doesn't do much
   closeChat = () => {
     this.setState({
-      ...this.state,
       to: undefined,
       min: false 
     })
