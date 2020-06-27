@@ -13,7 +13,7 @@ export default class SearchHeader extends Component {
     event.persist()
 
     if (!this.debouncedFn) {
-      this.debouncedFn =  debounce(() => {
+      this.debouncedFn = debounce(() => {
 
         const name = event.target.name
         const value = event.target.value

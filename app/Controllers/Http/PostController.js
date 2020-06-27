@@ -40,16 +40,19 @@ class PostController {
         const start = parseInt(request.params.start)
         const q = request.qs.q
 
+        // console.log(start)
+        // console.log(q)
+
         if (q && q != "") {     // keyword search
             // console.log(q)
             try {
                 const results = await Database
                     .from('posts')
-                    .where('posts.content', 'like', ` %${q}% `)            // only 2 letters is working
+                    .where('posts.content', 'like', `%${q}%`)            // only 2 letters is working
                     .orderBy('posts.created_at', 'desc')
                     .offset(start)
                     .limit(20)
-                console.log(results)
+                // console.log(results)
                 return results
             } catch (error) {
                 console.log(error)
