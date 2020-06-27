@@ -45,10 +45,32 @@ class PostController {
 
         if (q && q != "") {     // keyword search
             // console.log(q)
+
+            // // get user by name
+            // const userQuery = `select *
+            //                 from users
+            //                 where concat(fname, " ", lname) like "%${q}%"
+            //                 offset ${start}
+            //                 limit 20`
+            // const results = await Database.raw(userQuery)
+
+            // // get posts by a user
+            // const userPostQuery = `select posts.*
+            //                 from users left join posts 
+            //                 on posts.user_id = users.id 
+            //                 where concat(fname, " ", lname) like "%${q}%"
+            //                 group by posts.id
+            //                 order by posts.created_at desc
+            //                 offset ${start}
+            //                 limit 20`
+            // const r1 = await Database.raw(userPostQuery)
+            // const results = r1[0]
+
             try {
                 const results = await Database
                     .from('posts')
                     .where('posts.content', 'like', `%${q}%`)            // only 2 letters is working
+                    .orWhere('posts.link_title', 'like', `%${q}%`)
                     .orderBy('posts.created_at', 'desc')
                     .offset(start)
                     .limit(20)
