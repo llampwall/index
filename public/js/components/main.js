@@ -3105,7 +3105,7 @@ var Compose = function (_Component) {
               _context.prev = 30;
 
               // store the url in database
-              fData.append('img_name', self.state.image.name);
+              fData.append('img_name', self.state.img_url);
 
               _context.next = 34;
               return (0, _axios2.default)({
@@ -3169,7 +3169,7 @@ var Compose = function (_Component) {
               // get signed url from the server
               _context4.prev = 2;
               file = self.state.image;
-              filename = file.name;
+              filename = new Date().getTime() + '_' + file.name;
               type = encodeURIComponent(file.type);
               // console.log(filename)
               // console.log(type)
@@ -3182,7 +3182,7 @@ var Compose = function (_Component) {
                     while (1) {
                       switch (_context3.prev = _context3.next) {
                         case 0:
-                          // console.log('signed url: ' + response.data)
+                          console.log('signed url: ' + response.data);
 
                           // upload file to s3
                           options = {
@@ -3198,9 +3198,10 @@ var Compose = function (_Component) {
                                   switch (_context2.prev = _context2.next) {
                                     case 0:
                                       console.log(response);
+                                      self.setState({ img_url: filename });
                                       self._isUploading = false;
 
-                                    case 2:
+                                    case 3:
                                     case 'end':
                                       return _context2.stop();
                                   }
@@ -3213,7 +3214,7 @@ var Compose = function (_Component) {
                             };
                           }());
 
-                        case 2:
+                        case 3:
                         case 'end':
                           return _context3.stop();
                       }
@@ -3478,6 +3479,7 @@ var Compose = function (_Component) {
     _this.state = {
       postContent: '',
       image: '',
+      img_url: '',
       linkUrl: '',
       linkTitle: '',
       linkImage: '',

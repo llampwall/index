@@ -9,6 +9,7 @@ export default class Compose extends Component {
     this.state = { 
       postContent : '', 
       image: '',
+      img_url: '',
       linkUrl: '',
       linkTitle: '',
       linkImage: '',
@@ -95,7 +96,7 @@ export default class Compose extends Component {
       // get signed url from the server
       try {
           // store the url in database
-          fData.append('img_name', self.state.image.name)
+          fData.append('img_name', self.state.img_url)
           
           const res = await axios({
             method: 'post',
@@ -141,14 +142,14 @@ export default class Compose extends Component {
     // get signed url from the server
     try {
       const file = self.state.image
-      const filename = file.name
+      const filename = `${new Date().getTime()}_${file.name}`
       const type = encodeURIComponent(file.type)
       // console.log(filename)
       // console.log(type)
 
       const response = await axios.get(`/posts/url/${filename}/${type}`)
       .then (async function(response) {   
-        // console.log('signed url: ' + response.data)
+        console.log('signed url: ' + response.data)
 
         // upload file to s3
         var options = {
@@ -159,6 +160,7 @@ export default class Compose extends Component {
         axios.put(response.data, file, options)
         .then(async function(response) {
             console.log(response)
+            self.setState({img_url: filename})
             self._isUploading = false
         })
       })
