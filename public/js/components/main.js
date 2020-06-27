@@ -2991,19 +2991,16 @@ var Compose = function (_Component) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!_this._isUploading) {
-                _context.next = 2;
-                break;
-              }
 
-              return _context.abrupt('return');
+              // if (this._isUploading) {
+              //   return
+              // }
 
-            case 2:
               self = _this;
               // deal with just newline case
 
               if (!(_this.state.postContent == '\n')) {
-                _context.next = 6;
+                _context.next = 4;
                 break;
               }
 
@@ -3012,17 +3009,17 @@ var Compose = function (_Component) {
               }));
               return _context.abrupt('return');
 
-            case 6:
+            case 4:
 
               // get post data
               fData = new FormData();
 
               // check for link data and get it
 
-              _context.next = 9;
+              _context.next = 7;
               return _this.checkLink();
 
-            case 9:
+            case 7:
               _ref2 = _context.sent;
               text = _ref2.text;
               link = _ref2.link;
@@ -3037,43 +3034,43 @@ var Compose = function (_Component) {
               }
 
               if (!(text == '' && _this.state.linkUrl == '')) {
-                _context.next = 21;
+                _context.next = 19;
                 break;
               }
 
               if (!(_this.state.image == '')) {
-                _context.next = 18;
+                _context.next = 16;
                 break;
               }
 
               return _context.abrupt('return');
 
-            case 18:
+            case 16:
               // if there is just an image append a space for the content
               fData.append('content', ' ');
 
-            case 19:
-              _context.next = 22;
+            case 17:
+              _context.next = 20;
               break;
 
-            case 21:
+            case 19:
               if (text == '' && _this.state.linkUrl != '') {
                 fData.append('content', ' ');
               } else {
                 fData.append('content', text);
               }
 
-            case 22:
+            case 20:
               fData.append('user_id', _this.props.user.id);
 
               if (!(_this.state.image == '')) {
-                _context.next = 30;
+                _context.next = 28;
                 break;
               }
 
               fData.append('img_name', '');
               // console.log('no image')
-              _context.next = 27;
+              _context.next = 25;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -3098,12 +3095,12 @@ var Compose = function (_Component) {
                 return 'item saved';
               });
 
-            case 27:
+            case 25:
               response = _context.sent;
-              _context.next = 42;
+              _context.next = 40;
               break;
 
-            case 30:
+            case 28:
               // there is an image or video in the post
 
               // disable input while image uploads - maybe add loading symbol
@@ -3111,12 +3108,12 @@ var Compose = function (_Component) {
               document.getElementById("content").innerText = 'Loading...';
 
               // get signed url from the server
-              _context.prev = 32;
+              _context.prev = 30;
 
               // store the url in database
               fData.append('img_name', self.state.img_url);
 
-              _context.next = 36;
+              _context.next = 34;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -3148,23 +3145,23 @@ var Compose = function (_Component) {
                 console.log('upload failed: ' + err);
               });
 
-            case 36:
+            case 34:
               res = _context.sent;
-              _context.next = 42;
+              _context.next = 40;
               break;
 
-            case 39:
-              _context.prev = 39;
-              _context.t0 = _context['catch'](32);
+            case 37:
+              _context.prev = 37;
+              _context.t0 = _context['catch'](30);
 
               console.log("axios didnt work: " + _context.t0);
 
-            case 42:
+            case 40:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, _this2, [[32, 39]]);
+      }, _callee, _this2, [[30, 37]]);
     }));
     _this.uploadFile = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
       var self, file, filename, type, response;
