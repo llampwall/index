@@ -2991,16 +2991,19 @@ var Compose = function (_Component) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              if (!(_this.state.image != '' && _this.state.img_url == '')) {
+                _context.next = 2;
+                break;
+              }
 
-              // if (this._isUploading) {
-              //   return
-              // }
+              return _context.abrupt('return');
 
+            case 2:
               self = _this;
               // deal with just newline case
 
               if (!(_this.state.postContent == '\n')) {
-                _context.next = 4;
+                _context.next = 6;
                 break;
               }
 
@@ -3009,17 +3012,17 @@ var Compose = function (_Component) {
               }));
               return _context.abrupt('return');
 
-            case 4:
+            case 6:
 
               // get post data
               fData = new FormData();
 
               // check for link data and get it
 
-              _context.next = 7;
+              _context.next = 9;
               return _this.checkLink();
 
-            case 7:
+            case 9:
               _ref2 = _context.sent;
               text = _ref2.text;
               link = _ref2.link;
@@ -3034,43 +3037,43 @@ var Compose = function (_Component) {
               }
 
               if (!(text == '' && _this.state.linkUrl == '')) {
-                _context.next = 19;
+                _context.next = 21;
                 break;
               }
 
               if (!(_this.state.image == '')) {
-                _context.next = 16;
+                _context.next = 18;
                 break;
               }
 
               return _context.abrupt('return');
 
-            case 16:
+            case 18:
               // if there is just an image append a space for the content
               fData.append('content', ' ');
 
-            case 17:
-              _context.next = 20;
+            case 19:
+              _context.next = 22;
               break;
 
-            case 19:
+            case 21:
               if (text == '' && _this.state.linkUrl != '') {
                 fData.append('content', ' ');
               } else {
                 fData.append('content', text);
               }
 
-            case 20:
+            case 22:
               fData.append('user_id', _this.props.user.id);
 
               if (!(_this.state.image == '')) {
-                _context.next = 28;
+                _context.next = 30;
                 break;
               }
 
               fData.append('img_name', '');
               // console.log('no image')
-              _context.next = 25;
+              _context.next = 27;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -3095,12 +3098,12 @@ var Compose = function (_Component) {
                 return 'item saved';
               });
 
-            case 25:
+            case 27:
               response = _context.sent;
-              _context.next = 40;
+              _context.next = 42;
               break;
 
-            case 28:
+            case 30:
               // there is an image or video in the post
 
               // disable input while image uploads - maybe add loading symbol
@@ -3108,12 +3111,12 @@ var Compose = function (_Component) {
               document.getElementById("content").innerText = 'Loading...';
 
               // get signed url from the server
-              _context.prev = 30;
+              _context.prev = 32;
 
               // store the url in database
               fData.append('img_name', self.state.img_url);
 
-              _context.next = 34;
+              _context.next = 36;
               return (0, _axios2.default)({
                 method: 'post',
                 url: '/posts',
@@ -3145,49 +3148,48 @@ var Compose = function (_Component) {
                 console.log('upload failed: ' + err);
               });
 
-            case 34:
+            case 36:
               res = _context.sent;
-              _context.next = 40;
+              _context.next = 42;
               break;
 
-            case 37:
-              _context.prev = 37;
-              _context.t0 = _context['catch'](30);
+            case 39:
+              _context.prev = 39;
+              _context.t0 = _context['catch'](32);
 
               console.log("axios didnt work: " + _context.t0);
 
-            case 40:
+            case 42:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, _this2, [[30, 37]]);
+      }, _callee, _this2, [[32, 39]]);
     }));
-    _this.uploadFile = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
+    _this.uploadFile = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
       var self, file, filename, type, response;
-      return _regenerator2.default.wrap(function _callee4$(_context4) {
+      return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               self = _this;
 
-
-              _this._isUploading = true;
               // get signed url from the server
-              _context4.prev = 2;
+
+              _context3.prev = 1;
               file = self.state.image;
               filename = new Date().getTime() + '_' + file.name;
               type = encodeURIComponent(file.type);
               // console.log(filename)
               // console.log(type)
 
-              _context4.next = 8;
+              _context3.next = 7;
               return _axios2.default.get('/posts/url/' + filename + '/' + type).then(function () {
-                var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(response) {
+                var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
                   var options;
-                  return _regenerator2.default.wrap(function _callee3$(_context3) {
+                  return _regenerator2.default.wrap(function _callee2$(_context2) {
                     while (1) {
-                      switch (_context3.prev = _context3.next) {
+                      switch (_context2.prev = _context2.next) {
                         case 0:
                           console.log('signed url: ' + response.data);
 
@@ -3198,35 +3200,19 @@ var Compose = function (_Component) {
                             }
                           };
 
-                          _axios2.default.put(response.data, file, options).then(function () {
-                            var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
-                              return _regenerator2.default.wrap(function _callee2$(_context2) {
-                                while (1) {
-                                  switch (_context2.prev = _context2.next) {
-                                    case 0:
-                                      console.log(response);
-                                      self.setState({ img_url: filename });
-                                      self._isUploading = false;
-
-                                    case 3:
-                                    case 'end':
-                                      return _context2.stop();
-                                  }
-                                }
-                              }, _callee2, this);
-                            }));
-
-                            return function (_x2) {
-                              return _ref5.apply(this, arguments);
-                            };
-                          }());
+                          _axios2.default.put(response.data, file, options).then(function (response) {
+                            console.log(response);
+                            self.setState({
+                              img_url: filename
+                            });
+                          });
 
                         case 3:
                         case 'end':
-                          return _context3.stop();
+                          return _context2.stop();
                       }
                     }
-                  }, _callee3, this);
+                  }, _callee2, this);
                 }));
 
                 return function (_x) {
@@ -3234,32 +3220,29 @@ var Compose = function (_Component) {
                 };
               }());
 
-            case 8:
-              response = _context4.sent;
-              _context4.next = 14;
+            case 7:
+              response = _context3.sent;
+              _context3.next = 13;
               break;
 
-            case 11:
-              _context4.prev = 11;
-              _context4.t0 = _context4['catch'](2);
+            case 10:
+              _context3.prev = 10;
+              _context3.t0 = _context3['catch'](1);
 
-              console.log("failed to upload file: " + _context4.t0);
+              console.log("failed to upload file: " + _context3.t0);
 
-            case 14:
-              _this._isUploading = false;
-
-            case 15:
+            case 13:
             case 'end':
-              return _context4.stop();
+              return _context3.stop();
           }
         }
-      }, _callee4, _this2, [[2, 11]]);
+      }, _callee3, _this2, [[1, 10]]);
     }));
-    _this.checkLink = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6() {
+    _this.checkLink = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
       var self, text, link, expression, regex, data, i, secureUrl;
-      return _regenerator2.default.wrap(function _callee6$(_context6) {
+      return _regenerator2.default.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               self = _this;
               text = ' ';
@@ -3268,7 +3251,7 @@ var Compose = function (_Component) {
               regex = new RegExp(expression);
 
               if (!(_this.state.postContent.length > 0)) {
-                _context6.next = 27;
+                _context5.next = 27;
                 break;
               }
 
@@ -3276,7 +3259,7 @@ var Compose = function (_Component) {
               // console.log(data)
 
               if (!(data.length > 0)) {
-                _context6.next = 27;
+                _context5.next = 27;
                 break;
               }
 
@@ -3284,30 +3267,30 @@ var Compose = function (_Component) {
 
             case 9:
               if (!(i < data.length)) {
-                _context6.next = 27;
+                _context5.next = 27;
                 break;
               }
 
               if (!data[i].match(regex)) {
-                _context6.next = 22;
+                _context5.next = 22;
                 break;
               }
 
               // found a url
               secureUrl = data[i].replace(/^http:\/\//i, 'https://'); // http to https
 
-              _context6.prev = 12;
-              _context6.next = 15;
+              _context5.prev = 12;
+              _context5.next = 15;
               return _axios2.default.post( // get preview info from link metadata
               'https://api.linkpreview.net', {
                 q: encodeURIComponent(secureUrl),
                 key: '3f0c5b8e7b6ebf2fb7302a9eaa4c1a1a'
               }).then(function () {
-                var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(resp) {
+                var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(resp) {
                   var secureImg;
-                  return _regenerator2.default.wrap(function _callee5$(_context5) {
+                  return _regenerator2.default.wrap(function _callee4$(_context4) {
                     while (1) {
-                      switch (_context5.prev = _context5.next) {
+                      switch (_context4.prev = _context4.next) {
                         case 0:
                           // console.log(resp.data)
 
@@ -3323,29 +3306,29 @@ var Compose = function (_Component) {
 
                         case 3:
                         case 'end':
-                          return _context5.stop();
+                          return _context4.stop();
                       }
                     }
-                  }, _callee5, this);
+                  }, _callee4, this);
                 }));
 
-                return function (_x3) {
-                  return _ref7.apply(this, arguments);
+                return function (_x2) {
+                  return _ref6.apply(this, arguments);
                 };
               }());
 
             case 15:
-              _context6.next = 20;
+              _context5.next = 20;
               break;
 
             case 17:
-              _context6.prev = 17;
-              _context6.t0 = _context6['catch'](12);
+              _context5.prev = 17;
+              _context5.t0 = _context5['catch'](12);
 
-              console.log(_context6.t0);
+              console.log(_context5.t0);
 
             case 20:
-              _context6.next = 24;
+              _context5.next = 24;
               break;
 
             case 22:
@@ -3354,18 +3337,18 @@ var Compose = function (_Component) {
 
             case 24:
               i++;
-              _context6.next = 9;
+              _context5.next = 9;
               break;
 
             case 27:
-              return _context6.abrupt('return', { text: text, link: link });
+              return _context5.abrupt('return', { text: text, link: link });
 
             case 28:
             case 'end':
-              return _context6.stop();
+              return _context5.stop();
           }
         }
-      }, _callee6, _this2, [[12, 17]]);
+      }, _callee5, _this2, [[12, 17]]);
     }));
 
     _this.handleChange = function (event) {
@@ -3390,14 +3373,14 @@ var Compose = function (_Component) {
     };
 
     _this.getImage = function () {
-      var _ref8 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee7(event) {
+      var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee8(event) {
         var userFile, options, compressedFile;
-        return _regenerator2.default.wrap(function _callee7$(_context7) {
+        return _regenerator2.default.wrap(function _callee8$(_context8) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context8.prev = _context8.next) {
               case 0:
                 if (!event.target.files[0]) {
-                  _context7.next = 23;
+                  _context8.next = 23;
                   break;
                 }
 
@@ -3406,52 +3389,63 @@ var Compose = function (_Component) {
                 // reject files over 5mb
 
                 if (!(userFile.size / 1024 / 1024 > 10)) {
-                  _context7.next = 7;
+                  _context8.next = 7;
                   break;
                 }
 
                 alert('Sorry, media files are limited to 10MB.');
-                return _context7.abrupt('return', false);
+                return _context8.abrupt('return', false);
 
               case 7:
                 if (!(userFile.type.substring(0, 5) == "image")) {
-                  _context7.next = 22;
+                  _context8.next = 22;
                   break;
                 }
 
-                _context7.prev = 8;
+                _context8.prev = 8;
                 options = {
                   maxSizeMB: 1,
                   maxWidthOrHeight: 1920,
                   useWebWorker: true
                 };
-                _context7.next = 12;
+                _context8.next = 12;
                 return (0, _browserImageCompression2.default)(userFile, options);
 
               case 12:
-                compressedFile = _context7.sent;
+                compressedFile = _context8.sent;
 
                 // console.log('compressedFile instanceof Blob', compressedFile instanceof Blob) // true
                 console.log('compressedFile size ' + compressedFile.size / 1024 / 1024 + ' MB'); // smaller than maxSizeMB
 
                 _this.setState({
                   image: compressedFile
-                }, function () {
+                }, (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6() {
+                  return _regenerator2.default.wrap(function _callee6$(_context6) {
+                    while (1) {
+                      switch (_context6.prev = _context6.next) {
+                        case 0:
 
-                  _this.uploadFile();
-                });
+                          _this.uploadFile();
 
-                _context7.next = 20;
+                        case 1:
+                        case 'end':
+                          return _context6.stop();
+                      }
+                    }
+                  }, _callee6, _this2);
+                })));
+
+                _context8.next = 20;
                 break;
 
               case 17:
-                _context7.prev = 17;
-                _context7.t0 = _context7['catch'](8);
+                _context8.prev = 17;
+                _context8.t0 = _context8['catch'](8);
 
-                console.log("Error compressing image: " + _context7.t0);
+                console.log("Error compressing image: " + _context8.t0);
 
               case 20:
-                _context7.next = 23;
+                _context8.next = 23;
                 break;
 
               case 22:
@@ -3459,27 +3453,39 @@ var Compose = function (_Component) {
 
                 _this.setState({
                   image: userFile
-                }, function () {
+                }, (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee7() {
+                  return _regenerator2.default.wrap(function _callee7$(_context7) {
+                    while (1) {
+                      switch (_context7.prev = _context7.next) {
+                        case 0:
 
-                  _this.uploadFile();
-                });
+                          _this.uploadFile();
+
+                        case 1:
+                        case 'end':
+                          return _context7.stop();
+                      }
+                    }
+                  }, _callee7, _this2);
+                })));
 
               case 23:
               case 'end':
-                return _context7.stop();
+                return _context8.stop();
             }
           }
-        }, _callee7, _this2, [[8, 17]]);
+        }, _callee8, _this2, [[8, 17]]);
       }));
 
-      return function (_x4) {
-        return _ref8.apply(this, arguments);
+      return function (_x3) {
+        return _ref7.apply(this, arguments);
       };
     }();
 
     _this.removeImage = function () {
       _this.setState((0, _extends3.default)({}, _this.state, {
-        image: ""
+        image: "",
+        img_url: ""
       }));
     };
 
@@ -3492,8 +3498,6 @@ var Compose = function (_Component) {
       linkImage: '',
       linkDesc: ''
     };
-
-    _this._isUploading = false;
     return _this;
   }
 
@@ -3538,7 +3542,7 @@ var Compose = function (_Component) {
               backgroundSize: 'cover' } }),
           _react2.default.createElement(
             'div',
-            { className: 'send-btn', onClick: this.submitPost },
+            { className: 'send-btn' + (this.state.uploading ? " off" : ""), onClick: this.submitPost },
             _react2.default.createElement('i', { className: 'ayn-right' })
           )
         );

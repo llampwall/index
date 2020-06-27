@@ -13,18 +13,16 @@ export default class Compose extends Component {
       linkUrl: '',
       linkTitle: '',
       linkImage: '',
-      linkDesc: ''
+      linkDesc: '',
     }
-
-    this._isUploading = false
   }
 
 
   submitPost = async () => {
 
-    // if (this._isUploading) {
-    //   return
-    // }
+    if (this.state.image != '' && this.state.img_url == '') {
+      return
+    }
 
     const self = this;
     // deal with just newline case
@@ -145,7 +143,6 @@ export default class Compose extends Component {
   uploadFile = async () => {
     const self = this
 
-    this._isUploading = true
     // get signed url from the server
     try {
       const file = self.state.image
@@ -165,16 +162,16 @@ export default class Compose extends Component {
           }
         }
         axios.put(response.data, file, options)
-        .then(async function(response) {
+        .then(function(response) {
             console.log(response)
-            self.setState({img_url: filename})
-            self._isUploading = false
+            self.setState({
+              img_url: filename
+            })
         })
       })
     } catch (error) {
       console.log("failed to upload file: " + error)
     }
-    this._isUploading = false
   }
 
   // check if a link is in the post and update it accordingly
@@ -276,7 +273,7 @@ export default class Compose extends Component {
 
             this.setState({
               image: compressedFile
-            }, () => {
+            }, async () => {
 
               this.uploadFile()
 
@@ -290,7 +287,7 @@ export default class Compose extends Component {
 
           this.setState({
             image: userFile
-          }, () => {
+          }, async () => {
 
             this.uploadFile()
 
@@ -305,7 +302,8 @@ export default class Compose extends Component {
   removeImage = () => {
     this.setState({
       ...this.state,
-      image: ""
+      image: "",
+      img_url: ""
     })
   }
 
@@ -334,7 +332,7 @@ export default class Compose extends Component {
               backgroundPosition: 'center center', 
               backgroundRepeat: 'no-repeat', 
               backgroundSize: 'cover'}} />
-          <div className="send-btn" onClick={this.submitPost}>
+          <div className={`send-btn${this.state.uploading ? " off" : ""}`} onClick={this.submitPost}>
             <i className="ayn-right" />
           </div>
         </section>

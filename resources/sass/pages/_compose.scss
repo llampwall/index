@@ -84,6 +84,10 @@
     .send-btn {
       bottom: 3px;
       right: 5px;
+
+      &.off {
+        pointer-events: none;
+      }
     }
 
     .preview {
