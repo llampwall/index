@@ -73,6 +73,7 @@ export default class Compose extends Component {
         self.setState({
           postContent: "",
           image: "",
+          img_url: "",
           linkUrl: "",
           linkTitle: "",
           linkImage: "",
@@ -107,6 +108,7 @@ export default class Compose extends Component {
               self.setState({
                 postContent: "",
                 image: "", 
+                img_url: "",
                 linkUrl: "",
                 linkTitle: "",
                 linkImage: "",
