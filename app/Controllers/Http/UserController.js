@@ -39,13 +39,15 @@ class UserController {
 
     // search for online users by name
     async searchOnline({auth, request}) {
+        console.log('hello')
         const q = request.qs.q
+        console.log(q)
         if (auth.user) {
             try {
                 const onlineSearch = await Database.from('users')
                     .innerJoin('onlines', 'users.id', 'onlines.user_id')
-                    .where('users.fname', 'like', ` %${q}% `)
-                    .orWhere('users.lname', 'like', ` %${q}% `)
+                    .where('users.fname', 'like', `%${q}%`)
+                    .orWhere('users.lname', 'like', `%${q}%`)
                 // const onlineSearch = await Database.raw(`select * from users where users.fname like " %${q}% " and where exists (select * from onlines where users.id = onlines.user_id and users.id != ${auth.user.id})`)
                console.log(onlineSearch)
                return onlineSearch

@@ -1,7 +1,6 @@
 import React, { Component} from 'react'
-import axois from 'axios'
 import ChatWindow from './ChatWindow'
-import Axios from 'axios'
+import axios from 'axios'
 import { debounce } from 'lodash'
 
 export default class Messenger extends Component {
@@ -315,26 +314,34 @@ export default class Messenger extends Component {
     const self = this
     try {
       
-      let allOffline = await Axios.get('/api/offline')
-      let allOnline = await Axios.get('/api/online')
+      let allOffline = await axios.get('/api/offline')
+      // let allOnline = await axios.get('/api/online')
+
       // console.log("users: ")
       // console.log(allUsers)
 
-      // let allOnline = ""
-      // if (this.state.search != "") {            // searching for users
-      //   allOnline = await axios.get(`/api/user/search`, {
-      //     params: {
-      //       q: self.state.query
-      //     }
-      //   })
-      // } else {
-      //   allOnline = await axois.get('/api/online')
-      // }
+      if (self.state.search != "") {            // searching for users
+        let allOnline = await axios.get(`/api/user/search`, {
+          params: {
+            q: self.state.search
+          }
+        })
+        self.setState({
+          users_on: allOnline.data,
+          users_off: allOffline.data
+        })
+      } else {
+        let allOnline = await axios.get('/api/online')
+        self.setState({
+          users_on: allOnline.data,
+          users_off: allOffline.data
+        })
+      }
 
-      self.setState({
-        users_on: allOnline.data,
-        users_off: allOffline.data
-      })
+      // self.setState({
+      //   users_on: allOnline.data,
+      //   users_off: allOffline.data
+      // })
     } catch(error) {
       console.log("error fetching users: " + error)
     }
@@ -422,10 +429,10 @@ export default class Messenger extends Component {
         this.setState({
           search: value
         }, () => {
-          this.forceUpdate()
+          this.populate()
         })
 
-      }, 2000);
+      }, 500);
     }
     this.debouncedFn()
   }

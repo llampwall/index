@@ -1316,13 +1316,13 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(42);
-
-var _axios2 = _interopRequireDefault(_axios);
-
 var _ChatWindow = __webpack_require__(334);
 
 var _ChatWindow2 = _interopRequireDefault(_ChatWindow);
+
+var _axios = __webpack_require__(42);
+
+var _axios2 = _interopRequireDefault(_axios);
 
 var _lodash = __webpack_require__(188);
 
@@ -1624,7 +1624,8 @@ var Messenger = function (_Component) {
     };
 
     _this.populate = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-      var self, allOffline, allOnline;
+      var self, allOffline, allOnline, _allOnline;
+
       return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -1636,45 +1637,57 @@ var Messenger = function (_Component) {
 
             case 4:
               allOffline = _context3.sent;
-              _context3.next = 7;
-              return _axios2.default.get('/api/online');
 
-            case 7:
+              if (!(self.state.search != "")) {
+                _context3.next = 12;
+                break;
+              }
+
+              _context3.next = 8;
+              return _axios2.default.get('/api/user/search', {
+                params: {
+                  q: self.state.search
+                }
+              });
+
+            case 8:
               allOnline = _context3.sent;
-
-              // console.log("users: ")
-              // console.log(allUsers)
-
-              // let allOnline = ""
-              // if (this.state.search != "") {            // searching for users
-              //   allOnline = await axios.get(`/api/user/search`, {
-              //     params: {
-              //       q: self.state.query
-              //     }
-              //   })
-              // } else {
-              //   allOnline = await axois.get('/api/online')
-              // }
 
               self.setState({
                 users_on: allOnline.data,
                 users_off: allOffline.data
               });
-              _context3.next = 14;
+              _context3.next = 16;
               break;
 
-            case 11:
-              _context3.prev = 11;
+            case 12:
+              _context3.next = 14;
+              return _axios2.default.get('/api/online');
+
+            case 14:
+              _allOnline = _context3.sent;
+
+              self.setState({
+                users_on: _allOnline.data,
+                users_off: allOffline.data
+              });
+
+            case 16:
+              _context3.next = 21;
+              break;
+
+            case 18:
+              _context3.prev = 18;
               _context3.t0 = _context3['catch'](1);
 
               console.log("error fetching users: " + _context3.t0);
 
-            case 14:
+            case 21:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[1, 11]]);
+      }, _callee3, _this2, [[1, 18]]);
     }));
 
     _this.displayUsers = function () {
@@ -1776,9 +1789,9 @@ var Messenger = function (_Component) {
           _this.setState({
             search: value
           }, function () {
-            _this.forceUpdate();
+            _this.populate();
           });
-        }, 2000);
+        }, 500);
       }
       _this.debouncedFn();
     };
