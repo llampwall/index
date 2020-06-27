@@ -307,6 +307,16 @@ export default class Compose extends Component {
     })
   }
 
+  block = () => {
+    if (this.state.image != '' && this.state.img_url == '') {
+      return (
+        <div className="sending" onClick={(e) => {e.stopPropagation()}}>
+          <span className="text">Uploading...</span>
+        </div>
+      )
+    }
+  }
+
   render () {
     if (this.props.user == undefined) {
       return (
@@ -317,6 +327,7 @@ export default class Compose extends Component {
     } else {
       return (
         <section id="compose">
+          {this.block()}
           <textarea name="postContent" id="content" cols={30} rows={10} placeholder="share something..." onChange={this.handleChange} onKeyUp={this.checkSubmit} value={this.state.postContent}/>
           <div className="user-img" style={{
             backgroundImage: `url("${this.props.user.profile_img}")`, 

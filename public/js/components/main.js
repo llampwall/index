@@ -3489,6 +3489,22 @@ var Compose = function (_Component) {
       }));
     };
 
+    _this.block = function () {
+      if (_this.state.image != '' && _this.state.img_url == '') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'sending', onClick: function onClick(e) {
+              e.stopPropagation();
+            } },
+          _react2.default.createElement(
+            'span',
+            { className: 'text' },
+            'Uploading...'
+          )
+        );
+      }
+    };
+
     _this.state = {
       postContent: '',
       image: '',
@@ -3523,6 +3539,7 @@ var Compose = function (_Component) {
         return _react2.default.createElement(
           'section',
           { id: 'compose' },
+          this.block(),
           _react2.default.createElement('textarea', { name: 'postContent', id: 'content', cols: 30, rows: 10, placeholder: 'share something...', onChange: this.handleChange, onKeyUp: this.checkSubmit, value: this.state.postContent }),
           _react2.default.createElement('div', { className: 'user-img', style: {
               backgroundImage: 'url("' + this.props.user.profile_img + '")',
