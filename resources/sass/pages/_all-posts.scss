@@ -120,6 +120,7 @@
           margin: 0 auto;
           transition: all .3s ease;
           min-height: 400px;
+          max-height: 700px;
           z-index: -5;
           cursor: pointer;
           @media (hover: hover) {
