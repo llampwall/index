@@ -21,6 +21,12 @@ export default class Compose extends Component {
 
 
   submitPost = async () => {
+
+    if (this._isUploading) {
+      return
+    }
+
+
     const self = this;
     // deal with just newline case
     if (this.state.postContent == '\n') {
