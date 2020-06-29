@@ -155,8 +155,9 @@ input[type="password"] {
   }
 
   .toasty {
-    background-color: $primary;
+    background: linear-gradient(-45deg, #1c252e, #212c37);
     border-radius: $border-r;
+    @include hard-shadow;
   
     .toast-body-custom {
       display: flex;
@@ -184,8 +185,9 @@ input[type="password"] {
         justify-content: center;
       
         .go {
-          width: 90%;
+          width: 100%;
           background-color: #AEEE98;
+          transition: all .2s ease-in-out;
           border-radius: $border-r;
           padding: 5px 0;
           cursor: pointer;

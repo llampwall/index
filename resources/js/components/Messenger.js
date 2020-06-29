@@ -151,9 +151,9 @@ export default class Messenger extends Component {
     if (message.from != undefined) {
         console.log('message to us!: ' + message.body)
 
-        // toast.info(this.displayMsg(message), {
-        //   toastId: new Date().getTime()
-        // })
+        toast.info(this.displayMsg(message), {
+          toastId: new Date().getTime()
+        })
         
 
         if (!this.state.blinkIds.has(message.from.id)) {
@@ -184,7 +184,7 @@ export default class Messenger extends Component {
         <span className="msg-usr">{`${message.from.fname} ${message.from.lname} says: `}</span>
         <span className="msg-body">{message.body}</span>
         <div className="buttons">
-          <button className="go" onClick={this.msgClick.bind(null, message)}>Go <i className="ayn-right"></i></button>
+          <button className="go" onClick={this.msgClick.bind(null, message)}>Reply <i className="ayn-right"></i></button>
           {/* <button className="close" onClick={closeToast}>Close</button> */}
         </div>
       </div>
@@ -194,6 +194,9 @@ export default class Messenger extends Component {
   msgClick = (message) => {
     if (!this.state.chatUser || (this.state.chatUser.id != message.from.id)) {
       this.openChat(message.from, true)
+      toast.dismiss()
+    } else {
+      toast.dismiss()
     }
   }
 
@@ -247,7 +250,10 @@ export default class Messenger extends Component {
   // open chat window / switch to a different one
   openChat = async (user, clicked) => {
     const self = this
-    let isDesktop = (window.innerWidth > 600)
+
+    if (this.state.open && (window.innerWidth < 600)) {     // close on small devices
+      this.setState({open: false})
+    }
     // console.log('clicked: ' + clicked)
 
     // do nothing if clicking your own name

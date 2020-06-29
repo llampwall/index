@@ -1425,30 +1425,29 @@ var Messenger = function (_Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(message.from != undefined)) {
-                  _context.next = 8;
+                  _context.next = 9;
                   break;
                 }
 
                 console.log('message to us!: ' + message.body);
 
-                // toast.info(this.displayMsg(message), {
-                //   toastId: new Date().getTime()
-                // })
-
+                _reactToastify.toast.info(_this.displayMsg(message), {
+                  toastId: new Date().getTime()
+                });
 
                 if (!_this.state.blinkIds.has(message.from.id)) {
                   _this.blink(message.from.id, 5000); // blink this users name for 5 seconds, then add it to unread
                 }
 
                 if (!(_this.state.chatUser == null)) {
-                  _context.next = 6;
+                  _context.next = 7;
                   break;
                 }
 
-                _context.next = 6;
+                _context.next = 7;
                 return _this.openChat(message.from, false);
 
-              case 6:
+              case 7:
 
                 if (_this.chatRef != null && _this.state.chatUser.id != message.from.id) {
                   _reactToastify.toast.info(_this.displayMsg(message), {
@@ -1460,7 +1459,7 @@ var Messenger = function (_Component) {
                   _this.chatRef.current.getMessages();
                 }
 
-              case 8:
+              case 9:
               case 'end':
                 return _context.stop();
             }
@@ -1494,7 +1493,7 @@ var Messenger = function (_Component) {
           _react2.default.createElement(
             'button',
             { className: 'go', onClick: _this.msgClick.bind(null, message) },
-            'Go ',
+            'Reply ',
             _react2.default.createElement('i', { className: 'ayn-right' })
           )
         )
@@ -1504,6 +1503,9 @@ var Messenger = function (_Component) {
     _this.msgClick = function (message) {
       if (!_this.state.chatUser || _this.state.chatUser.id != message.from.id) {
         _this.openChat(message.from, true);
+        _reactToastify.toast.dismiss();
+      } else {
+        _reactToastify.toast.dismiss();
       }
     };
 
@@ -1559,13 +1561,18 @@ var Messenger = function (_Component) {
 
     _this.openChat = function () {
       var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(user, clicked) {
-        var self, isDesktop, newBlink, newUnread;
+        var self, newBlink, newUnread;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 self = _this;
-                isDesktop = window.innerWidth > 600;
+
+
+                if (_this.state.open && window.innerWidth < 600) {
+                  // close on small devices
+                  _this.setState({ open: false });
+                }
                 // console.log('clicked: ' + clicked)
 
                 // do nothing if clicking your own name
