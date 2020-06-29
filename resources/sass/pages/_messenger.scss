@@ -102,7 +102,7 @@
         @media (hover: hover) {
           &:hover {
             color: $third-font-color;
-            transform: scale(1.02);
+            // transform: scale(1.02);
           }
         }
 
@@ -240,7 +240,7 @@
 
         .chat-user {
           font-size: 1.2rem;
-          color: $accents;
+          color: $third-font-color;
           z-index: inherit;
 
           &.blink {
