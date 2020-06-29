@@ -127,7 +127,7 @@ class Layout extends Component {
           
           <ToastContainer
             position="bottom-left"
-            autoClose={50000}
+            autoClose={4000}
             hideProgressBar
             newestOnTop={false}
             rtl={false}

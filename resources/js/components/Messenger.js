@@ -151,9 +151,9 @@ export default class Messenger extends Component {
     if (message.from != undefined) {
         console.log('message to us!: ' + message.body)
 
-        toast.info(this.displayMsg(message), {
-          toastId: new Date().getTime()
-        })
+        // toast.info(this.displayMsg(message), {
+        //   toastId: new Date().getTime()
+        // })
         
 
         if (!this.state.blinkIds.has(message.from.id)) {
