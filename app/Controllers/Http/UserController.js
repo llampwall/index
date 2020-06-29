@@ -48,12 +48,11 @@ class UserController {
         const q = request.qs.q
         // console.log(q)
         if (auth.user) {
-            try {                       
+            try {                                 
                 const onlineSearch = await Database.select('users.*').from('users')
                     .innerJoin('onlines', 'users.id', 'onlines.user_id')
                     .whereNot('users.id', auth.user.id)
-                    .where('users.fname', 'like', `%${q}%`)
-                    .orWhere('users.lname', 'like', `%${q}%`)
+                    .whereRaw(`concat(users.fname, " ", users.lname) like "%${q}%"`)
                     .groupBy('users.id')
             //    console.log(onlineSearch)
                response.send(onlineSearch)
