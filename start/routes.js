@@ -43,7 +43,7 @@ Route.get('/api/users', 'UserController.getAll')
 Route.get('/api/online', 'UserController.getAllOnline')
 Route.get('/api/offline', 'UserController.getAllOffline')
 Route.get('/api/convo', 'ApiController.getConvo')
-Route.get('/api/user/search', 'UserController.searchOnline')
+Route.get('/api/online/search', 'UserController.searchOnline')
 
 // posts
 Route.get('/posts', 'PostController.index')

@@ -1643,32 +1643,35 @@ var Messenger = function (_Component) {
               allOffline = _context3.sent;
 
               if (!(self.state.search != "")) {
-                _context3.next = 12;
+                _context3.next = 14;
                 break;
               }
 
-              _context3.next = 8;
-              return _axios2.default.get('/api/user/search', {
+              // searching for users
+              console.log('searching for ' + self.state.search);
+              _context3.next = 9;
+              return _axios2.default.get('/api/online/search', {
                 params: {
                   q: self.state.search
                 }
               });
 
-            case 8:
+            case 9:
               allOnline = _context3.sent;
 
+              console.log(allOnline);
               self.setState({
                 users_on: allOnline.data,
                 users_off: allOffline.data
               });
-              _context3.next = 16;
+              _context3.next = 18;
               break;
 
-            case 12:
-              _context3.next = 14;
+            case 14:
+              _context3.next = 16;
               return _axios2.default.get('/api/online');
 
-            case 14:
+            case 16:
               _allOnline = _context3.sent;
 
               self.setState({
@@ -1676,22 +1679,22 @@ var Messenger = function (_Component) {
                 users_off: allOffline.data
               });
 
-            case 16:
-              _context3.next = 21;
+            case 18:
+              _context3.next = 23;
               break;
 
-            case 18:
-              _context3.prev = 18;
+            case 20:
+              _context3.prev = 20;
               _context3.t0 = _context3['catch'](1);
 
               console.log("error fetching users: " + _context3.t0);
 
-            case 21:
+            case 23:
             case 'end':
               return _context3.stop();
           }
         }
-      }, _callee3, _this2, [[1, 18]]);
+      }, _callee3, _this2, [[1, 20]]);
     }));
 
     _this.displayUsers = function () {

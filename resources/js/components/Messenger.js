@@ -321,11 +321,13 @@ export default class Messenger extends Component {
       // console.log(allUsers)
 
       if (self.state.search != "") {            // searching for users
-        let allOnline = await axios.get(`/api/user/search`, {
+        console.log('searching for ' + self.state.search)
+        let allOnline = await axios.get(`/api/online/search`, {
           params: {
             q: self.state.search
           }
         })
+        console.log(allOnline)
         self.setState({
           users_on: allOnline.data,
           users_off: allOffline.data

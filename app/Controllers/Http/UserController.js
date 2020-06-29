@@ -5,13 +5,17 @@ const Database = use('Database')
 class UserController {
 
     async getLoggedInUser({auth, request, response}) {
-       if (auth.user) {
+        if (auth.user) {
+            // console.log("hello")
            return auth.user
-       }
+        } else {
+            response.unauthorized('Login First')
+        }
     }
 
     async profile({auth, request, response}) {
         if (auth.user) {
+            // console.log(request)
             try {
                 const user = await User.query().where('id', request.params.id).fetch()
                 return user.toJSON()
@@ -19,47 +23,49 @@ class UserController {
                 console.log(error)
             }
         } else {
-            return "LOGIN"
+            response.unauthorized('Login First')
         }
     }
 
-    async getAll({auth, request}) {
+    async getAll({auth, request, response}) {
         if (auth.user) {
+            // console.log("hello")
             try {
                const allUsers = await Database.table('users').select('*')
-               console.log(allUsers)
+            //    console.log(allUsers)
                return allUsers
             } catch (error) {
                 console.log(error)
             }
         } else {
-            return "LOGIN"
+            response.unauthorized('Login First')
         }
     }
 
     // search for online users by name
-    async searchOnline({auth, request}) {
-        console.log('hello')
+    async searchOnline({auth, request, response}) {
+
         const q = request.qs.q
-        console.log(q)
+        // console.log(q)
         if (auth.user) {
-            try {
-                const onlineSearch = await Database.from('users')
+            try {                       
+                const onlineSearch = await Database.select('users.*').from('users')
                     .innerJoin('onlines', 'users.id', 'onlines.user_id')
+                    .whereNot('users.id', auth.user.id)
                     .where('users.fname', 'like', `%${q}%`)
                     .orWhere('users.lname', 'like', `%${q}%`)
-                // const onlineSearch = await Database.raw(`select * from users where users.fname like " %${q}% " and where exists (select * from onlines where users.id = onlines.user_id and users.id != ${auth.user.id})`)
-               console.log(onlineSearch)
-               return onlineSearch
+                    .groupBy('users.id')
+            //    console.log(onlineSearch)
+               response.send(onlineSearch)
             } catch (error) {
                 console.log(error)
             }
         } else {
-            return "LOGIN"
+            response.unauthorized('Login First')
         }
     }
 
-    async getAllOnline({auth, request}) {
+    async getAllOnline({auth, request, response}) {
         if (auth.user) {
             try {
                const allOnline = await Database.raw(`select * from users where exists (select * from onlines where users.id = onlines.user_id and users.id != ${auth.user.id})`)
@@ -69,11 +75,11 @@ class UserController {
                 console.log(error)
             }
         } else {
-            return "LOGIN"
+            response.unauthorized('Login First')
         }
     }
 
-    async getAllOffline({auth, request}) {
+    async getAllOffline({auth, request, response}) {
         if (auth.user) {
             try {
                const allOffline = await Database.raw('select * from users where not exists (select * from onlines where users.id = onlines.user_id)')
@@ -83,7 +89,7 @@ class UserController {
                 console.log(error)
             }
         } else {
-            return "LOGIN"
+            response.unauthorized('Login First')
         }
     }
 
