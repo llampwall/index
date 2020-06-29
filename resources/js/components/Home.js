@@ -33,8 +33,32 @@ export default class Home extends Component {
     })
     this.chat.on('update', throttle(function(message) {                       // throttled 3 seconds
       console.log('new post')
+      // toast.info(self.displayMsg(message), {
+      //   toastId: new Date().getTime()
+      // })
       self.postAreaRef.current && self.postAreaRef.current.getNew()
     }, 2000))
+  }
+
+  displayMsg = (message, closeToast) => {
+    console.log(message.from.fname + " " + message.from.lname + " made a new post!")
+    const self = this
+    return (
+      <div className="toast-body-custom">
+        <div className="msg">
+          <span className="msg-usr">{`${message.from.fname}${message.from.lname ? " " + message.from.lname : ""} `}</span>
+          <span className="msg-body">made a new post!</span>
+        </div>
+        <div className="buttons">
+          <button className="go" onClick={this.msgClick.bind(null, message)}>Go <i className="ayn-right"></i></button>
+          {/* <button className="close" onClick={closeToast}>Close</button> */}
+        </div>
+      </div>
+    )
+  }
+
+  msgClick = () => {
+    console.log('click')
   }
 
   // if this is a single post page, get the data for the post and the poster

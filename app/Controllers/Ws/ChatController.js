@@ -148,7 +148,11 @@ class ChatController {
   }
 
   async updateFeeds() {
-    this.socket.broadcast('update', 'refresh')
+    let newMsg = {
+      from: this.auth.user,
+      body: 'post'
+    }
+    this.socket.broadcast('update', newMsg)
   }
 
   async deletePost(id) {

@@ -858,6 +858,43 @@ var Home = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
+    _this.displayMsg = function (message, closeToast) {
+      console.log(message.from.fname + " " + message.from.lname + " made a new post!");
+      var self = _this;
+      return _react2.default.createElement(
+        'div',
+        { className: 'toast-body-custom' },
+        _react2.default.createElement(
+          'div',
+          { className: 'msg' },
+          _react2.default.createElement(
+            'span',
+            { className: 'msg-usr' },
+            '' + message.from.fname + (message.from.lname ? " " + message.from.lname : "") + ' '
+          ),
+          _react2.default.createElement(
+            'span',
+            { className: 'msg-body' },
+            'made a new post!'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'buttons' },
+          _react2.default.createElement(
+            'button',
+            { className: 'go', onClick: _this.msgClick.bind(null, message) },
+            'Go ',
+            _react2.default.createElement('i', { className: 'ayn-right' })
+          )
+        )
+      );
+    };
+
+    _this.msgClick = function () {
+      console.log('click');
+    };
+
     _this.getPost = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
       var p_id, postData;
       return _regenerator2.default.wrap(function _callee$(_context) {
@@ -914,6 +951,9 @@ var Home = function (_Component) {
       this.chat.on('update', (0, _lodash.throttle)(function (message) {
         // throttled 3 seconds
         console.log('new post');
+        // toast.info(self.displayMsg(message), {
+        //   toastId: new Date().getTime()
+        // })
         self.postAreaRef.current && self.postAreaRef.current.getNew();
       }, 2000));
     }
