@@ -375,7 +375,7 @@
       margin-left: 2rem;
       padding: .5rem;
       height: 50px;
-      background: $right-menu-bg;
+      background: transparent;
       border-top: $border-thickness solid $border-color;
       position: absolute;
       bottom: 0;
@@ -385,6 +385,7 @@
 
       i {
         margin-left: .8rem;
+        color: $third-font-color;
       }
 
       input[type='text'] {
@@ -392,7 +393,7 @@
         background: transparent;
         outline: none;
         padding: .5rem;
-        border-radius: 30%;
+        border-radius: 3px;
         width: 70%;
         color: $lr-menu-headers;
         
