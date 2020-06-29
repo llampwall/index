@@ -25,6 +25,7 @@ export default class ChatWindow extends Component {
         chat: this.props.chat
     }, () => {
         // console.log(this.state)
+        document.getElementById("chatmessage").focus()
         self.getMessages()
     })
   }
@@ -36,6 +37,7 @@ export default class ChatWindow extends Component {
         min: false
     }, () => {
         console.log('changed user: ' + this.state.to.fname)
+        document.getElementById("chatmessage").focus()
         this.getMessages()
     })
   }
@@ -148,7 +150,7 @@ export default class ChatWindow extends Component {
                     <div ref={this.msgEndRef}></div>
                 </div>
                 <div className='chat-compose'>
-                    <input type='text' name='message' value={this.state.message} onKeyUp={this.checkSubmit} onChange={this.changeText} placeholder='enter a message'/>
+                    <input type='text' id='chatmessage' name='message' value={this.state.message} onKeyUp={this.checkSubmit} onChange={this.changeText} placeholder='enter a message'/>
                     <div className='send-btn' onTouchStart={this.sendMsg} onClick={this.sendMsg}><i className='ayn-paper-plane-1'></i></div> 
                 </div>
           </div>

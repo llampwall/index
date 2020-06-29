@@ -2607,6 +2607,7 @@ var ChatWindow = function (_Component) {
         min: false
       }, function () {
         console.log('changed user: ' + _this.state.to.fname);
+        document.getElementById("chatmessage").focus();
         _this.getMessages();
       });
     };
@@ -2732,6 +2733,7 @@ var ChatWindow = function (_Component) {
         chat: this.props.chat
       }, function () {
         // console.log(this.state)
+        document.getElementById("chatmessage").focus();
         self.getMessages();
       });
     }
@@ -2790,7 +2792,7 @@ var ChatWindow = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'chat-compose' },
-            _react2.default.createElement('input', { type: 'text', name: 'message', value: this.state.message, onKeyUp: this.checkSubmit, onChange: this.changeText, placeholder: 'enter a message' }),
+            _react2.default.createElement('input', { type: 'text', id: 'chatmessage', name: 'message', value: this.state.message, onKeyUp: this.checkSubmit, onChange: this.changeText, placeholder: 'enter a message' }),
             _react2.default.createElement(
               'div',
               { className: 'send-btn', onTouchStart: this.sendMsg, onClick: this.sendMsg },
