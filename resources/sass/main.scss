@@ -35,7 +35,6 @@
   @media (hover: hover) {
     &:hover {
       color: #AEEE98;
-      transform: scale(1.1);
       // background: $button-color;
     }
   }
@@ -157,6 +156,7 @@ input[type="password"] {
 
   .toasty {
     background-color: $primary;
+    border-radius: $border-r;
   
     .toast-body-custom {
       display: flex;
@@ -168,36 +168,46 @@ input[type="password"] {
       .msg-usr {
         width: 100%;
         color: $accents;
-        margin: .5rem;
       }
     
       .msg-body {
         width: 100%;
         color: $placeholder-font-color;
         line-height: 1.4;
-        margin: .5rem;
+        margin: .7rem;
       }
     
       .buttons {
         width: 100%;
         margin-top: 5px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
       
         .go {
-          width: 68%;
+          width: 90%;
           background-color: #AEEE98;
           border-radius: $border-r;
           padding: 5px 0;
           cursor: pointer;
+          @media (hover: hover) {
+            &:hover {
+              background-color: rgb(71, 149, 45);
+            }
+          }
         }
-        .close {
-          width: 28%;
-          background-color: lightcoral;
-          border-radius: $border-r;
-          padding: 5px 0;
-          cursor: pointer;
-        }
+        // .close {
+        //   width: 28%;
+        //   background-color: lightcoral;
+        //   border-radius: $border-r;
+        //   padding: 5px 0;
+        //   cursor: pointer;
+        //   @media (hover: hover) {
+        //     &:hover {
+        //       background-color: rgb(149, 54, 45);
+        //       // background: $button-color;
+        //     }
+        //   }
+        // }
       }
     }  
   }
@@ -264,8 +274,6 @@ input[type="password"] {
       height: 85vh;
     }
   }
-
- 
 
   .welcome-page {
     height: 100vh;

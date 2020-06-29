@@ -151,9 +151,9 @@ export default class Messenger extends Component {
     if (message.from != undefined) {
         console.log('message to us!: ' + message.body)
 
-        toast.info(this.displayMsg(message), {
-          toastId: new Date().getTime()
-        })
+        // toast.info(this.displayMsg(message), {
+        //   toastId: new Date().getTime()
+        // })
         
 
         if (!this.state.blinkIds.has(message.from.id)) {
@@ -165,9 +165,9 @@ export default class Messenger extends Component {
         }
 
         if (this.chatRef != null && this.state.chatUser.id != message.from.id)  {
-          // toast(message.body, {
-          //   toastId: new Date().getTime()
-          // })
+          toast.info(this.displayMsg(message), {
+            toastId: new Date().getTime()
+          })
         }
 
         if (this.chatRef != null)  {
@@ -177,16 +177,25 @@ export default class Messenger extends Component {
      }
   }
 
-  displayMsg = (message , closeToast) => (
-    <div className="toast-body-custom">
-      <span className="msg-usr">{`${message.from.fname} ${message.from.lname} says: `}</span>
-      <span className="msg-body">{message.body}</span>
-      <div className="buttons">
-        <button className="go" onClick={() => {this.openChat(message.from, false)}}>Go <i className="ayn-right"></i></button>
-        <button className="close" onClick={closeToast}>Close</button>
+  displayMsg = (message, closeToast) => {
+    const self = this
+    return (
+      <div className="toast-body-custom">
+        <span className="msg-usr">{`${message.from.fname} ${message.from.lname} says: `}</span>
+        <span className="msg-body">{message.body}</span>
+        <div className="buttons">
+          <button className="go" onClick={this.msgClick.bind(null, message)}>Go <i className="ayn-right"></i></button>
+          {/* <button className="close" onClick={closeToast}>Close</button> */}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+
+  msgClick = (message) => {
+    if (!this.state.chatUser || (this.state.chatUser.id != message.from.id)) {
+      this.openChat(message.from, true)
+    }
+  }
 
   // blink username color change when message received
   blink = (u_id, ms) => {

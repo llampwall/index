@@ -1425,41 +1425,42 @@ var Messenger = function (_Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(message.from != undefined)) {
-                  _context.next = 9;
+                  _context.next = 8;
                   break;
                 }
 
                 console.log('message to us!: ' + message.body);
 
-                _reactToastify.toast.info(_this.displayMsg(message), {
-                  toastId: new Date().getTime()
-                });
+                // toast.info(this.displayMsg(message), {
+                //   toastId: new Date().getTime()
+                // })
+
 
                 if (!_this.state.blinkIds.has(message.from.id)) {
                   _this.blink(message.from.id, 5000); // blink this users name for 5 seconds, then add it to unread
                 }
 
                 if (!(_this.state.chatUser == null)) {
-                  _context.next = 7;
+                  _context.next = 6;
                   break;
                 }
 
-                _context.next = 7;
+                _context.next = 6;
                 return _this.openChat(message.from, false);
 
-              case 7:
+              case 6:
 
                 if (_this.chatRef != null && _this.state.chatUser.id != message.from.id) {
-                  // toast(message.body, {
-                  //   toastId: new Date().getTime()
-                  // })
+                  _reactToastify.toast.info(_this.displayMsg(message), {
+                    toastId: new Date().getTime()
+                  });
                 }
 
                 if (_this.chatRef != null) {
                   _this.chatRef.current.getMessages();
                 }
 
-              case 9:
+              case 8:
               case 'end':
                 return _context.stop();
             }
@@ -1473,6 +1474,7 @@ var Messenger = function (_Component) {
     }();
 
     _this.displayMsg = function (message, closeToast) {
+      var self = _this;
       return _react2.default.createElement(
         'div',
         { className: 'toast-body-custom' },
@@ -1491,19 +1493,18 @@ var Messenger = function (_Component) {
           { className: 'buttons' },
           _react2.default.createElement(
             'button',
-            { className: 'go', onClick: function onClick() {
-                _this.openChat(message.from, false);
-              } },
+            { className: 'go', onClick: _this.msgClick.bind(null, message) },
             'Go ',
             _react2.default.createElement('i', { className: 'ayn-right' })
-          ),
-          _react2.default.createElement(
-            'button',
-            { className: 'close', onClick: closeToast },
-            'Close'
           )
         )
       );
+    };
+
+    _this.msgClick = function (message) {
+      if (!_this.state.chatUser || _this.state.chatUser.id != message.from.id) {
+        _this.openChat(message.from, true);
+      }
     };
 
     _this.blink = function (u_id, ms) {
