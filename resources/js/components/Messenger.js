@@ -2,6 +2,7 @@ import React, { Component} from 'react'
 import ChatWindow from './ChatWindow'
 import axios from 'axios'
 import { debounce } from 'lodash'
+import { toast } from 'react-toastify';
 
 export default class Messenger extends Component {
   constructor () {
@@ -149,6 +150,8 @@ export default class Messenger extends Component {
   handleMsg = async (message) => {
     if (message.from != undefined) {
         console.log('message to us!: ' + message.body)
+          
+        toast(message.body)
 
         if (!this.state.blinkIds.has(message.from.id)) {
           this.blink(message.from.id, 3000)    // blink this users name for 4 seconds, then add it to unread

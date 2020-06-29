@@ -13,6 +13,7 @@ import Messenger from '../components/Messenger'
 import SearchHeader from '../components/SearchHeader'
 import Loading from '../components/Loading'
 import Ws from '@adonisjs/websocket-client'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 class Layout extends Component {
@@ -119,11 +120,23 @@ class Layout extends Component {
     this.homeRef.current && this.homeRef.current.search(query)
   }
 
-
   render () {
     return (
       <Router>
         <div className="app-container home-page">
+          
+          <ToastContainer
+            position="bottom-left"
+            autoClose={5000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable={false}
+            pauseOnHover
+            limit={5}
+          />
 
           <Loading active={(this.state.user != undefined) ? "" : 'active'}/>
 

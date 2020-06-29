@@ -138,8 +138,8 @@ export default class ChatWindow extends Component {
     } else {
       return (
           <div className={`chat ${this.state.min ? 'min' : ''}`}>
-                <div className='chat-header'>
-                  <div className='min-btn' onClick={this.minChat}><i className={`ayn-down-open ${this.state.min ? 'min' : ''}`}></i></div>
+                <div className='chat-header' onClick={this.minChat}>
+                  <div className='min-btn'><i className={`ayn-down-open ${this.state.min ? 'min' : ''}`}></i></div>
                   <span className={`chat-user ${this.props.blink ? 'blink' : ''}`}>{this.state.to.fname} {this.state.to.lname}</span>
                   <div className='close-btn' onClick={this.closeChat}><i className='ayn-cancel'></i></div>
                 </div>

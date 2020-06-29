@@ -237,6 +237,7 @@
         position: relative;
         z-index: inherit;
         transition: all .3s ease-in-out;
+        cursor: pointer;
 
         .chat-user {
           font-size: 1.2rem;

@@ -18,7 +18,7 @@ var _defineProperty2 = __webpack_require__(111);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _slicedToArray2 = __webpack_require__(550);
+var _slicedToArray2 = __webpack_require__(552);
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
@@ -52,7 +52,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(96);
 
-var _Comments = __webpack_require__(335);
+var _Comments = __webpack_require__(337);
 
 var _Comments2 = _interopRequireDefault(_Comments);
 
@@ -60,11 +60,11 @@ var _axios = __webpack_require__(42);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Modal = __webpack_require__(337);
+var _Modal = __webpack_require__(339);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
-var _nodeVibrant = __webpack_require__(724);
+var _nodeVibrant = __webpack_require__(727);
 
 var Vibrant = _interopRequireWildcard(_nodeVibrant);
 
@@ -786,7 +786,7 @@ exports.default = Post;
 
 /***/ }),
 
-/***/ 310:
+/***/ 312:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -828,11 +828,11 @@ var _axios = __webpack_require__(42);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _PostArea = __webpack_require__(338);
+var _PostArea = __webpack_require__(340);
 
 var _PostArea2 = _interopRequireDefault(_PostArea);
 
-var _Compose = __webpack_require__(336);
+var _Compose = __webpack_require__(338);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
@@ -982,7 +982,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 311:
+/***/ 313:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1217,7 +1217,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 312:
+/***/ 314:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1278,7 +1278,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 313:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1320,7 +1320,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ChatWindow = __webpack_require__(334);
+var _ChatWindow = __webpack_require__(336);
 
 var _ChatWindow2 = _interopRequireDefault(_ChatWindow);
 
@@ -1329,6 +1329,8 @@ var _axios = __webpack_require__(42);
 var _axios2 = _interopRequireDefault(_axios);
 
 var _lodash = __webpack_require__(189);
+
+var _reactToastify = __webpack_require__(199);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1423,31 +1425,33 @@ var Messenger = function (_Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(message.from != undefined)) {
-                  _context.next = 7;
+                  _context.next = 8;
                   break;
                 }
 
                 console.log('message to us!: ' + message.body);
+
+                (0, _reactToastify.toast)(message.body);
 
                 if (!_this.state.blinkIds.has(message.from.id)) {
                   _this.blink(message.from.id, 3000); // blink this users name for 4 seconds, then add it to unread
                 }
 
                 if (!(_this.state.chatUser == null)) {
-                  _context.next = 6;
+                  _context.next = 7;
                   break;
                 }
 
-                _context.next = 6;
+                _context.next = 7;
                 return _this.openChat(message.from, false);
 
-              case 6:
+              case 7:
 
                 if (_this.chatRef != null) {
                   _this.chatRef.current.getMessages();
                 }
 
-              case 7:
+              case 8:
               case 'end':
                 return _context.stop();
             }
@@ -1962,7 +1966,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 314:
+/***/ 316:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2008,7 +2012,7 @@ var _axios = __webpack_require__(42);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactTransitionGroup = __webpack_require__(760);
+var _reactTransitionGroup = __webpack_require__(304);
 
 var _Post = __webpack_require__(131);
 
@@ -2333,7 +2337,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 315:
+/***/ 317:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2436,7 +2440,7 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 334:
+/***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2655,10 +2659,10 @@ var ChatWindow = function (_Component) {
           { className: 'chat ' + (this.state.min ? 'min' : '') },
           _react2.default.createElement(
             'div',
-            { className: 'chat-header' },
+            { className: 'chat-header', onClick: this.minChat },
             _react2.default.createElement(
               'div',
-              { className: 'min-btn', onClick: this.minChat },
+              { className: 'min-btn' },
               _react2.default.createElement('i', { className: 'ayn-down-open ' + (this.state.min ? 'min' : '') })
             ),
             _react2.default.createElement(
@@ -2701,7 +2705,7 @@ exports.default = ChatWindow;
 
 /***/ }),
 
-/***/ 335:
+/***/ 337:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2938,7 +2942,7 @@ exports.default = Comments;
 
 /***/ }),
 
-/***/ 336:
+/***/ 338:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2988,7 +2992,7 @@ var _axios = __webpack_require__(42);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _browserImageCompression = __webpack_require__(600);
+var _browserImageCompression = __webpack_require__(602);
 
 var _browserImageCompression2 = _interopRequireDefault(_browserImageCompression);
 
@@ -3593,7 +3597,7 @@ exports.default = Compose;
 
 /***/ }),
 
-/***/ 337:
+/***/ 339:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3623,7 +3627,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(28);
+var _propTypes = __webpack_require__(24);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -3691,7 +3695,7 @@ exports.default = Modal;
 
 /***/ }),
 
-/***/ 338:
+/***/ 340:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3701,7 +3705,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(551);
+var _toConsumableArray2 = __webpack_require__(553);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -3991,7 +3995,7 @@ exports.default = PostArea;
 
 /***/ }),
 
-/***/ 339:
+/***/ 341:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4025,7 +4029,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(77);
+var _reactDom = __webpack_require__(70);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -4035,33 +4039,35 @@ var _axios = __webpack_require__(42);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(310);
+var _Home = __webpack_require__(312);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(314);
+var _Profile = __webpack_require__(316);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(311);
+var _LeftMenu = __webpack_require__(313);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(313);
+var _Messenger = __webpack_require__(315);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(315);
+var _SearchHeader = __webpack_require__(317);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(312);
+var _Loading = __webpack_require__(314);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
-var _websocketClient = __webpack_require__(309);
+var _websocketClient = __webpack_require__(311);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
+
+var _reactToastify = __webpack_require__(199);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4224,6 +4230,18 @@ var Layout = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'app-container home-page' },
+          _react2.default.createElement(_reactToastify.ToastContainer, {
+            position: 'bottom-left',
+            autoClose: 5000,
+            hideProgressBar: true,
+            newestOnTop: false,
+            closeOnClick: true,
+            rtl: false,
+            pauseOnFocusLoss: true,
+            draggable: false,
+            pauseOnHover: true,
+            limit: 5
+          }),
           _react2.default.createElement(_Loading2.default, { active: this.state.user != undefined ? "" : 'active' }),
           _react2.default.createElement(_LeftMenu2.default, { user: this.state.user, ws: this.ws, open: this.openLeft, tron: this.tron, ref: this.leftRef }),
           _react2.default.createElement(
@@ -4254,4 +4272,4 @@ _reactDom2.default.render(_react2.default.createElement(Layout, null), app);
 
 /***/ })
 
-},[339]);
+},[341]);
