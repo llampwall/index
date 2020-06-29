@@ -1,4 +1,5 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
+import { Link } from "react-router-dom";
 
 export default class LeftMenu extends Component {
   constructor () {
@@ -54,6 +55,7 @@ export default class LeftMenu extends Component {
     })
   }
 
+  
   close = () => {
     this.setState({open: false})
     document.getElementById("left-menu").classList.remove("open");
@@ -83,11 +85,11 @@ export default class LeftMenu extends Component {
         <section id="left-menu" className={
           `${this.state.open ? "open" : "closed"} ${this.state.tron ? "tron" : ""}`
         }>
-          <a className="account-dropdown" href={`/profile/${this.props.user.id}`}>
+          <Link to={`/profile/${this.props.user.id}`} className="account-dropdown">
             <div className="username">
               {`${fname} ${lname}`}
             </div>
-          </a>
+          </Link>
   
           <div className="groups">
             <div className="title">you</div>

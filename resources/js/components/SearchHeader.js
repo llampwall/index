@@ -1,5 +1,6 @@
 import React, { Component} from 'react'
 import { debounce } from 'lodash';
+import { Link } from "react-router-dom";
 
 export default class SearchHeader extends Component {
   constructor () {
@@ -33,13 +34,13 @@ export default class SearchHeader extends Component {
     return (
         <div className="header">
             {/* <div className="nothing" /> */}
-            <a href="/">
+            <Link to="/">
               <img src="/img/sun_small.JPG" alt="index - home"></img>
-            </a>
+            </Link>
             <div className="search">
-                <a href="/">
+                <Link to="/">
                   <img src="/img/index_orange.png" />
-                </a>
+                </Link>
                 <input type="text" name="search" placeholder="search..." onChange={this.updateSearch} />
             </div>
             {/* <div className="icons">

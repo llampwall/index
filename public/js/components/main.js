@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 130:
+/***/ 131:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10,11 +10,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(111);
+var _extends2 = __webpack_require__(112);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _defineProperty2 = __webpack_require__(110);
+var _defineProperty2 = __webpack_require__(111);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -49,6 +49,8 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(96);
 
 var _Comments = __webpack_require__(335);
 
@@ -696,8 +698,8 @@ var Post = function (_Component) {
             'div',
             { className: 'post-header' },
             _react2.default.createElement(
-              'a',
-              { href: '/profile/' + this.state.user.id, className: 'author' },
+              _reactRouterDom.Link,
+              { to: '/profile/' + this.state.user.id, className: 'author' },
               _react2.default.createElement('div', { className: 'user-img', style: {
                   backgroundImage: 'url("' + this.state.user.profile_img + '")',
                   backgroundPosition: 'center center',
@@ -712,8 +714,8 @@ var Post = function (_Component) {
               )
             ),
             _react2.default.createElement(
-              'a',
-              { href: '/post/' + this.props.post.id, className: 'text' },
+              _reactRouterDom.Link,
+              { to: '/post/' + this.props.post.id, className: 'text' },
               'shared ',
               this.getType(),
               ' ',
@@ -784,7 +786,7 @@ exports.default = Post;
 
 /***/ }),
 
-/***/ 309:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -834,11 +836,11 @@ var _Compose = __webpack_require__(336);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
-var _Post = __webpack_require__(130);
+var _Post = __webpack_require__(131);
 
 var _Post2 = _interopRequireDefault(_Post);
 
-var _lodash = __webpack_require__(188);
+var _lodash = __webpack_require__(189);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -980,7 +982,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 310:
+/***/ 311:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1009,6 +1011,8 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(96);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1113,8 +1117,8 @@ var LeftMenu = function (_Component) {
           "section",
           { id: "left-menu", className: (this.state.open ? "open" : "closed") + " " + (this.state.tron ? "tron" : "") },
           _react2.default.createElement(
-            "a",
-            { className: "account-dropdown", href: "/profile/" + this.props.user.id },
+            _reactRouterDom.Link,
+            { to: "/profile/" + this.props.user.id, className: "account-dropdown" },
             _react2.default.createElement(
               "div",
               { className: "username" },
@@ -1213,7 +1217,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 311:
+/***/ 312:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1274,7 +1278,7 @@ exports.default = Loading;
 
 /***/ }),
 
-/***/ 312:
+/***/ 313:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1284,7 +1288,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(111);
+var _extends2 = __webpack_require__(112);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -1324,7 +1328,7 @@ var _axios = __webpack_require__(42);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _lodash = __webpack_require__(188);
+var _lodash = __webpack_require__(189);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1957,7 +1961,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 313:
+/***/ 314:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1971,7 +1975,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(111);
+var _extends2 = __webpack_require__(112);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -2005,7 +2009,7 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactTransitionGroup = __webpack_require__(760);
 
-var _Post = __webpack_require__(130);
+var _Post = __webpack_require__(131);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -2328,7 +2332,7 @@ exports.default = Profile;
 
 /***/ }),
 
-/***/ 314:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2338,7 +2342,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(110);
+var _defineProperty2 = __webpack_require__(111);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2362,7 +2366,9 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = __webpack_require__(188);
+var _lodash = __webpack_require__(189);
+
+var _reactRouterDom = __webpack_require__(96);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2405,16 +2411,16 @@ var SearchHeader = function (_Component) {
         'div',
         { className: 'header' },
         _react2.default.createElement(
-          'a',
-          { href: '/' },
+          _reactRouterDom.Link,
+          { to: '/' },
           _react2.default.createElement('img', { src: '/img/sun_small.JPG', alt: 'index - home' })
         ),
         _react2.default.createElement(
           'div',
           { className: 'search' },
           _react2.default.createElement(
-            'a',
-            { href: '/' },
+            _reactRouterDom.Link,
+            { to: '/' },
             _react2.default.createElement('img', { src: '/img/index_orange.png' })
           ),
           _react2.default.createElement('input', { type: 'text', name: 'search', placeholder: 'search...', onChange: this.updateSearch })
@@ -2439,7 +2445,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(110);
+var _defineProperty2 = __webpack_require__(111);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2941,7 +2947,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = __webpack_require__(110);
+var _defineProperty2 = __webpack_require__(111);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2949,7 +2955,7 @@ var _regenerator = __webpack_require__(49);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = __webpack_require__(111);
+var _extends2 = __webpack_require__(112);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -3718,7 +3724,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(130);
+var _Post = __webpack_require__(131);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -4022,37 +4028,37 @@ var _reactDom = __webpack_require__(77);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(317);
+var _reactRouterDom = __webpack_require__(96);
 
 var _axios = __webpack_require__(42);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Home = __webpack_require__(309);
+var _Home = __webpack_require__(310);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Profile = __webpack_require__(313);
+var _Profile = __webpack_require__(314);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
-var _LeftMenu = __webpack_require__(310);
+var _LeftMenu = __webpack_require__(311);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(312);
+var _Messenger = __webpack_require__(313);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(314);
+var _SearchHeader = __webpack_require__(315);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _Loading = __webpack_require__(311);
+var _Loading = __webpack_require__(312);
 
 var _Loading2 = _interopRequireDefault(_Loading);
 
-var _websocketClient = __webpack_require__(308);
+var _websocketClient = __webpack_require__(309);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
 

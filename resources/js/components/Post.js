@@ -1,4 +1,5 @@
 import React, { Component} from 'react'
+import { Link } from 'react-router-dom'
 import Comments from "./Comments"
 import axios from 'axios'
 import Modal from './Modal'
@@ -434,16 +435,16 @@ export default class Post extends Component {
         return (
             <div className="post" id={`post${this.props.post.id}`}>
                 <div className="post-header">
-                    <a href={`/profile/${this.state.user.id}`} className="author">
+                    <Link to={`/profile/${this.state.user.id}`} className="author">
                         <div className="user-img" style={{
                         backgroundImage: `url("${this.state.user.profile_img}")`, 
                         backgroundPosition: 'center center', 
                         backgroundRepeat: 'no-repeat', 
                         backgroundSize: 'cover'}} />
                         <div className="username">{this.state.user.fname} {this.state.user.lname}</div>
-                    </a>
+                    </Link>
 
-                    <a href={`/post/${this.props.post.id}`} className="text">shared {this.getType()} <i className="ayn-link"></i></a>
+                    <Link to={`/post/${this.props.post.id}`} className="text">shared {this.getType()} <i className="ayn-link"></i></Link>
                       
                     <div className="time">{new Date(this.props.post.created_at).toLocaleString()}</div>
                     {this.showDelBtn()}
