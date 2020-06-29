@@ -150,23 +150,43 @@ export default class Messenger extends Component {
   handleMsg = async (message) => {
     if (message.from != undefined) {
         console.log('message to us!: ' + message.body)
-          
-        toast(message.body)
+
+        toast.info(this.displayMsg(message), {
+          toastId: new Date().getTime()
+        })
+        
 
         if (!this.state.blinkIds.has(message.from.id)) {
-          this.blink(message.from.id, 3000)    // blink this users name for 4 seconds, then add it to unread
+          this.blink(message.from.id, 5000)    // blink this users name for 5 seconds, then add it to unread
         }
 
-        if (this.state.chatUser == null) {
+        if (this.state.chatUser == null) {      // open the chat window if it isnt open
           await this.openChat(message.from, false)
         }
 
-        if(this.chatRef != null)  {
+        if (this.chatRef != null && this.state.chatUser.id != message.from.id)  {
+          // toast(message.body, {
+          //   toastId: new Date().getTime()
+          // })
+        }
+
+        if (this.chatRef != null)  {
           this.chatRef.current.getMessages()
         }
         
      }
   }
+
+  displayMsg = (message , closeToast) => (
+    <div className="toast-body-custom">
+      <span className="msg-usr">{`${message.from.fname} ${message.from.lname} says: `}</span>
+      <span className="msg-body">{message.body}</span>
+      <div className="buttons">
+        <button className="go" onClick={() => {this.openChat(message.from, false)}}>Go <i className="ayn-right"></i></button>
+        <button className="close" onClick={closeToast}>Close</button>
+      </div>
+    </div>
+  )
 
   // blink username color change when message received
   blink = (u_id, ms) => {
@@ -227,14 +247,13 @@ export default class Messenger extends Component {
     }
 
     if (this.state.connected == false) {
-      this.props.ws.connect()
+      await this.props.ws.connect()
       this.chat = this.props.ws.getSubscription('chat') || this.props.ws.subscribe('chat')
     }
     // send login
     this.setState({
-      // ...this.state,
       connected: true,
-      open: isDesktop  //close on small devices
+      // open: isDesktop  //close on small devices
     })
 
     // if blinking, stop blinking
@@ -242,9 +261,8 @@ export default class Messenger extends Component {
       let newBlink = new Set(this.state.blinkIds)
       newBlink.delete(user.id)
       this.setState({
-        // ...this.state,
         connected: true,
-        open: isDesktop, 
+        // open: isDesktop, 
         blinkIds: newBlink
       })
       clearInterval(this.blinkInt)
@@ -260,7 +278,7 @@ export default class Messenger extends Component {
       this.setState({
         // ...this.state,
         connected: true,
-        open: isDesktop, 
+        // open: isDesktop, 
         unread: newUnread
       })
     }
@@ -269,14 +287,14 @@ export default class Messenger extends Component {
       this.setState({
         // ...this.state,
         connected: true,
-        open: isDesktop, 
+        // open: isDesktop, 
         chatUser: user
       })
     }
 
-    if (isDesktop) {
-      this.props.open()
-    }
+    // if (isDesktop) {
+    //   this.props.open()
+    // }
 
     if (this.chatRef.current != null && clicked == true) {
       this.chatRef.current.switchUser(user)

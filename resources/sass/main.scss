@@ -150,6 +150,60 @@ input[type="password"] {
 
 }
 
+.Toastify {
+  .Toastify__toast-container--bottom-left {
+    bottom: 5em !important;
+  }
+
+  .toasty {
+    background-color: $primary;
+  
+    .toast-body-custom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+  
+      .msg-usr {
+        width: 100%;
+        color: $accents;
+        margin: .5rem;
+      }
+    
+      .msg-body {
+        width: 100%;
+        color: $placeholder-font-color;
+        line-height: 1.4;
+        margin: .5rem;
+      }
+    
+      .buttons {
+        width: 100%;
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+      
+        .go {
+          width: 68%;
+          background-color: #AEEE98;
+          border-radius: $border-r;
+          padding: 5px 0;
+          cursor: pointer;
+        }
+        .close {
+          width: 28%;
+          background-color: lightcoral;
+          border-radius: $border-r;
+          padding: 5px 0;
+          cursor: pointer;
+        }
+      }
+    }  
+  }
+}
+
+
 
 
 // ALL MEDIA QUERIES

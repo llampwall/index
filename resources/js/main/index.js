@@ -127,15 +127,16 @@ class Layout extends Component {
           
           <ToastContainer
             position="bottom-left"
-            autoClose={5000}
+            autoClose={50000}
             hideProgressBar
             newestOnTop={false}
-            closeOnClick
             rtl={false}
+            closeOnClick={false}
             pauseOnFocusLoss
             draggable={false}
             pauseOnHover
             limit={5}
+            toastClassName="toasty"
           />
 
           <Loading active={(this.state.user != undefined) ? "" : 'active'}/>

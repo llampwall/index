@@ -1425,16 +1425,18 @@ var Messenger = function (_Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(message.from != undefined)) {
-                  _context.next = 8;
+                  _context.next = 9;
                   break;
                 }
 
                 console.log('message to us!: ' + message.body);
 
-                (0, _reactToastify.toast)(message.body);
+                _reactToastify.toast.info(_this.displayMsg(message), {
+                  toastId: new Date().getTime()
+                });
 
                 if (!_this.state.blinkIds.has(message.from.id)) {
-                  _this.blink(message.from.id, 3000); // blink this users name for 4 seconds, then add it to unread
+                  _this.blink(message.from.id, 5000); // blink this users name for 5 seconds, then add it to unread
                 }
 
                 if (!(_this.state.chatUser == null)) {
@@ -1447,11 +1449,17 @@ var Messenger = function (_Component) {
 
               case 7:
 
+                if (_this.chatRef != null && _this.state.chatUser.id != message.from.id) {
+                  // toast(message.body, {
+                  //   toastId: new Date().getTime()
+                  // })
+                }
+
                 if (_this.chatRef != null) {
                   _this.chatRef.current.getMessages();
                 }
 
-              case 8:
+              case 9:
               case 'end':
                 return _context.stop();
             }
@@ -1463,6 +1471,40 @@ var Messenger = function (_Component) {
         return _ref.apply(this, arguments);
       };
     }();
+
+    _this.displayMsg = function (message, closeToast) {
+      return _react2.default.createElement(
+        'div',
+        { className: 'toast-body-custom' },
+        _react2.default.createElement(
+          'span',
+          { className: 'msg-usr' },
+          message.from.fname + ' ' + message.from.lname + ' says: '
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'msg-body' },
+          message.body
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'buttons' },
+          _react2.default.createElement(
+            'button',
+            { className: 'go', onClick: function onClick() {
+                _this.openChat(message.from, false);
+              } },
+            'Go ',
+            _react2.default.createElement('i', { className: 'ayn-right' })
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'close', onClick: closeToast },
+            'Close'
+          )
+        )
+      );
+    };
 
     _this.blink = function (u_id, ms) {
       var self = _this;
@@ -1535,16 +1577,22 @@ var Messenger = function (_Component) {
                 return _context2.abrupt('return');
 
               case 4:
-
-                if (_this.state.connected == false) {
-                  _this.props.ws.connect();
-                  _this.chat = _this.props.ws.getSubscription('chat') || _this.props.ws.subscribe('chat');
+                if (!(_this.state.connected == false)) {
+                  _context2.next = 8;
+                  break;
                 }
+
+                _context2.next = 7;
+                return _this.props.ws.connect();
+
+              case 7:
+                _this.chat = _this.props.ws.getSubscription('chat') || _this.props.ws.subscribe('chat');
+
+              case 8:
                 // send login
                 _this.setState({
-                  // ...this.state,
-                  connected: true,
-                  open: isDesktop //close on small devices
+                  connected: true
+                  // open: isDesktop  //close on small devices
                 });
 
                 // if blinking, stop blinking
@@ -1553,9 +1601,8 @@ var Messenger = function (_Component) {
 
                   newBlink.delete(user.id);
                   _this.setState({
-                    // ...this.state,
                     connected: true,
-                    open: isDesktop,
+                    // open: isDesktop, 
                     blinkIds: newBlink
                   });
                   clearInterval(_this.blinkInt);
@@ -1572,7 +1619,7 @@ var Messenger = function (_Component) {
                   _this.setState({
                     // ...this.state,
                     connected: true,
-                    open: isDesktop,
+                    // open: isDesktop, 
                     unread: newUnread
                   });
                 }
@@ -1581,14 +1628,14 @@ var Messenger = function (_Component) {
                   _this.setState({
                     // ...this.state,
                     connected: true,
-                    open: isDesktop,
+                    // open: isDesktop, 
                     chatUser: user
                   });
                 }
 
-                if (isDesktop) {
-                  _this.props.open();
-                }
+                // if (isDesktop) {
+                //   this.props.open()
+                // }
 
                 if (_this.chatRef.current != null && clicked == true) {
                   _this.chatRef.current.switchUser(user);
@@ -1598,7 +1645,7 @@ var Messenger = function (_Component) {
                   _this.chatRef.current.switchUser(user);
                 }
 
-              case 12:
+              case 14:
               case 'end':
                 return _context2.stop();
             }
@@ -4232,15 +4279,16 @@ var Layout = function (_Component) {
           { className: 'app-container home-page' },
           _react2.default.createElement(_reactToastify.ToastContainer, {
             position: 'bottom-left',
-            autoClose: 5000,
+            autoClose: 50000,
             hideProgressBar: true,
             newestOnTop: false,
-            closeOnClick: true,
             rtl: false,
+            closeOnClick: false,
             pauseOnFocusLoss: true,
             draggable: false,
             pauseOnHover: true,
-            limit: 5
+            limit: 5,
+            toastClassName: 'toasty'
           }),
           _react2.default.createElement(_Loading2.default, { active: this.state.user != undefined ? "" : 'active' }),
           _react2.default.createElement(_LeftMenu2.default, { user: this.state.user, ws: this.ws, open: this.openLeft, tron: this.tron, ref: this.leftRef }),
