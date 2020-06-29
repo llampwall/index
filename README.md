@@ -20,6 +20,7 @@
         - link to individual posts (chain icon)
         - lazy loading of images/videos
         - infinite scrolling
+        - search for posts at the top
 
     {messenger}
         - you are immediately visible to all online as soon as you log in
@@ -29,19 +30,20 @@
         - icon will change to let you know you have unread messages from a user
         - easily minimize or close the chat window or hide the entire messenger sidebar
         - your chat history with other users is persistent
+        - search for online users by typing in the search bar at the bottom
 
     {other}
         - vibrant high contrast dark theme
         - optimized to work smoothly and look just as good on mobile, if not better
 
     {coming soon}
-        - expanded profile page (right now it is there but it's just your picture)
+        - expanded profile page
         - groups / pages (they are visible on the left but not functional)
         - news / weather / popular posts at the top of feed
         - notifications
         - animations are in the works
         - log in via google
-        - post searching
+        - search for posts by users
         - service workers to keep functionality when offline / slow connection
         - ability to choose different themes
         - changing the domain name of course
