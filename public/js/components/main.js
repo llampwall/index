@@ -159,9 +159,9 @@ var Post = function (_Component) {
         // post.style.boxShadow = bs
 
         var bc = 'linear-gradient(145deg, ' + dark + ', ' + light + ')';
-        post.style.background = bc;
+        post && (post.style.background = bc);
 
-        post.style.border = '2px solid ' + light;
+        post && (post.style.border = '2px solid ' + light);
       });
     };
 
