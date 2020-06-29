@@ -92,12 +92,12 @@ class AuthController {
 
         url = img ? `https://${Env.get('S3_BUCKET')}.s3.amazonaws.com/${img}` : '/img/user-anon.png'
 
-        console.log(first)
-        console.log(last)
-        console.log(email)
-        console.log(img)
-        console.log(pw)
-        console.log(url)
+        // console.log(first)
+        // console.log(last)
+        // console.log(email)
+        // console.log(img)
+        // console.log(pw)
+        // console.log(url)
 
         // save new user
         try {

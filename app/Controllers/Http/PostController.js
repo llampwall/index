@@ -129,14 +129,14 @@ class PostController {
             .from('posts')
             .where('posts.id', '>', id)
             .orderBy('posts.created_at', 'desc')
-        console.log(results)
+        // console.log(results)
         return results
     }
 
     // get and return a signed aws url for image uploading
     async getUrl({request, response}) {
 
-        console.log(request.params)
+        // console.log(request.params)
         // prepare aws
         aws.config.region = 'us-west-1'
         const S3_BUCKET = Env.get('S3_BUCKET')
@@ -200,7 +200,7 @@ class PostController {
         // remove extra spaces and newlines
         let content = request.input('content').trim()
         content = content.replace(/(\r\n|\n|\r)/gm,"")
-        console.log(content)
+        // console.log(content)
 
         // save post to db
         try {
@@ -234,15 +234,15 @@ class PostController {
 
     // delete post
     async destroy({request, response}) {
-        console.log(request.params)
+        // console.log(request.params)
         const { id } = request.params
-        console.log("deleting: " + id)
+        // console.log("deleting: " + id)
         try {
             const affectedRows = await Database.table('posts').where('id', id).delete()
             if (affectedRows < 1) {
                 console.log('delete failed')
             } else {
-                console.log("done") 
+                // console.log("done") 
                 return affectedRows
             }
         } catch {
@@ -279,7 +279,7 @@ class PostController {
                 post_id: request.input('post_id'),
                 user_id: request.input('user_id')
             })
-            console.log('saved comment');
+            // console.log('saved comment');
             return response.redirect('/')
         } catch (error) {
             console.log(error)
@@ -288,15 +288,15 @@ class PostController {
 
     // delete comment
     async destroyComment({request}) {
-        console.log(request.params)
+        // console.log(request.params)
         const { id } = request.params
-        console.log("deleting comment: " + id)
+        // console.log("deleting comment: " + id)
         try {
             const target = await Comment.query().where('id', id).delete()
         } catch {
             console.log("error destroying comment: " + error)
         }
-        console.log("done")
+        // console.log("done")
         return "destroyed"
     }
 
@@ -323,7 +323,7 @@ class PostController {
 
     // like a post
     async likePost({request, response}) {
-        console.log("liking post: " + request.input('post_id'))
+        // console.log("liking post: " + request.input('post_id'))
         try {
             const newLike = await Like.create({
                 user_id: request.input('user_id'),
@@ -337,7 +337,7 @@ class PostController {
 
     // unlike a post
     async unlikePost({request}) {
-        console.log("unliking post: " + request.input('post_id'))
+        // console.log("unliking post: " + request.input('post_id'))
         try {
             const query = `delete from likes where user_id = ${request.input('user_id')} and post_id = ${request.input('post_id')}`
             const target = await Database.raw(query)
