@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 131:
+/***/ 132:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -836,11 +836,13 @@ var _Compose = __webpack_require__(338);
 
 var _Compose2 = _interopRequireDefault(_Compose);
 
-var _Post = __webpack_require__(131);
+var _Post = __webpack_require__(132);
 
 var _Post2 = _interopRequireDefault(_Post);
 
-var _lodash = __webpack_require__(189);
+var _lodash = __webpack_require__(190);
+
+var _reactToastify = __webpack_require__(131);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1328,9 +1330,9 @@ var _axios = __webpack_require__(42);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _lodash = __webpack_require__(189);
+var _lodash = __webpack_require__(190);
 
-var _reactToastify = __webpack_require__(199);
+var _reactToastify = __webpack_require__(131);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2075,7 +2077,7 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactTransitionGroup = __webpack_require__(304);
 
-var _Post = __webpack_require__(131);
+var _Post = __webpack_require__(132);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -2432,7 +2434,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = __webpack_require__(189);
+var _lodash = __webpack_require__(190);
 
 var _reactRouterDom = __webpack_require__(96);
 
@@ -3790,7 +3792,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Post = __webpack_require__(131);
+var _Post = __webpack_require__(132);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -4128,7 +4130,7 @@ var _websocketClient = __webpack_require__(311);
 
 var _websocketClient2 = _interopRequireDefault(_websocketClient);
 
-var _reactToastify = __webpack_require__(199);
+var _reactToastify = __webpack_require__(131);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4294,7 +4296,7 @@ var Layout = function (_Component) {
           _react2.default.createElement(_reactToastify.ToastContainer, {
             position: 'bottom-left',
             transition: _reactToastify.Slide,
-            autoClose: 8000,
+            autoClose: 12000,
             hideProgressBar: true,
             newestOnTop: false,
             rtl: false,

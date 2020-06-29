@@ -4,6 +4,7 @@ import PostArea from './PostArea'
 import Compose from './Compose'
 import Post from './Post'
 import { throttle } from 'lodash';
+import { toast } from 'react-toastify';
 
 // Handles updating the postarea when its sibling compose adds a post to the database
 

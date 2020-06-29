@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Post from '../components/Post'
 import axios from 'axios'
 
+
 export default class PostArea extends Component {
   constructor () {
     super()

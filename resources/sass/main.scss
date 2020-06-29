@@ -157,7 +157,8 @@ input[type="password"] {
   }
 
   .toasty {
-    background: linear-gradient(-45deg, #1c252e, #212c37);
+    // background: linear-gradient(-45deg, #1c252e, #212c37);
+    background: white;
     border-radius: $border-r;
     box-shadow: 3px 12px 56px -15px rgba(0,0,0,0.8);
   
@@ -175,13 +176,15 @@ input[type="password"] {
 
         .msg-usr {
           width: 100%;
-          color: $accents;
+          // color: $accents;
+          color: #f70eff;
           padding: 0;
         }
       
         .msg-body {
           width: 100%;
           color: $placeholder-font-color;
+          color: black;
           line-height: 1.4;
           margin: .7rem 0;
           padding: 0;
