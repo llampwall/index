@@ -1199,7 +1199,7 @@ var LeftMenu = function (_Component) {
                 id: "tron",
                 value: this.state.tron,
                 onChange: this.handleChange }),
-              "tron mode"
+              "2077"
             )
           ),
           _react2.default.createElement(

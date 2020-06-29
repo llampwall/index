@@ -42,7 +42,8 @@
         border: $border-thickness solid $border-color;
         font-family: $main-font;
         // z-index: 3;
-        border-radius: $border-r;
+        border-radius: 7px;
+        overflow: hidden;
         // background: $post-bg;
         background: $post-bg-gradient;
         margin-top: 3rem;

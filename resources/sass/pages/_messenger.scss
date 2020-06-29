@@ -15,8 +15,11 @@
     -webkit-box-shadow: -23px 0px 57px -20px rgba(39,61,84,.2);
     -moz-box-shadow: -23px 0px 57px -20px rgba(39,61,84,.2);
     box-shadow: -23px 0px 57px -20px rgba(39,61,84,.2);
-    overflow: scroll;
+    // overflow: auto;
     -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     &.closed {
       right: -16.5rem;
