@@ -1479,14 +1479,19 @@ var Messenger = function (_Component) {
         'div',
         { className: 'toast-body-custom' },
         _react2.default.createElement(
-          'span',
-          { className: 'msg-usr' },
-          message.from.fname + ' ' + message.from.lname + ' says: '
-        ),
-        _react2.default.createElement(
-          'span',
-          { className: 'msg-body' },
-          message.body
+          'div',
+          { className: 'msg' },
+          _react2.default.createElement(
+            'span',
+            { className: 'msg-usr' },
+            '' + message.from.fname + (message.from.lname ? " " + message.from.lname : "") + ': '
+          ),
+          _react2.default.createElement(
+            'span',
+            { className: 'msg-body' },
+            message.body.substring(0, 50),
+            message.body.length > 50 ? "..." : ""
+          )
         ),
         _react2.default.createElement(
           'div',
@@ -4288,7 +4293,8 @@ var Layout = function (_Component) {
           { className: 'app-container home-page' },
           _react2.default.createElement(_reactToastify.ToastContainer, {
             position: 'bottom-left',
-            autoClose: 4000,
+            transition: _reactToastify.Slide,
+            autoClose: 8000,
             hideProgressBar: true,
             newestOnTop: false,
             rtl: false,

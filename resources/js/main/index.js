@@ -13,7 +13,7 @@ import Messenger from '../components/Messenger'
 import SearchHeader from '../components/SearchHeader'
 import Loading from '../components/Loading'
 import Ws from '@adonisjs/websocket-client'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 
 class Layout extends Component {
@@ -127,7 +127,8 @@ class Layout extends Component {
           
           <ToastContainer
             position="bottom-left"
-            autoClose={4000}
+            transition={Slide}
+            autoClose={8000}
             hideProgressBar
             newestOnTop={false}
             rtl={false}

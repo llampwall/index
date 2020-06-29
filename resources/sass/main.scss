@@ -152,12 +152,14 @@ input[type="password"] {
 .Toastify {
   .Toastify__toast-container--bottom-left {
     bottom: 5em !important;
+    // width: unset;
+    // max-width: 250px;
   }
 
   .toasty {
     background: linear-gradient(-45deg, #1c252e, #212c37);
     border-radius: $border-r;
-    @include hard-shadow;
+    box-shadow: 3px 12px 56px -15px rgba(0,0,0,0.8);
   
     .toast-body-custom {
       display: flex;
@@ -166,16 +168,24 @@ input[type="password"] {
       width: 100%;
       height: 100%;
   
-      .msg-usr {
+      .msg {
         width: 100%;
-        color: $accents;
-      }
-    
-      .msg-body {
-        width: 100%;
-        color: $placeholder-font-color;
-        line-height: 1.4;
-        margin: .7rem;
+        display: inline-block;
+        padding: 0;
+
+        .msg-usr {
+          width: 100%;
+          color: $accents;
+          padding: 0;
+        }
+      
+        .msg-body {
+          width: 100%;
+          color: $placeholder-font-color;
+          line-height: 1.4;
+          margin: .7rem 0;
+          padding: 0;
+        }
       }
     
       .buttons {
@@ -238,6 +248,10 @@ input[type="password"] {
 
   .notify.success.active {
     width: 100%;
+  }
+
+  .Toastify__toast-container--bottom-left {
+    bottom: 0;
   }
 
   body {

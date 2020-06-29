@@ -181,8 +181,10 @@ export default class Messenger extends Component {
     const self = this
     return (
       <div className="toast-body-custom">
-        <span className="msg-usr">{`${message.from.fname} ${message.from.lname} says: `}</span>
-        <span className="msg-body">{message.body}</span>
+        <div className="msg">
+          <span className="msg-usr">{`${message.from.fname}${message.from.lname ? " " + message.from.lname : ""}: `}</span>
+          <span className="msg-body">{message.body.substring(0, 50)}{(message.body.length > 50) ? "..." : ""}</span>
+        </div>
         <div className="buttons">
           <button className="go" onClick={this.msgClick.bind(null, message)}>Reply <i className="ayn-right"></i></button>
           {/* <button className="close" onClick={closeToast}>Close</button> */}
