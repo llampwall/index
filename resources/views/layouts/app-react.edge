@@ -27,7 +27,14 @@
   <script src="/js/components/vendor.js"></script>
   <script src="/js/components/main.js"></script>
   <script defer src="/js/addsw.js"></script>
-
+  <script>
+    function load() {
+      /mobile/i.test(navigator.userAgent) && !location.hash && setTimeout(function() {
+        window.scrollTo(0, 1);
+      }, 1000);​
+    };
+    window.onload = load;
+  </script>
 
 </body>
 </html>

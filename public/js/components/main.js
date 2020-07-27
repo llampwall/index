@@ -4321,6 +4321,7 @@ var Layout = function (_Component) {
         // else if (docElm.msRequestFullscreen) {
         //     docElm.msRequestFullscreen();
         // }
+
       }
 
       this.startChat();

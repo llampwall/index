@@ -96,6 +96,7 @@ class Layout extends Component {
       // else if (docElm.msRequestFullscreen) {
       //     docElm.msRequestFullscreen();
       // }
+
     }
 
     this.startChat()
