@@ -258,9 +258,8 @@ input[type="password"] {
   }
 
   body {
-    min-height: 100vh;
     min-height: -webkit-fill-available;
-    overflow: hidden;
+    // overflow: hidden;
 
     .title {
       margin-bottom: 0;
@@ -346,7 +345,7 @@ input[type="password"] {
       }
 
       .content-area {
-        position: sticky;
+        // position: sticky;
         // width: 80%;
         width: 100%;
         margin: 0 auto;
