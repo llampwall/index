@@ -287,12 +287,12 @@ input[type="password"] {
 
     #app {
       // height: 85vh;
-      height: 100vh;
+      height: 110vh;
     }
 
     .app-container {
       // height: 85vh;
-      height: 100vh;
+      height: 100%;
     }
   }
 
@@ -324,7 +324,7 @@ input[type="password"] {
     #content-container {
 
       // height: 85vh;
-      height: 100vh;
+      height: 100%;
 
       .header {
         
@@ -355,7 +355,7 @@ input[type="password"] {
 
         // height: calc(85vh - 57px);
         // height: calc(100vh - 57px);
-        height: 100vh;
+        height: 100%;
         overflow-x: hidden;
 
         #compose {
