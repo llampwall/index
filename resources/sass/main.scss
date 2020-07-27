@@ -551,7 +551,7 @@ input[type="password"] {
     bottom: 0;
 
     .messenger-header {
-      height: 3rem;
+      height: 2rem;
 
       .title {
         font-size: 1rem;
@@ -560,9 +560,10 @@ input[type="password"] {
 
     .users {
       padding-left: 2rem;
-      height: calc(90% - 98px);
+      height: calc(100% - 82px);
 
       .user {
+        padding: .3rem;
         padding-left: 0;
         width: 13rem;
 
@@ -590,6 +591,7 @@ input[type="password"] {
 
     .search {
       margin-left: 1rem;
+      padding: 0;
       input[type='text'] {
         font-size: 1rem;
       }
