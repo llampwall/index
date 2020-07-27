@@ -292,7 +292,7 @@ input[type="password"] {
     .app-container {
       // height: 85vh;
       height: 100%;
-      // position: relative;
+      position: relative;
     }
   }
 
@@ -323,8 +323,8 @@ input[type="password"] {
 
     #content-container {
 
-      // height: 85vh;
-      height: -webkit-fill-available;
+      height: 85vh;
+      // height: -webkit-fill-available;
 
       .header {
         
