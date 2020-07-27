@@ -80,20 +80,22 @@ class Layout extends Component {
         rightOpen: true
       })
     } else {
-      var docElm = document.documentElement;
-      if (docElm.requestFullscreen) {
-          docElm.requestFullscreen();
-      }
-      else if (docElm.mozRequestFullScreen) {
-          docElm.mozRequestFullScreen();
-      }
-      else if (docElm.webkitRequestFullScreen) {
-          docElm.webkitRequestFullScreen();
-      }
-      else if (docElm.msRequestFullscreen) {
-          docElm.msRequestFullscreen();
-      }
-      // document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+
+      // fullscreen stuff
+
+      // var docElm = document.documentElement;
+      // if (docElm.requestFullscreen) {
+      //     docElm.requestFullscreen();
+      // }
+      // else if (docElm.mozRequestFullScreen) {
+      //     docElm.mozRequestFullScreen();
+      // }
+      // else if (docElm.webkitRequestFullScreen) {
+      //     docElm.webkitRequestFullScreen();
+      // }
+      // else if (docElm.msRequestFullscreen) {
+      //     docElm.msRequestFullscreen();
+      // }
     }
 
     this.startChat()

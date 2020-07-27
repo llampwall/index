@@ -259,7 +259,7 @@ input[type="password"] {
 
   body {
     min-height: -webkit-fill-available;
-    // overflow: hidden;
+    overflow: hidden;
 
     .title {
       margin-bottom: 0;
@@ -286,7 +286,7 @@ input[type="password"] {
 
     #app {
       // height: 85vh;
-      height: 110vh;
+      height: 100vh;
     }
 
     .app-container {
@@ -541,6 +541,7 @@ input[type="password"] {
 
   #messenger {
     width: 15rem;
+    height: 100vh;
 
     .messenger-header {
       height: 3rem;
@@ -552,6 +553,7 @@ input[type="password"] {
 
     .users {
       padding-left: 2rem;
+      height: calc(100vh - 98px);
 
       .user {
         padding-left: 0;
