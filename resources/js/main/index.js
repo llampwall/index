@@ -79,6 +79,8 @@ class Layout extends Component {
         leftOpen: true,
         rightOpen: true
       })
+    } else {
+      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
     }
 
     this.startChat()
