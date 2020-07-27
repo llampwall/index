@@ -162,6 +162,10 @@ var Post = function (_Component) {
         post && (post.style.background = bc);
 
         post && (post.style.border = '2px solid ' + light);
+
+        // var newBs = `13px 13px 25px #0e0e12, -13px -13px 25px #1e1e28, 0px 0px 100px -44px ${light} !important`
+        // console.log(newBs)
+        // post && (post.style.boxShadow = newBs)
       });
     };
 
