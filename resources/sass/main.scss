@@ -354,7 +354,8 @@ input[type="password"] {
         padding-left: 0;
 
         // height: calc(85vh - 57px);
-        height: calc(100vh - 57px);
+        // height: calc(100vh - 57px);
+        height: 100vh;
         overflow-x: hidden;
 
         #compose {
