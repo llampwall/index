@@ -502,7 +502,7 @@ input[type="password"] {
     bottom: 0;
 
     .account-dropdown {
-      height: 3rem;
+      height: 2rem;
       margin-right: 0;
       .username {
         font-size: 1rem;
@@ -512,10 +512,10 @@ input[type="password"] {
     .groups {
       padding-left: 2rem;
       .title {
-        font-size: 1rem;
+        font-size: 1rem !important;
       }
       ul>li {
-        font-size: .7rem;
+        font-size: .7rem !important;
       }
     }
     &.closed {
