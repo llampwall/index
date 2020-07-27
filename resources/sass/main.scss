@@ -285,13 +285,14 @@ input[type="password"] {
     }
 
     #app {
-      // height: 85vh;
-      height: 100vh;
+      height: 85vh;
+      // height: 100vh;
     }
 
     .app-container {
       // height: 85vh;
       height: 100%;
+      position: relative;
     }
   }
 
@@ -323,7 +324,7 @@ input[type="password"] {
     #content-container {
 
       // height: 85vh;
-      height: 100%;
+      height: -webkit-fill-available;
 
       .header {
         
@@ -496,8 +497,9 @@ input[type="password"] {
 
   #left-menu {
     padding: 0;
-    top: 68px;
-    height: 75vh;
+    top: 67px;
+    height: auto;
+    bottom: 0;
 
     .account-dropdown {
       height: 3rem;
@@ -544,8 +546,9 @@ input[type="password"] {
   #messenger {
     width: 15rem;
     // height: 100vh;
-    height: 75vh;
-    top: 68px;
+    height: auto;
+    top: 67px;
+    bottom: 0;
 
     .messenger-header {
       height: 3rem;
@@ -557,7 +560,7 @@ input[type="password"] {
 
     .users {
       padding-left: 2rem;
-      height: calc(100vh - 98px);
+      height: calc(90% - 98px);
 
       .user {
         padding-left: 0;
