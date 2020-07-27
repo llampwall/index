@@ -286,7 +286,7 @@ input[type="password"] {
 
     #app {
       // height: 85vh;
-      height: 110vh;
+      height: 100vh;
     }
 
     .app-container {
@@ -296,7 +296,7 @@ input[type="password"] {
   }
 
   .welcome-page {
-    height: 85vh;
+    height: 90vh;
     overflow-y: hidden;
 
     .welcome-container{
@@ -496,6 +496,8 @@ input[type="password"] {
 
   #left-menu {
     padding: 0;
+    top: 68px;
+    height: 85vh;
 
     .account-dropdown {
       height: 3rem;
@@ -541,7 +543,9 @@ input[type="password"] {
 
   #messenger {
     width: 15rem;
-    height: 100vh;
+    // height: 100vh;
+    height: 85vh;
+    top: 68px;
 
     .messenger-header {
       height: 3rem;
